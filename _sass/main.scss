@@ -103,7 +103,8 @@ $theme-color: #1A1B25;
     }
 
     #content {
-        margin-left: 10px;
+        width: 90%;
+        margin: auto;
         margin-top: 250px;
         overflow-x: hidden;
     }
@@ -111,6 +112,7 @@ $theme-color: #1A1B25;
 
 .post-list {
     list-style-type: none;
+    padding-left: 0;
     
     li {
         padding-bottom: 10px;
