@@ -9,6 +9,11 @@ body {
     margin: 0px;
 }
 
+.MathJax_Display, .MJXc-display, .MathJax_SVG_Display {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
 #navbar {
     height: 100%;
     width: $sidebar-width;
