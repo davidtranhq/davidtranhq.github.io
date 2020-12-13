@@ -37,7 +37,7 @@ However, I immediately realized that there were way more paths than I was willin
 
 I assigned some notation to make this easier to think about. Let $$0$$ denote a rightward step and $$1$$ denote a downward step. A route then is a sequence containing $$2n$$ bits, where $n$ of those bits are $$1$$ and the other $$n$$ are $$0$$. Now the problem becomes one of combinatorics: How many different ways can you arrange a sequence of $$2n$$ bits where half are set and the other other half are not? 
 
-This is a specific case of a common general combinatoric problem. First, how many permutations exist for a sequence of $$2n$$ distinct elements? After choosing a place in the sequence for the first element, the next element has $$2n-1$$ different places it could go, and the next has $$2n-2$$ different places, etc. until the last one has only $$1$$ place where it could go. This gives $$(2n)(2n-1)(2n-2)...(2)(1) = (2n)!$$ permutations for a sequence of length $$2n$$.
+This is a specific case of a common general combinatoric problem. First, how many permutations exist for a sequence of $$2n$$ distinct elements? The first element can be placed in any of the $$2n$$ places in the sequence. After that, the next element has $$2n-1$$ different places it could go, the next has $$2n-2$$ different places, etc. until the last one has only $$1$$ place it could go. This gives $$(2n)(2n-1)(2n-2)...(2)(1) = (2n)!$$ permutations for a sequence of length $$2n$$.
 
 But, our bit sequence doesn't have $$2n$$ elements. It has $$2n$$ places, but it only has $$n$$ elements. So, we don't fill the sequence until there are no places left; we stop when it is only half filled:
 
@@ -45,13 +45,13 @@ $$
     (2n)(2n-1)(2n-2)...(n+1)(n)
 $$
 
-This is just the first half of $$(2n)!$$. We get this by dividing $$(2n)!$$ by it's second half so that it cancels out:
+These are just the first $$n$$ terms of $$(2n)!$$. We can get this by dividing $$(2n)!$$ by it's last $$n$$ terms so that they cancel out:
 
 $$
     (2n)(2n-1)(2n-2)...(n+1)(n) = \frac{(2n)(2n-1)(2n-2)...(2)(1)}{(n)(n-1)...(2)(1)} = \frac{(2n)!}{n!}
 $$
 
-We're still not done though. This considers the number of unique sequence of length $$(2n)$$ if all $$n$$ elements are distinct. But, all the elements in our sequence are the same ($$1$$ bits). There's no difference between putting our 1st element in the 1st place and our 2nd element in the 2nd place versus putting our 1st element in the 2nd place and the 2nd element in the 1st. In other words, the order of our $$1$$'s doesn't matter (How could it? They're all the same!). So, we need to remove all the different ways the $$n$$ elements could be in "order". Since there are $$n!$$ different ways that $$n$$ elements could be in order:
+We're still not done though. This considers the number of unique sequence of length $$2n$$ if all $$n$$ elements are distinct. But, all the elements in our sequence are the same ($$1$$ bits). There's no difference between putting our 1st element in the 1st place and our 2nd element in the 2nd place versus putting our 1st element in the 2nd place and the 2nd element in the 1st. In other words, the order of our $$1$$'s doesn't matter (How could it? They're all the same!). So, we need to remove all the different ways the $$n$$ elements could be in "order" from our formula. Since there are $$n!$$ different ways that $$n$$ elements could be in order:
 
 $$
     \frac{(2n)!}{n!} \cdot \frac{1}{n!} = \frac{(2n)!}{(n!)^2}
