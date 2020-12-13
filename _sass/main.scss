@@ -86,9 +86,13 @@ body {
     }
 
     #content {
-        width: 90%;
+        width: 95%;
         margin: auto;
         overflow-x: hidden;
+
+        h1 {
+            font-size: 2em;
+        }
     }
 }
 
