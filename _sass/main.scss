@@ -63,7 +63,7 @@ $theme-color: #1A1B25;
     }
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 800px) {
     #navbar {
         position: fixed;
         top: 0;
@@ -81,6 +81,7 @@ $theme-color: #1A1B25;
             margin-top: 75px;
         }
         nav a {
+            margin-top: 30px;
             display: inline-block;
             bottom: 0;
         }
@@ -102,8 +103,9 @@ $theme-color: #1A1B25;
     }
 
     #content {
-        margin-left: 50px;
+        margin-left: 10px;
         margin-top: 250px;
+        overflow-x: hidden;
     }
 }
 
