@@ -75,6 +75,8 @@ $theme-color: #1A1B25;
         transition: font-size 0.5s, height 0.5s;
         -webkit-transition: font-size 0.5s, height 0.5s;
         -moz-transition: font-size 0.5s, height 0.5s;
+        /* for scrolling on mobile */
+        -webkit-overflow-scrolling:touch;
 
         h1 {
             margin: 0;
