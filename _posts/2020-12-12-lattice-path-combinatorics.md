@@ -20,22 +20,22 @@ Start at the top-left intersection of an $$n\times n$$ grid. By only moving to t
 
 ### Finding a Solution
 
-My first intuition was to break the problem into the simplest case: a 1x1 "grid".
+An initial intuition might be to break the problem into the simplest case: a 1x1 "grid".
 
 {:.post-image}
 ![All lattice paths for a 1x1 grid](/assets/images/1x1-lattice-path.png)
 
-There are only 2 unique routes. The next logical step was to see how many unique routes existed for a 3x3 grid in hopes that a common pattern would emerge to allow a generalization to an $$n\times n$$ grid. 
+There are only 2 unique routes. The next logical step could be to see how many unique routes exist for a 3x3 grid in hopes that a common pattern would emerge to allow a generalization for an $$n\times n$$ grid. 
 
 {:.post-image}
 ![Some lattice paths for a 3x3 grid](/assets/images/3x3-lattice-path.png)
 
-However, I immediately realized that there were way more paths than I was willing to draw out (and it probably wasn't the most mathematical approach either). It wasn't a complete waste of time though; I realized an important fact while drawing the paths. Notice that, because you can only move to the right and down, one step will always take you closer to the end. Therefore, the length (in steps) of every route is the same. If we assign the coordinates $$(0,0)$$ to the top-left corner and the coordinates $$(n,n)$$ to the bottom-right corner, it becomes clear that the route must contain $$n$$ rightward steps and $$n$$ downward steps.
+However, it becomes immediately apparent that the number of paths grows very quickly (and my desire to draw them falls). But, drawing out the paths can reveal some useful facts. Notice that, because you can only move to the right and down, one step will always take you closer to the end. Therefore, the length (in steps) of every route is the same. If we assign the coordinates $$(0,0)$$ to the top-left corner and the coordinates $$(n,n)$$ to the bottom-right corner, it becomes clear that the route must contain $$n$$ rightward steps and $$n$$ downward steps.
 
 {:.post-image}
 ![Assigning coordinates to the lattice](/assets/images/lattice-path-coordinates.png)
 
-I assigned some notation to make this easier to think about. Let $$0$$ denote a rightward step and $$1$$ denote a downward step. A route then is a sequence containing $$2n$$ bits, where $n$ of those bits are $$1$$ and the other $$n$$ are $$0$$. Now the problem becomes one of combinatorics: How many different ways can you arrange a sequence of $$2n$$ bits where half are set and the other other half are not? 
+Let's assign some notation to make this easier to think about. Let $$0$$ denote a rightward step and $$1$$ denote a downward step. A route then is a sequence containing $$2n$$ bits, where $n$ of those bits are $$1$$ and the other $$n$$ are $$0$$. Now the problem becomes one of combinatorics: How many different ways can you arrange a sequence of $$2n$$ bits where half are set and the other other half are not? 
 
 This is a specific case of a common general combinatoric problem. First, how many permutations exist for a sequence of $$2n$$ distinct elements? The first element can be placed in any of the $$2n$$ places in the sequence. After that, the next element has $$2n-1$$ different places it could go, the next has $$2n-2$$ different places, etc. until the last one has only $$1$$ place it could go. This gives $$(2n)(2n-1)(2n-2)...(2)(1) = (2n)!$$ permutations for a sequence of length $$2n$$.
 
