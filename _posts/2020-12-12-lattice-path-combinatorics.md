@@ -39,7 +39,7 @@ Let's assign some notation to make this easier to think about. Let $$0$$ denote 
 
 This is a specific case of a common general combinatoric problem. First, how many permutations exist for a sequence of $$2n$$ distinct elements? The first element can be placed in any of the $$2n$$ places in the sequence. After that, the next element has $$2n-1$$ different places it could go, the next has $$2n-2$$ different places, etc. until the last one has only $$1$$ place it could go. This gives $$(2n)(2n-1)(2n-2)...(2)(1) = (2n)!$$ permutations for a sequence of length $$2n$$.
 
-But, our bit sequence doesn't have $$2n$$ elements. It has $$2n$$ places, but it only has $$n$$ elements. So, we don't fill the sequence until there are no places left; we stop when it is only half filled:
+But, our bit sequence doesn't have $$2n$$ elements. It has $$2n$$ places, but it only has $$n$$ elements ($$1$$'s). So, we don't fill the sequence until there are no places left; we stop when it is only half filled:
 
 $$
     (2n)(2n-1)(2n-2)...(n+1)(n)
@@ -51,7 +51,7 @@ $$
     (2n)(2n-1)(2n-2)...(n+1)(n) = \frac{(2n)(2n-1)(2n-2)...(2)(1)}{(n)(n-1)...(2)(1)} = \frac{(2n)!}{n!}
 $$
 
-We're still not done though. This considers the number of unique sequence of length $$2n$$ if all $$n$$ elements are distinct. But, all the elements in our sequence are the same ($$1$$ bits). There's no difference between putting our 1st element in the 1st place and our 2nd element in the 2nd place versus putting our 1st element in the 2nd place and the 2nd element in the 1st. In other words, the order of our $$1$$'s doesn't matter (How could it? They're all the same!). So, we need to remove all the different ways the $$n$$ elements could be in "order" from our formula. Since there are $$n!$$ different ways that $$n$$ elements could be in order:
+We're still not done though. This considers the number of unique sequence of length $$2n$$ if all $$n$$ elements are distinct. But, all the elements in our sequence are the same ($$1$$'s). There's no difference between putting our 1st element in the 1st place and our 2nd element in the 2nd place versus putting our 1st element in the 2nd place and the 2nd element in the 1st. In other words, the order of our $$1$$'s doesn't matter (How could it? They're all the same!). So, we need to remove all the different ways the $$n$$ elements could be in "order" from our formula. Since there are $$n!$$ different ways that $$n$$ elements could be in order:
 
 $$
     \frac{(2n)!}{n!} \cdot \frac{1}{n!} = \frac{(2n)!}{(n!)^2}
