@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Hey! It's David.
+title: hi it david ;)
 permalink: /about/
 ---
 
