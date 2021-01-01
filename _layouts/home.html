@@ -32,6 +32,9 @@ layout: default
           <span class="post-meta">{{ post.date | date: date_format }}</span>
           {%- if site.show_excerpts -%}
             {{ post.excerpt }}
+            <a class="post-more" href="{{ post.url | relative_url }}">
+              Read more...
+            </a>
           {%- endif -%}
         </li>
         {%- endfor -%}

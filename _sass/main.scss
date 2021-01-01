@@ -66,6 +66,12 @@ body {
         font-weight: 100;
     }
 
+    .post-more {
+        text-decoration: none;
+        color: gray;
+        font-size: 0.8em;
+    }
+
     .post-content {
         line-height: 200%;
     }
@@ -119,6 +125,7 @@ body {
         height: 2px;
         background: $theme-color;
         position: absolute;
+        left: 0px;
         bottom: -1px;
     }
 }
