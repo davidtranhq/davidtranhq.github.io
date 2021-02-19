@@ -1,1 +1,29 @@
 http://www.lomont.org/papers/2003/InvSqrt.pdf
+https://mrob.com/pub/math/numbers-25.html#fn_eberly2010
+
+Quake III Arena is critically acclaimed FPS from 1999
+Part of what stood this game out from the rest was impressive graphics
+what allowed this game its superior graphics were clever optimizations of the game engine
+one of these optimizations: infamous approximation of the inverse sqrt:
+
+``` C
+float Q_rsqrt( float number )
+{
+	long i;
+	float x2, y;
+	const float threehalfs = 1.5F;
+
+	x2 = number * 0.5F;
+	y  = number;
+	i  = * ( long * ) &y;                       // evil floating point bit level hacking
+	i  = 0x5f3759df - ( i >> 1 );               // what the fuck? 
+	y  = * ( float * ) &i;
+	y  = y * ( threehalfs - ( x2 * y * y ) );   // 1st iteration
+//	y  = y * ( threehalfs - ( x2 * y * y ) );   // 2nd iteration, this can be removed
+
+	return y;
+}
+```
+
+inverse square root needed to normalize vectors, performed millions of times per second 
+overview

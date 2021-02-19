@@ -5,7 +5,7 @@ date: 2020-12-30 16:12:00 -0500
 excerpt_separator: <!--more-->
 ---
 
-Neural networks and artificial intelligence are all over the news, yet there's still a shroud of mystery about what really goes on behind the scenes. To understand how they work, we'll dive straight into the math and gain an understanding on how to build one from scratch.
+Neural networks and artificial intelligence are all over the news, yet they lack the explanation of what goes on behind the scenes. To understand how they work, we'll dive straight into the math and gain an understanding on how to build one from scratch.
 
 <!--more-->
 
