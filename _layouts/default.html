@@ -7,7 +7,8 @@
         <title>{{ page.title | default: site.title }}</title>
         <link rel="shortcut icon" type="image/png" href="/favicon.png">
         <link rel='stylesheet' href='/assets/css/styles.css'>
-        <link rel='stylesheet' href='/assets/css/syntax.css'>
+        <link rel='stylesheet' href='/assets/css/syntax.css'> <!--syntax highlighter -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- social media icons -->
         <script type="text/x-mathjax-config">
             MathJax.Hub.Config({
               TeX: {
@@ -25,8 +26,14 @@
     </head>
     <body>
         <div id='navbar'>
-            <h1>dav's site</h1>
-            {% include navigation.html %}
+          <h1>dav's site</h1>
+          {% include navigation.html %}
+          <div id="social">
+            <ul>
+              <li><a href="https://github.com/davidtranhq" class="fa fa-github"></a></li>
+              <li><a href="https://www.linkedin.com/in/david-tran-b476851b5/" class="fa fa-linkedin"></a></li>
+            </ul>
+          </div>
         </div>
         <div id='content'>
             {{ content }}

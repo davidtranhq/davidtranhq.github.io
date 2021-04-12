@@ -5,7 +5,7 @@ date: 2020-12-30 16:12:00 -0500
 excerpt_separator: <!--more-->
 ---
 
-Neural networks and artificial intelligence are all over the news, yet they lack the explanation of what goes on behind the scenes. To understand how they work, we'll dive straight into the math and gain an understanding on how to build one from scratch.
+It can seem like magic or sci-fi at first, but its all really just a mega calculus optimization problem.
 
 <!--more-->
 

@@ -12,9 +12,15 @@ body {
 .MathJax_Display, .MJXc-display, .MathJax_SVG_Display {
     overflow-x: auto;
     overflow-y: hidden;
+    font-size: 0.95em;
 }
 
 #navbar {
+    h1 {
+        text-align: center;
+        margin-top: 100px;
+        margin-bottom: 50px;
+    }
     height: 100%;
     width: $sidebar-width;
     position: fixed;
@@ -31,13 +37,35 @@ body {
         font-size: 1em;
         color: white;
         display: block;
+        
     }
-    h1 {
-        text-align: center;
-        margin-top: 100px;
-        margin-bottom: 50px;
+
+    a:hover {
+        opacity: 0.7;
+    }
+
+    #social {
+        li {
+            list-style-type: none;
+            display: inline-block;
+        }
+        position: absolute;
+        bottom: 0px;
+        right: 10px;
+
+        .fa {
+            font-size: 2em;
+            width: 20px;
+            margin-right: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+        }
+
     }
 }
+
+
 
 #content {
     margin-left: $sidebar-width + 50px;
@@ -79,7 +107,7 @@ body {
 
 @media only screen and (max-width: 800px) {
     #navbar {
-        position: static;
+        position: relative;
         width: 100%;
         height: 150px;
         font-size: 1em;
@@ -92,6 +120,35 @@ body {
             margin-top: 20px;
             display: inline-block;
             bottom: 0;
+        }
+
+        #social {
+            ul {
+                list-style-type: none;
+                margin-bottom: 0px;
+                li {
+                    display: inline-block; /* make list horizontal on mobile */
+                }
+            }
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+    
+            .fa {
+                font-size: 1.3em;
+                width: 20px;
+                text-align: center;
+                text-decoration: none;
+            }
+    
+            .fa-github {
+                color: white;
+              }
+              
+            /* Twitter */
+            .fa-linkedin {
+                color: white;
+            }
         }
     }
 
@@ -140,7 +197,7 @@ body {
 .post-image {
     text-align: center;
     img {
-        width: 100%;
+        width: 90%;
     }
 }
 
@@ -148,4 +205,22 @@ body {
     border-top: 1px solid $theme-color;
     margin-top: 100px;
     margin-bottom: 50px;
+}
+
+.post {
+    blockquote {
+        font-size: 0.95em;
+        padding: 10px 20px;
+        margin: 0 0 20px;
+        border-left: 5px solid $theme-color;
+    }
+
+    pre {
+        overflow: auto; /* I added this */
+        padding: 15px;
+        margin-bottom: 0;
+       /* white-space: pre-wrap; I deleted this
+        word-wrap: break-word;  and this
+        word-break: break-all; and also this */ 
+    }
 }
