@@ -40,7 +40,7 @@ The benefit of this is that now every bullet has a straight-line path, making it
 
 ## Generating mirror images
 
-It's enough to compute the upper and right mirror images (1st quadrant), since the other images are just reflections of the first quadrant. First, determine the maximum number of images to the right (`x_imgs`) and above (`y_imgs`) that can fit within the maximum bullet range (`dist`). Integer division is used here to prevent splitting a room in half; if even a little a bit of the reflected room is in range the entire reflection will be included so as to not miss any guards. The guards inside the room outside of range can be filtered later.
+It's enough to compute the upper and right mirror images (1st quadrant), since the other images are just reflections of the first quadrant. First, determine the maximum number of images to the right (`x_imgs`) and above (`y_imgs`) that can fit within the maximum bullet range (`dist`). Integer division is used here to prevent splitting a room in half. If even a little a bit of the reflected room is in range, the entire reflection will be included so as to not miss any guards. The guards inside the room outside of the maximal range can be filtered later.
 
 ```python
     x_imgs = (dist // dimensions[0]) + 2
@@ -139,7 +139,7 @@ def get_angles(x0, y0, pts):
 ```
 
 ## Counting valid shots
-Finally, only the shots that hit guards but miss players are considered. If the angle for a guard shot does not appear in `your_angles`, the shot certainly does not cross paths with a player reflection. However, if it does appear in `your_angles`, the shot can only be counted if the guard is closer than the player (otherwise the player will be hit first!).
+Finally, only the shots that hit guards but miss players are considered. If the angle for a guard shot does not appear in `your_angles`, the shot certainly is not aligned with a player reflection. However, if it does appear in `your_angles`, the shot can only be counted if the guard is closer than the player (otherwise the player will be hit first!).
 
 ```python
 # count how many guards can be shot
