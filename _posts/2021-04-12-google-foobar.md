@@ -86,7 +86,7 @@ guard_pts = include_reflections(guard_pts)
 
 ## Removing targets outside of range
 
-Since every bullet has a straight-line path, the length of the path is just the Euclidean distance $\sqrt{(x_1-x_0)^2+(y_1-y_0)^2}$ between the player $(x_0, y_0)$ and the target $(x_1, y_1)$. To filter targets outside of range, remove any targets who's path is larger than the maximum range.
+Since every bullet has a straight-line path, the length of the path is just the Euclidean distance $\sqrt{(x_1-x_0)^2+(y_1-y_0)^2}$ between the player $(x_0, y_0)$ and the target $(x_1, y_1)$. To filter targets outside of range, remove any targets whose path is larger than the maximum range.
 
 ```python
 def distance(x0, y0, x1, y1):
@@ -110,7 +110,7 @@ There are now two list of coordinates: one representing all the guard reflection
 {:.post-image}
 ![Computing angle](/assets/images/foobar_computing_angle.png)
 
-As shown, if the player's position is $(x_0, y_0)$ and the target is $(x_1, y_1)$, then the corresponding angle can be calculated with $\theta = arctan(\frac{\Delta x}{\Delta y})$. The angle corresponding to each guard and to each player will be saved in a map `guard_angles` and `player_angles` respectively, which map angles to the corresponding target coordinates. If an angle corresponds to multiple guards, only the closest guard will be recorded; likewise for the closest player.
+As shown, if the player's position is $(x_0, y_0)$ and the target is $(x_1, y_1)$, then the corresponding angle can be calculated with $\theta = arctan(\frac{\Delta y}{\Delta x})$. The angle corresponding to each guard and to each player will be saved in a map `guard_angles` and `player_angles` respectively, which map angles to the corresponding target coordinates. If an angle corresponds to multiple guards, only the closest guard will be recorded; likewise for the closest player.
 
 
 ```python
