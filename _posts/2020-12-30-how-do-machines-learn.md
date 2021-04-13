@@ -5,7 +5,7 @@ date: 2020-12-30 16:12:00 -0500
 excerpt_separator: <!--more-->
 ---
 
-It can seem like magic or sci-fi at first, but its all really just a mega calculus optimization problem.
+It can seem like magic or sci-fi at first, but its all really just a huge calculus optimization problem. Working through it from scratch makes it possible to see how anyone was even able to come up with this!
 
 <!--more-->
 
@@ -680,3 +680,11 @@ Python is the language of choice for machine learning for good reason. Many of t
 Going over the code could be a seperate post entirely. Since this post is long enough, I'll include the repository here, and maybe annotate another time.
 
 [github.com/davidtranhq/digit-recognizer](https://github.com/davidtranhq/digit-recognizer)
+
+***
+
+Additional resources: 
+
+[What is backpropagation really doing? (3Blue1Brown)](https://www.youtube.com/watch?v=Ilg3gGewQ5U)
+ 
+[Neural Networks and Deep Learning (Michael Nielsen)](http://neuralnetworksanddeeplearning.com/)
