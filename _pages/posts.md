@@ -1,7 +1,7 @@
 ---
 layout: default
 permalink: "/posts/"
-title: posts
+title: Posts
 ---
 <div class="posts">
     {% if site.paginate %}
