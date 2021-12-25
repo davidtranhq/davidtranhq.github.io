@@ -16,14 +16,14 @@ Supports calculations with n-dimensional vectors and matrices.
 Built from scratch without external libraries as an exercise in machine learning.
 
 [tex-math-parser](https://github.com/davidtranhq/tex-math-parser): An NPM package for parsing TeX math into
-a [MathJS](mathjs.org) expression tree.
+a [MathJS](https://mathjs.org) expression tree.
 
 [space-invaders](https://github.com/davidtranhq/space-invaders): A complete emulator for the Intel 8080 microprocessor.
 Includes the playable arcade version of Space Invaders using an emulated arcade cabinet.
 
 #### projects I've contributed to
 
-[MathJS](mathjs.org): A numeric and symbolic math library for JavaScript and Node.js. 
+[MathJS](https://mathjs.org): A numeric and symbolic math library for JavaScript and Node.js. 
 Reaches ~1.7 million downloads/month.
 
 &mdash;
