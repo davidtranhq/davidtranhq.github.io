@@ -1,5 +1,7 @@
 @import "colors";
 
+// custom changes to the Minimalist theme + some extras (theme switch)
+
 body {
   /* prevent scrollbar from adjusting body placement */
   padding-left: calc(100vw - 100%);
@@ -7,10 +9,6 @@ body {
 
 pre {
   font-size: 14px;
-  .highlight .ow {
-    color: #000000;
-    font-weight: bold;
-  }
 }
 
 .theme-switch {
@@ -20,5 +18,10 @@ pre {
   font-size: 16px; /* Set a font size */
   cursor: pointer; /* Mouse pointer on hover */
   float: right;
-  margin-top: 6px;
+}
+
+.link-wrapper-mobile {
+  display: flex;
+  justify-content: space-evenly;
+  color: black;
 }
