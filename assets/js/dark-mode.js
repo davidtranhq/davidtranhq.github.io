@@ -1,7 +1,7 @@
 const getTheme = () => localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
 
 document.addEventListener("DOMContentLoaded", function () {
-  const toggleButton = document.querySelector('button.theme-switch');
+  const toggleButtons = document.querySelectorAll('button.theme-switch');
 
   function toggleTheme(e) {
     const currentTheme = getTheme();
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem('theme', newTheme);
   }
 
-  toggleButton.addEventListener('click', toggleTheme, false);
+  toggleButtons.forEach(btn => btn.addEventListener('click', toggleTheme));
 
   const currentTheme = getTheme();
   if (currentTheme) {
