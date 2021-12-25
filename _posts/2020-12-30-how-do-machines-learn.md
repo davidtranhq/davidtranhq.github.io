@@ -5,28 +5,24 @@ date: 2020-12-30 16:12:00 -0500
 excerpt_separator: <!--more-->
 ---
 
-It can seem like magic or sci-fi at first, but its all really just a huge calculus optimization problem. Working through it from scratch makes it possible to see how anyone was even able to come up with this!
-
-<!--more-->
-
-We'll look at the famous problem of recognizing handwritten digits: the 'Hot Cross Buns' of artificial intelligence. For humans with a fully developed visual cortex, this task is trivial. For a computer, this task is more complicated. We'll solve this problem by building an artifical brain of sorts, a *neural network*. At it's most basic level, a neural network is a function that takes an input and provides an output. The input to our function will be a 28x28 pixel grayscale image of a handwritten digit, and the output will be the digit represented in the image.
+We'll look at the classic problem of recognizing handwritten digits: the "Hello, world!" of machine learning. For humans with a fully developed visual cortex, this task is trivial. For a computer, this task is more complicated. We'll solve this problem by building an artifical brain of sorts, a *neural network*. At its most basic level, a neural network is a function that takes an input and provides an output. The input to our function will be a 28x28 pixel grayscale image of a handwritten digit, and the output will be the digit represented in the image.
 
 {:.post-image}
-![Converting MNIST to number](/assets/images/mnist_to_number.png)
+![Converting MNIST to number](/assets/img/mnist_to_number.png)
 
 ## Perceptrons
 
 Perceptrons are functions. They are the building blocks of neural networks and represent the indivudal neurons of the network. They take $n$ inputs, $x_0, x_1, x_2, ..., x_n$, and produce one output: either $0$ or $1$. 
 
 {:.post-image}
-![Perceptron](/assets/images/perceptron.png)
+![Perceptron](/assets/img/perceptron.png)
 
 How is the output produced? Each perceptron has two types of real-number parameters: weights (one weight $w_n$ for each input $x_n$) and a threshold $t$. The output $P(x)$ of a perceptron is 1 if the weighted sum of the inputs $\sum_{i=0}^n w_a x_a$ is greater than or equal to $t$ and 0 if it is less than $t$.
 
 Represented graphically:
 
 {:.post-image}
-![Perceptron graph](/assets/images/perceptron-graph.png)
+![Perceptron graph](/assets/img/perceptron-graph.png)
 
 and algebraically:
 
@@ -73,14 +69,14 @@ $\frac{\partial P}{\partial w}$ and $\frac{\partial P}{\partial b}$ are partial 
 This requires differentiating the perceptron function with respect to $w$ and $b$. Unfortunately, this is not possible. Because it is a step function, the function is not differentiable at the threshold point $-b$. An infinitessimally small change in the weights at $-b$ can cause an infinitely large change in the output (from 0 to 1). At every other point the derivative is 0, making it impossible to know if the function is moving in the right or wrong direction. A modified perceptron is needed to solve this problem. 
 
 {:.post-image}
-![Non-differentiable perceptron graph](\assets\images\non-differentiable-perceptron-graph.png)
+![Non-differentiable perceptron graph](\assets\img\non-differentiable-perceptron-graph.png)
 
 ## Sigmoid Neurons
 
 What is really needed is a smooth perceptron function; one that is differentiable everywhere. We'll still take the weighted sum as in the original perceptron, but instead of producing only a 0 or 1 if the weighted sum exceeds the bias $b$, the perceptron will produce any value *between* 0 and 1. This can be accomplished by passing the sum through an *activation function*. An activation function takes an input (in this case the weighted sum) and maps it to an output, which will be the output of the neuron. For this reason, the output of a neuron is called it's *activation*. Knowing which activation function to use depends on the problem. We'll use the logistic function $\sigma$ as our activation function:
 
 {:.post-image}
-![Sigmoid graph](\assets\images\sigmoid-graph.png)
+![Sigmoid graph](\assets\img\sigmoid-graph.png)
 
 $$
     \sigma(x) = \frac{1}{1+e^{-x}}
@@ -88,7 +84,7 @@ $$
 
 Notice how the activation is bounded between 0 and 1. Very large sums produce activations very close to 1, while very small sums produce activations very close to 0.
 
-There exists many other activation functions, such as the hyperbolic tan function or the [ReLU function](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)). The choice of activation function affects the efficiency of the network. Although not the most efficient, we chose the logistic function both for the sake of tutorial and because it's derivatives are simple to compute.
+There exists many other activation functions, such as the hyperbolic tan function or the [ReLU function](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)). The choice of activation function affects the efficiency of the network. Although not the most efficient, we chose the logistic function both for the sake of tutorial and because its derivatives are simple to compute.
 
 Now we can represent the output of a single neuron as:
 
@@ -121,7 +117,7 @@ A single neuron can't make very complex decisions. Human brains have billions of
 A feed-forward neural network consists of $l$ layers, where each layer contains $k$ neurons. The inputs to a neuron in layer $l$ are the activations of every neuron in the previous layer $l-1$. Equivalently, the activation of a neuron in layer $l$ serve as one input to every neuron in layer $l+1$. The output of a layer $l$ can therefore be represented as a $k$-dimensional vector $a_l$, called the *activation vector* of layer $l$, where each component is the activation of one neuron in the layer. The choice of the number of layers and neurons per layer has an effect on the efficiency of the network. We'll (somewhat arbitrarily) choose $l = 4$ layers. 
 
 {:.post-image}
-![Feedforward architecture](\assets\images\feedforward.png)
+![Feedforward architecture](\assets\img\feedforward.png)
 
 The first layer $l = 0$, called the *input layer*, recieves the raw image data of the digit. Since there are $28 \cdot 28 = 784$ pixels in an image, this first layer will have $k = 784$ neurons. Each neuron will use the grayscale value (from 0 to 1) of one pixel as input (a grayscale value of 0 indicates the pixel is completely dark, while a value of 1 indicates the pixel is completely white). 
 
@@ -213,7 +209,7 @@ Notice that because of the squared difference, $C(\vec w, B)$ is always positive
 
 ### Gradients
 
-The gradient of a multivariable function $F$, denoted $\nabla F$, is a vector containing every partial derivative of F. Much like how a negative derivative indicates that a one-dimensional function is decreasing, the gradient can be used to describe the shape of a multivariable function at a certain point. For a function $F(x_0, x_1, ..., x_n)$ with $n$ variables, it's gradient is defined as:
+The gradient of a multivariable function $F$, denoted $\nabla F$, is a vector containing every partial derivative of F. Much like how a negative derivative indicates that a one-dimensional function is decreasing, the gradient can be used to describe the shape of a multivariable function at a certain point. For a function $F(x_0, x_1, ..., x_n)$ with $n$ variables, its gradient is defined as:
 
 $$
     \newcommand\colvec[1]{\begin{bmatrix}#1\end{bmatrix}}
@@ -378,7 +374,7 @@ Because the activations of each layer are influenced by the ones of every layer 
 Let $\delta^l$ be our proxy which represents the "error" of a layer $l$. What does the error of a layer mean? Think of it as a way to describe how much the cost function changed because of a layer $l$. Recall how each function feeds into the next:
 
 {:.post-image}
-![Error intuition](\assets\images\error-intuition.png)
+![Error intuition](\assets\img\error-intuition.png)
 
 Functions that are associated with the same layer are the same colour. Imagine the diagram as an assembly line. The initial raw materials are the pixels of the input image. They flow through each "worker" (layer), and each one applies some transformations to it until it becomes a final product (a digit classification) where it reaches quality assurance at the end of the line (the cost function). If we want to evaluate the error that a worker introduced into the assembly line, we should examine how the transformations that the worker applied changed the final product $C$. For the red worker, the "transformations" it applies are the weighted sum $z^L$, followed by the activation function $a^L$. Therefore, there is reason to believe that the error $\delta^L$ in the last red layer $L$ should be $\frac{\partial a^L}{\partial z^L}\frac{\partial C}{\partial a^L}$, which simplifies to $\frac{\partial C}{\partial z^L}$.
 

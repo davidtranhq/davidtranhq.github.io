@@ -1,0 +1,24 @@
+@import "colors";
+
+body {
+  /* prevent scrollbar from adjusting body placement */
+  padding-left: calc(100vw - 100%);
+}
+
+pre {
+  font-size: 14px;
+  .highlight .ow {
+    color: #000000;
+    font-weight: bold;
+  }
+}
+
+.theme-switch {
+  background-color: transparent;
+  border: none; /* Remove borders */
+  color: var(--clr-text);
+  font-size: 16px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+  float: right;
+  margin-top: 6px;
+}

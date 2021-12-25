@@ -22,16 +22,16 @@ The problem is as follows:
 One example of the problem is visually described below. Suppose the room is 4 x 2, you are standing at (1, 1), and the guard is standing at (2, 1). Then:
 
 {:.post-image}
-![Example case](/assets/images/foobar_example_case.png)
+![Example case](/assets/img/foobar_example_case.png)
 
 The blue dot represents your position and the red dot represents the guard's position. The blue ray is a bullet shot that bounces off the top wall and hits the guard. You could also bounce off the bottom wall, or you could fire directly at the guard. The goal is to count how many different shots you could take that will hit the guard (without hitting you).
 
-It's tempting to just write a simulation of the bullet ricocheting mechanics and directly count how many shots are valid. But, the key is realizing that a ray that reflects a wall at the same angle is equivalent to a ray that passes right through the wall into a mirror image of the room.
+It's tempting to want to write a simulation of the bullet ricocheting mechanics and directly count how many shots are valid. But, the key is realizing that a ray that reflects a wall at the same angle is equivalent to a ray that passes right through the wall into a mirror image of the room.
 
 {:.post-image}
-![Example case reflection](/assets/images/example_case_reflection.png)
+![Example case reflection](/assets/img/example_case_reflection.png)
 
-The benefit of this is that now every bullet has a straight-line path, making it easy to determine it's length and whether or not it hits a guard. With this, an outline for the solution is possible.
+The benefit of this is that now every bullet has a straight-line path, making it easy to determine its length and whether or not it hits a guard. With this, an outline for the solution is possible.
 
 1. Generate all mirror images of the room in all directions that fit within the maximum range of the bullet.
 2. Remove any targets that are farther than the maximum range of the bullet.
@@ -67,7 +67,7 @@ Then, create `x_imgs` $\times$ `y_imgs` mirror images of the room in the first q
 ```
 
 {:.post-image}
-![Example case reflection quadrant 1](/assets/images/example_case_reflection_quadrant_1.png)
+![Example case reflection quadrant 1](/assets/img/example_case_reflection_quadrant_1.png)
 
 
 Now, image reflections in quadrants II, III, and IV can be included by reflecting the points in the first quadrant accordingly.
@@ -108,7 +108,7 @@ def filter_pts(x, y, pts, dist):
 There are now two list of coordinates: one representing all the guard reflections in range and a one representing all the player reflections in range. Each shot that hits a guard can then be represented by the angle the path forms with 0 degrees.
 
 {:.post-image}
-![Computing angle](/assets/images/foobar_computing_angle.png)
+![Computing angle](/assets/img/foobar_computing_angle.png)
 
 As shown, if the player's position is $(x_0, y_0)$ and the target is $(x_1, y_1)$, then the corresponding angle can be calculated with $\theta = arctan(\frac{\Delta y}{\Delta x})$. The angle corresponding to each guard and to each player will be saved in a map `guard_angles` and `player_angles` respectively, which map angles to the corresponding target coordinates. If an angle corresponds to multiple guards, only the closest guard will be recorded; likewise for the closest player.
 
@@ -153,24 +153,57 @@ Finally, only the shots that hit guards but miss players are considered. If the 
 ```
 
 {:.post-image}
-![Valid vs. Invalid Shot](/assets/images/foobar_valid_invalid_shot.png)
+![Valid vs. Invalid Shot](/assets/img/foobar_valid_invalid_shot.png)
 
 ## An example test case
 
 For a $3 \times 2$ room where the player is positioned at $(1, 1)$ and the guard is positioned at $(2, 1)$ with a max bullet range of 4:
 
 {:.post-image}
-![Test case](/assets/images/foobar_test_case_small_shots.png)
+![Test case](/assets/img/foobar_test_case_small_shots.png)
 
-The black box represents the original room. The blue points are the player and their reflections and the red points are the guard and it's reflections. The green paths are all valid bullet paths. Since their are 7 paths, the function returns 7.
+The black box represents the original room. The blue points are the player and their reflections and the red points are the guard and its reflections. The green paths are all valid bullet paths. Since their are 7 paths, the function returns 7.
 
 ```python
 def solution(dimensions, your_pos, guard_pos, dist):
-    # ...
+    ypx, ypy = your_pos[0], your_pos[1]
+    gpx, gpy = guard_pos[0], guard_pos[1]
+    # max number of lattice image copies that fit within dist
+    x_imgs = (dist // dimensions[0]) + 2
+    y_imgs = (dist // dimensions[1]) + 2
+    # find points of the first quadrant
+    your_pts = []
+    guard_pts = []
+    for y_img in range(y_imgs):
+        y_off = y_img * dimensions[1]
+        your_y = y_off + (ypy if not y_img % 2 else dimensions[1] - ypy)
+        guard_y = y_off + (gpy if not y_img % 2 else dimensions[1] - gpy)
+        for x_img in range(x_imgs):
+            x_off = x_img * dimensions[0]
+            your_x = x_off + (ypx if not x_img % 2 else dimensions[0] - ypx)
+            guard_x = x_off + (gpx if not x_img % 2 else dimensions[0] - gpx)
+            your_pts.append( (your_x, your_y) )
+            guard_pts.append( (guard_x, guard_y) )
+    # include 2nd, 3rd, 4th quadrant pts from reflection of 1st quadrant pts
+    your_pts = include_reflections(your_pts)
+    guard_pts = include_reflections(guard_pts)
+    # remove pts farther than the bullet distance away from the player
+    your_pts = filter_pts(ypx, ypy, your_pts, dist)
+    guard_pts = filter_pts(ypx, ypy, guard_pts, dist)
+    # get map of (angle: pt) where pt is the closest point for a given angle
+    your_angles = get_angles(ypx, ypy, your_pts[1:])
+    guard_angles = get_angles(ypx, ypy, guard_pts)
+    # count how many guards can be shot
+    shots = 0
+    for ang, pt in guard_angles.iteritems():
+        # a guard can only be shot if it's not aligned with a player reflection OR
+        # it is closer than an aligned player reflection
+        if ang not in your_angles or distance(ypx, ypy, *pt) < distance(ypx, ypy, *your_angles[ang]):
+            shots += 1
     return shots
 
 >>> solution([3,2], [1,1], [2,1], 4)
 7
 ```
 
-[The full solution can be found here](https://github.com/davidtranhq/google-foobar/blob/6cdebd8ca52736569819520149bf33781669897b/bringing-a-gun-to-a-guard-fight/solution2.py).
+The full program can be found [here](https://github.com/davidtranhq/programming-challenges/blob/fd06e59d04f68d8ad82c0fe539fc5a6af966192e/google-foobar/bringing-a-gun-to-a-guard-fight/solution2.py).
