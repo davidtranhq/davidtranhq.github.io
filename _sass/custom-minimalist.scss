@@ -2,10 +2,14 @@
 
 // custom changes to the Minimalist theme + some extras (theme switch)
 
-body {
-  /* prevent scrollbar from adjusting body placement */
-  padding-left: calc(100vw - 100%);
+@media all and (min-width: 961px) {
+  body {
+    /* prevent scrollbar from adjusting body placement */
+    padding-left: calc(100vw - 100%);
+  }
 }
+
+
 
 pre {
   font-size: 14px;
