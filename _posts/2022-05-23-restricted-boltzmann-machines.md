@@ -4,7 +4,7 @@ title: Restricted Boltzmann Machines
 katex: True
 ---
 
-A **restricted Boltzmann machine** is an unsupervised model. It is an undirected graphical model with two layers: one layer of visible binary variables $\bm v$ and one layer of latent binary variables $\bm h$. Intralayer connections are forbidden, forming a bipartite graph structure.
+The **restricted Boltzmann machine** is an undirected graphical model with two layers: one layer of visible binary variables $\bm v$ and one layer of latent binary variables $\bm h$. Intralayer connections are forbidden, forming a bipartite graph structure.
 
 ![RBM Drawing](/assets/img/restricted-boltzmann-machines/rbm_drawing.png)
 
