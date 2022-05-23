@@ -16,12 +16,15 @@
       MathJax.Hub.Config({
         TeX: {
           equationNumbers: { autoNumber: "ams" },
-          tagSide: "right"
+          tagSide: "right",
+          Macros: {
+            bm: ["\\boldsymbol{#1}",1]
+          }
         },
         tex2jax: {
           inlineMath: [['$','$'], ['\\(','\\)']],
           processEscapes: true
-        }
+        },
       });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
