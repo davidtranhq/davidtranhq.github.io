@@ -9,7 +9,13 @@
   }
 }
 
-
+/* center images within <p> tags (images within markdown posts) */
+p {
+  img {
+    display: block;
+    margin: auto;
+  }
+}
 
 pre {
   font-size: 14px;
