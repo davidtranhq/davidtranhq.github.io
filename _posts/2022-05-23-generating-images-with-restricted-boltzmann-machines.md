@@ -8,7 +8,7 @@ The goal of unsupervised learning is to model the probability distribution $P_\t
 
 Complex probability distributions with multiple variables can be represented with a **probabilistic graphical model**. The probabilistic graphical model defines a graph $\mathcal{G}$ where each node corresponds to a variable and each edge corresponds to a possible dependence between the variables. The probability distribution can then be defined in terms of the nodes and the edges. In an undirected graphical model, if a node $X$ cannot be reached from a node $Y$, then $X$ and $Y$ are independent. If a node $X$ cannot be reached from a node $Y$ without passing through a node $Z$, then $X$ and $Y$ are conditionally independent given $Z$.
 
-The **restricted Boltzmann machine** is an undirected graphical model with two layers: one layer of visible binary variables $\bm v$ and one layer of latent binary variables $\bm h$. Intralayer connections are forbidden, forming a bipartite graph structure.
+The **restricted Boltzmann machine** is an undirected graphical model with two layers: one layer of visible binary variables $\bm v$ and one layer of latent binary variables $\bm h$. The connections between the layers are given by a weight matrix $\bm W$, where $W_{i,j}$ represents the connection between $v_i$ and $h_j$. Intralayer connections are forbidden, forming a bipartite graph structure.
 
 
 ![RBM Drawing](/assets/img/restricted-boltzmann-machines/rbm_drawing.png)
@@ -21,7 +21,7 @@ $$
     P(\bm v, \bm h) = \frac{1}{Z} \exp( -E(\bm v, \bm h))
 $$
 
-where $E(\bm v, \bm h) = -\bm b^\top \bm v - \bm c^\top \bm h - \bm v^\top \bm W \bm h$ is the **energy** function. The parameters $\bm b$ and $\bm c$ are bias vectors for the visible and hidden variables, respectively. $\bm W$ is the weight matrix representing the connections between $\bm v$ and $\bm h$, where $W_{i,j}$ represents the connection between $v_i$ and $h_j$. $Z$ is the **partition function**, the normalizing constant (with respect to $\bm v$ and $\bm h$) that ensures $P$ is a probability distribution by making $P$ sum to 1 over all $\bm v$ and $\bm h$.
+where $E(\bm v, \bm h) = -\bm b^\top \bm v - \bm c^\top \bm h - \bm v^\top \bm W \bm h$ is the **energy** function. The parameters $\bm b$ and $\bm c$ are bias vectors for the visible and hidden variables, respectively. $Z$ is the **partition function**, the normalizing constant (with respect to $\bm v$ and $\bm h$) that ensures $P$ is a probability distribution by making $P$ sum to 1 over all $\bm v$ and $\bm h$.
 
 $$
     Z = \sum_{\bm v} \sum_{\bm h} \exp(-E(\bm v, \bm h))
