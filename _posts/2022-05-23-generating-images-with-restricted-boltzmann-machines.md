@@ -1,14 +1,19 @@
 ---
 layout: post
-title: Restricted Boltzmann Machines
+title: Generating Images with Restricted Boltzmann Machines
 katex: True
 ---
 
+The goal of unsupervised learning is to model the probability distribution $P_\text{data}(\bm x)$ of some type of data $\bm x$. Generating examples of $\bm x$ is hard because data in the real world is often extremely high-dimensional with complex distributions. If instead, we represent $P_\text{data}(\bm x)$ with a simpler model $P_\text{model}(\bm x)$, we can generate new examples of $\bm x$ by sampling from $P_\text{model}(\bm x)$.
+
+Complex probability distributions with multiple variable can be represented with a **probabilistic graphical model**. The probabilistic graphical model defines a graph $\mathcal{G}$, where each node corresponds to a variable, and each edge corresponds to a possible dependence between the variables. In an undirected graphical model, if a node $X$ cannot be reached from a node $Y$, then $X$ and $Y$ are independent. If a node $X$ cannot be reached from a node $Y$ without passing through a node $Z$, then $X$ and $Y$ are conditionally independent given $Z$.
+
 The **restricted Boltzmann machine** is an undirected graphical model with two layers: one layer of visible binary variables $\bm v$ and one layer of latent binary variables $\bm h$. Intralayer connections are forbidden, forming a bipartite graph structure.
+
 
 ![RBM Drawing](/assets/img/restricted-boltzmann-machines/rbm_drawing.png)
 
-The goal is that the latent variables $\bm h$ will learn the dependencies between the visible variables $\bm v$.
+The goal is that the latent variables $\bm h$ will learn to represent the dependencies between the observed variables $\bm v$.
 
 The model defines the joint probability distribution:
 
@@ -26,9 +31,9 @@ Note that the number of terms in $Z$ grows exponentially with respect to the num
 
 ## Gibbs Sampling
 
-Because of the intractability of $Z$, exact samples can not be drawn from $P(\bm v, \bm h)$. Instead, $P(\bm v, \bm h)$ is approximated using **Gibbs sampling**.
+Because of the intractability of $Z$, exact samples can not be drawn from $P(\bm v, \bm h)$. Instead, a sample from $P(\bm v, \bm h)$ is approximated using **Gibbs sampling**.
 
-In the most general form, Gibbs sampling is used to sample an $n$-dimensional sample $\bm x = \langle x_1, \dots, x_n \rangle$ from a joint probability distribution $P(\bm x)$. It is often used when the joint probability distirbution is difficult or impossible to sample from, but the conditional probability distributions are easy. The algorithm is as follows:
+In the most general form, Gibbs sampling is used to generate an $n$-dimensional sample $\bm x = \langle x_1, \dots, x_n \rangle$ from a joint probability distribution $P(\bm x)$. It is often used when the joint probability distirbution is difficult or impossible to sample from, but the conditional probability distributions are easy. The algorithm is as follows:
 
 1. Initialize the initial sample $\bm x^{(0)}$ to some value (usually randomly or by some heuristic/algorithm).
 2. Update the sample $\bm x^{(t)} \to \bm x^{(t + 1)}$ by sampling each $x_i^{(t+1)}$ individually from the conditional distribution $P(x_i^{(t+1)} \mid \mathbb X)$, where $\mathbb X = \{ x_1^{(t)}, \dots, x_n^{(t)} \} \setminus \{ x_i^{(t)} \}$ is the set of individual samples from the previous iteration, excluding the individual sample corresponding to $x_i^{(t+1)}$.
@@ -49,9 +54,7 @@ $$
     &= \frac{P(\bm v, \bm h = \bm 1)}{P(\bm v, \bm h = \bm 1) + P(\bm v, \bm h = \bm 0)} \\
     &= \frac{\exp(\bm b^\top \bm v + \bm c + \bm v^\top \bm W)}{\exp(\bm b^\top \bm v + \bm c + \bm v^\top \bm W) + \exp(\bm b^\top \bm v)} \\
     &= \frac{\exp( \bm c + \bm v^\top \bm W)}{\exp(\bm c + \bm v^\top \bm W) + 1} \\
-    &= \sigma \left( \bm c + \bm v^\top \bm W \right) \\
-    P(\bm h = \bm 0 \mid \bm v) &= 1 - \sigma\left(\bm c + \bm v^\top \bm W\right) \\
-    &= \sigma\left(-\bm c - \bm v^\top \bm W\right)
+    &= \sigma \left( \bm c + \bm v^\top \bm W \right)
 \end{aligned}
 $$
 
@@ -59,12 +62,9 @@ and symmetrically,
 
 $$
 \begin{aligned}
-    P(\bm v = \bm 1 \mid \bm h) &= \sigma \left( \bm b + \bm W \bm h\right) \\
-    P(\bm v = \bm 0 \mid \bm h) &= \sigma \left( -\bm b - \bm W \bm h\right)
+    P(\bm v = \bm 1 \mid \bm h) &= \sigma \left( \bm b + \bm W \bm h\right).
 \end{aligned}
 $$
-
-Note that when computing $P(\bm v \mid \bm h)$, it is important that $\bm h$ represents the binary states of the hidden units and not their real-valued probabilities. This acts as a regularizer, as it prevents the hidden units from communicating real-values to the visible units during reconstruction [(Hinton, 2010)](https://www.cs.toronto.edu/~hinton/absps/guideTR.pdf).
 
 ## Training Restricted Boltzmann Machines with Maximum Likelihood
 
@@ -103,50 +103,43 @@ $$
 
 Note that the introduction of $\tilde P(\bm x) = \exp\left(\log \tilde P(\bm x)\right)$ is valid since $\tilde P(\bm x) > 0$.
 
-Therefore, both the positive phase and negative phase involve computing $\nabla_{\bm \theta} \log \tilde P(\bm x)$. But, the positive phase samples $\bm x$ from the data, that is, $\bm v \sim P_\text{data}(\bm v)$ and $\bm h \sim P_\text{model}(\bm h \mid \bm v)$, while the negative phase samples $\bm x$ from the model, that is, $\bm v, \bm h \sim P_\text{model}(\bm v, \bm h)$ (using Gibbs sampling).
+Therefore, both the positive phase and negative phase involve computing $\nabla_{\bm \theta} \log \tilde P(\bm x)$. But, the positive phase samples $\bm x$ from the data, that is, $\bm v$ is sampled from the data $P_\text{data}(\bm v)$, and $\bm h$ is sampled from the model $P_\text{model}(\bm h \mid \bm v)$ given $\bm v$. The negative phase instead samples $\bm x$ from the model, that is, both $\bm v$ and $\bm h$ are sampled from $P_\text{model}(\bm v, \bm h)$ using Gibbs sampling.
 
-## Training Restricted Boltzmann Machines with Contrastive Divergence
+### Persistent Contrastive Divergence
 
-Sampling $\bm v$ and $\bm h$ from $P(\bm v, \bm h)$ for the negative phase in maximum likelihood learning requires Gibbs sampling, which means burning in a new set of Markov chains at every gradient step. A more efficient alternative to learning exists.
+Sampling $\bm v$ and $\bm h$ from $P(\bm v, \bm h)$ for the negative phase in maximum likelihood learning requires Gibbs sampling, which means burning in a new set of Markov chains at every gradient step. We can improve computational speed by using the assumption that the distribution defined by the model does not change too much between single gradient steps. Therefore, we can initialize each chain with the state of the chain from the previous gradient step to improve mixing time.
 
-Let $P^{(t)}$ be the distribution of the model after $t$ full steps of Gibbs sampling. Suppose the initial sample (Step 1 of Gibbs sampling) is drawn from the data distribution, that is, $P^{(0)} = P_\text{data}$. The true distribution of the model $P_\text{model}$ is reached when the Markov chain converges after $k$ steps, that is, $P^{(k)} = P_\text{model}$. Since the goal of training is for the model to capture the underlying data distribution, we want $P^{(0)} = P^{(k)}$.
+Note that this assumption requires that the learning rate be much smaller than if we initialized the Markov chains randomly. If the learning rate is too large, the model distribution will move faster than the Markov chains can mix.
 
-One way of representing a "distance"; between probability distributions $P$ and $Q$ is using the **Kullback-Leibler divergence**:
+## Application
 
-$$
-    D_\text{KL}(P \lVert Q) = \mathbb E_{ \mathrm{x} \sim P} \left[ \log P(x) - \log Q(x) \right]
-$$
+### Treating Probabilities as Expectations
 
-meaning "$Q$ differs from $P$ by $D_\text{KL}(P \lVert Q)$".
+When computing the conditional posterior $P(\bm h \mid \bm v)$, it is common to take the probabilities of $\bm v$ as the values of $\bm v$ rather than sampling from the probabilities of $\bm v$ to reduce sampling noise. The theoretical justification is that since $\bm v$ is sampled from a Bernoulli distribution, using the probabilities of $\bm v$ is equivalent to taking the values of $\bm v$ to be the expectation of $\bm v$.
 
-**Contrastive divergence** trains the model by minimizing
+Note that when computing $P(\bm v \mid \bm h)$, it is important that $\bm h$ represents the binary values of the hidden units sampled from their probabilties and not the probabilities themselves. This acts as a regularizer, as it prevents the hidden units from communicating real-values to the visible units during reconstruction [(Hinton, 2010)](https://www.cs.toronto.edu/~hinton/absps/guideTR.pdf).
 
-$$
-    D = D_\text{KL}( P^{(0)} \lVert P^{(k)} ) - D_\text{KL}( P^{(1)} \lVert P^{(k)} ).
-$$
 
-This works because $P^{(1)}$ is one step closer to the equilibrium distribution $P^{(k)}$ than $P^{(0)}$. Thus, $D_\text{KL}( P^{(0)} \lVert P^{(k)} ) \geq D_\text{KL}( P^{(1)} \lVert P^{(k)} )$, so $D$ is always non-negative. Also, if $D = 0$, then $P^{(0)} = P^{(1)}$, so the Markov chain has converged and $P^{(0)} = P^{(k)}$ (the model is perfect).
+### Results
 
-Minimizing $D$ requires $\nabla_{\bm \theta}D$. It can be shown that 
+The RBM was implemented in PyTorch. It was trained on the MNIST dataset, with 50,000 samples used for training, 10,000 samples used for validation, and 10,000 samples used for testing. Each mini-batch comprised of 50 examples. The model was trained using persistent contrastive divergence with momentum and $L_2$ weight decay. The learning rate was decayed linearly from an initial value to zero over the course of training.
 
-$$
-    \nabla_{\bm \theta} D = \mathbb E_{\mathbf x \sim P^{(0)}} \left[
-        \nabla_{\bm \theta} \log \tilde P(\bm x)
-    \right] - \mathbb E_{\mathbf x \sim P^{(1)}} \left[
-        \nabla_{\bm \theta} \log \tilde P(\bm x)
-    \right]
-$$
+See [https://github.com/davidtranhq/pytorch-rbm](https://github.com/davidtranhq/pytorch-rbm) for the implementation. The parameter and hyperparameters for the below model can be found [in the repository](https://github.com/davidtranhq/pytorch-rbm/tree/main/models).
 
-[(Hinton, 2002)](https://www.cs.toronto.edu/~hinton/absps/tr00-004.pdf). So, the negative phase in maximum likelihood learning that required sampling from a burned-in  Markov chain now requires only one Gibbs sampling step before sampling: $\bm x \sim P^{(1)}$.
+The following images were generated after 10 full steps of Gibbs sampling, initialized from random Markov chains. The images show the probabilities of the visible units.
 
-## Practical Application
 
-See [https://github.com/davidtranhq/pytorch-rbm](https://github.com/davidtranhq/pytorch-rbm) for an RBM implemented in PyTorch. Training proceeds using contrastive divergence with momentum. Early stopping and L2 weight decay are used as regularizers.
+![Generation](/assets/img/restricted-boltzmann-machines/generation.png)
 
-![MNIST Loss](/assets/img/restricted-boltzmann-machines/MNIST_loss.png)
+The following images are reconstructions generated after 1 full step of Gibbs sampling, initialized from examples from the MNIST test set. Again, the probabilities of the visible units are shown.
 
-![MNIST Generation](/assets/img/restricted-boltzmann-machines/MNIST_generation.png)
+![Reconstruction](/assets/img/restricted-boltzmann-machines/reconstruction.png)
 
-![FashionMNIST Loss](/assets/img/restricted-boltzmann-machines/FashionMNIST_loss.png)
 
-![FashionMNIST Generation](/assets/img/restricted-boltzmann-machines/FashionMNIST_generation.png)
+When training on the dataset, the input images are binarized with a threshold of 127. The reconstruction error is computed using the $L_1$ difference between the binary input and the binary reconstructions (sampled from $\bm v$).
+
+![Loss](/assets/img/restricted-boltzmann-machines/loss.png)
+
+The weights of randomly selected hidden units are pictured below. Since each hidden unit is connected to the 28 x 28 = 784 visible units, each 28 x 28 image represents the weight between one hidden unit and all of the visible units.
+
+![Weights](/assets/img/restricted-boltzmann-machines/weights.png)
