@@ -4,7 +4,7 @@ title: Generating Images with Restricted Boltzmann Machines
 katex: True
 ---
 
-The goal of unsupervised learning is to model the probability distribution $P_\text{data}(\bm x)$ of some type of data $\bm x$. Generating examples of $\bm x$ is hard because data in the real world is often extremely high-dimensional with complex distributions. If instead, we represent $P_\text{data}(\bm x)$ with a simpler model $P_\text{model}(\bm x)$, we can generate new examples of $\bm x$ by sampling from $P_\text{model}(\bm x)$.
+The goal of unsupervised learning is to model the probability distribution $P_\text{data}(\bm x)$ of some type of data $\bm x$. Generating examples of $\bm x$ is hard because data in the real world is often extremely high-dimensional with complex distributions. If instead we represent $P_\text{data}(\bm x)$ with a simpler model $P_\text{model}(\bm x)$, we can generate new examples of $\bm x$ by sampling from $P_\text{model}(\bm x)$.
 
 Complex probability distributions with multiple variable can be represented with a **probabilistic graphical model**. The probabilistic graphical model defines a graph $\mathcal{G}$, where each node corresponds to a variable, and each edge corresponds to a possible dependence between the variables. In an undirected graphical model, if a node $X$ cannot be reached from a node $Y$, then $X$ and $Y$ are independent. If a node $X$ cannot be reached from a node $Y$ without passing through a node $Z$, then $X$ and $Y$ are conditionally independent given $Z$.
 
