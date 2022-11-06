@@ -2,6 +2,11 @@
 
 // custom changes to the Minimalist theme + some extras (theme switch)
 
+.MathJax_Display, .MJXc-display, .MathJax_SVG_Display {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
 @media all and (min-width: 961px) {
   body {
     /* prevent scrollbar from adjusting body placement */
