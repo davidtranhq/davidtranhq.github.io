@@ -53,6 +53,7 @@ $$
     &= F(x).
 \end{aligned}   
 $$
+
 since the cumulative distribution function $F_A$ of any standard uniformly-distributed random variable $A$ is $F_A(a) = P(A \leq a) = a$.
 
 ## Example: Generating Random Points in a Circle
