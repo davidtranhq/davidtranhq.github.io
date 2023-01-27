@@ -2,11 +2,11 @@
 layout: default
 ---
 
-I am a second-year CS + Math undergraduate at the University of Western Ontario.
-Most of my work consists of open-source contributions to libraries and
-[personal projects](/projects) that I find useful and/or fun.
+I am a CS + Math undergraduate at the University of Western Ontario.
 
 Currently, I'm doing research in machine learning and its applications to neuroscience at [The Brain and Mind Institute](https://www.uwo.ca/bmi/).
 
 I also occasionally write about interesting topics and problems I've come across. 
 (Check them out [here](/posts)!)
+
+See [/notes](/notes) for some of my class notes and [/projects](/projects) for projects I've made and worked on.
