@@ -1,6 +1,7 @@
 ---
 layout: default
 order: 7
+table_of_contents: true
 ---
 
 # Point Estimation
@@ -165,4 +166,152 @@ The non-parametric bootstrap is the same as the parametric bootstrap, except boo
 
 **Example**: Let $X_1, \dots, X_n$ be a random sample from a gamma distribution with parameters $\alpha, \beta$. Find the moment estimators $\hat \alpha, \hat \beta$.
 
-*Solution*: The first and second population moments are $\mathbb E[X] = \alpha\beta$ and $\mathbb E[X^2] = V(X) + \mathbb E[X]^2 = \alpha\beta^2 + \alpha^2\beta^2$. The first and second sample moments are $\bar X$ and $\frac{1}{n} \sum X_i^2 = TODO.$
+*Solution*: The first and second population moments are $\mathbb E[X] = \alpha\beta$ and $\mathbb E[X^2] = V(X) + \mathbb E[X]^2 = \alpha\beta^2 + \alpha^2\beta^2$. The first and second sample moments are $\bar X$ and $\frac{1}{n} \sum X_i^2$. Setting these equal to each other, we have 
+
+$$
+\begin{align*}
+    \bar X &= \alpha\beta \\
+    \frac{1}{n} \sum X_i^2 &= \bar X\beta + \bar X^2
+\end{align*}
+$$
+
+Solving for $\alpha, \beta$ gives $\hat \alpha = \frac{\bar X^2}{\frac{1}{n} \sum X_i^2 - \bar X^2}$ and $\hat \beta = \frac{\frac{1}{n} \sum X_i - \bar X^2}{\bar X}$. $\blacksquare$. 
+
+**Example**: Suppose we have samples from a uniform distribution $f(x; \theta)$ with $\bar x$. Find $\theta$.
+
+*Solution*: We have $\mathbb E[X] = \frac{\theta}{2} $, so by the method of moments, $\bar x = \frac{\theta}{2} \implies \theta = 2 \bar x $. $\blacksquare$.
+
+
+## Maximum Likelihood Estimation
+
+**Definition**: Let $p(\bm x; \bm \theta) $ be a probability distribution. The **likelihood** function
+gives the probability of $\bm x$ as a function of $\bm \theta$, that is 
+
+$$
+\begin{align*}
+    \mathcal{L}(\bm \theta; \bm x) = p(\bm x; \bm \theta)
+\end{align*}
+$$
+
+**Definition**: The **maximum likelihood estimator** is $\hat {\bm \theta} = \operatorname{argmax}_{\bm \theta} \mathcal{L}(\bm \theta; \bm x)$
+
+Note: since $x \mapsto \ln x$ is strictly increasing, the maximum likelihood estimator can also be found by maximizing $\ln \mathcal{L}(\bm \theta; \bm x)$.
+
+**Example**: Let $X_1, \dots X_n$ be a random sample from an exponential distribution with parameter $\lambda$. Find the maximuim likelihood estimate for $\lambda$.
+
+*Solution*: We have
+
+$$
+    \ln f(\bm x; \lambda) = \sum_n \ln (\lambda  e^{-\lambda x_i}) = n \ln \lambda - \lambda\sum_n x_i
+$$ 
+
+by the independence of $\bm X$. So 
+
+$$
+\begin{align*}
+    \frac{d \mathcal \ln f}{d \lambda} = \frac{n}{\lambda} - \sum_n x_i
+\end{align*}
+$$
+
+which equals $0$ when $\lambda = \frac{1}{\bar x}$. So $\hat \lambda = \frac{1}{\bar x}$. $\blacksquare$.
+
+**Example**: Let $X_1, \dots, X_n \sim f(x; \lambda, \theta)$ where $f$ is the shifted exponential distribution 
+
+$$
+\begin{align*}
+    f(x; \lambda, \theta) = \begin{cases}
+        \lambda e^{-\lambda (x - \theta)} & x \geq \theta \\
+        0 & x < \theta
+    \end{cases}
+\end{align*}
+$$
+
+Find the MLE of $\lambda, \theta$. 
+
+*Solution*: We have $\ln f = n \ln \lambda - \lambda \sum x + \lambda n \theta$. So, 
+
+$$
+\begin{align*}
+    \frac{\partial L}{\partial \lambda} &= \frac{n}{\lambda} - \bar x + n \theta \\
+    \frac{\partial L}{\partial \theta} &= \lambda n 
+\end{align*}
+$$
+
+so $\frac{\partial L}{\partial \lambda} = 0$ when $\lambda = \frac{n}{\bar x - n \theta}$. Notice that $\frac{\partial L}{\partial \theta} $ does not depend on $\theta$: the likelihood always increases as long as $\theta$ increases. But, when $\theta > x$, the likelihood drops to 0. So, the value of $\theta$ that maximizes the likelihood is $\operatorname{min} x_i $. So, $\hat \theta = \operatorname{min} x_i $ and $\hat \lambda = \frac{n}{x - n\theta}$.
+
+**Theorem (Invariance Principle)**: Let $\hat {\bm \theta}$ be the maximum-likelihood estimate of $\bm \theta$. Then, the maximum-likelihood estimate of $h(\bm \theta)$ is $h(\hat {\bm \theta})$.
+
+**Example**: It can be shown that the MLE of $\mu$ of a normal distribution is $\bar X$. Then, the MLE of $\sigma = h(\mu) = \sqrt{\frac{1}{n} \sum(X_i - \mu)^2} = \sqrt{\frac{1}{n} \sum(X_i - \bar X)^2}$.
+
+**Statement**: The MLE is usually approximately the MVUE.
+
+## Sufficiency
+
+**Definition**: A statistic $T = t(X_1, \dots, X_n)$ is **sufficient** for a parameter $\theta$ if the conditional distribution $f(X_1, \dots, X_n \mid T = t)$ does not depend upon $\theta$ for every possible value of $t$.
+* intuitively, this demonstrates that $X_1, \dots X_n$ contains no more extra information about $\theta$ than $T$
+
+**Theorem (Neyman Factorization)**: Let $f(x_1, \dots, x_n; \theta)$ be a joint distribution of $X_1, \dots, X_n$. Then, $T = t(X_1, \dots, X_n)$ is a sufficient statistic for $\theta$ if and only if $f$ can be factorized as 
+
+$$
+\begin{align*}
+    f(x_1, \dots, x_n; \theta) = g(t(x_1, \dots, x_n); \theta) h(x_1, \dots, x_n)
+\end{align*}
+$$
+
+where $g$ depends only on $t$ and $\theta$ and $h$ depends only on the data.
+
+Note that any one-to-one function of a sufficient statistic is itself a sufficient statistic, since the original statistic could be derived from the mapped to statistic.
+
+**Example**: Show that $\bar X$ is a sufficient statistic for $\lambda$ for independent samples $X_1, \dots, X_n$ of a Poisson distribution $f(x_1, \dots, x_n \mid \lambda)$.
+
+*Solution*: Since the samples are independent: 
+
+$$
+\begin{align*}
+    f(x_1, \dots, x_n \mid \lambda) &= \prod_{i = 1}^n \frac{e^{-\lambda}\lambda^{x_i}}{x_i!} \\
+    &= \frac{e^{-n\lambda}\lambda^{\sum X_i}}{x_1! \dots x_n!} \\
+    &= ({e^{-n\lambda}\lambda^{\sum X_i}} )\left(\frac{1}{x_1!\dots x_n!} \right) 
+\end{align*}
+$$
+
+so by the Neyman Factorization theorem, $\sum X_i$ is a sufficient statistic. Since $\sum X_i \mapsto \bar X$ is one-to-one, $\bar X$ is also a sufficient statistic. $\blacksquare$
+
+**Example**: Let $X_1, \dots, X_n$ be a random sample from an exponential distribution with parameter $\lambda$. Show that $\bar X$ is a sufficient statistic. 
+
+*Solution*: We have 
+
+$$
+\begin{align*}
+    f(x_1, \dots, x_n; \lambda) = \prod \lambda e^{-\lambda x_i} = \lambda^n e^{-n \lambda \sum x_i}
+    = (\lambda^n e^{\lambda\sum X_i})(e^{-n})
+\end{align*}
+$$
+
+so by the Neyman Factorization theorem, $\sum X_i$ is a sufficient statistic, and $\bar X$ is as well. $\blacksquare$
+
+**Definition**: Statistics $T_1, \dots, T_m$ are **jointly sufficient** for parameters $\theta_1, \dots, \theta_m$ if $f(X_1, \dots, X_n \mid T_1, \dots, T_m)$ does not depend on any of the parameters $\theta_1, \dots, \theta_m$ for all values of $T_i = t_i$.
+
+**Example**: Show that $\operatorname{min} x_i $ and $\operatorname{max} x_i $ are jointly sufficient statistics for parameters $\theta_1, \theta_2$ of a uniform distribution $\operatorname{Uniform} (x; \theta_1, \theta_2)$.
+
+*Solution*: We have 
+
+$$
+\begin{align*}
+    f(x_1, \dots, x_n ; \theta_1, \theta_2) &= \prod \frac{1}{\theta_2 - \theta_1}
+        1_{\theta_1 \leq x_i \leq \theta_2} \\
+    &= (\theta_2 - \theta_1)^{-n} 1_{\theta_1 \leq \min x, \max x \leq \theta_2}
+\end{align*} 
+$$
+
+where the factorization is $f = gh$ where $h$ is the constant function $x \mapsto 1$. $\blacksquare$
+
+
+
+
+
+
+
+
+
+
+
