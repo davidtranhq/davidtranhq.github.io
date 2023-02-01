@@ -75,6 +75,11 @@ we see that for certain values of $p$, $\hat p$ performs better or worse:
 
 *Proof*: $\mathbb E[\hat p] - p = \frac{np}{n} - p = 0$. $\blacksquare$.
 
+---
+Recall: $\mathbb E[\bar X] = \mu$ and $V(\bar X) = \frac{\sigma^2}{n} $ by the Central Limit Theorem.
+
+---
+
 **Example**: The sample standard deviation $S^2 = \frac{\sum_i (X_i - \bar X)^2}{n - 1}$ is unbiased.
 
 *Proof*: TODO. $\blacksquare$
@@ -305,13 +310,19 @@ $$
 
 where the factorization is $f = gh$ where $h$ is the constant function $x \mapsto 1$. $\blacksquare$
 
+**Definition**: A **minimally sufficient statistic** is a function of every other sufficient statistic. It is the sufficient statistic having the smallest dimensionality.
+* in other words, this statistic has the greatest dimensionality reduction without information loss
 
+**Theorem**: Let $T$ be a sufficient statistic for $\theta$ upon some joint distribution of $X_1, \dots, X_n$. Let $h$ be a function of $\theta$. If $U$ is an unbiased statistic for estimating $h(\theta)$ that does not depend on $T$.
 
+## Information and Efficiency
 
+**Definition**: The **Fisher information** in a single observation from a distribution $f(x; \theta)$ is 
 
-
-
-
-
-
+$$
+\begin{align*}
+    I(\theta) = V\left( \frac{\partial}{\partial \theta} \ln f(X; \theta) \right)
+        = - \mathbb E \left[ \frac{\partial ^2}{\partial \theta^2} \ln f(X; \theta)\right]
+\end{align*}
+$$ 
 
