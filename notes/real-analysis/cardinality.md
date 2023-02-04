@@ -215,9 +215,7 @@ Since for any number $r_i$ in the list, $r_{ii} \neq b_i, t \neq r_i$ for all $i
 
 **Theorem (Cantor-Bernstein)**: Given sets $X, Y$, if $ \vert X \vert  \leq  \vert Y \vert $ and $ \vert Y \vert  \leq  \vert X \vert $, then $ \vert X \vert  =  \vert Y \vert $. 
 
-
-
-*Proof*: Fix injections $f: X \hookrightarrow Y$ and $g: Y \hookrightarrow X$. Define $\psi = g \circ f: X \to X$. Then $\psi$ is injective, and hence $\psi$ is a bijection onto $\psi(X)$. Let $Z = g(Y) \subseteq X$, $V = X \setminus Z$.
+*Proof*: Fix injections $f: X \hookrightarrow Y$ and $g: Y \hookrightarrow X$. Define $\psi = g \circ f: X \to X$. Since $f$ and $g$ are injective, $\psi$ is injective.   hence $\psi$ is a bijection onto $\psi(X)$. Let $Z = g(Y) \subseteq X$, $V = X \setminus Z$.
 
 Notation: For a set $C \subseteq X, \psi^0 (C) = C, \psi^{n + 1}(C) = \psi(\psi^n(C))$.
 
