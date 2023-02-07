@@ -1,7 +1,7 @@
 ---
 layout: default
 order: 7
-table_of_contents: true
+toc: true
 ---
 
 # Point Estimation

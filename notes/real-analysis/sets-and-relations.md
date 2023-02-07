@@ -1,6 +1,7 @@
 ---
 layout: default
 order: 2
+toc: true
 ---
 
 # Sets and Functions

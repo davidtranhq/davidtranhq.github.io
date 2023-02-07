@@ -1,6 +1,7 @@
 ---
 layout: default
 order: 3
+toc: true
 ---
 
 # Cardinality
