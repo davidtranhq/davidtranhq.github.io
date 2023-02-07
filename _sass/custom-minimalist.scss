@@ -53,4 +53,7 @@ pre {
 
 .toc {
   padding-left: 10%;
+  ul {
+    margin-bottom: 0; /* remove bottom margin from nested sublists */
+  }
 }
