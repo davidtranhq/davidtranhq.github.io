@@ -186,14 +186,25 @@ Note: if $\max S$ exists, then $\operatorname{sup} S = \max S$!
 
 ## Density of $\mathbb Q$ in $\mathbb R$.
 
-**Theorem**: If $x, y \in \mathbb R, x \lt y$, then there is $q \in \mathbb Q$ such that $x \lt q \lt y$.
+**Theorem**: If $x, y \in \mathbb R, x \lt y$, then there is $q \in \mathbb Q$ such that $x \lt q \lt y$. That is, $\mathbb Q$ is everywhere dense in $\mathbb R$.
 
-*Proof*: By the Archimedean Principle, $y \gt x \implies y - x \gt 0 \implies \exists n \in \mathbb N$ such that $\frac{1}{n} \lt \frac{y - x}{2}$. TODO.
+*Proof*: By the Archimedean Principle, $y \gt x \implies y - x \gt 0 \implies \exists n \in \mathbb N$ such that $\frac{1}{n} \lt \frac{y - x}{2}$. Pick $k_0 \geq 1$, such that $k_0 \gt n_0x$, and $\forall k \geq 1, k \gt n_0x \implies k_0 \leq k$. That is, $k_0$ is the smallest such number. We claim that $x \lt \frac{k_0}{n_0} \lt y$.
 
-**Theorem**: If $x, y \in \mathbb R, x \lt y$, then there is $s \in \mathbb R \setminus \mathbb Q$ such that $x \lt s \lt y$. 
+$x \lt \frac{k_0}{n_0}$ follows from the definition of $k_0$. We show $\frac{k_0}{n_0} \lt y$. By definition of $k_0$, $k_0 - 1 \leq n_0x$, so $\frac{k_0 - 1}{n_0} \leq x$, that is, $\frac{k_0}{n_0} \leq x + \frac{1}{n_0} \lt x + \frac{y + x}{2} = \frac{y + x}{2} \lt \frac{2y}{2} = y$. $\blacksquare$.
 
-*Proof*: TODO.
+**Theorem**: If $x, y \in \mathbb R, x \lt y$, then there is $s \in \mathbb R \setminus \mathbb Q$ such that $x \lt s \lt y$. That is, the irrationals are everywhere dense in $\mathbb R$. 
+
+*Proof*: Given $y \gt x, x, y \in \mathbb R$. Then, $\frac{x}{\sqrt 2} \lt \frac{y}{\sqrt 2}$. By the previous theorem, we can choose $q \in \mathbb Q$ such that $\frac{x}{\sqrt 2} \lt q \lt \frac{y}{\sqrt 2}$, so $x \lt q \sqrt 2 \lt y$. It remains to show that $q \sqrt 2$ is irrational. TODO. $\blacksquare$
 
 **Theorem (Nested Interval Principle)**: Let $I_1 \supseteq I_2 \supseteq \dots$ be a nested sequence of closed intervals in $\mathbb R$. Then, $\bigcap_{k \geq 1}I_k \neq \emptyset$.
 
-*Proof*: TODO.
+*Proof*: Write $\forall n \geq 1, I_n = [a_n, b_n]$. Define $A = \lbrace a_n : n \geq 1 \rbrace$, $B = \lbrace b_n : n \geq 1 \rbrace$. Then, $A \neq \emptyset \neq B$ and $A$ is bounded above, and $B$ is bounded below. Set $\alpha = \sup A, \beta = \inf B$, We claim that $\alpha \leq \beta$. Pick any $p \in \alpha, \beta$. We have 
+
+$$
+\begin{align*}
+    \alpha \leq p &\implies \forall k \geq 1, a_k \leq \alpha \leq p \\
+    p \leq \beta &\implies \forall k \geq 1, p \leq \beta \leq b_k
+\end{align*}
+$$
+
+For a proof of contradiction, suppose $\beta \lt \alpha$. By he definition of $\beta, \alpha$ is not a lower bound (i.e., we can choose a $b_k \in B, b_k \lt \alpha$. By the definition of $\alpha, \exists l \geq 1$ such that $b_k \lt a_l$. If $k \leq l$, then $I_k \supseteq I_l$, so $a_k \leq a_l \leq b_l \leq b_k$, contradicting $b_k \lt b_l$. If $l \leq k$, then $I_l \supseteq I_k$, etc. $\blacksquare$.
