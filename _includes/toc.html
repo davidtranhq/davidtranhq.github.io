@@ -179,7 +179,7 @@
         {% if include.title %}
             {% assign titleTag = include.title_tag | default: h2 %}
             {% capture titleElement %}
-                <{{ titleTag }}>{{ title }}</{{ titleTag }}>
+                <{{ titleTag }}>{{ include.title }}</{{ titleTag }}>
             {% endcapture %}
         {% endif %}
 
