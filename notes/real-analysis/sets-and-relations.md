@@ -120,19 +120,10 @@ $$
   \end{cases}
 $$
 
-
-**Definition**: Let $f: A \to B$ be a function.
-* $f$ is **injective** (one-to-one) when $((a_1, b) \in f \land (a_2, b) \in f) \implies a_1 = a_2$
-  * also notated as $A \hookrightarrow B$
-* $f$ is **surjective** (onto) when $\forall b \in B, \exists a \in A, (a, b) \in f$
-  * also notated as $A \twoheadrightarrow B$
-* $f$ is **bijective** when $f$ is injective and surjective.
-  * also notated as $A \leftrightarrow B$ (our class uses a fusion of $\hookrightarrow$ and $\twoheadrightarrow$; I use $\leftrightarrow$ in these notes)
-
 **Definition**: A **sequence** with values in $X$ is a function $f: \mathbb N \to X$. Usually, we write $f_n$ for $f(n)$.
 
 **Definition**: Let $f: X \to Y$, $A \subseteq X, B \subseteq Y$.
-* the **image** of $A$ by $f$: $f(a) = \lbrace y \in Y : \exists a \in A, y = f(a) \rbrace$
+* the **image** of $A$ by $f$: $f(A) = \lbrace y \in Y : \exists a \in A, y = f(a) \rbrace$
 * the **inverse image** (or **preimage**) of $B$ by $f$: $f^{-1}(B) = \lbrace x \in X : \exists b \in B, f(x) = b \rbrace$
 
 NOTE: $f^{-1}$ is not to be mistaken for the inverse function of $f$, which may not exist.
@@ -141,12 +132,32 @@ NOTE: $f^{-1}$ is not to be mistaken for the inverse function of $f$, which may 
 1. $A \subseteq f^{-1}(f(A))$
 1. $f(f^{-1}(E)) \subseteq E$
 1. $f(A \cap B) \subseteq f(A) \cap f(B)$
-1. $f(A \cup B) = f(A) \cap f(B)$
+1. $f(A \cup B) = f(A) \cup f(B)$
 1. $f^{-1}(E \cap F) = f^{-1}(E) \cap f{-1}(F)$
 1. $f^{-1}(E \cup F) = f^{-1}(E) \cup f^{-1}(F)$
 1. $f^{-1}(E \setminus F) = f^{-1}(E) \setminus f^{-1}(F)$
 
-*Proof*: TODO. $\blacksquare$
+*Proof*: 
+
+1. Let $a \in A$. We want to show that $a \in f^{-1}(f(A))$. That is, we want to show there exists a $b \in f(A)$ such that $f(a) = b$.  Since $f$ is a function, then there exists $y \in f(A)$ such that $f(a) = y$. Let $b = y$. Then, there exists a $b \in f(A)$ such that $f(a) = b$. So, $a \in f^{-1}(f(A))$.
+ $\blacksquare$
+2. Let $e \in f(f^{-1}(E))$. So, there exists an $a \in f^{-1}(E)$ such that $e = f(a)$. So, there exists a $b \in E$ such that $b = f(a) = e$. Thus, $e \in E$. $\blacksquare$
+3. Let $x \in f(A \cap B)$. Then, there exists a $y \in A \cap B$ such that $f(y) = x$. Since $y \in A \cap B$, $y \in A$ and $y \in B$. So, since $f(y) = x$ and $y \in A$, $x \in f(A)$. Similarily, $x \in f(B)$. Thus, $x \in f(A) \cap f(B)$. $\blacksquare$
+4. ($\rightarrow$). Let $x \in f(A \cup B)$. Then, there exists a $y \in A \cup B$ such that $f(y) = x$. Consider the following cases.
+
+<u>Case 1</u>. $y \in A$. Then, since $f(y) = x$, $x \in f(A)$. Thus, $x \in f(A) \cup f(B)$.
+
+<u>Case 2</u>: $y \in B$. Then, since $f(y) = x$, $x \in f(B)$. Thus, $x \in f(A) \cup f(B)$.
+
+The cases are exhaustive, so $x \in f(A) \cup f(B)$. 
+
+($\leftarrow$) Let $x \in f(A) \cup f(B)$. Consider the following cases:
+
+<u>Case 1</u>: $x \in f(A)$. Then, there exists a $y \in A$ such that $f(y) = x$. Since $y \in A$, $y \in A \cup B$. So, $x \in f(A \cup B)$.
+
+<u>Case 2</u>: $x \in f(B)$. Then, there exists a $y \in B$ such that $f(y) = x$. Since $y \in B$, $y \in A \cup B$. So, $x \in f(A \cup B)$.
+
+The cases are exhaustive. So, $x \in f(A \cup B)$. $\blacksquare$
 
 **Theorem**: Let $f: X \to Y$, $A,B \subseteq X$ and $E \subseteq Y$. Then,
 1. If $f$ is injective, then $f^{-1}(f(A)) = A$.
@@ -161,6 +172,14 @@ $$
 g \circ f = \lbrace (x, z) \in X \times Z: \exists y \in Y, (x, y) \in f \land (y, z) \in G \rbrace.
 $$
 
+**Definition**: Let $f: A \to B$ be a function.
+* $f$ is **injective** (one-to-one) when $((a_1, b) \in f \land (a_2, b) \in f) \implies a_1 = a_2$
+  * also notated as $A \hookrightarrow B$
+* $f$ is **surjective** (onto) when $\forall b \in B, \exists a \in A, (a, b) \in f$
+  * also notated as $A \twoheadrightarrow B$
+* $f$ is **bijective** when $f$ is injective and surjective.
+  * also notated as $A \leftrightarrow B$ (our class uses a fusion of $\hookrightarrow$ and $\twoheadrightarrow$; I use $\leftrightarrow$ in these notes)
+
 **Theorem**: Let $f: X \to Y, g: Y \to Z$. Then,
 1. If $f, g$ are surjective, then so is $g \circ f$.
 1. If $f, g$ are injective, then so is $g \circ f$.
@@ -169,7 +188,10 @@ $$
 1. If $g \circ f$ is injective, then so is $f$.
 1. If $g \circ f$ is bijective, then $g$ is surjective and $f$ is injective.
 
-*Proof*: TODO. $\blacksquare$
+*Proof*: 
+1. We have $g \circ f: X \to Z$. Let $z \in Z$. Since $f$ is surjective, for all $y \in Y$ there exists an $x \in X$ such that $f(x) = y$. Similarily, since $g$ is surjective, for all $z \in Z$, there exists a $y \in Y$ such that $g(y) = z = g(f(x)) = (g \circ f)(x)$. So, for all $z$ there exists an $x$ such that $(g \circ f)(x) = z$. $\blacksquare$
+
+
 
 **Definition**: Let $f: X \leftrightarrow Y$. Define the **inverse function** of $f$, denoted $f^{-1}$, as
 
