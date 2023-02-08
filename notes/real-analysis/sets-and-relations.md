@@ -241,3 +241,5 @@ $$
   f^{-1} = f^{-1} \circ \operatorname{id}_Y = f^{-1} \circ (f \circ g) = \operatorname{id}_X \circ g = g
 \end{align*}
 $$
+
+$\blacksquare$

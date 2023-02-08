@@ -23,22 +23,19 @@ so cardinality represents an equivalence class. Equivalences classes with respec
 * $X$ is **countable** if it is denumerable or finite.
 * Non-finite cardinal numbers are **transfinite**.
 
-**Definition**: $ \vert  \mathbb N  \vert  = \aleph_0$ is the smallest transfinite number.
+**Definition**: $\vert  \mathbb N  \vert  = \aleph_0$ is the smallest transfinite number.
 
 **Example**:
 Show that $\mathbb N \sim 2 \mathbb N$, where $2 \mathbb N = \lbrace 2k \mid k \in \mathbb N \rbrace$.
 
-*Proof*: Let $f: \mathbb N \to 2\mathbb N, n \mapsto 2n$. We show that $f$ is bijective.
-
-(injective): Let $a, b \in \mathbb N$. Suppose $f(a) = f(b)$. Then, $2a = 2b$ so $a = b$.
-
-(surjective): Let $n \in 2 \mathbb N$. Let $k = \frac{n}{2}$. Then, $f(k) = n$.
-
+*Proof*: Let $f: \mathbb N \to 2\mathbb N, n \mapsto 2n$. We show that $f$ is bijective.  
+(injective): Let $a, b \in \mathbb N$. Suppose $f(a) = f(b)$. Then, $2a = 2b$ so $a = b$.  
+(surjective): Let $n \in 2 \mathbb N$. Let $k = \frac{n}{2}$. Then, $f(k) = n$.  
 $f$ is both injective and surjective, so it is bijective. $\blacksquare$
 
 **Theorem**: If $A$ is a set, then $A$ is infinite iff $\exists B \subsetneq A,\exists f: B \leftrightarrow A$.
 
-*Proof*: ($\rightarrow$) Suppose $\forall n \in \mathbb N, \vert A \vert \neq n$. By the axiom of choice, pick $a_1 \in A$. Since $\vert A \vert \neq 1 \implies A \setminus \lbrace  a_1 \rbrace \neq \emptyset$. Pick $a_2 \in A \setminus \lbrace  a_1 \rbrace$. Since $\vert A \neq 2 \vert \implies A \setminus \lbrace  a_1, a_2 \rbrace \neq \emptyset$. $\vert A \vert \neq k \implies A \setminus \lbrace  a_1, \dots, a_k \rbrace \neq \emptyset$. Pick $a_{k + 1} \in A \dots$. This gives an injection $\mathbb N_+ \hookrightarrow A$. We show that $\exists \tilde B \subsetneq \mathbb N_+ \exists \tilde B \leftrightarrow \mathbb N_+$. Set $\tilde B = \mathbb N_+ \setminus \lbrace  1 \rbrace, f: k \in \tilde B \mapsto k - 1 \in \mathbb N_+$. Define $B = g(\tilde B)$. Then $B \subsetneq A$ since $\tilde B \subseteq \mathbb N_+$ and $g$ is injective, so $g(\tilde B) \subsetneq g(\mathbb N_+) \subseteq A$.
+*Proof*: ($\rightarrow$) Suppose $A$ is infinite. We show there exists a countable set $B \subseteq A$. We have $\forall n \in \mathbb N, \vert A \vert \neq n$. By the axiom of choice, pick $a_1 \in A$. Since $\vert A \vert \neq 1$, $A \setminus \lbrace  a_1 \rbrace \neq \emptyset$. So pick $a_2 \in A \setminus \lbrace  a_1 \rbrace$. Since $\vert A \vert \neq 2$, $A \setminus \lbrace  a_1, a_2 \rbrace \neq \emptyset$. Similarily, $\vert A \vert \neq k \implies A \setminus \lbrace  a_1, \dots, a_k \rbrace \neq \emptyset$. This gives an injection $\mathbb N_+ \hookrightarrow A$. We show that $\exists \tilde B \subsetneq B, \tilde B \leftrightarrow B$. Set $\tilde B = \mathbb N_+ \setminus \lbrace  1 \rbrace, f: k \in \tilde B \mapsto k - 1 \in \mathbb N_+$. Define $B = g(\tilde B)$. Then $B \subsetneq A$ since $\tilde B \subseteq \mathbb N_+$ and $g$ is injective, so $g(\tilde B) \subsetneq g(\mathbb N_+) \subseteq A$.
 
 ($\leftarrow$) Let $B \subsetneq A$ and $f: B \leftrightarrow A$.
 So, $A \sim B$.
@@ -61,21 +58,15 @@ $$
 
 is a bijection from $\mathbb N$ to $\mathbb Z$.
 
-(injective): Let $a, b \in \mathbb N$. Suppose $f(a) = f(b)$. Then, either $a$ and $b$ are both odd or both even.
-
-<u>Case 1</u>: $a,b$ even. Then, $f(a) = f(b) \implies \frac{a}{2} = \frac{b}{2} \implies a = b$.
-
-<u>Case 2</u>: $a,b$ odd. Then, $f(a) = f(b) \implies -\frac{a - 1}{2} = -\frac{b - 1}{2} \implies a = b$
-
-So, $a = b$.
-
-(surjective): Let $k \in \mathbb Z$. By definition, $n = 2k$ when $k \geq 0$ and $n = 2k + 1$ when $k < 0$. 
-
+(injective): Let $a, b \in \mathbb N$. Suppose $f(a) = f(b)$. Then, either $a$ and $b$ are both odd or both even. Suppose $a,b$ is even. Then, $f(a) = f(b) \implies \frac{a}{2} = \frac{b}{2} \implies a = b$. Now suppose $a,b$ is odd. Then, $f(a) = f(b) \implies -\frac{a - 1}{2} = -\frac{b - 1}{2} \implies a = b$. In either case, $a = b$.  
+(surjective): Let $k \in \mathbb Z$. By definition, $n = 2k$ when $k \geq 0$ and $n = 2k + 1$ when $k < 0$.  
 $f$ is both injective and surjective, so it is bijective. $\blacksquare$
+
+**Well-ordering Principle**: Every non-empty subset of $\mathbb N_+$ contains a least element.
 
 **Theorem 1**: Let $A$ be a countable set and $B \subseteq A$. Then $B$ is countable.
 
-*Proof*: If $B$ is finite, $B$ is countable. So assume $B$ is infinite. Then, $A$ must be infinite, since $B \subseteq A$ (TODO: prove this). Let $f: \mathbb N_+ \leftrightarrow A$, which exists since $A$ is countable. Define $X = f^{-1}(B) \subseteq \mathbb N_+$. Define $g: \mathbb N_+ \to X$ as
+*Proof*: If $B$ is finite, $B$ is countable. So assume $B$ is infinite. Then, $A$ must be infinite, since $B \subseteq A$. Let $f: \mathbb N_+ \leftrightarrow A$, which exists since $A$ is countable. Define $X = f^{-1}(B) \subseteq \mathbb N_+$. Define $g: \mathbb N_+ \to X$ as
 
 $$
 \begin{align*}
@@ -84,7 +75,7 @@ $$
 \end{align*}
 $$
 
-which is well-defined by the well-ordering axiom. (TODO: verify that $g$ is a bijection on $X$, and so $f \circ g: \mathbb N_+ \to B$ is bijective). $\blacksquare$
+which is well-defined by the well-ordering axiom. We show that $g$ is a bijection. Suppose $g(x_1) = g(x_2)$. Then $x_1 = \min \lbrace l \in \mathbb N_+ \mid l \in X \setminus \lbrace g(1), \dots, g(x_1 - 1) \rbrace$TODO: verify that $g$ is a bijection on $X$, and so $f \circ g: \mathbb N_+ \to B$ is bijective). $\blacksquare$
 
 This theorem is useful because we can now easily show that any set is countable by showing it is a subset of another countable set (for example, the natural numbers).
 
@@ -93,13 +84,7 @@ This theorem is useful because we can now easily show that any set is countable 
 2. There is an injection $f: A \hookrightarrow \mathbb N_+$.
 3. There is a surjection $g: \mathbb N_+ \twoheadrightarrow A$.
 
-*Proof*: $(1 \to 2)$: Assume $A$ is countable. Then, $A$ is finite or enumerable.
-
-<u>Case 1</u>: $A$ is finite. Let $h_1: A \leftrightarrow I_n$ for some $n \in \mathbb N$. Then $h_1$ is an injection from $A$ to $\mathbb N_+$.
-
-<u>Case 2</u>: $A$ is enumerable. Let $h_2: \mathbb N_+ \leftrightarrow A$. Then, $h^{-1}$ is an injection from $A$ to $\mathbb N_+$.
-
-So, there exists an injection $A \hookrightarrow \mathbb N_+$.
+*Proof*: $(1 \to 2)$: Assume $A$ is countable. Then, $A$ is finite or enumerable. If $A$ is finite, then $h_1: A \leftrightarrow I_n$ for some $n \in \mathbb N$. Then $h_1$ is an injection from $A$ to $\mathbb N_+$. If instead $A$ is enumerable, then $h_2: \mathbb N_+ \leftrightarrow A$. Then, $h^{-1}$ is an injection from $A$ to $\mathbb N_+$. So, there exists an injection $A \hookrightarrow \mathbb N_+$.  
 
 $(2 \to 3)$: Let $f: A \hookrightarrow \mathbb N_+$. Define
 $$
@@ -110,9 +95,9 @@ g(n) = \begin{cases}
 $$
 where $a_0 \in A$. 
 
-$(3 \to 1)$: Assume $\exists g: \mathbb N_+ \twoheadrightarrow A$. Define $h: A \to N_+$ as $h(a) = \operatorname{min}\lbrace  n \in \mathbb N_+ \mid g(n) = a\rbrace$ Then $h$ is injective since if $h(a) = h(b)$ then $h(a) \in g^{-1}(\lbrace  a\rbrace) \cap g^{-1}(\lbrace  b \rbrace)$, contradicting the vertical line test.
+$(3 \to 1)$: Assume $\exists g: \mathbb N_+ \twoheadrightarrow A$. Define $h: A \to \mathbb N_+$ as $h(a) = \operatorname{min}\lbrace  n \in \mathbb N_+ \mid g(n) = a\rbrace$. $h$ is injective since if $h(a) = h(b)$ then $h(a) \in g^{-1}(\lbrace  a\rbrace) \cap g^{-1}(\lbrace  b \rbrace)$. So, $a = b$, otherwise the vertical line test would be contradicted.
 
-Thus, $h: A \to h(A) \subseteq \mathbb N_+$ is a bijection. So, $A$ is countable by Theorem 1 and the definition of cardinality. $\blacksquare$
+Thus, $h: A \leftrightarrow h(A) \subseteq \mathbb N_+$ is a bijection. $h(A)$ is countable since $h(A) \subseteq \mathbb N_+$ and $\mathbb N_+$ is countable. So $A$ is countable. $\blacksquare$
 
 **Example**: Let $S,T \neq \emptyset$ and countable. Show that $S \cup T$ is countable.
 
@@ -206,7 +191,7 @@ $$
 
 Since for any number $r_i$ in the list, $r_{ii} \neq b_i, t \neq r_i$ for all $i < n$, that is, $t$ is a newly constructed real number not in the list contradicting our assumption that $r_1, \dots, r_n$ enumerates all the real numbers. $\blacksquare$
 
-**Definition**: We say that $ \vert A \vert  \leq  \vert B \vert $ when there exists an injection $f: A \to B$.
+**Definition**: We say that $\vert A \vert  \leq  \vert B \vert$ when there exists an injection $f: A \to B$.
 
 **Definition**: The cardinality of the real numbers is the cardinal number **continuum** $\mathfrak{c}$ (also notated $2^{\aleph_0}$) 
 
@@ -214,7 +199,7 @@ Since for any number $r_i$ in the list, $r_{ii} \neq b_i, t \neq r_i$ for all $i
 
 *Proof*: $\mathfrak{c} > \aleph_0$, since $\mathfrak{c} \neq \aleph_0$ (by Cantor's theorem) and $\mathfrak{c} \geq \aleph_0$, since the identity function $n \mapsto n$ is a bijection from $\mathbb N \to \mathbb N$, and thus also a bijection from $\mathbb N \to \mathbb R$ since $\mathbb N \subseteq \mathbb R$. $\blacksquare$
 
-**Theorem (Cantor-Bernstein)**: Given sets $X, Y$, if $ \vert X \vert  \leq  \vert Y \vert $ and $ \vert Y \vert  \leq  \vert X \vert $, then $ \vert X \vert  =  \vert Y \vert $. 
+**Theorem (Cantor-Bernstein)**: Given sets $X, Y$, if $\vert X \vert  \leq  \vert Y \vert$ and $\vert Y \vert  \leq  \vert X \vert$, then $\vert X \vert  =  \vert Y \vert$. 
 
 *Proof*: Fix injections $f: X \hookrightarrow Y$ and $g: Y \hookrightarrow X$. Define $\psi = g \circ f: X \to X$. Since $f$ and $g$ are injective, $\psi$ is injective.   hence $\psi$ is a bijection onto $\psi(X)$. Let $Z = g(Y) \subseteq X$, $V = X \setminus Z$.
 
@@ -259,20 +244,13 @@ In either case, there is a contradiction, so there does not exist a bijection be
 ## Cardinal Arithemtic
 
 **Definition**: Given cardinal numbers $\alpha, \beta$, where $\alpha = \vert A \vert, \beta = \vert B \vert$, define
-* $\alpha + \beta = \vert A \cup B \vert$, where $A \cup B = \emptyset$
+* $\alpha + \beta = \vert A \cup B \vert$, where $A \cap B = \emptyset$
 * $\alpha \cdot \beta = \vert A \times B \vert$
 
-We show that cardinal arithemtic is well defined by showing that $\alpha + \beta = \vert A \cup B \vert$ holds regardless of choice of equivalence object.
-(1) Suppose $\forall n \in \mathbb N, \alpha \neq n, \forall m \in \mathbb N, \beta \neq n$. Suppose $\alpha = \vert A \vert = \vert C \vert$ and $\beta = \vert B \vert = \vert D \vert$, where $A \cup B = \emptyset = C \cap D$. We want to show that $\vert A \cup B \vert = \vert C \cup D \vert$. Pick bijections $f: A \leftrightarrow C, g: B \leftrightarrow D$. Define $h: A \cup B \to C \cup D$ as
+**Proposition**: The above operations are well-defined.
 
-For the case of multiplication, $\vert A \times B \vert = \alpha \cdot \beta = \vert C \times D \vert \land \vert A \vert = \vert C \vert \land \vert = \vert D \vert$, since $h: (a, b) \in A \times B \mapsto (f(a),g(b)) \in C \times D$. 
-
-**Proposition**: For any cardinals $\alpha,\beta,\gamma$,
-1. $\alpha + \beta = \beta + \alpha$
-2. $\alpha + (\beta + \gamma) = (\alpha + \beta) + \gamma$
-3. $\alpha \cdot \beta = \beta \cdot \alpha$
-4. $\alpha \cdot (\beta \cdot \gamma) = (\alpha \cdot \beta) \cdot \gamma$
-5. $\alpha \cdot (\beta + \gamma) = \alpha \cdot \beta + \alpha \cdot \gamma$
+*Proof*: We show that cardinal arithemtic is well defined by showing that $\alpha + \beta = \vert A \cup B \vert$ holds regardless of choice of equivalence object.
+(1) Suppose $\forall n \in \mathbb N, \alpha \neq n, \forall m \in \mathbb N, \beta \neq n$. Suppose $\alpha = \vert A \vert = \vert C \vert$ and $\beta = \vert B \vert = \vert D \vert$, where $A \cap B = \emptyset = C \cap D$. We want to show that $\vert A \cup B \vert = \vert C \cup D \vert$. Pick bijections $f: A \leftrightarrow C, g: B \leftrightarrow D$. Define $h: A \cup B \to C \cup D$ as 
 
 $$
     h(x) = \begin{cases}
@@ -283,7 +261,17 @@ $$
 
 We show that $h$ is bijective.
 
-(injectivity): Let $x_1,x_2 \in A \cup B, x_1 \neq x_2$. WLOG, assume $x_1 \in A$. Suppose $x_2 \in A$.  Then $h(x_1) = f(x_1)$ and $f(x_2) = h(x_2)$. By the injectivity of $f$ and $h$, $f(x_1) \neq f(x_2)$. If $x_2 \in B$, then $h(x_2) = g(x_2) \in D$, $h(x_1) = f(x_1) \in C$, $C \cap D = \emptyset$. So, $h(x_1) \neq h(x_2)$. 
+(injectivity): Let $x_1,x_2 \in A \cup B, x_1 \neq x_2$. WLOG, assume $x_1 \in A$. Suppose $x_2 \in A$.  Then $h(x_1) = f(x_1)$ and $f(x_2) = h(x_2)$. By the injectivity of $f$ and $h$, $f(x_1) \neq f(x_2)$. If $x_2 \in B$, then $h(x_2) = g(x_2) \in D$, $h(x_1) = f(x_1) \in C$, $C \cap D = \emptyset$. So, $h(x_1) \neq h(x_2)$.  
+(surjectivity) Let $y \in C \cup D$. Suppose $y \in C$. Then $\exists x \in A$ such that $y = f(x)$ by the bijectivity of $f$. Suppose $y \in D$. Then $\exists x \in B$ such that $y = g(x)$ by the bijectivity of $g$. $\blacksquare$
+
+For the case of multiplication, $\vert A \times B \vert = \alpha \cdot \beta = \vert C \times D \vert \land \vert A \vert = \vert C \vert \land \vert B \vert = \vert D \vert$, since $h: (a, b) \in A \times B \mapsto (f(a),g(b)) \in C \times D$ is a bijection. $\blacksquare$
+
+**Proposition**: For any cardinals $\alpha,\beta,\gamma$,
+1. $\alpha + \beta = \beta + \alpha$
+2. $\alpha + (\beta + \gamma) = (\alpha + \beta) + \gamma$
+3. $\alpha \cdot \beta = \beta \cdot \alpha$
+4. $\alpha \cdot (\beta \cdot \gamma) = (\alpha \cdot \beta) \cdot \gamma$
+5. $\alpha \cdot (\beta + \gamma) = \alpha \cdot \beta + \alpha \cdot \gamma$
 
 Notation: $\mathscr P(S) \equiv 2^S$
 * justification: there is a bijection $T \in \mathscr P(S) \mapsto \mathcal{X}_T \in \lbrace  \S \to \lbrace 0, 1\rbrace \rbrace$ where $\mathcal{X}_T$ is the characteristic function of $T$ related to $S$
