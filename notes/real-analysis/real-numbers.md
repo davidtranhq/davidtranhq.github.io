@@ -25,13 +25,21 @@ toc: true
 2. $\forall x \in \mathbb{F}, -x$ is unique.
 3. $\forall x \in \mathbb{F} \setminus \lbrace 0 \rbrace, x^{-1}$ is unique.
 4. $\forall x, y \in \mathbb{F} (x + z = y + z) \implies (x + y)$ (cancellation law)
-5. $\forall x \in \mathbb{F} x \cdot 0 = 0$
-6. $\forall x \in \mathbb F (-1) \cdot x = -x$
+5. $\forall x \in \mathbb{F}, x \cdot 0 = 0$
+6. $\forall x \in \mathbb F, (-1) \cdot x = -x$
 7. $\forall x,y \in \mathbb F, x \cdot y = 0 \implies (x = 0 \lor y = 0)$
 8. $\forall x, y \in \mathbb F \exists ! z \in \mathbb F, x = y + z$ (subtraction)
 9. $\forall x \in \mathbb F, \forall y \in \mathbb F \setminus \lbrace 0 \rbrace, \exists ! x \in \mathbb F, x = y \cdot z$ (division)
 
-*Proof*: TODO.
+*Proof*:
+1. Let $0_1, 0_2$ be additive identities. Then $0_1 = 0_1 + 0_2 = 0_2 + 0_1 = 0_2$. Similarily, let $1_1, 1_2$ be multiplicative identities. Then $1_1 = 1_1 \cdot 1_2 = 1_2 \cdot 1_1 = 1_2$. $\blacksquare$
+2. Let $x \in \mathbb F$ with $x + y_1 = 0$ and $x + y_2 = 0$. Then $y_1 = y_1 + x + y_2 = y_2 + (x + y_1) = y_2$. $\blacksquare$
+3. Let $x \in \mathbb F$ with $x \cdot y_1 = 1$ and $x \cdot y_2 = 1$. Then $y_1 = y_1 \cdot x \cdot y_2 = y_2$. $\blacksquare$
+4. Suppose $x + z = y + z$. Then $x = x + z + (-z) = y + z + (-z) = y$. $\blacksquare$
+5. We have $x \cdot 0 = x \cdot (0 + 0) = x \cdot 0 + x \cdot 0$. And, $x \cdot 0 = x \cdot 0 + 0$, so $x \cdot 0 + x \cdot 0 = x \cdot 0 + 0$, thus by cancellation, $x \cdot 0 = 0$. $\blacksquare$
+6. $(-1) \cdot x + x = (-1 + 1) \cdot x = 0 \cdot x = 0$. By (2), $(-1) \cdot x = -x$. $\blacksquare$
+7. Suppose $x \neq 0$ and $y \neq 0$. Then, $x$ and $y$ have multiplicate inverses $x^{-1}$ and $y^{-1}$, so $1 = x^{-1} \cdot x \cdot y \cdot y^{-1} = 0$; a contradiction. $\blacksquare$
+8. 
 
 **Definition**: The **characteristic** of a field $\mathbb F$ is defined as the smallest number of times needed to sum the multiplicative identity of $\mathbb F$ to obtain 0. That is,
 
