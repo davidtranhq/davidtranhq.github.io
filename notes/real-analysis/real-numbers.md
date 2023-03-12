@@ -28,7 +28,7 @@ toc: true
 5. $\forall x \in \mathbb{F}, x \cdot 0 = 0$
 6. $\forall x \in \mathbb F, (-1) \cdot x = -x$
 7. $\forall x,y \in \mathbb F, x \cdot y = 0 \implies (x = 0 \lor y = 0)$
-8. $\forall x, y \in \mathbb F \exists ! z \in \mathbb F, x = y + z$ (subtraction)
+8. $\forall x, y \in \mathbb F, \exists ! z \in \mathbb F, x = y + z$ (subtraction)
 9. $\forall x \in \mathbb F, \forall y \in \mathbb F \setminus \lbrace 0 \rbrace, \exists ! x \in \mathbb F, x = y \cdot z$ (division)
 
 *Proof*:
@@ -39,7 +39,8 @@ toc: true
 5. We have $x \cdot 0 = x \cdot (0 + 0) = x \cdot 0 + x \cdot 0$. And, $x \cdot 0 = x \cdot 0 + 0$, so $x \cdot 0 + x \cdot 0 = x \cdot 0 + 0$, thus by cancellation, $x \cdot 0 = 0$. $\blacksquare$
 6. $(-1) \cdot x + x = (-1 + 1) \cdot x = 0 \cdot x = 0$. By (2), $(-1) \cdot x = -x$. $\blacksquare$
 7. Suppose $x \neq 0$ and $y \neq 0$. Then, $x$ and $y$ have multiplicate inverses $x^{-1}$ and $y^{-1}$, so $1 = x^{-1} \cdot x \cdot y \cdot y^{-1} = 0$; a contradiction. $\blacksquare$
-8. 
+8. Given $x, y \in \mathbb F$, define $z = x + (-y)$. Then $y + z = y + x + (-y) = x$. If for some other $w \in \mathbb F, x = y + w$, then $x = y + z = y + w \implies z = w$, by (4). $\blacksquare$
+9. Given $x, y \in \mathbb F$, define $z = y^{-1} \cdot x$. Then $y \cdot z = y \cdot y^{-1} \cdot x = x$. If for some other $w \in \mathbb F, x = y \cdot w$, then $w = 1 \cdot w = y^{-1} \cdot y \cdot w = y^{-1} \cdot x = z$. $\blacksquare$
 
 **Definition**: The **characteristic** of a field $\mathbb F$ is defined as the smallest number of times needed to sum the multiplicative identity of $\mathbb F$ to obtain 0. That is,
 
@@ -55,11 +56,11 @@ $$
 **Example**:
 1. $\mathbb Q = \lbrace p/q : p \in \mathbb Z, q \in \mathbb N_+ \rbrace$ is the smallest field of characteristic $0$.
 2. $\mathbb R, \mathbb C$ are other fields of characteristic 0.
-3. Let $p \in \mathbb N$ be prime. Define $\mathbb{Z}_p = \lbrace \bar 0, \bar 1, \dots, \bar{p - 1} \rbrace$ with addition and multiplication included from $\mathbb Z \mod p$. Then, $\mathbb Z_p$ is a field and $\operatorname{char} (\mathbb Z_p) = p$.
+3. Let $p \in \mathbb N$ be prime. Define $\mathbb{Z}_p = \lbrace \overline 0, \overline 1, \dots, \overline{p - 1} \rbrace$ with addition and multiplication included from $\mathbb Z \pmod p$. Then, $\mathbb Z_p$ is a field and $\operatorname{char} (\mathbb Z_p) = p$.
 
 ### Ordered Fields
 
-**Definition**: An **ordered field** is a field equipped with a linear order relation compatible with the field addition and multiplicatinon. That is, $(\mathbb F, +, \cdot)$ is an ordered field when there is a relation $<$ on $\mathbb F$ satisfying the following axioms (OF):
+**Definition**: An **ordered field** is a field equipped with a linear order relation compatible with the field addition and multiplication. That is, $(\mathbb F, +, \cdot)$ is an ordered field when there is a relation $<$ on $\mathbb F$ satisfying the following (OF) axioms:
 1.  $\forall x, y \in \mathbb F$, one of $x \lt y$,  $x = y$, $y \lt x$ is true (trichotomy)
 2. $\forall x, y, z \in \mathbb F, x < y \land y < z \implies x < z$ (transitivity)
 3. $\forall x, y, z \in \mathbb F, x \lt y \implies x + z \lt y + z$
@@ -67,9 +68,11 @@ $$
 
 *Notation*: We write $x \leq y$ when $x \lt y \lor x = y$.
 
-**Example**: $\mathbb Q, \mathbb R$ with $\lt$. But, $\mathbb C$ and $\mathbb Z_p$ are NOT ordered fields! ($\mathbb Z_p$ does not satisfy (3)). Show that no relation $\lt$ can exist for $\mathbb C$ that complies with the order axioms.
+**Example**: $\mathbb Q, \mathbb R$ with $\lt$. But, $\mathbb C$ and $\mathbb Z_p$ are NOT ordered fields! ($\mathbb Z_p$ does not satisfy (OF3)). Show that no relation $\lt$ can exist for $\mathbb C$ that complies with the order axioms.
 
-*Proof*: Suppose for the sake of contradiction that an ordereding exists. Then, either $0 \lt i$ or $0 \gt i$. Suppose $0 \lt i$. Then by Axiom 4, $0i \lt i^2 \implies 0 \lt -1 \implies 0 \lt (-1)^2 = 1$. Then, by Axiom 3, $0 \lt -1 \implies 0 + 1 \lt -1 + 1 \implies 1 \lt 0$. We have $0 \lt 1$ and $1 \lt 0$, contradicting Axiom 1. A symmetric argument can be made for the case when $i \lt 0$. $\blacksquare$
+*Proof*: Suppose for the sake of contradiction that an ordering exists. Then, either $0 \lt i$ or $0 \gt i$, since $i \neq 0$. Suppose $0 \lt i$. Then by (OF4), $0i \lt i^2 \implies 0 \lt -1 \implies 0 \lt (-1)^2 = 1$. Then, by (OF3), $0 \lt -1 \implies 0 + 1 \lt -1 + 1 \implies 1 \lt 0$. We have $0 \lt 1$ and $1 \lt 0$, contradicting (OF1).
+
+So suppose $i < 0$. Then by (OF3), $0 < -i$, so by (OF4) $0 < (-i)^2 = -1$. Then, by (OF3), $0 + 1 = 1 < -1 + 1 = 0$, We have $0 < 1$ and $1 < 0$, contradicting (OF1). $\blacksquare$
 
 **Definition**: Let $(\mathbb F, \lt)$ be an ordered field. We say $a \in \mathbb F$ is **positive** if $0 \lt a$ and **negative** if $a \lt 0$ (and **non-negative** if $0 \leq a$).
 
@@ -84,8 +87,8 @@ $$
 *Proof*:
 1. Suppose $x \lt y \land z \lt w$. Then, by (OF3), $x + z \lt y + z = z + y \lt w + y = y + w$. $\blacksquare$
 2. Suppose $x \lt y$. Then $-y = -y + 0 = -y + (x + (-x)) = x + (-y + (-x)) \lt y + (-y + (-x)) = -x$. $\blacksquare$
-3. TODO.
-4. By definition $0 \neq 1$. Suppose for the sake contradiction that $1 \lt 0$. Then, by (3), $1 \cdot 1 = 1 \gt 1 \cdot 0 = 0$. This contradicts that $1 \lt 0$. So $1 \gt 0$.
+3. Suppose $x \lt y \land z \lt 0$. By (2), $-z > -0 = 0$. So $(-z)x \lt (-z)y$ and again by (2), $-(-z)x = xz \gt -(-z)y = yz$. $\blacksquare$
+4. By definition $0 \neq 1$. Suppose for the sake contradiction that $1 \lt 0$. Then, by (3), $1 \cdot 1 = 1 \gt 1 \cdot 0 = 0$. This contradicts that $1 \lt 0$. So $1 \gt 0$. $\blacksquare$
 5. Suppose $x > 0$. Then $\frac{1}{x} \neq 0$, otherwise $1 = x \cdot \frac{1}{x} = 0$. By (OF1), either $\frac{1}{x} < 0$ or $\frac{1}{x} > 0$. Suppose $\frac{1}{x} \lt 0$. Then by (3), $0 \cdot \frac{1}{x} = 0 \gt x \cdot \frac{1}{x} = 1$, contradicting (4). So, $\frac{1}{x} > 0$. $\blacksquare$
 6. Suppose $0 \lt x \lt y$. Then, $\frac{1}{x} \neq \frac{1}{y}$, otherwise $1 = x \cdot \frac{1}{x} = x \cdot \frac{1}{y} \lt y \cdot \frac{1}{y} = 1$. So by (OF1), either $\frac{1}{x} \lt \frac{1}{y}$ or $\frac{1}{x} \gt \frac{1}{y}$. Suppose $\frac{1}{x} \lt \frac{1}{y}$. Then, $1 = \frac{1}{x} \cdot x < \frac{1}{y} \cdot x < \frac{1}{y} \cdot y = 1$, a contradiction. So, $\frac{1}{x} > \frac{1}{y}$. $\blacksquare$.
 
@@ -96,11 +99,28 @@ $$
 $$
 \begin{align*}
     \psi(0_{\mathbb N}) &= 0_{\mathbb F} \\
-    \psi(n + 1_{\mathbb N}) &= \psi(n_{\mathbb N}) + 1
+    \psi((n + 1)_{\mathbb N}) &= \psi(n_{\mathbb N}) + 1_{\mathbb F}
 \end{align*}
 $$
 
-for all $n \in \mathbb N$. Then, $\forall n \in \mathbb N, \psi(n) = 0 + \psi(n) < 1 + \psi(n) = \psi(n + 1) = 0 + \psi(n + 1) \lt 1 + \psi(n + 1) = \psi(n + 2) \dots$. By induction, it can be shown that $\forall k \in \mathbb N_+, \psi(n) < \psi(n + k)$, thus $\psi$ is injective. So, there is no $n \in \mathbb N_+$ with $\psi(n) = 0$, so $\operatorname{char}(\mathbb F) = 0$, by definition. (TODO: why?) $\blacksquare$
+for all $n \in \mathbb N$. Then, $\forall n \in \mathbb N, \psi(n) = 0 + \psi(n) < 1 + \psi(n) = \psi(n + 1) = 0 + \psi(n + 1) \lt 1 + \psi(n + 1) = \psi(n + 2) \dots$. By induction, it can be shown that $\forall k \in \mathbb N_+, \psi(n) < \psi(n + k)$, thus $\psi$ is injective. So, there is no $n \in \mathbb N_+$ with $\psi(n) = 0$, so $\operatorname{char}(\mathbb F) = 0$, by definition. $\blacksquare$
+
+---
+
+**Definition**: We say a field $\mathbb F$ **contains** another field $\mathbb K$, that is, $\mathbb K$ is a **subfield** of $\mathbb F$, or $\mathbb K \subseteq \mathbb F$, if there exists an injection $\phi: \mathbb K \hookrightarrow \mathbb F$ such that 
+
+$$
+\begin{align*}
+    \phi(0_{\mathbb K}) &= 0_{\mathbb F} \\
+    \phi(1_{\mathbb K}) &= 1_{\mathbb F} \\
+    \phi(x + y) &= \phi(x) + \phi(y) \\
+    \phi(xy) &= \phi(x)\phi(y)
+\end{align*}
+$$
+
+for all $x, y \in \mathbb K$.
+
+---
 
 **Corollary**: Every ordered field $\mathbb F$ contains the field of rational numbers $\mathbb Q$.
 
@@ -108,7 +128,19 @@ for all $n \in \mathbb N$. Then, $\forall n \in \mathbb N, \psi(n) = 0 + \psi(n)
 
 **Corollary**: Let $(\mathbb F, \lt)$ be an ordered field, $x, y \in \mathbb F$. If $\forall \epsilon \gt 0, x \leq y + \epsilon$, then $x \leq y$.
 
-*Proof*: TODO.
+*Proof*: Suppose $\forall \epsilon \gt 0, x \leq y + \epsilon$. For the sake of contradiction, assume $y \lt x$. Then, $x - y \gt 0$, so $\epsilon = \frac{1}{2}(x - y) \gt 0$. So, 
+
+$$
+\begin{align*}
+    y + \epsilon &= y + \frac{1}{2}(x - y) \\
+    &= \frac{1}{2} \cdot 2 \cdot y + \frac{1}{2}(x - y) \\
+    &= \frac{1}{2} (2y + x - y) \\
+    &= \frac{1}{2} (y + x) \\
+    &< \frac{1}{2} (x + x) \\
+    &= x
+\end{align*}
+$$
+; a contradiction. $\blacksquare$
 
 **Definition**: Let $(\mathbb F, \lt)$ be an ordered field. The **absolute value function** on $\mathbb F$ is 
 
@@ -127,7 +159,11 @@ $$
 3. $\lvert xy \rvert = \lvert x \rvert \lvert y \rvert$
 4. $\lvert x + y \rvert \leq \lvert x \rvert + \lvert y \rvert$ (triangle inequality)
 
-*Proof*: TODO.
+*Proof*:
+1. By definition, and since $x \lt 0 \implies -x = (-1)x \gt 0$. $\blacksquare$
+2. Suppose $\vert x \vert \leq a$. If $x \geq 0$, then $x = \vert x \vert \leq a$. Also, $a \geq 0 \implies -a \leq 0$, so $-a \leq 0 \leq x$. If $x \lt 0$, then $x = -\vert x \vert = (-1) \vert x \vert \geq (-1) a = -a$. Also, $a \geq 0 \implies x \lt 0 \leq a$. $\blacksquare$
+3. Suppose $x, y \gt 0$. Then $\vert x \vert = x$ and $\vert y \vert = y$, so $\vert xy \vert = xy = \vert x \vert \vert y \vert$. Now suppose WLOG, $x \gt 0, y \lt 0$. Then $\vert x \vert = x$ and $\vert y \vert = -y$, so $\vert xy \vert = -xy = x \cdot (-y) = \vert x \vert \vert y \vert$. Finally, suppose $x, y \lt 0$. Then $\vert x \vert = -x$ and $\vert y \vert = -y$, so $\vert xy \vert = xy = (-x)(-y) = \vert x \vert \vert y \vert$. $\blacksquare$
+4. By (2), $-\vert x \vert \leq x \leq \vert x \vert \land - \vert y \vert \leq y \leq \vert y \vert$, so $-(\vert x \vert + \vert y \vert) = -\vert x \vert - \vert y \vert \leq x + y \leq \vert x \vert + \vert y \vert$, hence $\vert x + y \vert \leq \vert x \vert + \vert y \vert$, by (2). $\blacksquare$
 
 **Definition (Interval)**: Let $(X, \lt)$ be a non-empty set with a linear order relation $<$. A subset $I \subseteq X$ is called an **interval** in $X$ when 
 
@@ -152,13 +188,15 @@ $$
 2. $\alpha \in X$ is called the **supremum** (or **least upper bound**) of $S$ when $(\forall s \in S, s \leq \alpha) \land (\beta \in X, \beta \lt \alpha \implies (\exists s \in S, \beta < s))$
 
 **Example**:
-1. $\lbrace \frac{1}{n} : n \in \mathbb N_+ \rbrace$
-2. $[0, \sqrt 2] \cap \mathbb Q$ with $X = \mathbb Q$
-3. $[0, \sqrt 2)$ with $X = \mathbb R$
+1. $\lbrace \frac{1}{n} : n \in \mathbb N_+ \rbrace$ is bounded below by $0$, bounded above by $1$, and $\sup S = 1 = \max S$.
+2. $[0, \sqrt 2] \cap \mathbb Q$ with $X = \mathbb Q$, $\inf = 0$, bounded above by $\sqrt 2$ but no supremum.
+3. $[0, \sqrt 2)$ with $X = \mathbb R$, $\inf = 0$, $\sup = \sqrt 2$
 
 Note: if $\max S$ exists, then $\operatorname{sup} S = \max S$!
 
 **Definition**: We say that a non-empty linearly ordered set $(X, \lt)$ satisfies the **Completeness Axiom**, when every non-empty bounded above subset of $X$ has a least upper bound.
+
+Intuitively, the Completeness Axiom says that there are no "gaps" or "missing points".s
 
 **Definition**: The field $\mathbb R$ of real numbers is defined as the smallest (with respect to inclusion) ordered field satisfying the completness axiom.
 
@@ -180,9 +218,9 @@ Note: if $\max S$ exists, then $\operatorname{sup} S = \max S$!
 
 ($2 \to 3$) Let $x \in \mathbb R_+, y \in \mathbb R$. By (2), $\exists n_0 \in \mathbb N, \frac{y}{x} \lt n_0$. Then, as $x \gt 0$, $\frac{y}{x} \cdot x = y \lt n_0 x$.
 
-($3 \to 4$). Let $x \in \mathbb R$. By (2), $\exists n_0 \in \mathbb N_+, n_0x \gt 1$. Then, $n_0 \gt 0 \implies \frac{1}{n_0} \gt 0 \implies n_0 \cdot x \cdot \frac{1}{n_0} \gt 1 \cdot \frac{1}{n_0}$, that is, $x \gt \frac{1}{n_0}$.
+($3 \to 4$). Let $x \in \mathbb R$. By (3), $\exists n_0 \in \mathbb N_+, n_0x \gt 1$. Then, $n_0 \gt 0 \implies \frac{1}{n_0} \gt 0 \implies n_0 \cdot x \cdot \frac{1}{n_0} \gt 1 \cdot \frac{1}{n_0}$, that is, $x \gt \frac{1}{n_0}$.
 
-($4 \to 1$). Suppose $\alpha \in \mathbb R$ such that $\alpha \geq n, \forall n \in \mathbb N$. Then, $\alpha \geq 1 \gt 0$, and $\forall n \in \mathbb N, \frac{1}{n} \leq \frac{1}{\alpha}$, contradicting (4). $\blacksquare$
+($4 \to 1$). Suppose $\alpha \in \mathbb R$ such that $\alpha \geq n, \forall n \in \mathbb N$. Then, $\alpha \geq 1 \gt 0$, and $\forall n \in \mathbb N, \frac{1}{\alpha} \leq \frac{1}{n}$, contradicting (4). $\blacksquare$
 
 **Theorem**: For every $s \in \mathbb R, s \gt 0 \implies \exists x \in \mathbb R, x^2 = s$.
 
