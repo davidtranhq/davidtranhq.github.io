@@ -1,3 +1,11 @@
+---
+layout: default
+order: 1
+toc: true
+---
+
+# Computer Architecture
+
 ## Introduction
 
 **von Neumann architecture**: shared memory banks + buses for instructions and data
