@@ -7,6 +7,7 @@ permalink: /notes/
 
 * [Real Analysis](real-analysis/)
 * [Real Analysis II](real-analysis-ii/)
+* [Complex Analysis](complex-analysis/)
 * [Abstract Algebra](abstract-algebra/)
 
 ## Computer Science
