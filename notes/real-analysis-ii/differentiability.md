@@ -1,4 +1,5 @@
 ---
+r 
 layout: default
 order: 1
 toc: true
@@ -68,7 +69,7 @@ There is no function $f(x)$ such that $f'(x) =
         1, & x \gt 0
     \end{cases}$
 
-*Proof*: Suppose such a function $f$ existed. Then $\lim_{x \to 0^-} \frac{f(x) - f(0)}{x - 0} = -1$ and $\lim_{x \to 0^+} \frac{f(x) - f(0)}{x - 0} = 1$. So the left and right limits at $0$ are not equal, and $\lim_{x \to 0}\frac{f(x) - f(0)}{x - 0}$ does not exist, contradicting the fact that $f'(0) = 0$. $\blacksquare$
+*Proof*: Suppose for the sake of contradiction that such a function $f$ existed. Then $f$ is differentiable and thus continuous. By definition of $f'$, $\lim_{x \to a} \frac{f(x) - f(a)}{x - a} = 1$ for all $a > 0$. Note that since $f$ is continuous and the difference and quotient of continuous functions is itself continuous (when the denominator is non-zero), $\frac{f(x) - f(a)}{x - a} = 1$ for all $a > 0$ and $x \neq a$. Thus, $\lim_{x \to 0^+} \frac{f(x) - f(0)}{x - 0} = 1$. Similarily, $\lim_{x \to 0^-} \frac{f(x) - f(0)}{x - 0} = -1$. These left and right limits at $0$ are not equal, so $\lim_{x \to 0} \frac{f(x) - f(0)}{x - 0}$ does not exist. This contradicts that $f'(0) = 0$. So $f$ can not exist. $\blacksquare$
 
 **Definition (Differentiability 2)**: Let $x_0 \in \mathbb R$. Suppose $f$ is defined on $(x_0 - \delta, x_0 + \delta)$ for some $\delta \gt 0$. Then $f$ is **differentiable at $x_0$** if there is a $L \in \mathbb R$ and a function $\epsilon$ such that
 
