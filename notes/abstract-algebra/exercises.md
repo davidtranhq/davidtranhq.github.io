@@ -75,3 +75,62 @@ Transitive since the composition of a bijective function is itself bijective.
 (10b) $2^S = \lbrace \emptyset, \lbrace 1 \rbrace, \lbrace 2 \rbrace, \lbrace 3 \rbrace, \lbrace 4 \rbrace, \lbrace 1, 2 \rbrace, \dots \rbrace$ (all subsets of $S$)
 
 $2^S / \sim \quad = \lbrace [\emptyset], [\lbrace 1 \rbrace], [\lbrace 1, 2 \rbrace], [\lbrace 1, 2, 3 \rbrace], [\lbrace 1, 2, 3, 4 \rbrace] \rbrace$
+
+### 3.5
+
+(1) $a^12 = e$, so order of $a^j$ is $12/\operatorname{gcd}(j, 12)$.
+
+(2) $a^30 = e$, $a^j$ has order $k$ when $30 \mid jk$. So $j = 15, 10, 6$ for $k = 2, 3, 5$.
+
+(7) $\mathbb Z_{18}^\times, \mathbb Z_{27}^\times$
+
+(8) $\langle \pi \rangle = \lbrace \pi^k \mid k \in \mathbb Z \rbrace$
+
+(9) $\mathbb Z_4 \times \mathbb Z_2 = \lbrace (0, 0), (0, 1), (1, 0), (1, 1), \dots, (3, 0), (3, 1) \rbrace$
+
+$\langle (0, 0) \rangle = \lbrace (0, 0) \rbrace$
+
+$\langle (0, 1) \rangle = \lbrace (0, 1), (0, 0) \rbrace$
+
+$\langle (1, 0) \rangle = \lbrace (1, 0), (2, 0), (3, 0), (0, 0) \rbrace$
+
+$\langle (1, 1) \rangle = \lbrace (1, 1), (2, 0), (3, 1), (0, 0) \rbrace$
+
+...
+
+(see the back of the book for the rest, all elements are generators of a cyclic subgroup)
+
+(10) Write out all subgroups generated from every $(x, y) \in \mathbb Z_6 \times \mathbb Z_3$...
+
+### 3.7
+
+#### 2
+$\phi(x) = [mx]_{12}$ where $m$ and $12$ are coprime define all homomorphisms. (See Example 3.7.6).
+
+#### 3
+(a) $\phi(xy) = \vert xy \vert = \vert x \vert \vert y \vert = \phi(x)\phi(y)$
+
+(b) $\phi(xy) = \frac{xy}{\vert xy \vert} = \frac{x}{\vert x \vert} \frac{y}{\vert y \vert} = \phi(x)\phi(y)$
+
+(c) same as (b)
+
+#### 4
+$\phi(x * y) = (x * y)^n = x^n * y^n = \phi(x) * \phi(y)$. Note that the distirbution of $n$ is only possible because $G$ is abelian.
+
+#### 7
+$\phi((a + bi)(c + di)) = \phi((ac - bd) + i(ad + bc)) = (ac - bd)^2 + (ad + bc)^2 = ... = (a^2 + b^2)(c^2 + d^2) = \phi(a + bi)\phi(c + di)$ (see [here for the algebra](https://www.symbolab.com/solver/simplify-calculator/simplify%20%5Cleft(ac%20-%20bd%5Cright)%5E%7B2%7D%2B%5Cleft(ad%2Bbc%5Cright)%5E%7B2%7D?or=input))
+
+
+#### 11
+
+*If $G_1$ is abelian then so is $G_2$*.
+
+*Proof*: Suppose $G_1$ is abelian. Let $c, d \in G_2$. By surjectivity of $f$, choose $a, b$ such that $c = f(a)$ and $d = f(b)$. Then $ab = ba$, so $cd = f(a)f(b) = f(ab) = f(ba) = f(b)f(a) = dc$. $\blacksquare$
+
+*Counterexample of the converse*: Let $G_1 = GL_2(\mathbb R)$ and $G_2 = \lbrace e \rbrace$, with $f$ mapping everything to $e$. Then $G_2$ is abelian and $f$ is a surjective homomorphism, but $G_1$ is not abelian.
+
+*If $G_1$ is cyclic then so is $G_2$*.
+
+*Proof*: Suppose $G_1$ is cyclic. Let $G_1 = \langle a \rangle$. Let $b = f(a)$. $\langle b \rangle \subseteq G_2$ from the closure property of groups. Let $x \in G_2$. By surjectivity of $G_2$, $x = f(a^n)$ for some $n$. Then, $x = f(a^n) = f(a)^n = b^n$. So $x \in \langle b \rangle$, and $G_2 \subseteq \langle b \rangle$. So $G_2$ is cyclic. $\blacksquare$
+
+*Counterexample of the converse*: Let $G_1 = \mathbb Z_2 \times \mathbb Z_2$ and $G_2 = \lbrace e \rbrace$, with $f$ mapping everything to $e$. Then $G_2$ is cyclic and $f$ is a surjective homomorphism, but $G_1$ is not cyclic.
