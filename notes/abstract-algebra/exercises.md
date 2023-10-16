@@ -68,6 +68,16 @@ $2^S / \sim \quad = \lbrace [\emptyset], [\lbrace 1 \rbrace], [\lbrace 1, 2 \rbr
 
 ## Chapter 3
 
+### 3.2
+
+#### 26
+
+(a) Suppose $a^n = e$. Then $e = (aa^{-1})^n = a^n(a^{-n}) = ea^{-n} = a^{-n}$. 
+
+(b) (ab)^n = e  e = (ab)(ab)^-1
+
+
+
 ### 3.5
 
 #### 1

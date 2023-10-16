@@ -73,7 +73,9 @@ order: 1
 
 **Lemma**: Let $G$ be a group and let $H \subseteq G$. Then $H$ is a subgroup of $G$ if and only if $H$ is non-empty and $ab^{-1} \in H$ for all $a, b \in H$.
 
-*Proof*: TODO.
+*Proof*: $(\rightarrow)$ By definition.
+
+$(\leftarrow)$ Suppose $H$ is non-empty and $ab^{-1} \in H$ for all $a, b \in H$. Then $aa^{-1} = e \in H$. Also, $ea^{-1} = a^{-1} \in H$. Finally, $a(b^{-1})^{-1} = ab \in H$. So $H$ is a subgroup of $G$. $\blacksquare$
 
 **Lemma**: Let $G$ be a group, and let $H$ be a finite, non-empty subset of $G$. Then $H$ is a subgroup of $G$ if and only if $ab \in H$ for all $a, b \in H$.
 
@@ -99,7 +101,7 @@ order: 1
 
 (1) $e_2 *_2 f(e_1) = f(e_1) = f(e_1 *_1 e_1) = f(e_1) * f(e_1)$, so $e_2 = f(e_1)$, by the cancellation law.
 
-(2) TODO.
+(2) $f(a^{-1}) = f(a^{-1}e_1) = f(a^{-1})e_2 = f(a^{-1})f(a)f(a)^{-1} = f(a^{-1}a)f(a)^{-1} = f(e_1)f(a)^{-1} = f(a)^{-1}$.
 
 (3) By induction.
 
@@ -112,9 +114,9 @@ $\blacksquare$
 
 *Proof*:
 
-(1) TODO.
+(1) Let $H_1 \subseteq G_1$ be a subgroup. Let $a, b \in f(H_1)$. Then there is $x, y \in H_1$ such that $a = f(x)$ and $b = f(y)$. Since $H_1$ is a subgroup, $xy^{-1} \in H_1$. So, $f(xy^{-1}) = f(x)f(y^{-1}) = f(x)f(y)^{-1} = ab^{-1} \in f(H_1)$$. $\blacksquare$
 
-(2) TODO.
+(2) Let $H_2 \subseteq G_2$ be a subgroup. Let $x, y \in f^{-1}(H_2)$. Then there is $a, b \in H_2$ such that $a = f(x)$ and $b = f(y)$. Since $H_2$ is a subgroup, $ab^{-1} \in H_2$. So $f(x)f(y)^{-1} = f(xy^{-1}) \in H_2$, so $xy^{-1} \in f^{-1}(H_2)$. $\blacksquare$
 
 **Definition**: The **kernel** of a group homomorphism $f: G_1 \to G_2$ is $\operatorname{Ker}(f) = \lbrace x \in G_1 \mid f(x) = e_2 \rbrace$.
 
@@ -130,7 +132,7 @@ $\blacksquare$
 
 *Proof*: $(\rightarrow)$ Suppose $a \in \operatorname{Ker}(f)$. Then $f(a) = e_2 = f(e_1)$. By injectivity of $f$, $a = e_1$. 
 
-$(\leftarrow)$ TODO.
+$(\leftarrow)$ Suppose $\operatorname{Ker}(f) = \lbrace e_1 \rbrace$. Let $f(a) = f(b)$. Then $f(a)f(b)^{-1} = f(ab^{-1}) = e_2$. Since the kernel is trivial, $ab^{-1} = e_1$, so $a = b$. $\blacksquare$
 
 **Definition**: A group homomorphism $f: G_1 \to G_2$ is a **group isomorphism** if there is any group homomorphism $g: G_2 \to G_1$ such that $g \circ f = \operatorname{id}_{G_1}$ and $f \circ g = \operatorname{id}_{G_2}$.
 
@@ -161,9 +163,9 @@ $\blacksquare$
 
 **Definition**: Let $G_1$ and $G_2$ be groups. The product of $G_1$ and $G_2$ is the group $(G_1 \times G_2)$ with the operation defined elementwise.
 
-**Example**: Show that $\mathbb Z_6 \cong \mathbb Z_2 \times \mathbb Z_3$ with the isomorphism given by $f(k) = (k \mod 2, k \mod 3)$
+**Example**: Show that $\mathbb Z_6 \cong \mathbb Z_2 \times \mathbb Z_3$ with the isomorphism given by $f(k) = (k \bmod 2, k \bmod 3)$
 
-*Proof*: TODO.
+*Proof*: $f(a) + f(b) = (a + b \bmod 2, a + b \bmod 3) = f(a + b)$, Brute force check shows that it is bijective. $\blacksquare$.
 
 ## Cyclic Groups
 
@@ -175,29 +177,46 @@ $\blacksquare$
 
 **Lemma**: Let $G$ be a group and $a \in G$.
 
-1. If the order of $a$ is finite, then $a^k = a^l$ if and only if $k = l$.
+1. If the order of $a$ is infinite, then $a^k = a^l$ if and only if $k = l$.
 2. If the order of $a$ is $n$, then $a^k = a^l$ if and only if $n \mid k - l$.
 
-*Proof*: TODO.
+*Proof*: 
+
+(1) $(\rightarrow)$ Suppose $a^k = a^l$. Then $a^{k - l} = e$. Since $a$ has infinite order, this is only possibel when $k - l = 0$, that is, $k = l$.
+
+$(\leftarrow)$ Trivial. $\blacksquare$
+
+(2) $(\rightarrow)$ Suppose $a^k = a^l$. Then $a^{k - l} = e$. Since $o(a) = n$, $a^{k - l} = e$ when $k - l = mn$ for some $m$. That is, $n \mid k - l$.
+
+$(\leftarrow)$ Suppose $n \mid k - l$. Then $k - l = mn$ for some $m$, and since $o(a) = n$, $a^{k - l} = a^{mn} = (a^n)^m = e^m = e$, that is, $a^k = a^l$. $\blacksquare$
 
 **Corollary**: Let $a \in G$. If $o(a) = k$ and $a^n = e$, then $k \mid n$.
 
-*Proof*: TODO.
+*Proof*: Suppose $a^n = e$. We have $(a^k)^m = e, so $a^n = a^{km}$, so by above, $k \mid n - km$, that is, $kx = n - km \implies k(x + m) = n$, so $k \mid n$. $\blacksquare$
 
 **Lemma**: Let $G$ be a group and let $a \in G$.
-* The set $\langle a \rangle$ is a subgroup of $G$.
-* If $K$ is any subgroup of $G$ such that $a \in K$, then $\langle a \rangle \subseteq K$
+1. The set $\langle a \rangle$ is a subgroup of $G$.
+2. If $K$ is any subgroup of $G$ such that $a \in K$, then $\langle a \rangle \subseteq K$
 
-*Proof*: TODO.
+*Proof*: 
+(1) Let $x, y \in \langle a \rangle$. Then $x = a^n$ and $y = a^m$ for some $n, m \in \mathbb N$, and $y^{-1} = a^{-m} \in \langle a \rangle$, so $xy^{-1} = a^na^{-m} = a^{n - m} \in \langle a \rangle$. $\blacksquare$
+
+(2) Let $K$ be a subgroup of $G$ with $a \in K$. Let $x \in \langle a \rangle$. Then $x = a^k$ for some $k \in \mathbb Z$. Since $k$ is a subgroup, by the closure property, $a^k \in K$. So $\langle a \rangle \subseteq K$. $\blacksquare$
 
 **Proposition**: Every subgroup of a cyclic group is cyclic.
 
-*Proof*: TODO.
+*Proof*: Let $H$ be a subgroup of a cyclic group $G$. Let $a \in G$ such that $\langle a \rangle = G$. If $H = \lbrace e \rbrace$ then $H$ is cyclic, so suppose otherwise. Then, choose the smallest $m \in \mathbb Z^+$ such that $a^m \in H$. We show that $H = \langle a^m \rangle$. Let $b \in H$. Since $H \subseteq G$, then $b = a^n$ for some $n \in \mathbb Z$. By the division algorithm, choose $q, r$ such that $0 \leq r \lt m$ and $n = mq + r$. Then $a^n = (a^m)^q a^r$. So $a^r = a^n (a^m)^{-q}$. Since $H$ is a group and $a^n, a^m \in H$, $a^r \in H$. Since $m$ is the smallest positive integer such that $a^m \in H$ and $0 \leq r \lt m$, $r = 0$. So $a^n = (a^m)^q = b$. $\blacksquare$
 
 **Theorem**: Let $G$ be a cyclic group.
 
 1. If the order of $G$ is infinite, then $G \cong \mathbb Z$.
 2. If the order of $G$ is $n$, then $G \cong \mathbb Z_n$.
+
+*Proof*: 
+
+(1) Let $a$ be the generator of $G$. Consider $f: \mathbb Z \to G, n \mapsto a^n$. Then it is a homomorphism since $f(x)f(y) = a^xa^y = a^{x + y} = f(x + y)$. It is injective since $\operatorname{Ker}(f) = \lbrace 0 \rbrace$ and surjective since for any $a^n \in G, f(n) = a^n$. $\blacksquare$
+
+(2) TODO.
 
 **Example**: $\mathbb Z_{10} \cong \mathbb Z_{11}^*$ by the isomorphism $f: n \mapsto [2^n]$.
 
@@ -237,18 +256,28 @@ Suppose $f(a) = f(b)$. Then $a = ea = f(a)(e) = f(b)(e) = eb = b$. $\blacksquare
 
 *Proof*: From the example above, $S_3$ is not abelian. We proceed by induction. Let $n \gt 3$. Suppose $S_{n - 1}$ is non-abelian. Choose one such $\sigma_{n - 1}$ and $\tau_{n - 1}$ such that their composition does not commute. Define $\sigma_n(x) = \begin{cases}x,& x = n \\ \sigma_{n - 1}(x), & x < n\end{cases}$, and likewise for $\tau_n(x)$. Then $\sigma_n$ and $\tau_n$ do not commute, so $S_n$ is not abelian. $\blacksquare$
 
-### Langrage's Theorem
+### Lagrange's Theorem
+
+**Lemma**: Let $H$ be a subgroup of the group $G$. For $a, b \in G$, define $a \sim G$ if $ab^{-1} \in H$. Then $\sim$ is an equivalence relation.
+
+*Proof*: The relation is reflexive since $aa^{-1} = e \in H$. It is symmetric since if $ab^{-1} \in H$, then $(ab^{-1})^{-1} = ba^{-1} \in H$, so $b \sim a$. It is transitive since if $a \sim b$ and $b \sim c$, then $(ab^{-1})(bc^{-1}) = ac^{-1} \in H$ (by closure). $\blacksquare$
 
 **Theorem (Lagrange)**: Let $G$ be a group of order $n$, and $H$ a subgroup of order $m$. Then $m \mid n$.
 
-*Proof*: TODO.
+*Proof*: Let $\sim$ denote the equivalence relation defined in the previous lemma. For $a \in G$, let $[a]$ denote the equivalence class of $a$. We show that $\vert [a] \vert = \vert H \vert = m$, from which it follows that $m \mid n$ since $n = mt$, where $t$ is the number of distinct equivalence classes.
+
+Define $\rho_a: H \to [a], x \mapsto xa$. Note that the stated codomain is valid since if $x \in H$, then $(xa)a^{-1} = x \in H$, so $xa \sim a$. We show that $\rho_a$ is bijective. It is injective since if $\rho_a(x) = \rho_a(y)$, then $xa = ya$ so $x = y$ by the cancellation property. It is surjective since $xa = b$ has a solution, namely $x = ba^{-1}$. So it is bijective. $\blacksquare$
 
 **Corollary**: The order of an element in a finite group divides the order of the group.
 
-*Proof*: TODO.
+*Proof*: The order of an element $a$ is the order of $\langle a \rangle$, which by Lagrange's theorem divides the order of the group. $\blacksquare$
 
 **Corollary**: Let $G$ be a group of prime order $p$. Then $G \cong \mathbb Z_p$.
 
-*Proof*: TODO.
+*Proof*: Let $g \in G$. Then $o(g) \mid p$, so $o(g) = 1$ or $o(g) = p$. If $o(g) = 1$, then $g = e$. Since the order of $G$ is prime, it must have at least one other non-identity element, whose order must be $p$. Thus $G$ has an element of order $p$, so $G$ is cyclic, so $G \cong \mathbb Z_p$. $\blacksquare$
+
+
+
+
 
 
