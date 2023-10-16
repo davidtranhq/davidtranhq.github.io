@@ -220,7 +220,7 @@ $(\leftarrow)$ Suppose $n \mid k - l$. Then $k - l = mn$ for some $m$, and since
 
 **Example**: $\mathbb Z_{10} \cong \mathbb Z_{11}^*$ by the isomorphism $f: n \mapsto [2^n]$.
 
-### Cayley's Theorem
+## Cayley's Theorem
 
 **Theorem (Cayley)**: Let $(G, *)$ be a group. Then there is an injective homomorphism $f: G \to \operatorname{Bij}(G)$.
 
@@ -240,9 +240,13 @@ Suppose $f(a) = f(b)$. Then $a = ea = f(a)(e) = f(b)(e) = eb = b$. $\blacksquare
 
 **Remark**: Every group is isomorphic to a subgroup of some $\operatorname{Bij}(X)$.
 
+### Symmetric Groups
+
 **Definition**: The **symmetric group**, denoted $S_n$, is the group $\operatorname{Bij}(\lbrace 1, 2, \dots, n \rbrace)$. An element in $S_n$ is called a **permutation**.
 
 **Notation**: We write a permutation $\sigma$ as $\begin{pmatrix}1 & 2 & 3 \\ \sigma(1) & \sigma(2) & \sigma(3) \end{pmatrix}$.
+
+**Notation**: We can also describe a permutation by its cycles, so that $\sigma = (a, b, c)$ means $a \mapsto b, b \mapsto c, c \mapsto a$. Elements not listed in the cycle, say $d$, maps to itself. If a permutation has multiple cycles, it is denoted by the product of those cycles, e.g. $\sigma = (a, b, c)(d, e)$ means $a \mapsto b, b \mapsto c, c \mapsto a, d \mapsto e, e \mapsto d$.
 
 **Remark**: The binary operation in $S_n$ is function composition.
 
@@ -256,7 +260,7 @@ Suppose $f(a) = f(b)$. Then $a = ea = f(a)(e) = f(b)(e) = eb = b$. $\blacksquare
 
 *Proof*: From the example above, $S_3$ is not abelian. We proceed by induction. Let $n \gt 3$. Suppose $S_{n - 1}$ is non-abelian. Choose one such $\sigma_{n - 1}$ and $\tau_{n - 1}$ such that their composition does not commute. Define $\sigma_n(x) = \begin{cases}x,& x = n \\ \sigma_{n - 1}(x), & x < n\end{cases}$, and likewise for $\tau_n(x)$. Then $\sigma_n$ and $\tau_n$ do not commute, so $S_n$ is not abelian. $\blacksquare$
 
-### Lagrange's Theorem
+## Lagrange's Theorem
 
 **Lemma**: Let $H$ be a subgroup of the group $G$. For $a, b \in G$, define $a \sim G$ if $ab^{-1} \in H$. Then $\sim$ is an equivalence relation.
 
@@ -276,8 +280,109 @@ Define $\rho_a: H \to [a], x \mapsto xa$. Note that the stated codomain is valid
 
 *Proof*: Let $g \in G$. Then $o(g) \mid p$, so $o(g) = 1$ or $o(g) = p$. If $o(g) = 1$, then $g = e$. Since the order of $G$ is prime, it must have at least one other non-identity element, whose order must be $p$. Thus $G$ has an element of order $p$, so $G$ is cyclic, so $G \cong \mathbb Z_p$. $\blacksquare$
 
+## Cosets and Normal Groups
 
+**Definition**: Let $G$ be a group and $H$ a subgroup of $G$. For $a \in G$, define
+1. The **left coset** of $H$ determined by $a$ is $aH = \lbrace ax \mid x \in H \rbrace$
+2. The **right coset** of $H$ determined by $a$ is $Ha = \lbrace xa \mid x \in H \rbrace$
 
+**Proposition**: Let $H$ be a subgroup of $G$ and $a \in G$. Then,
+1. $[a]_{\sim_L} = aH$
+2. $[a]_{\sim_R} = Ha$
 
+where $a \sim_L b$ if and only if $a^{-1}b \in H$ and $a \sim_R b$ if and only if $ab^{-1} \in H$.
 
+*Proof*: (1) $(\subseteq)$ Let $b \in [a]_{\sim_L}$. Then $a^{-1}b \in H$, so $b = aa^{-1}b \in aH$.
 
+$(\supseteq)$ Let $b \in aH$. Then $b = ax$ for some $x \in H$, so $a^{-1}b = x \in H$, so $a \sim_L b$. $\blacksquare$
+
+*Proof*: (2) $(\subseteq)$ Let $b \in [a]_{\sim_R}$. Then $ab^{-1} \in H$, so $ba^{-1} \in H$, and $b = ba^{-1}a \in Ha$.
+
+$(\supseteq)$ Let $b \in Ha$. Then $b = xa$ for some $x \in H$, so $ba^{-1} = x \in H$, so $ab^{-1} \in H$, so $b \sim_R a$. $\blacksquare$
+
+**Lemma**: Let $H$ be a subgroup $G$ and $a, b \in G$. Then TFAE:
+1. $aH = bH$
+2. $aH \subseteq bH$
+3. $a \in bH$
+4. $a^{-1}b \in H$
+
+*Proof*: $(1 \implies 2)$ is clear.
+
+$(2 \implies 3)$ Suppose $aH \subseteq bH$. Then $a = ae \in aH \subseteq bH$.
+
+$(3 \implies 4)$ Suppose $a \in bH = [b]_{\sim_L}$. Then $b \sim_L a$, so $a \sim_L b$, so $a^{-1}b \in H$.
+
+$(4 \implies 1)$ Suppose $a^{-1}b \in H$. Then $a \sim_L b$, so $aH = [a] = [b] = bH$. $\blacksquare$
+
+**Lemma**: Let $H$ be a subgroup of $G$ and $a, b \in G$. Then TFAE.
+
+1. $Ha = Hb$
+2. $Ha \subseteq Hb$
+3. $a \in Hb$
+4. $ab^{-1} \in H$.
+
+*Proof*: TODO.
+
+**Example**: For $G = \mathbb Z$ and $H = 2\mathbb Z$, we have distinct left cosets $0H = \lbrace 0 + 2n \mid n \in \mathbb Z \rbrace = 2\mathbb Z$ and $1H = \lbrace 1 + 2n \mid n \in \mathbb Z \rbrace$.
+
+**Example**: For $G \in \mathbb Z$ and $H = 3\mathbb Z$, we have distinct left cosets $0H, 1H, 2H$.
+
+**Example**: For $G = \mathbb Z_4$ and $H = \lbrace 0, 2 \rbrace$, we have distinct left cosets $0H, 1H$.
+
+**Example**: For $G = \mathbb Z_4$ and $H = \lbrace 0 \rbrace$, we have distinct left cosets $0H, 1H, 2H, 3H$.
+
+**Example**: For $G = \mathbb Z_4$ and $H = \mathbb Z_4$, all left cosets are $\mathbb Z_4$.
+
+**Remark**: If $G$ is abelian and $H$ is any subgroup, then the left and right cosets are equal, since $aH = \lbrace ax \mid x \in H \rbrace = \lbrace xa \mid x \in H \rbrace = Ha$.
+
+**Example**: In $S_3$, we have subgroup $H = \lbrace \tau_0, \sigma_1 \rbrace$ (recall that $\tau_0 = \operatorname{id}$, $\tau_1 = (1, 2, 3)$ and $\sigma_1 = (2, 3)$).
+
+$$
+\begin{align*}
+\tau_1\tau_0 = (1,2,3)(1)(2)(3) = (1,2,3) = \tau_1 \\
+\tau_1\sigma_1 = (1,2,3)(2,3) = (2,1)(3) \\
+\\
+\tau_0\tau_1 = (1)(2)(3)(1,2,3) = (1,2,3) = \tau_1 \\
+\sigma_1\tau_1 = (2,3)(1,2,3) = (1,3)(2)
+\end{align*}
+$$
+
+so $\tau_1H = \lbrace (1, 2, 3), (2, 1)(3) \rbrace \neq H\tau_1 = \lbrace (1, 2, 3), (1,3)(2) \rbrace$
+
+**Definition**: A subgroup $H$ of $G$ is **normal** if for every $a \in G$, $aH = Ha$.
+
+**Remark**: This doesn't necessarily mean that for $a \in G$ and $x \in H$, $ax = xa$, instead, that for $a \in G$ and $x \in H$, there is a $y \in H$ such that $ax = ya$.
+
+**Example**: If $G$ is abelian, then all subgroups are normal.
+
+**Example**: For an arbitrary group $G$, we have that H = $\lbrace e \rbrace$ is normal, since $aH = \lbrace a \rbrace = Ha$ for all $a \in G$.
+
+**Example**: For an arbitrary group $G$, we have that $G$ is normal, since $aG = G = Ga$.
+
+**Definition**: Let $H$ be a subgroup of a group $G$. The **index** of $H$ in $G$, denoted $(G: H)$, is the number of left cosets of $H$ in $G$.
+
+**Example**: $(\mathbb Z : 2\mathbb Z) = 2$. $(G : G) = 1$. $(\mathbb Z : n\mathbb Z) = n$. $(G : \lbrace e \rbrace) = \vert G \vert$.
+
+**Proposition**: Let $H$ be a subgroup of a group $G$. Let $\mathcal L(G, H) = \lbrace aH \mid a \in G \rbrace$ and $\mathcal R(G, H) = \lbrace Ha \mid a \in G \rbrace$. Then the function $f: \mathcal L(G, H) \to \mathcal R(G, H)$ given by $f(aH) = Ha^{-1}$ is a bijection.
+
+**Remark**: This shows that the number of left and right cosets are equal.
+
+**Remark**: For $G$ finite, this follows from Lagrange's theorem.
+
+*Proof*: First we show that $f$ is well defiend. Suppose $aH = bH$.  Then $a \in bH$, so $a = bx$ for some $x \in H$. Then $Ha^{-1} = H(bx)^{-1} = Hx^{-1}b^{-1} = Hb^{-1}$.
+
+Next we show that $f$ is bijective. Define the inverse $g: \mathcal R(G, H) \to \mathcal L(G, H)$ as $g(Ha) = a^{-1}H$. This is well-defined since if $Ha = Hb$, then $a = xb$ for some $x \in H$, so $a^{-1}H = b^{-1}x^{-1}H = b^{-1}H$. And it is an inverse since $(g \circ f)(aH) = g(Ha^{-1}) = aH$. $\blacksquare$
+
+**Lemma**: A subgroup $H$ of a group $G$ is normal if and only if $aHa^{-1} \subseteq H$ for all $a \in G$.
+
+*Proof*: $(\rightarrow)$ Suppose that $H$ is normal and fix $a \in G$ and $x \in H$. We show that $axa^{-1} \in H$. Since $H$ is normal, there is a $y \in H$ such that $ax = ya$. So $axa^{-1} = yaa^{-1} = y \in H$.
+
+$(\leftarrow)$ Suppose that $aHa^{-1} \subseteq H$ for all $a \in G$. We show that $aH = Ha$. $(\subseteq)$ Let $b \in aH$. Then $b = ax$ for some $x \in H$. By assumption, $axa^{-1} \in H$, so $b = ax = axa^{-1}a$ means $b \in Ha$. $(\supseteq)$ Analagous. $\blacksquare$
+
+**Corrolarry**: Let $f: G \to G'$ be a group homomorphism. Then $\operatorname{Ker}(f)$ is a normal subgroup of $G$.
+
+*Proof*: By the lemma, it suffices to show that for $a \in G$ and $x \in \operatorname{Ker}(f)$, we have that $axa^{-1} \in \operatorname{Ker}(f)$. We have $f(axa^{-1}) = f(a)f(x)f(a)^{-1} = f(a)f(a)^{-1} = e$, so $axa^{-1} \in \operatorname{Ker}(f)$. $\blacksquare$
+
+**Example**: If $H$ is normal in $G$ and $f: G \to G'$ is a homomorphism, then $f(H)$ need **not** be normal in $G'$.
+
+*Counterexample*: Consider $f: \mathbb Z_2 \to S_3$ given by $f(0) = \sigma_0, f(1) = \sigma_1$. This is a homomorphism and $\mathbb Z_2$ is normal in $\mathbb Z_2$, but $f(\mathbb Z_2)$ is not normal in $S_3$.
