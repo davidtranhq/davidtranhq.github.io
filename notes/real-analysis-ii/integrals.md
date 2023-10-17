@@ -37,6 +37,8 @@ $$
 $$
 
 If so, this number is called the **definite integral** of $f$ over $[a, b]$ and we denote it by $\int_a^b f(x)$.
+* $\overline {\int_a^b} f(x) dx := \inf_X U_x(f)$ is the **upper integral** of $f$
+* $\underline {\int_a^b} f(x) dx := \sup_X L_x(f)$ is the **lower intergral** of $f$
 
 **Example**: 
 
