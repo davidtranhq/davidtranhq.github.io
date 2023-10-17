@@ -6,6 +6,8 @@ toc: true
 
 # Metric Spaces
 
+## Metric Spaces
+
 **Definition**: A **metric space** is a non-empty space $X$ with a function $d: X \times X \to \mathbb R$ such that
 * $d(x, y) \geq 0, \forall x, y \in X$
 * $d(x, y) = 0$ if and only if $x = y$
