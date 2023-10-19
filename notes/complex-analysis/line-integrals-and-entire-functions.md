@@ -30,7 +30,7 @@ $$
 \int_C f(z) dz = \int_a^b f(z(t))\dot z(t) dt
 $$
 
-**Definition**: $C_1: z(t), a \leq t \leq b$ and $C_2: \omega(t), c \leq t \leq d$ are **smoothly equivalent** if there exists a bijective mapping $\lambda(t): [c, d] \to [a, b]$ such that $\lambda(c) = a, \lambda(d) = b, \lambda'(t) \gt 0$ for all $t$ and $\omega(t) = z(\omega(t))$.
+**Definition**: $C_1: z(t), a \leq t \leq b$ and $C_2: \omega(t), c \leq t \leq d$ are **smoothly equivalent** if there exists a bijective $\mathbb C$ mapping $\lambda: [c, d] \to [a, b]$ such that $\lambda(c) = a, \lambda(d) = b, \lambda'(t) \gt 0$ for all $t$ and $\omega(t) = z(\lambda(t))$.
 
 **Proposition**: If $C_1$ and $C_2$ are smoothly equivalent, then $\int_{C_1} f = \int_{C_2} f$.
 
@@ -72,6 +72,15 @@ $$
 1. $\int_C (f(z) + g(z)) dz = \int_C f(z) dz + \int_C g(z) dz$
 2. $\int_C \alpha f(z) dz = \alpha \int_C f(z) dz$
 
+*Proof*: (1) Let $f(z) = u_f(x, y) + iv_f(x, y)$ and $g(z) = u_g(x, y) + iv_g(x, y)$. Then
+
+$$
+\begin{align*}
+\int_C f(z) + g(z) dz
+&= \int_a^b (f(z(t)) + g(z(t))) \dot z(t) dt \\
+&= \int_a^b [u_f(x(t), y(t)) + v_f(x(t), y(t))]
+\end{align*}
+$$
 **Notation**: Let $\alpha, \beta \in \mathbb C$. Then $\alpha \ll \beta \iff \vert \alpha \vert \leq \vert \beta \vert$.
 
 **Lemma**: Suppose $G(t)$ is a continuous complex-valued function of $t$. Then
@@ -98,10 +107,10 @@ $$
 
 *Proof*: TODO.
 
-**Proposition**: Suppose $F$ is the derivative of an analytic function $F$, that is $f(z) = F"(z)$, where $F$ is analytic on the smooth curve $C$. Then
+**Proposition**: Suppose $f$ is the derivative of an analytic function $F$, that is $f(z) = F'(z)$, where $F$ is analytic on the smooth curve $C$. Then
 
 $$
-\int_C f(z) dz = f(z(b)) - F(z(a))
+\int_C f(z) dz = F(z(b)) - F(z(a))
 $$
 
 *Proof*: TODO.
