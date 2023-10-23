@@ -379,10 +379,14 @@ Next we show that $f$ is bijective. Define the inverse $g: \mathcal R(G, H) \to 
 
 $(\leftarrow)$ Suppose that $aHa^{-1} \subseteq H$ for all $a \in G$. We show that $aH = Ha$. $(\subseteq)$ Let $b \in aH$. Then $b = ax$ for some $x \in H$. By assumption, $axa^{-1} \in H$, so $b = ax = axa^{-1}a$ means $b \in Ha$. $(\supseteq)$ Analagous. $\blacksquare$
 
-**Corrolarry**: Let $f: G \to G'$ be a group homomorphism. Then $\operatorname{Ker}(f)$ is a normal subgroup of $G$.
+**Corollary**: Let $f: G \to G'$ be a group homomorphism. Then $\operatorname{Ker}(f)$ is a normal subgroup of $G$.
 
 *Proof*: By the lemma, it suffices to show that for $a \in G$ and $x \in \operatorname{Ker}(f)$, we have that $axa^{-1} \in \operatorname{Ker}(f)$. We have $f(axa^{-1}) = f(a)f(x)f(a)^{-1} = f(a)f(a)^{-1} = e$, so $axa^{-1} \in \operatorname{Ker}(f)$. $\blacksquare$
 
 **Example**: If $H$ is normal in $G$ and $f: G \to G'$ is a homomorphism, then $f(H)$ need **not** be normal in $G'$.
 
 *Counterexample*: Consider $f: \mathbb Z_2 \to S_3$ given by $f(0) = \sigma_0, f(1) = \sigma_1$. This is a homomorphism and $\mathbb Z_2$ is normal in $\mathbb Z_2$, but $f(\mathbb Z_2)$ is not normal in $S_3$.
+
+**Definition**: For $aH, bH \in G/H$ define $aH \times bH = (ab)H$.
+
+**Proposition**:
