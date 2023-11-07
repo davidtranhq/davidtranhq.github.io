@@ -204,6 +204,13 @@ $(\rightarrow)$ Suppose $G/N$ is abelian. Let $a, b \in G$. Then $abN = baN$, so
 
 *Proof*: Let $N$ be a subgroup of $Z(G)$. Suppose $G/N$ is cyclic. Let $aN$ be a generator of $G/N$. Let $x, y \in G$. Then $xN = (aN)^i = a^iN$ and $yN = (aN)^j = a^jN$ for some $i, j \in \mathbb Z$. So, $x \in a^iN$, so $x = a^in_x$ for some $n_x \in N$. Similarily, $y = a^jn_y$. Then, $xy = (a^in_x)(a^jn_y) = (a^jn_y)(a^in_x) = yx$, using the fact that $a^i, a^j, n_x, n_y \in N$, and $N \subseteq Z(G)$ is abelian. So $G$ is abelian. $\blacksquare$
 
+#### 18
+$\langle(2, 2)\rangle$ is of order 6, and $\mathbb Z_6 \times \mathbb Z_4$ is of order 24, so the factor group is of order 4. Note that $\langle(2, 2)\rangle$ covers all $(k, l)$ such that $k, l$ are even, so for any $(a, b) \in \mathbb Z_6 \times \mathbb Z_4$, $2(a, b) \in \langle(2, 2)\rangle$. So the maximum order of any element is 2. So the group is congruent to $\mathbb Z_2 \times \mathbb Z_2$, by the Classification Theorem for Finite Abelian Groups.
+
+#### 19
+
+The factor group is of order 24 / 2 = 12. $(1, 1) + \langle(3, 2)\rangle$ is of order 12, so the factor group is congruent to $\mathbb Z_{12}$ (by the Classification Theorem).
+
 #### 20
 *Proof*: Define $\phi: \mathbb Z \times \mathbb Z \to \mathbb Z$ as $(x, y) \mapsto x$. Then it is easy to show that $\phi$ is a homomorphism, and, $\phi((0, k)) = 0$ for all $k \in \mathbb Z$, so $\langle(0, 1)\rangle = \operatorname{Ker}(\phi)$. So by the Fundamental Homomorphism Theorem, $\mathbb Z \times \mathbb Z / \langle(0, 1)\rangle \cong \mathbb Z$, so it is an infinite cyclic group. $\blacksquare$
 
