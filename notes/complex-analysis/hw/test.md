@@ -1,0 +1,1 @@
+$\vert c_n \vert^{1/n}$ converges to 1 since $\forall k > 0, \lim_{n \to \infty} k^{1/n} = 1$.

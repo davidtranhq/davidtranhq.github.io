@@ -13,3 +13,4 @@ permalink: /notes/
 ## Computer Science
 
 * [Computer Architecture](computer-architecture/)
+* [Machine Learning](machine-learning/)

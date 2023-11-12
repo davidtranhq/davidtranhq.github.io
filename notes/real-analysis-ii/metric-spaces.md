@@ -197,23 +197,27 @@ $(\leftarrow)$ Suppose $X \setminus S$ is open and assume for the sake of contra
 
 **Definition**: An **isometry** is a function $f: X_1 \to X_2$ such that $d_2(f(x_1), f(y_1)) = d_1(x_1, y_1)$ for all $(x_1, y_1) \in X_1$. That is, an isometry is a distance preserving map. Also caled an **isometric embedding**.
 
+**Example**: $f: [0, \infty) \to [0, \infty), x \mapsto x + 10$ is an isometry.
+
+**Proposition**: Let $f: X \to Y$ be an isometry.
+* Isometries preserve convergence of seqeuences.
+* Isometries preserve Cauchyness.
+* Isometries are one-to-one.
+
+*Proof (Sketch)*: (1) and (2) are clear. For (3), note that for $x_1, x_2 \in X$, if $f(x_1) = f(x_2)$, then $d_2(f(x_1), f(x_2)) = 0 = d_1(x_1, x_2) \implies x_1 = x_2$. $\blacksquare$
+
+**Definition**: Let $f: X_1 \to X_2$ be an isometry that is bijection. Then its inverse $f^{-1}$ is also an isometry, and $X_1$ and $X_2$ are said to be **isometric**.
+
 **Example**:
 * In $(\mathbb R^2, d_\text{st})$, translations and rotations are isometries.
 * In $(\mathbb R^2, d_1)$, rotation is not an isometry but translation is.
+* $f: [0, \infty) \to [0, \infty), x \mapsto x + 10$ is a nonsurjective isometry for the standard distance.
 
-**Example**: $f: [0, \infty) \to [0, \infty), x \mapsto x + 10$ is an isometry.
+**Definition**: A subset $D$ of a metric space $X$ is **dense in $X$** if every $x \in X$ is the limit of a sequence in $D$.
 
-**Proposition**: Isometries preserve convergence of seqeuences.
-
-**Proposition**: Isometries preserve Cauchyness.
-
-**Proposition**: Isometries are one-to-one.
-
-**Definition**: A subset $Y \subseteq X$ is **dense** if every $x \in X$ is the limit of a sequence in $Y$.
-
-**Definition**: A completion of a metric space $(X, d)$ is a metric space $(X^*, d^*)$ together with an isometric embedding $i: X \to X^*$ such that
+**Definition**: A **completion** of a metric space $(X, d)$ is a metric space $(X^*, d^*)$ together with an isometric embedding $i: X \to X^*$ such that
 1. $X^*$ is complete
-2. $X$ is dense in $X^*$.
+2. $f(X)$ is dense in $X^*$.
 
 **Example**:
 * $[0, 1]$ is the completion of $[0, 1)$
