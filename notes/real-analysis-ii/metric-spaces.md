@@ -242,4 +242,90 @@ $(\leftarrow)$ Suppose $X \setminus S$ is open and assume for the sake of contra
 * $f(x) = 1$ for all $x \in B$
 * $0 \leq f(x) \leq 1$ for all $x \in X$.
 
-*Proof*: Consider the function $h(x) = d(x, A) = $\operatorname{Int}_{y \in A} \lbrace d(x, y) \rbrace$.
+*Proof*: Consider the function $h(x) = d(x, A) = \inf_{y \in A} \lbrace d(x, y) \rbrace$. First we show that $h: X \to \mathbb R$ is continuous. Let $\epsilon \gt 0$. Choose $\delta = \epsilon/2$. Since $d(x, y) \leq d(x, z) + d(z, y)$ for all $y \in A$, $d(x, A) \leq d(x, z) + d(z, A)$. So $d(x, A) - d(z, A) = h(x) - h(z) \leq d(x, z) = \epsilon/2$. Similarily $d(z, A) - d(x, A) \leq \epsilon/2$. So $\vert h(x) - h(z) \vert < \epsilon$. Now define
+
+$$
+f(x) = \frac{d(x, A)}{d(x, A) + d(x, B)}
+$$
+
+which is also continuous. Note that $d(x, A) + d(x, B) \neq 0$ since $A$ and $B$ are disjoint. $\blacksquare$
+
+**Corollary**: Let $A, B$ be disjoint closed sets in a metric space $(X, d)$. Then there are disjoint open sets $G, H$ such that $A \subseteq G$ and $B \subseteq H$.
+
+*Proof*: Define $f: X \to [0, 1]$ as in the proof of Urysohn's Lemma. Let $G = f^{-1}([0, \frac{1}{2}))$ and $H = f^{-1}((\frac{1}{2}, 1])$. Then $A \subseteq G$ and $B \subseteq H$ and $G, H$ are disjoint and open, since $f$ is continuous and the pre-image of open sets are open for continuous functions. $\blacksquare$
+
+**Recall**: A continuous function $f$ maps convergent sequences to convergent sequences, but does not necessarily map Cauchy sequences to Cauchy sequences. For example, $f: (0, \infty) \to \mathbb R, x \mapsto \frac{1}{x}$ on the standard metric is continuous, and $x_n = \frac{1}{n}$ is Cauchy, but $f(x_n)$ is not.
+
+**Proposition**: Uniformly continuous functions on metric spaces map Cauchy sequences to Cauchy sequences.
+
+*Proof (Sketch)*: Let $\epsilon \gt 0$. Choose $\delta \gt 0$ such that if $d_X(x, y) \lt \delta, d_Y(f(x), f(y)) \lt \epsilon$ for all $x, y \in X$. Since $x_n$ is Cauchy, for $\delta$, infinitely many $x_n$ are within $\delta$ of each other. Then infinitely many $f(x_n), f(x_y)$ are within $\epsilon$ of each other. So $f(x_n)$ is Cauchy. $\blacksquare$
+
+**Definition**: Let $(X, d_X), (Y, d_Y)$ be metric spaces. A map $f: X \to Y$ is called a **homeomorphism** if it is bijective, $f$ is continuous, and $f^{-1}$ is continuous. We say that $X$ and $Y$ are **homeomorphic** if there is such an $f$.
+
+**Observation**: Being homeomorphic is an equivalence relation on a metric space.
+
+**Observation**: If $X, Y$ are homeomorphic, then open sets are mapped to open sets and closed sets are mapped to close sets.
+
+**Example**: Completeness is not preserved under homeomorphisms. Consider $X = (-\pi/2, \pi/2)$ with the standard metric and $Y = \mathbb R$ with the standard metric. $f: X \to Y, x \mapsto \tan x$ is bijective and continuous, so $X$ and $Y$ are homeomorphic, but $Y$ is complete and $X$ is not complete, since a sequence convergent to $\frac{\pi}{2}$ is Cauchy but not convergent in $X$.
+
+**Observation**: An isometry is a homeomorphism but a homeomorphism is not necessarily an isometry.
+
+### Equivalent Metrics
+
+**Definition**: Let $X$ be a set. The metrics $d$ and $\rho$ on $X$ are **equivalent** if a subset $S \subseteq X$ is open in $(X, d)$ if and only if $S$ is open in $(X, \rho)$.
+
+**Proposition**: Let $d$ and $\rho$ be metrics on a set $X$. If there are positive constants $C_1$ and $C_2$ such that for all $x, y \in X$,
+
+$$
+C_1\rho(x, y) \leq d(x, y) \leq C_2\rho(x, y)
+$$
+
+then $d$ and $\rho$ are equivalent.
+
+*Proof*: TODO.
+
+**Observation**: If the metrics $d, \rho$ on $X$ ar eequivalent, then $\operatorname{id}: X_d \to X_\rho$ is a homeomorphism.
+
+**Theorem**: Let $(X, d_X), (y, d_Y)$ be metric spaces. Suppose $f: X \to Y$ is a bijective map such that $f, f^{-1}$ are both uniformly continuous. Then $X$ is complete if and only if $Y$ is complete.
+
+*Proof*: It suffices to show that if $X$ is complete then $Y$ is complete. Assume $X$ is complete. Let $(y_n)$ be a Cauchy sequence in $Y$. There is $(x_n) \subseteq X$ such that $y_n = f(x_n)$ for all $x_n = f^{-1}(y_n)$. Since $f^{-1}$ is uniformly continuous and $y_n$ is Cauchy, it follows that $x_n$ is Cauchy in $X$. Since $X$ is complete, $x_n$ converges to some $x \in X$. Let $y = f(x)$ with $\epsilon \gt 0$ arbitrary. Since $f$ is continuous at $x$, there is a $\delta \gt 0$ such that $d_Y(f(x), f(z)) \lt \epsilon$. $\blacksquare$
+
+### Contractions 
+
+**Definition**: Let $(X, d_X)$ be a metric space. A map $f: X \to X$ is called a **contraction** if there exists a constant $c \lt 1$ such that for all $x, y \in X, d(f(x), f(y)) \leq Cd(x, y)$.
+
+**Example**: $X = \mathbb R$, $d(x, y) = \vert x - y \vert$. $f: X \to X, x \mapsto x/2$ is a contraction. Since $d(f(x), f(y)) = \frac{1}{2} d(x, y)$, so $C = \frac{1}{2}$.
+
+**Definition**: Let $(X, d_X)$ be a metric space, $f: X \to X$ a mapping. Then $x_0 \in X$ is a **fixed point of $f$** if $f(x_0) = x_0$.
+
+**Theorem**: Let $(X, d_X)$ be a metric space. Assume it is complete. Let $f: X \to X$ be a contraction. Then $f$ has a unique fixed point.
+
+*Proof (Sketch)*: Continually apply the contraction to some arbitrary point $x \in X$. Since it is a contraction, the points form a Cauchy sequence and by completeness, converge to a point $y$. For contradiction, choose another fixed point $z$, then $d(y, z) = d(f(y), f(z)) \leq Cd(y, z) \lt d(y, z)$ $\blacksquare$.
+
+**Corollary**: Let $(X, d_X)$ be a complete metric space. Let $f: X \to X$ be a continuous map such that $f \circ \dots \circ f$ $k$ times is a contraction. Then the equation $f(x) = x$ has exactly one solution.
+
+*Proof*: Similar to above.
+
+### Uniform Convergence
+
+**Recall**: The uniform limit of a sequence of continuous functions is a continuous function. The uniform limit of a sequence of integrable functions is integrable.
+
+**Definition**: Let $(X, d_X), (Y, d_Y)$ be metric spaces. Let $f_n: X \to Y, n \in \mathbb N$ and $f: X \to Y$ be functions.
+* $f_n$ converges to $f$ **pointwise** if $d_Y(f_n(x), f(x)) \to 0$ as $n \to \infty$ for all $x \in X$.
+* $f_n$ converges to $f$ **uniformly** if for all $\epsilon \gt 0$, there is a $n_0 \in \mathbb N$ such that $d_Y(f_n(x), f(x)) \lt \epsilon$ for all $n \gt n_0$ and all $x \in X$.
+
+**Remark**: Uniform convergence implies pointwise convergence, but not vice-versa.
+
+**Theorem**: Let $(X, d_X), (Y, d_Y)$ be metric spaces. Let $f_n: X \to Y$ be continuous functions $n = 1, 2, 3, \dots$. Suppose $f: X \to Y, f_n \to f$ uniformly. Then $f$ is continuous.
+
+*Proof*: Let $x_0 \in X$. Let $\epsilon \gt 0$. Choose $N \in \mathbb N$ such that $d_Y(f_n(x), f(x)) \lt \epsilon/3$ for all $x \in X$ and $n \geq N$. By continuity of $f_n$, choose $\delta$ such that if $d_X(x_0, x) \lt \delta$ for all $x \in X$, then $d_Y(f_n(x), f_n(x_0)) \lt \epsilon/3$. Then, when $d_X(x_0, x) \lt \delta$,
+
+$$
+d_Y(f(x), f(x_0)) \leq d_Y(f_n(x), f(x)) + d_Y(f_n(x), f_n(x_0)) + d_Y(f_n(x_0), f(x_0)) \lt \epsilon
+$$
+
+$\blacksquare$
+
+**Theorem (Cauchy Criterion for Uniform Convergence)**: Let $(X, d_X), (Y, d_Y)$ be metric spaces. Assume $Y$ is complete. Let $f_n: X \to Y, n = 1, 2, 3, \dots$. Then there is $f: X \to Y$ such that $f_n \to f$ uniformly if and only if $f_n$ is Cauchy.
+
+*Proof*: TODO.

@@ -81,10 +81,24 @@
 \setlist[enumerate]{leftmargin=*} % remove enuemrate indentation
 
 \begin{enumerate}
-  \item TODO.
+  \item First we prove the following lemma.
+  \begin{lemma}
+    Let $\lbrace z_n \rbrace \subseteq \mathbb C$ be infinite and bounded. Then there exists a subsequence $\lbrace z_{n_k} \rbrace \subseteq \lbrace z_n \rbrace$ convergent to some point $z \in \mathbb C$.
+  \end{lemma}
+  \begin{proof}
+    Let $\lbrace z_n \rbrace$ be bounded. It suffices to show that a subsequence of $\lbrace z_n \rbrace$ where both the real and imaginary parts converge. Since $\lbrace z_n \rbrace$ is bounded, $\lbrace \Re(z_n) \rbrace$ is bounded, so by the lemma, there exists a subsequence $\lbrace z_{n_k} \rbrace$ such that the real parts converge. Since $\lbrace z_{n_k} \rbrace \subseteq \lbrace z_n \rbrace$, it is also bounded, so again by Bolzano-Weierstrass $\lbrace \Im(z_{n_k}) \rbrace$ is bounded and there exists a subsequence $\lbrace z_{n_{k_l}} \rbrace \subseteq \lbrace z_{n_k} \rbrace$ such that the imaginary parts converge. Thus the real and imaginary parts of $\lbrace z_{n_{k_l}} \rbrace$ converge, so the subsequence is convergent.
+  \end{proof}
+
+  Now we prove the theorem.
+  
+  \begin{proof}
+    Let $f$ be a continuous complex-valued function on a compact set $K \subseteq \mathbb C$. Set $M := \sup_{z \in K} \vert f(z) \vert$. Consider the sequence $\lbrace f(z_n) \rbrace$ defined such that $M - \frac{1}{n} < \vert f(z_n) \vert$ for all $n \geq 1$, which exists by definition of supremum. Since $\vert f(z_n) \vert \leq M$ for all $z_n \in K$, the sequence converges to an $\alpha$ with $\vert \alpha \vert = M$. Since $K$ is compact, it is bounded, so by Bolzano-Weierstrass, there exists a subsequence $\lbrace z_{n_k} \rbrace \subseteq \lbrace z_n \rbrace$ convergent to some point $z \in \mathbb C$. Since $f$ is continuous, $\lbrace f(z_{n_k}) \rbrace$ also converges, and since $\lbrace f(z_{n_k}) \rbrace \subseteq \lbrace f(z_n) \rbrace$, it converges to $\alpha$. Finally, since $K$ is compact and $z$ is a limit point of $K$, $z \in K$. Thus $\alpha = f(z)$.
+
+    Note that in the above, we assumed $M$ was finite. This can be shown as follows. Suppose otherwise. Then $f(K)$ is unbounded. But this contradicts that $f$ is continuous, since continuous functions map compact sets to compact sets. 
+  \end{proof}
   % \item \begin{proof}
   %   Let $f$ be a continuous complex-valued function on a compact set $K \subseteq \mathbb C$. Define $M := \sup_{z \in K} \vert f(z) \vert$. We show that $M$ is finite. Suppose otherwise. 
-  % \end{proof}
+  % \end{proox2f}
   % \begin{enumerate}
   %   \item \begin{proof}
   %     Suppose $M$ is finite. Then suppose there exists a $z \in K$ such that $\vert f(z) \vert = M$. Then the constant sequence $\lbrace f(z) \rbrace$ converges to an $\alpha \in f(K)$ such that $\vert \alpha \vert = M$ trivially. So suppose otherwise. Then by the definition of supremum, for all $n \in \mathbb N$, there is a $z_n \in K$ such that $M - \frac{1}{n} < \vert f(z_n) \vert$. We show that $\lim_{n \to \infty} f(z_n) = \alpha$ for some $\alpha$ with $\vert \alpha \vert = M$. Let $\epsilon > 0$. Choose $N \in \mathbb N$ such that for all $n \geq N$, $\frac{1}{n} < \epsilon$. Then,
@@ -124,7 +138,7 @@
   \end{enumerate}
 
   \item \begin{proof}
-    Let $f$ be entire with $\vert f(z) \vert \leq A + B \vert z \vert^k$. Then, along $\vert z \vert = R$, $\vert f \vert \leq A + BR^k$. From above, $\vert C_j \vert \leq \frac{A + BR^k}{R^j}$. Now suppose $j > k$. Taking circles of radius $R$ of arbitrary size, $\lim_{R \to \infty} \vert C_j \vert = 0$.
+    Let $f$ be entire with $\vert f(z) \vert \leq A + B \vert z \vert^k$. Then, along $\vert z \vert = R$, $\vert f \vert \leq A + BR^k$. From above, $\vert C_j \vert \leq \frac{A + BR^k}{R^j}$. Now suppose $j > k$. Taking circles of radius $R$ of arbitrary size, $\lim_{R \to \infty} \frac{A + BR^k}{R^j} = 0$, since $j > k$.
   \end{proof}
 
   \item \begin{proof}
@@ -136,7 +150,22 @@
   \end{proof}
 
   \item \begin{proof}
-    Suppose $P(z) = (z - \alpha)^kQ(z)$ where $Q$ is analytic and $Q(\alpha) \neq 0$.
+    $(\rightarrow)$ Suppose $P(z) = (z - \alpha)^kQ(z)$ where $Q$ is analytic and $Q(\alpha) \neq 0$. Then
+    $$
+    P'(z) = k(z - \alpha)^{k - 1}Q(z) + (z - \alpha)^kQ'(z) = (z - \alpha)^{k - 1}(kQ(z) + (z - \alpha)Q'(z))
+    $$
+    So $P'(z) = (z - \alpha)^{k - 1}Q_1(z)$ with $Q_1(\alpha) \neq 0$. Repeating as in the first part of the proof, $P^{(n)}(z) = (z - \alpha)^{k - n}Q_n(z)$ with $Q_n(\alpha) \neq 0$. Note that $P^{(k)}(z) = k!Q_k(z) \neq 0$ since $Q_k(z) \neq 0$. So $P^{(0)}(\alpha) = P^{(1)}(\alpha) = \dots = P^{(k - 1)}(\alpha) = 0$, and $P^{(k)}(\alpha) \neq 0$.
+
+    $(\leftarrow)$ Suppose $P(\alpha) = P'(\alpha) = \dots = P^{(k - 1)}(\alpha) = 0$ and $P^{(k)}(\alpha) \neq 0$. We show that $P(z) = (z - \alpha)^kQ(z)$ where $Q$ is analytic and $Q(\alpha) \neq 0$. First note that since $P^{(k - 1)}(\alpha) = 0$, $P^{(k - 1)}(z) = (z - \alpha)Q(z)$ by the Factor Theorem. Also, $Q(\alpha) \neq 0$ since \begin{align*}
+      P^{(k)}(z) = Q(z) + (z - \alpha)Q'(z)
+    \end{align*}
+    and $P^{(k)}(z) \neq 0$ by assumption. We finish with induction. Suppose $P^{(j)}(z) = (z - \alpha)^nQ(z)$ with $Q$ analytic and $Q(\alpha) \neq 0$, and $j < k$ and $n \geq 1$. We show that $P^{(j - 1)}(z)$ has root $\alpha$ with multiplicity $n + 1$. From the initial assumption, $P^{(j - 1)}(z) = (z - \alpha)S(z)$ with $S$ analytic. Differentiating gives 
+    $$
+    P^{(j)}(z) = (z - \alpha)^{n + 1}Q(z) = S(z) + (z - \alpha)S'(z),
+    $$
+    by the inductive hypothesis. so $S(z)$ has multiplicity $n$. Thus $P^{(j - 1)}(z) = (z - \alpha)S(z)$, has multiplicity $n + 1$.
+
+    We have that $P^{(k - 1)}(z)$ has root $\alpha$ with multiplicity 1, so $P^{(0)}(z)$ has root $\alpha$ with multiplicity $1 + k - 1 = k$, as desired.
   \end{proof}
 \end{enumerate}
 

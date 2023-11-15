@@ -14,6 +14,6 @@
 14. Expected benefit for taking offer: 3.33
 15. Now, suppose we are in the same situation.... -30.56
 16. I have 50 unique cards, numbered sequentially.... 127.5
-17. I am willing to sell you a contract.... None of the above (46.5)
+17. I am willing to sell you a contract.... 46.5
 18. Now suppose I change the game. I start with 50 unique cards... None of the above (625/44)
 19. 
