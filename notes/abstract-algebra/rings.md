@@ -271,3 +271,40 @@ $(\leftarrow)$ Suppose that $R/I$ is a field and let $J$ be an ideal such that $
 $\blacksquare$
 
 **Corollary**: Every maximal ideal is prime in commutative rings with unity $1 \neq 0$.
+
+### Field of Fractions
+
+**Notation**: Let $D$ be an integral domain. Define a relation $\sim$ on $D \times S$ where $S = \lbrace a \in D \mid a \neq 0 \rbrace$ by $(a, b) \sim (c, d)$ if and only if $ad = bc$.
+
+**Proposition**: $\sim$ is an equivalence relation.
+
+*Proof*: Reflexivity and symmetry hold due to the commutativity of the ring. For transitivity, suppose $(a, b) \sim (c, d)$ and $(c, d) \sim (e, f)$. Then $ad = bc$ and $cf = de$. Right-multiply the first equation by $f$ and left-mutiply the second by $b$ to obtain $af = be$. $\blacksquare$
+
+**Proposition**: Let $F_D$ be the set $(D \times S)/\sim$ and write $a/b$ for $[(a, b)]_\sim$. Define $+$ and $\cdot$ as
+
+$$
+a/b + c/d = (ad + bc)/bd
+$$
+
+and
+
+$$
+a/b \cdot c/d = (ac)/(cd)
+$$
+
+Then $+$ and $\cdot$ are well-defined operations on $F_D$, and $F_D$ with these operations is a field.
+
+*Proof*: (Well-defined) Suppose $a/b = a'/b'$ an $c/d = c'/d'$. Then $ab' = a'b$ and $cd' = c'd$. For $+$, we have
+
+$$
+(ad + bc)b'd' = adb'd' + bcb'd' = a'bdd' + c'dbb' = (a'd' + b'c')bd
+$$
+
+so $(ad + bc)/bd = (a'd' + b'c')/b'd'$.
+For $\cdot$, $acb'd' = a'bc'd = bda'c'$. So $ac/bd = a'c'/b'd'$.
+
+(Field) TODO.
+
+**Definition**: The **field of fractions** of an integral domain $D$ is a field $F_D$ with an injective ring homomorphism $\eta: D \to F_D$ such that for any field $F$ and an injective ring homomorphism $f: D \to F$, there is a unique injective ring homomorphism $\bar f: F_D \to F$ such that $\bar f \circ \eta = f$.
+
+**Proposition**: Let $f: D \to D'$ be an injective ring homomorphism where $D, D'$ are integral domains.
