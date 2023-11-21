@@ -194,7 +194,15 @@ for some $L$ proportional to the length of $\Gamma^{(n)}_k$ by the $ML$ formula.
 
 **Theorem (Integral Theorem)**: If $f$ is entire, then $f$ is everywhere the derivative of an analytic function. That is, $f(z) = F'(z)$ for some entire function $F$.
 
-*Proof*: TODO.
+*Proof*: Define $F(z) = \int_0^z f(\zeta) d\zeta$, where $\int_0^z$ denotes the integral along the path from 0 to $\Re(z)$ and $\Re(z)$ to $z$. Then $F(z + h) = F(z) + \int_z^{z + h} f(\zeta) d\zeta$. So
+
+$$
+\begin{align*}
+\frac{F(z + h) - F(z)}{h}
+\end{align*}
+$$
+
+TODO.
 
 **Theorem (Closed Curve)**: If $f$ is entire and if $C$ is a (smooth) closed curve,
 
