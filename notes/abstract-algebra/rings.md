@@ -307,4 +307,87 @@ For $\cdot$, $acb'd' = a'bc'd = bda'c'$. So $ac/bd = a'c'/b'd'$.
 
 **Definition**: The **field of fractions** of an integral domain $D$ is a field $F_D$ with an injective ring homomorphism $\eta: D \to F_D$ such that for any field $F$ and an injective ring homomorphism $f: D \to F$, there is a unique injective ring homomorphism $\bar f: F_D \to F$ such that $\bar f \circ \eta = f$.
 
-**Proposition**: Let $f: D \to D'$ be an injective ring homomorphism where $D, D'$ are integral domains.
+**Proposition**: Let $f: D \to D'$ be an injective ring homomorphism where $D, D'$ are integral domains. Then $f(1_D) = 1_{D'}$.
+
+*Proof*: $1 \cdot f(1) = f(1 \cdot 1) = f(1) \cdot f(1)$. Note that $f(1) \neq 0$ since $f$ is injective so $\operatorname{Ker}(f) = \lbrace 0 \rbrace$. So by Cancellation, $1 = f(1)$.
+
+**Theorem**: $F_D := \lbrace a/b : a, b \in D \rbrace$ for some integral domain $D$ is the field of fractions of $D$.
+
+*Proof*: Define $\eta: D \to F_D$ by $\eta(a) = \frac{a}{1}$. Then $\eta$ is injective since $\operatorname{Ker}(\eta) = \lbrace a \in D : a/1 = 0 \rbrace = \lbrace 0 \rbrace$.
+
+$\eta$ is a ring homomorphism since for $a, b \in D$,
+
+$$
+\eta(a + b) = \frac{a + b}{1} = \frac{a}{1} + \frac{b}{1} = \eta(a) + \eta(b)$$
+
+and
+
+$$
+\eta(ab) =\frac{ab}{1} = \frac{a}{1} \cdot \frac{b}{1} = \eta(a)\eta(b)
+$$
+
+Let $f: D \to F$ be an injective ring homomorphism. First we show the existence of an injective ring homomorphism $\overline f$
+
+First we show that $\overline f$ is well-defined. Let $a/b = a'/b'$. Then $ab' = a'b$, so $f(ab') = f(a)f(b') = f(ba') = f(b)f(a')$. So $f(a)f(b)^{-1} = f(a')f(b')^{-1}$.
+
+Next we show that $\overline f$ is a ring homomorphism.
+
+$$
+\begin{align*}
+\overline f(a/b \cdot c/d)
+&= \overline f\left(\frac{ac}{bd}\right) \\
+&= f(ac)f(bd)^{-1} \\
+&= f(a)f(c)f(b)^{-1}f(d)^{-1} \\
+&= f(a)f(b)^{-1}f(c)f(d)^{-1} \\
+&= \overline f(a/b) \overline f(c/d)
+\end{align*}
+$$
+
+The proof is similar for $+$.
+
+Then we show that $\overline f$ is injective. We have that $\overline f(a/b) = 0$ when $f(a)f(b)^{-1} = 0$. Since $f(b)^{-1}$ is a unit, $f(a) = 0$. Since $f$ is injective, $a = 0$, so $a/b = 0$, so $\operatorname{Ker(\overline f)} = \lbrace 0 \rbrace$, so $\overline f$ is injectve.
+
+Finally we show $\overline f \circ \eta = f$.
+
+$$
+(\overline f \circ \eta)(a) = \overline f(\eta(a)) = \overline f(a/1) = f(a)f(1)^{-1} = f(a) \cdot 1 = f(a)
+$$
+
+Next we show the uniqueness of $\overline f$. Suppose that there is another injective ring homomorphism $\hat f: F_D \to F$ such that $\overline f \circ \eta = f = \hat f \circ \eta$.
+
+For $a \in D$, we have $\overline f(a/1) = \overline f \circ \eta(a) = f(a) = \hat f \circ \eta(a) = \hat f(a/1)$.
+
+## Polynomial Rings
+
+**Recall**: Let $R$ be a ring. We can form $R[x] = \lbrace a_nx^n + a_{n - 1}x^{n - 1} + \dots + a_1x + a_0 \mid a_i \in R \rbrace$.
+
+**Remark**: Let $D$ be an integral domain.
+1. If $f(x), g(x) \in D[x]$ that are non-zero, then $\operatorname{deg}(f(x) \cdot g(x)) = \operatorname{deg} f(x) + \deg g(x)$
+2. $D[x]$ is an integral domain.
+
+**Example**: Think of a commutative ring with unity $1 \neq 0$ such that (1) fails.
+
+**Theorem (Scholium)**: If $F$ is a field, then $F[x]$ is very much like $\mathbb Z$.
+
+**Division Algorithm for F[x]**: Let $F$ be a field. For $f(x), g(x), \in F[x]$ such that $g(x) is non-zero, there are unique polynomials $q(x)$ and $r(x)$ such that
+
+$$
+f(x) = g(x)q(x) + r(x)
+$$
+
+where $r(x) = 0$ or $\deg r(x) \lt \deg g(x)$.
+
+*Proof*: Let $f(x) = a_nx^n + \dots + a_1x + a_0$, $g(x) = b_m x^m + \dots + b_1x + b_0$, $a_n, b_n \neq 0$. If $\deg f(x) \lt \deg g(x)$, (or $f(x) = 0$), then $q(x) = 0$ and $r(x) = f(x)$.
+
+Suppose that $\deg f(x) \geq \deg g(x)$. We proceed by induction with respect to $\deg f(x)$. Assume that we can divide polynomials of degree less than $n$ with remainder by $g(x)$. To divide $f(x)$ by $g(x)$ with remainder:
+
+Define $f_1(x) = f(x) - a_n b_m^{-1}x^{n - m}g(x)$. Then $f_1(x)$ has degree less than $n$. By the inductive hypothesis, there are polynomials $q_1(x), r_1(x)$ such that $f_1(x) = g(x)q_1(x) + r_1(x)$ and $r_1(x) = 0$ or $\deg r_1(x) \lt g(x)$. Then
+
+$$
+\begin{align*}
+f(x) &= a_nb_m^{-1} x^{n - m} g(x) + f_1(x) \\
+&= g(x)(a_nb_m^{-1} x^{n - m} + q_1(x)) + r_1(x)
+\end{align*}
+$$
+
+Put $q(x) = a_nb_m^{-1} x^{n - m} + q_1(x)$ and $r(x) = r_1(x)$. Then $f(x) = g(x)q(x) + r(x)$, and $r(x) = 0$ or $\deg r(x) \lt \deg g(x)$.
