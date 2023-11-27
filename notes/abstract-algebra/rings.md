@@ -28,7 +28,7 @@ toc: true
 * $\mathbb Z$ with $+$ and $\cdot$ forms a ring and is commutative with unity.
 * $\mathbb Q, \mathbb R, \mathbb C$ with $+$ and $\cdot$ are all rings with commutative and unity.
 * $\mathbb Z[x] =$ set of polynomials with integer coefficients is a commutative ring with unity given by constant polynomial 1.
-* Similarily, $\mathbb Q[x], \mathbb R[x], \mathbb C[x]$ are commutative iwth unity 1.
+* Similarily, $\mathbb Q[x], \mathbb R[x], \mathbb C[x]$ are commutative with unity 1.
 * $\mathbb Z_n$ with $+_n$ and $\cdot_n$, commutative with unity 1
 * $M_{n \times n}(\mathbb R)$ with addition and multiplication of matrices is not commutative with unity $I_n = \begin{bmatrix} 1 & 0 \\ 0 & 1\end{bmatrix}$.
 * $M_{n \times n}(R)$ is a ring for any ring $R$ (has unity if and only if $R$ has unity)
@@ -90,6 +90,8 @@ $$
 * $\mathbb Z_{10}: 2, 4, 5, 6, 8$
 * $\mathbb Z_n$: all $k \neq 0$ with $\gcd(k, n) \gt 1$
 
+## Integral Domains and Fields
+
 **Definition**: An **integral domain** is a commutative ring with unity $1 \neq 0$ without zero divisors.
 
 **Example**: $\mathbb Z, \mathbb Q, \mathbb R, \mathbb C, \mathbb Z_p$, $\mathbb R[x], \mathbb Q[x], \mathbb C[x], \mathbb Z[x]$, not $\mathbb Z_n$.
@@ -113,6 +115,8 @@ $$
 *Proof*: Let $D = \lbrace a_1, \dots, a_n \rbrace$. For $b \in D$ nonzero, consider the list $ba, \dots, ba_n$. All elements are distinct by the Cancellation Law. In particular, $1 = ba_i$ for some $i$. So $a_i$ is the multiplicative inverse of $b$, making it a unit. $\blacksquare$
 
 **Example**: $\mathbb Z[x]$ is an integral domain but ont a field, since $x \in \mathbb Z[x]$ is not a unit. Similarily, $\mathbb R[x], \mathbb Q[x], \mathbb C[x], \mathbb Z_p[x]$ are integral domains but not fields.
+
+## Ring Homomorphisms
 
 **Definition**: Let $R, S$ be rings. A **ring homomorphism** $f: R \to S$ is a function such that $f(r + r') = f(r) + f(r')$ and $f(rr') = f(r)f(r')$ for all $r, r' \in R$.
 
@@ -146,6 +150,8 @@ $\blacksquare$
 **Recall**: For a group $G$ and a normal subgroup $H$, we form $G/H = \lbrace aH \mid a \in H \rbrace$. This is a gruop with a binary operation given by $(aH)(bH) = (ab)H$.
 
 For a ring $R$ and a subring $A$ we can form $R/A$, which is an abelian group with $(r + A) = (s + A) = (r + s) + A$, where $R/A = \lbrace r + A \mid r \in R \rbrace$, since $(R, +)$ is abelian, so it is normal. Note that in general, it is **not** a ring.
+
+## Ideals
 
 **Definition**: An **ideal** in a ring $R$ is a subset $I \subseteq R$ such that
 1. $I$ is a subgroup of $(R, +)$.
@@ -240,9 +246,13 @@ Distributivity follows similarily. $\blacksquare$
 
 *Proof*: TODO (as above). $\blacksquare$
 
+### First Isomorphism Theorem for Rings
+
 **Theorem (First Isomorphism Theorem for Rings)**: Let $f: R \to S$ be a surjective ring homomorphism. Then there exists a nuique ring isomorphism $\overline f: R/\operatorname{Ker}(f) \to S$ such that $f\ circ q = f$ where $q: R \to R/\operatorname{Ker}(f)$ is the canonical quotient map $q(r) = r + \operatorname{Ker}(f)$.
 
 *Proof*: This follows from the analagous theorem for groups, except we need to check that $\overline f$ preserves multiplication. (TODO) $\blacksquare$
+
+### Proper and Maximal Ideals
 
 **Definition**: A proper ideal $I \subseteq R$ is
 1. **prime** if for any $a, b \in R$, if $ab \in I$, then $a \in I$ or $b \in I$.
@@ -412,3 +422,67 @@ $$
 r_1(x) = f(x) - g(x)q_1(x) = f(x) - g(x)q_2(x) = r_2(x)
 $$
 
+**Corollary**: Let $F$ be a field. For $f(x) \in F[x]$, we have $f(a) = 0$ if and only if $f(x) = (x - a)g(x)$ for some $g(x) \in F[x]$.
+
+*Proof*: $(\rightarrow)$ Suppose $f(a) = 0$. We divide $f(x)$ by $x - a$ with remainder: $f(x) = (x - a)g(x) + r(x)$ where $r(x)$ is a constant polynomial. Then $0 = f(a) = (a - a)g(a) + r(a) = r(a)$. Thus $r(x) = 0$.
+
+$(\leftarrow)$ Suppose $f(x) = (x - a)g(x)$. Then $f(a) = (a - a)g(a) = 0$. $\blacksquare$
+
+## Euclidean Domains
+
+**Definition**: An integral domain $D$ is a **Euclidean domain (ED)** if there exists a function $N: D \to \mathbb N$ such that 
+1. $N(0) = 0$
+2. For any $a, b \in D$ such that $b \neq 0$, there are $q, r \in D$ such that $a = bq + r$ with $r = 0$ or $N(r) < N(B)$.
+
+Such a function $N$ is called a **norm**.
+
+**Example**:
+* $\mathbb Z$ is an ED with $N(a) = \vert a \vert$.
+* $F[x]$ is an ED with $N(f(x)) = \deg f(x)$.
+
+**Theorem**: The Gaussian integers
+
+$$
+\mathbb Z[i] = \lbrace a + bi \mid a, b \in \mathbb Z \rbrace
+$$
+
+defined with the operations
+
+$$
+(a + bi) + (c + di) = (a + c) + (b + d)i \\
+(a + bi) \cdot (c + di) = (ac - bd) + (ad + bc)i
+$$
+
+is a Euclidean domain.
+
+*Proof*: Let $x, y \in \mathbb Z[i]$. It can be shown that $x/y = s + ti$ for some rationals $s, t$.
+We wish to decompose $s + ti$ into a quotient and a remainder.
+So consider
+
+$$
+s + ti = (s + m - m) + (t + n - n)i = (s + ni) + (0 + (t - n)i)
+$$
+
+where $n \in \mathbb Z$ is chosen such that $\vert t - n \vert \leq \frac{1}{2}$, which is valid since $t \in \mathbb Q$. Then $x = qy + r$ with $q = s + ni$ and $r = y(t - n)i$. It remains to show that $N(r) \lt N(y)$ for some $N: \mathbb Z[i] \to \mathbb N$.
+Define $N(a + bi) = a^2 + b^2$. Note that $N(xy) = N(x)N(y)$. So,
+
+Then
+$$
+N(r) = N(y(t - n)i) = N((t - n)i) \cdot N(y) =  (t - n)^2 \cdot N(y) = \frac{1}{4}N(y) \lt N(y)
+$$
+
+$\blacksquare$
+
+**Lemma**: Let $R$ be a commutative ring and $a \in R$. For an ideal $I$, if $a \in I$, then $\langle a \rangle \subseteq I$.
+
+*Proof*: Let $x \in \langle a \rangle$. Then $x = ar$ for some $r \in R$. Since $a \in I$ and $I$ is an ideal, $x = ar \in I$. $\blacksquare$
+
+**Corollary**: In a commutative ring $R$ with an ideal $I$, if $1 \in I$, then $I = R$.
+
+*Proof*: From above, $\langle 1 \rangle = R \subseteq I$. $\blacksquare$
+
+**Corollary**: In a commutative ring $R$ with an ideal $I$, if $u \in I$ for some unit $u$, then $I = R$.
+
+*Proof*: Since $u$ is a unit, $ur = 1$ for some $r \in R$. Since $I$ is an ideal, $ur = 1 \in I$, so $I = R$, by above. $\blacksquare$
+
+**Proposition**: A commutative ring with unity $1 \neq 0$ is a field if and only if it contains exactly 2 ideals.
