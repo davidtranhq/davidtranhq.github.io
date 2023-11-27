@@ -11,3 +11,4 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jemoji
+  - _plugins/latex_preprocessor.rb

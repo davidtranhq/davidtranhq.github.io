@@ -329,3 +329,19 @@ $\blacksquare$
 **Theorem (Cauchy Criterion for Uniform Convergence)**: Let $(X, d_X), (Y, d_Y)$ be metric spaces. Assume $Y$ is complete. Let $f_n: X \to Y, n = 1, 2, 3, \dots$. Then there is $f: X \to Y$ such that $f_n \to f$ uniformly if and only if $f_n$ is Cauchy.
 
 *Proof*: TODO.
+
+## Connectedness
+
+**Definition**: Let $(X, d)$ be a metric space. It is **connected** if for some open disjoint subsets $U, V$ of $X$, $X = U \cup V$ implies $U = \emptyset$ or $V = \emptyset$. That is, $X$ can not be represented as the union of two disjoint open subsets.
+
+**Example**: $\mathbb R$ with the discrete metric is not connected since every subset is open.
+
+**Proposition**: A metric space $(X, d)$ is connected if and only if the only subsets of $X$ that are open and closed are $\emptyset$ and $X$.
+
+*Proof*: ($\rightarrow$) Suppose $X$ is connected. Let $S \subseteq X$ be open and closed. Then $X - S$ is open and closed. Consider $S \cup (X - S) = X$. $S$ and $X - S$ are disjoint open subsets that cover $X$, so by connectedness, either $S = \emptyset$ and $X - S = X$, or vice-versa. 
+
+($\leftarrow$) Suppose $\emptyset$ and $X$ are the only subsets of $X$ that are open and closed. Suppose $A \cup B = X$ where $A, B$ are open disjoint subsets of $X$. Then $A = X - B$. So $A$ is also closed. Similarily, $B = X - A$, so $B$ is also closed. Then $A$ and $B$ are open and closed. If $A = \emptyset$, then $B = X$, and vice-versa. So $X$ is connected. $\blacksquare$
+
+**Example**: $\mathbb R$ with the standard metric is connected.
+
+*Proof*: 
