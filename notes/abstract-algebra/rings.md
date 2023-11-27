@@ -369,7 +369,7 @@ For $a \in D$, we have $\overline f(a/1) = \overline f \circ \eta(a) = f(a) = \h
 
 **Theorem (Scholium)**: If $F$ is a field, then $F[x]$ is very much like $\mathbb Z$.
 
-**Division Algorithm for F[x]**: Let $F$ be a field. For $f(x), g(x), \in F[x]$ such that $g(x) is non-zero, there are unique polynomials $q(x)$ and $r(x)$ such that
+**Division Algorithm for F[x]**: Let $F$ be a field. For $f(x), g(x) \in F[x]$ such that $g(x)$ is non-zero, there are unique polynomials $q(x)$ and $r(x)$ such that
 
 $$
 f(x) = g(x)q(x) + r(x)
@@ -391,3 +391,24 @@ f(x) &= a_nb_m^{-1} x^{n - m} g(x) + f_1(x) \\
 $$
 
 Put $q(x) = a_nb_m^{-1} x^{n - m} + q_1(x)$ and $r(x) = r_1(x)$. Then $f(x) = g(x)q(x) + r(x)$, and $r(x) = 0$ or $\deg r(x) \lt \deg g(x)$.
+
+It remains to show that these $q(x)$ and $r(x)$ are unique.
+
+Suppose $f(x) = g(x)q_1(x) + r_1(x)$ with $r_1(x) = 0$ or $\deg r_1(x) \lt \deg g(x)$ and $f(x) = g(x)q_2(x) + r_2(x)$ with $r(x) = 0$ or $\deg r_2(x) \lt \deg g(x)$. We have
+
+$$
+g(x) q_1(x) + r_1(x) = g(x) q_2(x) + r_2(x)
+$$
+
+Then
+
+$$
+g(x) q_1(x) - g(x)q_2(x) = r_2(x) - r_1(x)
+$$
+
+The RHS is a polynomial of degree less than $\deg g(x)$. So the LHS must be such a polynomial. Thus $q_1(x) - q_2(x) = 0$, so $q_1(x) = q_2(x)$. Then
+
+$$
+r_1(x) = f(x) - g(x)q_1(x) = f(x) - g(x)q_2(x) = r_2(x)
+$$
+
