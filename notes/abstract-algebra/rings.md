@@ -151,8 +151,6 @@ $\blacksquare$
 
 ## Ideal
 
-**Recall**: For a group $G$ and a normal subgroup $H$, we form $G/H = \lbrace aH \mid a \in H \rbrace$. This is a group with a binary operation given by $(aH)(bH) = (ab)H$.
-
 For a ring $R$ and a subring $A$ we can form $R/A$, which is an abelian group with $(r + A) = (s + A) = (r + s) + A$, where $R/A = \lbrace r + A \mid r \in R \rbrace$, since $(R, +)$ is abelian, so it is normal. Note that in general, it is **not** a ring.
 
 *Definition**: An **ideal** in a ring $R$ is a subset $I \subseteq R$ such that
@@ -203,6 +201,8 @@ $$
 *Proof*: Let $a \in \operatorname{Ker}(f)$ and $r \in R$. Then $f(ar) = f(a)f(r) = 0 \cdot f(r) = 0$. Moreover, $\operatorname{Ker}(f)$ is an additive subgroup. $\blacksquare$
 
 **Example**: In $\mathbb Z[x]$, we have $\langle x \rangle, \langle 2 \rangle$, but we also have $\langle 2, x \rangle =$ polynomials with even coefficients or constant term = 0.
+
+**Recall**: For a group $G$ and a normal subgroup $H$, we form $G/H = \lbrace aH \mid a \in H \rbrace$. This is a group with a binary operation given by $(aH)(bH) = (ab)H$.
 
 **Construction**: Given an ideal $I$ in a ring $R$, define multiplication on $R/I$ as 
 
