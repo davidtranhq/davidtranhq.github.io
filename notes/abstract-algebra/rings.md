@@ -149,11 +149,11 @@ $\blacksquare$
 
 
 
-## Ideal
+## Ideals
 
 For a ring $R$ and a subring $A$ we can form $R/A$, which is an abelian group with $(r + A) = (s + A) = (r + s) + A$, where $R/A = \lbrace r + A \mid r \in R \rbrace$, since $(R, +)$ is abelian, so it is normal. Note that in general, it is **not** a ring.
 
-*Definition**: An **ideal** in a ring $R$ is a subset $I \subseteq R$ such that
+**Definition**: An **ideal** in a ring $R$ is a subset $I \subseteq R$ such that
 1. $I$ is a subgroup of $(R, +)$.
 2. For any $a \in I$ or $r \in R$, $ar, ra \in I$.
 
