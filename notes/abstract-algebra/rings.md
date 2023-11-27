@@ -223,6 +223,7 @@ $$
 &= rs + I
 \end{align*}
 $$
+
 $\blacksquare$
 
 **Theorem**: For a ring $R$ and an ideal $I$, the set $R/I$ is again a ring with $(r + I) = (s + I) = (r + s) + I$ and $(r + I)(s + I) = rs + I$.
