@@ -151,8 +151,6 @@ $\blacksquare$
 
 ## Ideals
 
-For a ring $R$ and a subring $A$ we can form $R/A$, which is an abelian group with $(r + A) = (s + A) = (r + s) + A$, where $R/A = \lbrace r + A \mid r \in R \rbrace$, since $(R, +)$ is abelian, so it is normal. Note that in general, it is **not** a ring.
-
 **Definition**: An **ideal** in a ring $R$ is a subset $I \subseteq R$ such that
 1. $I$ is a subgroup of $(R, +)$.
 2. For any $a \in I$ or $r \in R$, $ar, ra \in I$.
@@ -202,7 +200,11 @@ $$
 
 **Example**: In $\mathbb Z[x]$, we have $\langle x \rangle, \langle 2 \rangle$, but we also have $\langle 2, x \rangle =$ polynomials with even coefficients or constant term = 0.
 
+### Quotient Rings
+
 **Recall**: For a group $G$ and a normal subgroup $H$, we form $G/H = \lbrace aH \mid a \in H \rbrace$. This is a group with a binary operation given by $(aH)(bH) = (ab)H$.
+
+For a ring $R$ and a subring $A$ we can form $R/A$, which is an abelian group with $(r + A) + (s + A) = (r + s) + A$, where $R/A = \lbrace r + A \mid r \in R \rbrace$, since $(R, +)$ is abelian, so it is normal. Note that in general, it is **not** a ring.
 
 **Construction**: Given an ideal $I$ in a ring $R$, define multiplication on $R/I$ as 
 
@@ -489,3 +491,49 @@ $\blacksquare$
 *Proof*: Since $u$ is a unit, $ur = 1$ for some $r \in R$. Since $I$ is an ideal, $ur = 1 \in I$, so $I = R$, by above. $\blacksquare$
 
 **Proposition**: A commutative ring with unity $1 \neq 0$ is a field if and only if it contains exactly 2 ideals.
+
+*Proof*: ($\rightarrow$) Let $I \subseteq R$ be an ideal of a commutative ring $R$ with unity $1 \neq 0$. If $I \neq \lbrace 0 \rbrace$, then there is an $a \neq 0$ with $a \in I$. Since $R$ is a field, $a$ is a unit, so $I = R$.
+
+($\leftarrow$) If $R$ has exactly two ideals, $\lbrace 0 \rbrace$ and $R$, then $\lbrace 0 \rbrace$ is a maximal ideal, so $R \cong R/\lbrace 0 \rbrace$ is a field. $\blacksquare$
+
+### Principal Ideal Domains
+
+**Definition**: A **principal ideal domain (PID)** is an integral domain where every ideal is principal.
+
+**Example**: $\mathbb Z[x]$ is NOT a PID since $\langle 2, x \rangle$ is not principal.
+
+**Theorem**: Every Euclidean domain is a principal ideal domain.
+
+*Proof*: Let $D$ be a Euclidean domain with norm $N: D \to \mathbb N$. Let $I \subseteq D$ be an ideal. If $I = \lbrace 0 \rbrace$ then $I = \langle 0 \rangle$. So suppose otherwise. Choose $a \in I$ with minimal norm. Then, given $b \in I$, we can divide with remainder $b = aq + r$ with $N(r) \lt N(a)$ or $r \neq 0$. If $r \neq 0$ then $N(r) < N(a)$, contradicting the minimality of $N(a)$. If $r = 0$, then $b = aq \in \langle a \rangle$. $\blacksquare$
+ 
+**Example**:
+* $\mathbb Z$ is a principal ideal domain because $\mathbb Z$ is a Euclidean domain.
+* $F[x]$ is a principal ideal domain
+* $\mathbb Z[i]$ is a principal ideal domain
+
+**Example**: $\mathbb Z[1 + \sqrt{-19}{2}]$ is a principal ideal domain but not a Euclidean domain.
+
+**Definition**: Let $D$ be an integral domain.
+1. An element $a$ **divides** $b$, written $a \mid b$ if there is a $c$ such that $b = ac$.
+2. A non-zero element $a \in D$ is **prime** if for any $b, c \in D$, if $a \mid bc$ then $a \mid b$ or $a \mid c$.
+3. Elements $a, b \in D$ are **associates** if there is a unit $u \in D$ such that $au = b$.
+4. A non-zero non-unit element $a \in D$ is **irreducible** if for any $b, c \in D$, if $a = bc$ then either $b$ or $c$ is a unit.
+
+**Example**: In $\mathbb Z$:
+* $2 \mid 4, 3 \mid 12, 2 \not \mid 3$
+* $1$ and $-1$ are associates, as are $2$ and $-2$; $2$ and $2$
+* prime elements are the prime numbers
+* irreducible elements are the prime numbers
+
+**Example**: In $\mathbb R[x]$,
+* $x \mid x^2$, $(x + 1) \mid (x^2 - 1)$
+* $x + 1$ and $37x + 37$ are associates
+* $x^2 + 2x - 3$ and $-x^2 - 2x + 3$ are associates
+
+**Proposition**: Every prime element is irreducible.
+
+*Proof*: Let $D$ be an integral domain and $p \in D$ a prime element. Suppose $p = bc$, so $p \mid bc$. Then $p \mid b$ or $p \mid c$. WLOG, suppose $p \mid c$. Then $c = ap$, so $p = bc = bap$. Thus $0 = p - bap = (1 - ba)p$. Since $p$ is prime, $p \neq 0$, so $1 - ba = 0$, and so $ba = 1$. Thus $b$ is a unit.
+
+**Proposition**: In a principal ideal domain, an element $p$ is prime if and only if it is irreducible.
+
+*Proof*: TODO.
