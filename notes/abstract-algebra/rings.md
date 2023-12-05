@@ -537,3 +537,31 @@ $\blacksquare$
 **Proposition**: In a principal ideal domain, an element $p$ is prime if and only if it is irreducible.
 
 *Proof*: TODO.
+
+**Example**: 2 is irreducible but not prime in $\mathbb Z[\sqrt -5] = \lbrace a + b\sqrt{-5} \mid a, b \in \mathbb Z\rbrace$, defined with the operations
+
+$$
+(a + b\sqrt{-5}) + (c + d\sqrt{-5}) = (a + c) + (b + d)\sqrt{-5} \\
+$$
+
+and
+
+$$
+(a + b\sqrt{-5})(c + d\sqrt{-5}) = (ac - 5bd) + (ad + bc)\sqrt{-5}
+$$
+
+One can check that $\mathbb Z[\sqrt{-5}]$ is a commutative ring.
+
+*Proof*: Define a function $N: \mathbb Z[\sqrt{-5}] \to \mathbb N$ by $a + b\sqrt{-5} \mapsto a^2 + 5b^2$, that is, $N(x) = x\overline x$. Note that $N(x) = 0$ if and only if $x = 0$, and $N(xy) = N(x)N(y)$. First we show that $N(x) = 1$ if and only if $x$ is a unit in $\mathbb Z[{\sqrt -5}]$. Suppose $a^2 + 5b^2 = 1$. Then $b = 0$ and $a = 1$ or $a = -1$, which can be shown to be units. Now if $x$ is a unit, then there is a $y$ such that $xy = 1$. Then $N(xy) = 1 = N(x)N(y)$. So $N(x) = N(y) = 1$.
+
+Finally, we show that if $N(x)$ is a prime number, then $x$ is irreducible. Suppose $N(x)$ is prime and $x = yz$. Then $N(x) = N(yz) = N(y)N(z)$. Since $N(x)$ is prime, either $N(y) = 1$ or $N(z) = 1$, so either $y$ or $z$ is a unit.
+
+In $\mathbb Z[\sqrt{-5}]$, $6 = (1 + \sqrt{-5})(1 - \sqrt{-5})$. So $2 \mid 6$, but $2$ does not divide $(1 \pm \sqrt{-5})$. So it is not prime. We show $2$ is irreducible. We have $N(2) = 4$, so if $xy = 2$, then $4 = N(xy) = N(x)N(y)$. $N(x) = N(y) = 2$ is impossible since $a^2 + 5b^2 = 2$ has no integer solutions. So $N(x)$ or $N(y)$ is 1, so $x$ or $y$ is a unit. $\blacksquare$
+
+**Theorem (Fundamental Theorem of Arithmetic)**: Every integer $n$ greater than $1$ can be written as the a product of primes
+
+$$
+n = p_1^{e_1}p_2^{e_2}\dots p_k^{e_k}
+$$
+
+unique up to the order of primes.

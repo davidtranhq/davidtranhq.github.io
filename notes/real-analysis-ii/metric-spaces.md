@@ -344,4 +344,25 @@ $\blacksquare$
 
 **Example**: $\mathbb R$ with the standard metric is connected.
 
-*Proof*: 
+**Example**: Non-empty subsets of connected metric spaces are not necessarily connected, take for example $S = (0, 1) \cup (2, 3) \subseteq \mathbb R$.
+
+
+
+## Compactness
+
+**Definition**: Let $(X, d)$ be a metric space. A family of open subsets of $X$, $\lbrace U_d \rbrace_{d \in I}$, is called an **open cover** of $X$ if $\bigcup_{d \in I} U_d = X$.
+
+**Definition**: A metric space $(X, d)$ is called **compact** if every open cover of $X$ has a finite open subcover, that is, a finite subset which is also an open cover of $X$.
+
+**Example**: Any finite metric space is compact, since we can choose an open subset for each $x \in X$ to form a finite subfamily that covers $X$.
+
+**Example**: $X = (0, 1)$ with the standard metric is not compact.
+
+*Proof*: Let $U_n = (\frac{1}{n}, 1)$. Then there is no $N \in \mathbb N$ such that $\bigcup_{k = 1}^N U_k = X, since for any $N$, $\frac{1}{N + 1} \not\in \bigcup_{k = 1}^N U_k$. $\blacksquare$
+
+**Definition**: A subset $S$ of a metric space $(X, d)$ is called **bounded** if there is an $x_0 \in X$ such that $S \subseteq B(x_0; \epsilon)$.
+
+**Proposition**: Let $(X, d_X)$ be a metric space, and $K \subseteq X$ with the induced metric. If $K$ is comapct, then $K$ is bounded.
+
+*Proof*: Choose $x_0 \in X$. For any $y \in K$ there is a ball centered at $x_0$ with radius $n \in \mathbb N$ containing $y$. As $K$ is compact, choose $N \in \mathbb N$ such that if $y \in B(x_0; n)$, $n \leq N$. Then $K \subseteq B(x_0; n)$. $\blacksquare$
+

@@ -164,3 +164,69 @@ where $S = \lbrace i : X_i \text{ in the sequence is a success} \rbrace$.
 $$
 \frac{1}{n + 1}\binom{2n}{n}
 $$
+
+## Useful Formulae
+
+### Sum of First $n$ Squares
+
+$$
+\sum_{x = 1}^n x^2 = \frac{x(x+1)(2x + 1)}{6}
+$$
+
+### Sum of First $n$ Cubes
+
+$$
+\sum_{x = 1}^n x^3 = \left(\frac{x(x + 1)}{2}\right)^2 = \binom{x + 1}{2}
+$$
+
+### Sum of Squares of Binomial Coefficients
+
+$$
+\sum_{k = 0}^n \binom{n}{k}^2 = \binom{2n}{n}
+$$
+
+*Proof*: To choose $n$ people from a group of $2n$, first split the $2n$ people into 2 groups of size $n$. Then, consider all the ways to choose $k$ people from 1 group and $n - k$ group from the other group, for $k$ from $0$ to $n$. $\blacksquare$
+
+### Characteristic Polynomial of A Matrix
+
+For a general matrix $A$,
+
+$$
+\det (A - I\lambda) = 0
+$$
+
+and for a $2 \times 2$ matrix $A$,
+
+$$
+p(\lambda) = \lambda^2 - \operatorname{tr}(A) + \det A
+$$
+
+*Proof*: From the definition of the eigenvalues/eigenvectors,
+
+$$
+Ax = \lambda x \implies (A - I\lambda)x = 0 \implies \det (A - I \lambda) = 0
+$$
+
+$\blacksquare$
+
+### Volume of an $n$-simplex ($n$ dimensional hypertriangle)
+
+This is useful since the volume of an $n$-simplex in a cube of side-length $x$ represents the probability of the sum of $n$ independent uniformly randomly distributed variables being less than or equal to $x$.
+
+$$
+\frac{x^n}{n!}
+$$
+
+where $x$ is the length of the cube.
+
+*Proof*: Consider the simplex formed by $0 \leq x_1 \leq \dots \leq x_n \leq 1$. Now, consider $X_1, \dots, X_n \sim \operatorname{Uniform}(0, 1)$. The probability of any of the $n!$ orderings of $X_1 = x_1, \dots, X_n = x_n$ is equal, so each ordering must have probability $\frac{1}{n!}$. A linear transformation can transform this simplex to one whose sides are the basis vectors in $\mathbb R^n$. Scaling the unit cube by $x$ scales its volume by $x^n$, giving $\frac{x^n}{n!}$. $\blacksquare$
+
+**Example**: Consider all decreasing sequences of length $n \geq 1$ of standard uniform random variables $x_1 \geq x_2 \geq \dots \geq x_n$. What is $\mathbb E[x_n]$?
+
+*Solution*: We consider $\mathbb E[x_n]$ for fixed $n$, after which we will sum across all sequences of length $n$. To have $x_n = x$, we must have selected $n - 1$ standard uniform variables with $x_1, \dots, x_{n - 1} \leq x^{n - 1}$, which occurs with probability $x^n$. The probability of the specific ordering $x_1 \geq x_2 \geq x_3 \geq \dots$ is $\frac{1}{(n - 1)!}$. Thus, $p(x) = \sum_{n = 0}^\infty \frac{x^{n - 1}}{(n - 1)!} = e^x$. So $\mathbb E[x_n] = \int_0^1 xe^x dx =$
+
+### Covariance
+
+$$
+\operatorname{Cov}(X, Y) = \mathbb E[XY] - \mathbb E[X]E[Y]
+$$
