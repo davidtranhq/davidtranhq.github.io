@@ -565,3 +565,98 @@ n = p_1^{e_1}p_2^{e_2}\dots p_k^{e_k}
 $$
 
 unique up to the order of primes.
+
+### Unique Factorization Domains
+
+Recall: If $F$ is a field, then $F[x]$ is a PID because it is a Euclidean domain.
+
+$p$ is prime if and only if $\langle p \rangle$ in any integral domain.
+
+In a PID, $p$ is irreducible if and only if $p$ is prime if and only if $\langle p \rangle$ is prime if and only if $\langle p \rangle$ is maximal.
+
+**Example**: Given $f(x) \in R[x]$, is it reducible?
+
+If $f(x)$ is an irreducible polynomial in $\mathbb Z_[x]$ of degree $n$, then $\mathbb Z_p[x]/\langle f(x) \rangle$ is a field with $p^n$ elements.
+
+**Remark**: The irreducibility of above depends on the above.
+
+**Example**: $f(x) = x^2 + 1$ is
+* irreducible in $\mathbb R[x]$ $\mathbb Q[x]$, $\mathbb Z[x]$
+* is reducible in $\mathbb C[x]$, since $f(x) = (x + i)(x - i)$
+* reducible in $\mathbb Z_2[x]$, with $(x + 1)^2$
+* reducible in $\mathbb Z_5[x]$, with $(x + 3)(x + 2)$
+* irreducible in $\mathbb Z_3[x]$ (shown **below**)
+
+**Lemma**: Let $F$ be a field and $f(x) \in F[x]$ be a polynomial of degree at most 3. Then $f(x)$ is irreducible if and only if it doesn't have a root (there is no $a \in F$ such that $f(a) = 0$.)
+
+**Recall**: $f(a) = 0$ if and only if $f(x) = (x - a) g(x)$ for some $g(x)$.
+
+*Proof*: It is clear that polynomials of degree 1 are irreducible.
+
+$(\rightarrow)$ By contrapositive, assume $f(x)$ has a root $a$, so $f(x) = (x - a)g(x)$. Then it is not irreducible.
+
+$(\leftarrow)$ By contrapositive, if $f(x) = g(x)h(x)$ for $\deg g(x), \deg h(x) \geq 1$, then at least one of $g(x)$ or $h(x)$ must have degree 1, so there is a root.
+
+**Example**: $f(x) = x^2 + 1$ is irreducible in $\mathbb Z_3[x]$ as there are no roots.
+
+**Example**: $f(x) = x^3 + x^2 + 1$ has no roots so it is irreducible.
+
+**Remark**: $f(x) = x^4 + 2x^2 + 1$ is reducible in $\mathbb Q[x]$ but it doesn't have a root.
+
+**Example**: $f(x) = 2x + 2 = 2(x + 1)$ is reducible in $\mathbb Z[x]$ but not in $\mathbb Q[x]$ (since 2 is a unit).
+
+### Content and Primitives
+
+**Definition**: Let $f(x) \in \mathbb Z[x]$ with $f(x) = \sum a_kx^k$.
+1. The **content** of $f(x)$ is $\operatorname{gcd}(a_1, \dots, a_n)$.
+2. The polynomial $f(x)$ is **primitive** if its content is 1.
+
+**Gauss's Lemma**: The product of primitive polynomials is again primitive.
+
+*Proof*: Let $f(x), g(x) \in \mathbb Z[x]$ be primitive and suppose their product is not primitive. Let $p$ be a prime divisor of the content of $f(x)g(x)$. Let $\overline f(x)$ and $\overline g(x)$ be the polynomials in $\mathbb Z_p[x]$ obtained by reducing the coefficients of $f$ and $g$ respectively by $p$. Then $\overline f(x)\overline g(x) = 0 \in \mathbb Z_p[x]$. As $\mathbb Z_p[x]$ is an integral domain, either $\overline f \equiv 0$ or $\overline g \equiv 0$. WLOG assume $\overline f \equiv 0$. So the content of $f$ is divisible by $p$, so $f$ is not primitive; a contradiction. $\blacksquare$
+
+**Theorem**: Let $f(x) \in \mathbb Z[x]$. If $f(x)$ is irreducible in $\mathbb Z[x]$, then it is irreducible in $\mathbb Q[x]$.
+
+*Proof*: We prove the contrapositive. Let $f(x) \in \mathbb Z[x]$. Suppose it is reducibile in $\mathbb Q[x]$ with non-unit factors $g(x)$ and $h(x)$. If $f(x)$ is not primitive, then $g(x), h(x) \in \mathbb Z[x]$ and we are done. So suppose otherwise. Then $g(x) = \sum \frac{a_m}{b_m} x^m$ and $h(x) = \sum\frac{c_n}{d_n} x^n$. Then $bg(x)$ and $dh(x)$ have integer coefficients, where $b$ and $d$ are the least-common multiples of $b_1, \dots, b_m$ and $d_1, \dots, d_m$, respectively. So $bg(x)$ and $dh(x)$ have contents $\tilde b$ and $\tilde d$. Then there are primitive polynomials $\tilde g$ and $\tilde h$ in $\mathbb Z[x]$ such that $bg = \tilde b \tilde g$ and $dh = \tilde d \tilde h$. So
+
+$$
+bdf(x) = \tilde b \tilde d \tilde g(x) \tilde h(x)
+$$
+
+By Gauss' Lemma, $\tilde g \tilde h$ is primitive, so $bd = \tilde b \tilde d$ since this is the content of $bdf(x)$. So $f(x) = \tilde g(x) \tilde h(x)$, by Cancellation. $\blacksquare$
+
+**Corollary**: Let $f \in \mathbb Z[x]$ be primitive. Then $f \in \mathbb Z[x]$ is irreducible if and only if it is irreducible in $\mathbb Q[x]$.
+
+**Eisenstein's Criterion**: Let $f(x) = \sum a_nx^n \in \mathbb Z[x]$. Suppose there is a prime $p$ such that
+1. $p \nmid a_n$
+2. $p \mid a_0, \dots, a_{n - 1}$
+3. $p^2 \nmid a_0$
+
+Then $f(x)$ is irreducible in $\mathbb Q[x]$. If moreover the content is 1, then it is irreducible in $\mathbb Z[x]$.
+
+*Proof*: We prove by contradiction. Suppose $f$ is reducible in $\mathbb Q[x]$ with non-unit factors $g, h \in \mathbb Q[x]$. Let $\overline g, \overline h$ be the polynomials obtained by reducing $g, h$ by $\bmod p$ (a prime divisor $p$ of the content of $fg$). Then $\overline f = \overline g \overline h \in \mathbb Z_p[x]$ so $f(x) = \overline a_n x^n$. Thus $x \mid \overline g(x)$ and $x \mid \overline h(x)$. So $\overline g(0) = 0$ and $\overline h(0) = 0$. Then $a_0 = f(0) = g(0)h(0)$. As $\overline g(0) = 0$ and $\overline h(0) = 0$, $p \mid g(0)$ and $p \mid h(0)$. So $p^2 \mid g(0)h(0) = f(0) = a_0$, a contradiction. $\blacksquare$
+
+**Example**: $x^4 + 10x + 5$ is irreducibile in $\mathbb Z[x]$ by Eisenstein's Criterion with $p = 5$.
+
+**Example**: $f(x) = x^4 + 1$. No primes divide 1. But, note that $f(x)$ is irreducible if and only if $f(x + 1)$ is irreducible, since if $f(x + 1) = g(x)h(x)$ then $f(x) = g(x - 1)h(x - 1)$. We have
+
+$$
+f(x + 1) = (x + 1)^4 + 1 = x^4 +  4x^3 + 6x^2 + 4x + 2
+$$
+
+is irreducible by Eisenstein's Criterion with $p = 2$.
+
+**Example**: $\Phi_p = x^{p - 1} + x^{p - 2} + \dots + x + 1 = \frac{x^p - 1}{x - 1}$ for $p$ prime. It suffices to show that $\Phi_p(x + 1)$ is irreducible.
+
+$$
+\Phi_p(x + 1) = \frac{(x + 1)^p - 1}{x} = \frac{1}{x} \sum_{i = 1}^p \binom{p}{i} x^i = \sum_{i = 1}^p \binom{p}{i} x^{i - 1}
+$$
+
+Each of $\binom{p}{i}$ is divisible by $p$ for $i = 1, \dots, p - 1$. The result follows by Eistenstein.
+
+**Theorem**: If $D$ is a UFD, then so is $D[x]$.
+
+*Proof*: (Existence) Let $f(x) \in D[x]$. Let $a$ be the content of $f(x)$ that can be factored in $D$ into irreducibles. Assume $f(x)$ is primitive. We proceed by induction on $\deg f(x) = n$.
+If $n = 1$, then $f(x)$ is irreducible. Now suppose every primitive polynomial of degree $\lt n$ can be factored into irreducibles. Let $f(x)$ be a polynomial of degree $n$, which is primitive. If $f(x)$ is irreducible, we are done. So suppose it isn't and factor it into $g, h$ of degree lesser than $f$. Then both are primitive and by the inductive hypothesis they can be factored into irreducibles.
+
+(Uniqueness) Suppose $f$ factors into $\prod a_mp_m(x)$ and $\prod b_nq_n(x)$ where $p, q$ are primitives and $a, b$ are irreducibles in $D$. Then $\prod a_m = \prod b_n$ as they are both the content of $f$ since $\prod p_m$ and $\prod q_n$ are primitive by Gauss' Lemma. Since $D$ is a UFD, $k = l$ and after ordering $a_1$ and $b_i$ are associates for $i = 1, \dots, m$ since $m = n$. It remains to show that the polynomial factors associate. As irreducibility in $D[x]$ and the field of fractions $F_D[x]$ is the same for primitive oplynomials, and $F_D[x]$ is a UFD, so we're done. $\blacksquare$    

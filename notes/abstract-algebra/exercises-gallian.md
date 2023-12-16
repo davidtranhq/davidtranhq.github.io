@@ -81,3 +81,7 @@ Thus $xy + xy + yx = xy$, but since $xy + xy = 0$, $yx = xy$.
 Let $R$ be a commutative ring such that for $a, b, c \in R$ and $a \neq 0$,
 $ab = ac$ implies $b = c$. Then there are no zero-divisors. For if there were one, say $d$, with
 non-zero $x \in R$ such that $dx = 0$,
+
+## Chapter 18
+
+###

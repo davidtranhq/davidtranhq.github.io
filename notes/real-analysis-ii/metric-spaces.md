@@ -346,7 +346,9 @@ $\blacksquare$
 
 **Example**: Non-empty subsets of connected metric spaces are not necessarily connected, take for example $S = (0, 1) \cup (2, 3) \subseteq \mathbb R$.
 
+**Proposition**: If $S$ is a connected subset of a metric space $(X, d)$, $\overline S$ is connected.
 
+*Proof*: TODO.
 
 ## Compactness
 
@@ -362,7 +364,80 @@ $\blacksquare$
 
 **Definition**: A subset $S$ of a metric space $(X, d)$ is called **bounded** if there is an $x_0 \in X$ such that $S \subseteq B(x_0; \epsilon)$.
 
+**Lemma**: Let $(X, d_X)$ be a metric space, $S \subseteq X$ with the induced metric. Then the open sets in $S$ are exactly the sets $S \cap U$ where $U$ is open in $X$.
+
+*Proof*: Open balls in $S$ are open balls in $X$ intersected with $S$. $\blacksquare$
+
 **Proposition**: Let $(X, d_X)$ be a metric space, and $K \subseteq X$ with the induced metric. If $K$ is comapct, then $K$ is bounded.
 
 *Proof*: Choose $x_0 \in X$. For any $y \in K$ there is a ball centered at $x_0$ with radius $n \in \mathbb N$ containing $y$. As $K$ is compact, choose $N \in \mathbb N$ such that if $y \in B(x_0; n)$, $n \leq N$. Then $K \subseteq B(x_0; n)$. $\blacksquare$
 
+**Lemma**: Let $(X, d_X)$ be a metric space. Let $x \in X$. Then $S = \lbrace x \rbrace$ is closed in $X$.
+
+*Proof*: $S$ is not closed if there is some $y \in \overline S$ such that $y \neq x$. Then $d(y, x) > 0$. But then there is a ball around $y$ that doesn't intersect $X$, so $y \not\in \overline S$; a contradiction. $\blacksquare$
+
+**Proposition**: Let $(X, d)$ be a metric space. If $K \subseteq X$ is compact, then $K$ is closed in $X$.
+
+*Proof*: We show $X - K$ is open. Let $y \in X - K$. Consider the cover consisting of the union of all open balls around each element in $K$. Since $K$ is compact, take finitely many such open balls. By Urysohn's Lemma, for each of these open balls, there is a disjoint open ball containing $y$. The intersection of all of these open balls containing $y$ is open since there are finitely many of them. And, the intersection is disjoint from $X$. $\blacksquare$
+
+**Theorem**: Let $a \leq b$. $[a, b]$ is compact in $\mathbb R$ equipped with the standard metric. 
+
+*Proof*: TODO.
+
+**Lemma**: Let $(X, d)$ be a metric space, and $S \subseteq X$ a non-empty subset of $X$ with the induced metric. Then $W \subseteq S$ is closed in $S$ if and only if there exists a closed set $C \subseteq X$ such that $W = S \cap C$.
+
+*Proof*: TODO.
+
+**Proposition**: Let $(X, d)$ be a compact metric space. Let $K$ be a closed subset of $X$. Then $K$ is compact.
+
+*Proof*: TODO.
+
+**Theorem**: In $\mathbb R^n$ equipped with the standard metric, a closed bounded set is compact.
+
+*Proof*: If $S \subseteq \mathbb R^n$ is bounded, then $S \subseteq [x_1, x_2, \dots, x_n]$. We know $[x_1, x_2, \dots, x_n]$ is compact, and closed subsets of compact spaces are compact, so $S$ is compact. $\blacksquare$
+
+**Proposition**: Let $(X, d_X)$ $(Y, d_y)$ be metric spaces and $f: X \to Y$ a continuous map. If $X$ is compact, then $f(X)$ is compact.
+
+**Corollary**: Suppose $(X, d_X)$ and $(Y, d_Y)$ are homeomorphic metric spaces. Then $X$ is compact if and only if $Y$ is compact.
+
+**Theorem**: Let $(X, d)$ be a compact metric space. Let $f: X \to \mathbb R$ be a continuous function. Then $f$ is bounded and attains its minimum and maximum values on $X$.
+
+*Proof*: $f(X)$ is compact, so it contains its minimum and maximum values. $\blacksquare$
+
+**Theorem**: Let $(X, d)$ be a metric space. If $X$ is compact, then $X$ is complete.
+
+*Proof*: If it weren't, then every open ball around $y \in X$ would only contain finitely many elements of a Cauchy sequence in $X$. Since $X$ is compact, all such balls would form a cover of $X$, whose finite union would only contain finitely many elements of the sequence, so it wouldn't be a cover; a contradiction. $\blacksquare$
+
+**Lemma**: Let $X$ be a metric space. Let $x \in X$ with $(x_n)$ a sequence in $X$ such that $\forall \epsilon \gt 0$, $B(x; \epsilon)$ contains $x_n$ for infinitely many $n$. Then $(x_n)$ contains a subsequence convergent to $x$.
+
+*Proof*: Consider the elements in the sequence intersecting successively smaller epsilon balls around $x$. $\blacksquare$
+
+**Corollary**: Let $X$ be a metric space. Suppose a sequence $(x_n)$ in $X$ has no convergent subsequence. Then for all $x \in X$, there is an epsilon ball around it containing finitely many elements of the sequence.
+
+**Proposition**: Let $X$ be a metric space. Suppose $X$ is compact. Then $X$ is sequentially compact.
+
+*Proof*: Same as the proof for compactness implying completeness. $\blacksquare$
+
+### Lebesgue Numbers and $\epsilon$-nets
+
+**Definition**: Let $X$ be a metric space with $S \subseteq X$. Let $\lbrace U \rbrace$ be an open cover of $S$. A **Lebesgue number** for this cover is $\epsilon \gt 0$ such that every $x \in S$ has an epsilon ball contained in some $U$ of the cover.
+
+**Definition**: Let $X$ be a metric space. Let $\epsilon \gt 0$. A subset $N \subseteq X$ is an **$\epsilon$-net** for $X$ if $\lbrace B(x; \epsilon) \rbrace_{x \in N}$ is a cover for $X$.
+
+**Example**: $\mathbb Z$ is a 1-net of $\mathbb R$ with the standard metric.
+
+**Proposition**: Let $X$ be a sequentially compact metric space, then $\forall \epsilon \gt 0$ there is a finite epsilon net for $X$.
+
+*Proof*: By contradiction. Successively add elements to a set whose $\epsilon$-balls don't intersect. Since there is no finite epsilon net, we can always add such elements. They will always be seperated by $\epsilon$, so it has no Cauchy subsequence, so it has no convergent subsequence. $\blacksquare$
+
+**Proposition**: Let $(X, d)$ be a sequentially compact metric space. Let $U$ be an open cover 
+
+**Proposition**: Every sequentially compact metric space has an open cover with a Lebesgue number.
+
+**Proposition**: Let $X$ be a sequentially compact metric space. Then it is compact.
+
+*Proof*: Let $U$ be an open cover of $X$. Take a finite epsilon-net of $X$ where epsilon is the Lebesgue number of $U$. Then the sets where each epsilon ball of the net is contained form a finite subcover of $X$. $\blacksquare$
+
+**Theorem**: Let $f: X \to Y$ be a continuous map. Suppose $X$ is compact. Then $f$ is uniformly continuous.
+
+*Proof*: 
