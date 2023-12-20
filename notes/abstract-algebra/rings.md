@@ -108,7 +108,7 @@ $$
 
 **Theorem (Cancellation Law)**: Let $R$ be an integral domain and $a \in R$ a nonzero element. If $ab = ac$, then $b = c$ where $b, c \in R$.
 
-*Proof*: TODO.
+*Proof*: We have $ab - ac = 0$, so $a(b - c) = 0$. Since $R$ has no zero-divisors, $(b - c) = 0$, so $b = c$. $\blacksquare$
 
 **Theorem**: If $D$ is a finite integral domain, then $D$ is a field.
 
@@ -372,67 +372,6 @@ Next we show the uniqueness of $\overline f$. Suppose that there is another inje
 
 For $a \in D$, we have $\overline f(a/1) = \overline f \circ \eta(a) = f(a) = \hat f \circ \eta(a) = \hat f(a/1)$.
 
-## Polynomial Rings
-
-**Recall**: Let $R$ be a ring. We can form $R[x] = \lbrace a_nx^n + a_{n - 1}x^{n - 1} + \dots + a_1x + a_0 \mid a_i \in R \rbrace$.
-
-**Remark**: Let $D$ be an integral domain.
-1. If $f(x), g(x) \in D[x]$ that are non-zero, then $\operatorname{deg}(f(x) \cdot g(x)) = \operatorname{deg} f(x) + \deg g(x)$
-2. $D[x]$ is an integral domain.
-
-**Example**: Think of a commutative ring with unity $1 \neq 0$ such that (1) fails.
-
-**Theorem (Scholium)**: If $F$ is a field, then $F[x]$ is very much like $\mathbb Z$.
-
-**Division Algorithm for F[x]**: Let $F$ be a field. For $f(x), g(x) \in F[x]$ such that $g(x)$ is non-zero, there are unique polynomials $q(x)$ and $r(x)$ such that
-
-$$
-f(x) = g(x)q(x) + r(x)
-$$
-
-where $r(x) = 0$ or $\deg r(x) \lt \deg g(x)$.
-
-*Proof*: Let $f(x) = a_nx^n + \dots + a_1x + a_0$, $g(x) = b_m x^m + \dots + b_1x + b_0$, $a_n, b_n \neq 0$. If $\deg f(x) \lt \deg g(x)$, (or $f(x) = 0$), then $q(x) = 0$ and $r(x) = f(x)$.
-
-Suppose that $\deg f(x) \geq \deg g(x)$. We proceed by induction with respect to $\deg f(x)$. Assume that we can divide polynomials of degree less than $n$ with remainder by $g(x)$. To divide $f(x)$ by $g(x)$ with remainder:
-
-Define $f_1(x) = f(x) - a_n b_m^{-1}x^{n - m}g(x)$. Then $f_1(x)$ has degree less than $n$. By the inductive hypothesis, there are polynomials $q_1(x), r_1(x)$ such that $f_1(x) = g(x)q_1(x) + r_1(x)$ and $r_1(x) = 0$ or $\deg r_1(x) \lt g(x)$. Then
-
-$$
-\begin{align*}
-f(x) &= a_nb_m^{-1} x^{n - m} g(x) + f_1(x) \\
-&= g(x)(a_nb_m^{-1} x^{n - m} + q_1(x)) + r_1(x)
-\end{align*}
-$$
-
-Put $q(x) = a_nb_m^{-1} x^{n - m} + q_1(x)$ and $r(x) = r_1(x)$. Then $f(x) = g(x)q(x) + r(x)$, and $r(x) = 0$ or $\deg r(x) \lt \deg g(x)$.
-
-It remains to show that these $q(x)$ and $r(x)$ are unique.
-
-Suppose $f(x) = g(x)q_1(x) + r_1(x)$ with $r_1(x) = 0$ or $\deg r_1(x) \lt \deg g(x)$ and $f(x) = g(x)q_2(x) + r_2(x)$ with $r(x) = 0$ or $\deg r_2(x) \lt \deg g(x)$. We have
-
-$$
-g(x) q_1(x) + r_1(x) = g(x) q_2(x) + r_2(x)
-$$
-
-Then
-
-$$
-g(x) q_1(x) - g(x)q_2(x) = r_2(x) - r_1(x)
-$$
-
-The RHS is a polynomial of degree less than $\deg g(x)$. So the LHS must be such a polynomial. Thus $q_1(x) - q_2(x) = 0$, so $q_1(x) = q_2(x)$. Then
-
-$$
-r_1(x) = f(x) - g(x)q_1(x) = f(x) - g(x)q_2(x) = r_2(x)
-$$
-
-**Corollary**: Let $F$ be a field. For $f(x) \in F[x]$, we have $f(a) = 0$ if and only if $f(x) = (x - a)g(x)$ for some $g(x) \in F[x]$.
-
-*Proof*: $(\rightarrow)$ Suppose $f(a) = 0$. We divide $f(x)$ by $x - a$ with remainder: $f(x) = (x - a)g(x) + r(x)$ where $r(x)$ is a constant polynomial. Then $0 = f(a) = (a - a)g(a) + r(a) = r(a)$. Thus $r(x) = 0$.
-
-$(\leftarrow)$ Suppose $f(x) = (x - a)g(x)$. Then $f(a) = (a - a)g(a) = 0$. $\blacksquare$
-
 ## Euclidean Domains
 
 **Definition**: An integral domain $D$ is a **Euclidean domain (ED)** if there exists a function $N: D \to \mathbb N$ such that 
@@ -496,7 +435,7 @@ $\blacksquare$
 
 ($\leftarrow$) If $R$ has exactly two ideals, $\lbrace 0 \rbrace$ and $R$, then $\lbrace 0 \rbrace$ is a maximal ideal, so $R \cong R/\lbrace 0 \rbrace$ is a field. $\blacksquare$
 
-### Principal Ideal Domains
+## Principal Ideal Domains
 
 **Definition**: A **principal ideal domain (PID)** is an integral domain where every ideal is principal.
 
@@ -566,7 +505,110 @@ $$
 
 unique up to the order of primes.
 
-### Unique Factorization Domains
+## Unique Factorization Domains and Noetherian Domains
+
+**Definition**: A **unique factorization domain (UFD)** is an integral domain $D$ such that every non-zero non-unit element can be written as a unique (up to order and associates) product of irreducible elements.
+
+**Definition**: A commutative ring $R$ is **Noetherian** if, given any ascending chain of ideals $I_0 \subseteq I_1 \subseteq I_2 \subseteq \dots$ in $R$, there is an $N \in \mathbb N$ such that $I_n = I_{n + 1}$ for all $n \geq N$.
+
+**Example**:
+* $(60) \subseteq (60) \subseteq (30) \subseteq (15) \subseteq (1) = \mathbb Z = \dots$
+* $(60) = (60) = \dots$
+
+**Definition**: A **Noetherian domain** is an integral domain that is Noetherian.
+
+**Lemma** Let $R$ be a commutative ring and $I_0 \subseteq I_ \subseteq \dots$ an ascending chain of ideals. Let $I = \bigcup_{i \in \mathbb N}$. Then $I$ is an ideal.
+
+*Proof*: $I$ is an abelian subgroup since $a - b \in I_i$ for $a, b \in I$, where $i$ is the ideal common to both $a$ and $b$ in the chain. Absorption and closure follows from the fact that each of the individual $I_i$'s are ideals. $\blacksquare$
+
+**Remark**: The arbitrary union of ideals are not ideal in general. For example, $(2) \cup (3) \subseteq \mathbb Z$ is **not** an ideal.
+
+**Theorem**: Every principal ideal domain is Noetherian.
+
+*Proof*: The union of ascending ideals is generated by a single element $a$, so one of such ascending ideals must contain $a$ (of which it also generated by), since it is a superset of the union. So $(a) \subseteq (a) = (a) = \dots$. $\blacksquare$
+
+**Example**: $\mathbb Z[x]$ is Noetherian but not a PID.
+
+**Example**: $\mathbb Q[x_1, x_2, \dots]$, polynomials in infinitely many variables, is not Noetherian as $(x_1) \subseteq (x_1, x_2) \subseteq \dots$
+
+**Lemma**: In a PID, every non-zero non-unit element has an irreducible factor.
+
+*Proof*: Given a non-zero, non-unit element $a$, continually factor it into reducible factors. Eventually one of the factors will be irreducible, since if $a \mid b$ then $(b) \subseteq (a)$. So the sequence of factors forms an ascending chain of ideals, which stabilizes since every PID is Noetherian. $\blacksquare$
+
+**Lemma**: In a PID, every non-zero non-unit element factors into irreducibles.
+
+*Proof*: Use the above lemma on each reducible factor until just one reducible factor is left. Then, similar to above, continually factor it until it factors into irreducibles, which is guaranteed by the stabilizing property of ascending chains of ideals. $\blacksquare$
+
+**Lemma**: Let $D$ be an integral domain and $p$ a prime element. If $p \mid a_1 \dots a_n$, then $p \mid a_i$ for some $i = 1, \dots, n$.
+
+*Proof*: By induction using the definition of primality. $\blacksquare$
+
+**Theorem**: Every PID is a UFD.
+
+*Proof*: TODO.
+
+## Polynomial Rings
+
+**Recall**: Let $R$ be a ring. We can form $R[x] = \lbrace a_nx^n + a_{n - 1}x^{n - 1} + \dots + a_1x + a_0 \mid a_i \in R \rbrace$.
+
+**Remark**: Let $D$ be an integral domain.
+1. If $f(x), g(x) \in D[x]$ that are non-zero, then $\operatorname{deg}(f(x) \cdot g(x)) = \operatorname{deg} f(x) + \deg g(x)$
+2. $D[x]$ is an integral domain.
+
+**Example**: Think of a commutative ring with unity $1 \neq 0$ such that (1) fails.
+
+**Theorem (Scholium)**: If $F$ is a field, then $F[x]$ is very much like $\mathbb Z$.
+
+**Division Algorithm for F[x]**: Let $F$ be a field. For $f(x), g(x) \in F[x]$ such that $g(x)$ is non-zero, there are unique polynomials $q(x)$ and $r(x)$ such that
+
+$$
+f(x) = g(x)q(x) + r(x)
+$$
+
+where $r(x) = 0$ or $\deg r(x) \lt \deg g(x)$.
+
+*Proof*: Let $f(x) = a_nx^n + \dots + a_1x + a_0$, $g(x) = b_m x^m + \dots + b_1x + b_0$, $a_n, b_n \neq 0$. If $\deg f(x) \lt \deg g(x)$, (or $f(x) = 0$), then $q(x) = 0$ and $r(x) = f(x)$.
+
+Suppose that $\deg f(x) \geq \deg g(x)$. We proceed by induction with respect to $\deg f(x)$. Assume that we can divide polynomials of degree less than $n$ with remainder by $g(x)$. To divide $f(x)$ by $g(x)$ with remainder:
+
+Define $f_1(x) = f(x) - a_n b_m^{-1}x^{n - m}g(x)$. Then $f_1(x)$ has degree less than $n$. By the inductive hypothesis, there are polynomials $q_1(x), r_1(x)$ such that $f_1(x) = g(x)q_1(x) + r_1(x)$ and $r_1(x) = 0$ or $\deg r_1(x) \lt g(x)$. Then
+
+$$
+\begin{align*}
+f(x) &= a_nb_m^{-1} x^{n - m} g(x) + f_1(x) \\
+&= g(x)(a_nb_m^{-1} x^{n - m} + q_1(x)) + r_1(x)
+\end{align*}
+$$
+
+Put $q(x) = a_nb_m^{-1} x^{n - m} + q_1(x)$ and $r(x) = r_1(x)$. Then $f(x) = g(x)q(x) + r(x)$, and $r(x) = 0$ or $\deg r(x) \lt \deg g(x)$.
+
+It remains to show that these $q(x)$ and $r(x)$ are unique.
+
+Suppose $f(x) = g(x)q_1(x) + r_1(x)$ with $r_1(x) = 0$ or $\deg r_1(x) \lt \deg g(x)$ and $f(x) = g(x)q_2(x) + r_2(x)$ with $r(x) = 0$ or $\deg r_2(x) \lt \deg g(x)$. We have
+
+$$
+g(x) q_1(x) + r_1(x) = g(x) q_2(x) + r_2(x)
+$$
+
+Then
+
+$$
+g(x) q_1(x) - g(x)q_2(x) = r_2(x) - r_1(x)
+$$
+
+The RHS is a polynomial of degree less than $\deg g(x)$. So the LHS must be such a polynomial. Thus $q_1(x) - q_2(x) = 0$, so $q_1(x) = q_2(x)$. Then
+
+$$
+r_1(x) = f(x) - g(x)q_1(x) = f(x) - g(x)q_2(x) = r_2(x)
+$$
+
+**Corollary**: Let $F$ be a field. For $f(x) \in F[x]$, we have $f(a) = 0$ if and only if $f(x) = (x - a)g(x)$ for some $g(x) \in F[x]$.
+
+*Proof*: $(\rightarrow)$ Suppose $f(a) = 0$. We divide $f(x)$ by $x - a$ with remainder: $f(x) = (x - a)g(x) + r(x)$ where $r(x)$ is a constant polynomial. Then $0 = f(a) = (a - a)g(a) + r(a) = r(a)$. Thus $r(x) = 0$.
+
+$(\leftarrow)$ Suppose $f(x) = (x - a)g(x)$. Then $f(a) = (a - a)g(a) = 0$. $\blacksquare$
+
+### Factorization of Polynomials
 
 Recall: If $F$ is a field, then $F[x]$ is a PID because it is a Euclidean domain.
 
@@ -605,7 +647,7 @@ $(\leftarrow)$ By contrapositive, if $f(x) = g(x)h(x)$ for $\deg g(x), \deg h(x)
 
 **Example**: $f(x) = 2x + 2 = 2(x + 1)$ is reducible in $\mathbb Z[x]$ but not in $\mathbb Q[x]$ (since 2 is a unit).
 
-### Content and Primitives
+#### Content and Primitives
 
 **Definition**: Let $f(x) \in \mathbb Z[x]$ with $f(x) = \sum a_kx^k$.
 1. The **content** of $f(x)$ is $\operatorname{gcd}(a_1, \dots, a_n)$.
