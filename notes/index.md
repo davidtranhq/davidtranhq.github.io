@@ -9,6 +9,7 @@ permalink: /notes/
 * [Real Analysis II](real-analysis-ii/)
 * [Complex Analysis](complex-analysis/)
 * [Abstract Algebra](abstract-algebra/)
+* [Group Theory](group-theory/)
 
 ## Computer Science
 

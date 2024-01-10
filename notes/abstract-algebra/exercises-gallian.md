@@ -82,6 +82,23 @@ Let $R$ be a commutative ring such that for $a, b, c \in R$ and $a \neq 0$,
 $ab = ac$ implies $b = c$. Then there are no zero-divisors. For if there were one, say $d$, with
 non-zero $x \in R$ such that $dx = 0$,
 
+## Chapter 15
+
+### 65
+
+Define a ring isomorphism $f: \operatorname{Frac}(\mathbb Z[i]) \to \mathbb Q[i]$ as
+
+$$
+f\left(\frac{a + bi}{c + di}\right) = \frac{ac + bd}{c^2 + d^2} + i\left(\frac{bc - ad}{c^2 + d^2}\right)
+$$
+
+and proceed to show that the isomorphism is structure-preserving.
+
+### 66
+
+Define a ring isomorphism $f: \operatorname{Frac}{F} \to F$ as the identity mapping. 
+
+
 ## Chapter 17
 
 ### 2
@@ -147,3 +164,39 @@ $f(1) = 0$ so $(x - 1)$ is a factor. Then by polynomial long division, $f(x) = (
 $$
 (x - 1)(x^2 + x + 1) = x^3 + x^2 + x - x^2 - x - 1 = x^3 - 1 = x^3 + 6
 $$
+
+## Chapter 18
+
+### 1
+
+### 2
+
+If $a = ub$ for some unit $u$, then $a \in (b)$ so $(a) \subseteq (b)$, likewise for the other direction. So $(a) = (b)$.
+
+If $(a) = (b)$, then $a = pb$ and $b = qa$ for some $p, q \in D$. Then $a = pqa$, so $pq = 1$ and $p, q$ are units. $\blacksquare$
+
+### 4
+
+Consider $pu = ab$, where $p$ is an irreducible and $u$ is a unit, and $a, b$ are non-units. Then $p = (ab)u^{-1}$. WLOG, suppose $a$ is a non-unit. Then $bu^{-1}$ must be a unit. But then, since associates of units are also units $(bu^{-1})u = b$ is a unit; a contradiction. $\blacksquare$
+
+### 5
+
+$(\rightarrow)$ If $a$ is a unit, then $a^{-1}ab = b \in (ab)$, so $(b) \subseteq (ab)$, and $(ab)$ can't be a proper subset of $(b)$.
+
+$(\leftarrow)$ Suppose $a$ is not a unit. Suppose $(b) = (ab)$. Then $b = xab$ for some $x \in D$. But then, since $b \neq 0$, $xa = 1$. $\blacksquare$
+
+### 6
+
+Reflexive: $a = 1a$, and $1$ is a unit.
+Symmetric: If $a = ub$ for $u$ a unit, then $b = u^{-1}a$.
+Transitive: If $a = ub$ and $b = vc$ with $u, v$ units, Then $a = uvc$, and $uv$ is a unit since $(uv)(v^{-1}u^{-1}) = 1$.
+
+### 10
+
+$(\rightarrow)$ If $(p)$ is maximal, then it is prime, so $p$ is prime, so it is irreducible.
+
+$(\leftarrow)$ If $p$ is irreducible, then $p$ is prime since $D$ is a PID, so $(p)$ is prime, so $(p)$ is maximal, since $D$ is a PID. $\blacksquare$
+
+
+
+

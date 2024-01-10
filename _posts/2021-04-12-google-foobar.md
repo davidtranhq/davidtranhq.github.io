@@ -3,6 +3,7 @@ layout: post
 title: "Google Foobar: Bringing a Gun to a Guard Fight"
 date:   2021-04-12 12:00:00 -0500
 excerpt_separator: <!--more-->
+published: false
 ---
 
 Google's Foobar challenge is a series of programming problems that used to be used to recruit potential developers. This problem was my favourite of all of them, mainly because it has a creative solution and requires no prior knowledge of theorems or algorithms.
