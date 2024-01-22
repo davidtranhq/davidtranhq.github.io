@@ -12,3 +12,4 @@ Gemfile.lock
 *.fls
 *.log
 *.synctex.gz
+*.out
