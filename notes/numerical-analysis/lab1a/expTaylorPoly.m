@@ -20,3 +20,18 @@ function T = expTaylorPoly(x, n)
         T = T + x.^k ./ factorial(k);
     end
 end
+
+
+\documentclass{article}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% ... (same preamble as before)
+
+\begin{document}
+
+\section{MATLAB Code Example}
+
+\lstinputlisting[caption=Your MATLAB code caption here,label=your-label-here]{yourfile.m}
+
+\end{document}
