@@ -1,8 +1,8 @@
----
+<!-- ---
 layout: default
 toc: true
 order: 1
----
+--- -->
 
 ## Orthogonal Matrices
 
@@ -17,24 +17,23 @@ order: 1
 **Remark**: The above proposition holds even for non-square matrices.
 
 The following properties follow from the above:
+
 * $Q^T = Q^{-1}$
 * $Q^T$ is orthogonal
 * The rows of $Q$ form an orthonormal set.
 
 **Proposition**: In $\mathbb R^2$, every orthogonal matrix is either a reflection or a rotation.
 
-The following properties follow from above:
-
 ## Gram-Schmidt Decomposition
 
 **Gram-Schmidt Decomposition**: Given $\lbrace x_1, x_2 \dots, x_n \rbrace$ as a basis for a subspace, to get an othogonal basis, let
 
 $$
-\begin{align*}
+\begin{aligned}
 v_1 &= x_1 \\
 v_2 &= x_2 - \operatorname{proj}_{v_1} x_2 \\
 v_3 &= x_3 - \operatorname{proj}_{v_1} x_3 - \operatorname{proj}_{v_2} x_3
-\end{align*}
+\end{aligned}
 $$
 
 In general, the idea is to subtract from each vector $x_1$ the components parallel to the basis vectors already defined.
@@ -53,13 +52,13 @@ Note that since the columns of $Q^T$ are orthogonal, $Q^{-1} = Q^T$, so $R = Q^T
 
 ## Orthogonal Diagonalization
 
-**Definition**: A square matrix $A$ is **orthogonally diagonalizable** if there exists an orthogonal matrix $Q$ such that
+<!-- **Definition**: A square matrix $A$ is **orthogonally diagonalizable** if there exists an orthogonal matrix $Q$ such that
 
 $$
 Q^TAQ = D
 $$
 
-where $D$ is a diagonal matrix.
+where $D$ is a diagonal matrix. -->
 
 **Remark**: The columns of $Q$ are the normalized eigenvectors of $A$.
 
@@ -98,3 +97,18 @@ $$
 
 First normalize the eigenvectors then use Spectral Decomposition to form $A$.
 
+## Quadratic Forms
+
+**Definition**: A **quadratic form** is a function $f: \mathbb R^n \to \mathbb R$ of the form $f(u) = u^TAu$, where $A$ is symmetric.
+
+### Sketching Quadratic Forms
+
+Let $Q^TDQ = A$ be the orthogonal diagonalization of $A$. The eigenvectors of $Q$ are the principal axis of the quadratic curve, and the eigenvalues determine the curve shape.
+
+**Principle Axes Theorem** Given a quadratic form $u^TAu$, if $Q^TAQ = D$ is the orthogonal diagonlization, then the change of variables $v = Q^Tu$ gives $u^TAu = v^TDv$.
+
+**Theorem**: Let $A$ be a symmetric real matrix and $f$ its quadratic form.
+
+* if $A$ is positive definite (all eigenvalues are positive), then the quadratic form is positive everywhere except the origin
+* if $A$ is positive semi-definite (all eigenvalues are non-negative), then the quadratic form is non-negative everywhere
+* if $A$ is indefinite (eigenvalues are opsitive and negative)$, $f$ is positive or negative or 0.

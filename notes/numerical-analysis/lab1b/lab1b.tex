@@ -1,0 +1,100 @@
+\documentclass[letter,11pt]{article}
+
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+% Adjust the margins if needed
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+
+% Set the title and author
+\title{Iteration and Error}
+\author{David Tran and Spencer Kelly}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Abstract}
+
+\subsection*{Introduction}
+
+\subsection*{Particular aspects of this Lab }
+
+\subsection*{Taylor series and error}
+\subsubsection*{Problem 0}
+Let $f(x) = e^{-x}$. Note that $f^{(1)}(x) = -e^{-x}, f^{(2)}(x) = e^{-x}$, and in general, $f^{(n)}(x) = (-1)^ne^{-x}$. So, $f^{(n)}(0) = (-1)^n$, and the Taylor series expansion around $x_0 = 0$ is given by
+
+\begin{align*}
+T_n(x) &= \sum_{k = 0}^n \frac{f^{(k)}(x_0)}{k!} x^k \\
+&= \sum_{k = 0}^n \frac{(-1)^k}{k!}x^k
+\end{align*}
+
+Similarily, the remainder term is
+
+\begin{align*}
+R_n &= \frac{f^{(n + 1)}(z)}{(n + 1)!}(x - x_0)^{n + 1} \\
+&= \frac{(-1)^{n + 1} e^{-z}}{(n + 1)!}x^{n + 1}.
+\end{align*}
+
+for some $0 \leq z \leq x$.
+
+\subsubsection*{Problem 1}
+\begin{enumerate}[label=\alph*.]
+  \item We have \begin{align*}
+    e^{-x} &= 1 - x + \frac{x^2}{2!} - \frac{x^3}{3!} + \dots
+  \end{align*}
+  so
+  \begin{align*}
+    F(x) &= \frac{e^{-x} - 1 + x}{x^2} \\
+    &= \frac{1}{2!} - \frac{x}{3!} + \frac{x^2}{4!} - \dots \\
+    &= \sum_{k = 0}^n (-1)^k \frac{x^k}{(k + 2)!}.
+  \end{align*}
+
+  The remainder term is TODO.
+  \item TODO.
+\end{enumerate}
+
+\subsubsection*{Problem 2}
+\begin{enumerate}[label=\alph*.]
+  \item TODO.
+  \item TODO.
+\end{enumerate}
+
+\subsubsection*{Problem 3}
+\begin{enumerate}[label=\alph*.]
+  \item TODO.
+  \item TODO.
+  \item TODO.
+  \item TODO.
+\end{enumerate}
+
+\subsubsection*{Problem 4}
+\begin{enumerate}[label=\alph*.]
+  \item TODO.
+  \item TODO.
+  \item TODO.
+\end{enumerate}
+
+\subsection*{Summary and Conclusions}
+
+\begin{thebibliography}{99}
+  % Add your references here using the \bibitem{} command
+  % Example: \bibitem{author_year} Author, A., \& Year, Y. Title of the paper. \textit{Journal Name}, \textbf{Volume}(Issue), PageRange.
+\end{thebibliography}
+
+\subsection*{Teamwork Statement}
+
+\subsection*{Code Appendix}
+
+\subsection*{Plot Appendix}
+
+
+\end{document}
