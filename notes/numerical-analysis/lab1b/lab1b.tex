@@ -49,6 +49,9 @@
 
 % Adjust the margins if needed
 \usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{graphicx}
+\usepackage{tabto}
 
 % Set the title and author
 \title{Iteration and Error}
@@ -64,7 +67,21 @@ The following series of labs explore different algorithms in numerical analysis,
 
 This lab introduces the concept of iteration in numerical algorithms through use of Taylor series. Through computations, we show how well the Taylor series approximates a function, and additionally quantify the error in its approximation. We observe and discuss the effects of truncation and precision or rounding errors which occur due to the limitations of hardware, and show how we can measure and differentiate between the two.
 
-\section{Introduction}
+\subsection*{Introduction}
+In the field of numerical analysis, one of the first important concepts introduced is the idea of approximating otherwise complex and computationally expensive to evaluate functions using much simpler and efficient methods.
+In this lab, the first of four, we delve into the approximations of functions using their Taylor series and their associated Taylor remainders, exposing the reader to introductory concepts in functional approximation.
+
+Taylor series are a powerful tool in mathematics, and provide us with a means of representing a smooth function using an infinite series of polynomial terms.
+These series allow us to work with otherwise difficult functions, and have applications in a variety of fields including physics, engineering, and quantitative finance, where they aid in modeling complex systems, solving differential equations, and the analysis of complex functions, to name a few.
+
+For the purposes of computation, it is not realistic to use the infinite taylor series for a given function.
+In this lab, we introduce the truncated (finite terms) Taylor series for a single function.
+We will compare the truncated Taylor series to the function in which it approximates, and analyze the difference between the two, over various domains.
+We will also analyze the Taylor remainder, which represents the error associated with truncation to finite terms.
+By analyzing the differing number of terms before truncation and plotting the Taylor remainder, we can observe how the degree of truncation effects the accuracy of the approximation, providing insight into the tradeoff between efficiency and accuracy in the field of numerical analysis.
+
+The field of numerical analysis in some form dates back over 2000 years ago in ancient Egypt, and there is evidence to suggest that Babylonians may have used numerical methods to calculate the square root of 2 to within 5 decimal places.
+Though using more modern methods, and with the help of the computational software MATLAB, this lab serves as an introduction to methods of computation and approximation in numerical analysis that have been of great use across many fields and civilizations.
 
 \section{Taylor series and error}
 
@@ -76,8 +93,6 @@ Let $f(x) = e^{-x}$. Note that $f^{(1)}(x) = -e^{-x}, f^{(2)}(x) = e^{-x}$, and 
 T_n(x) &= \sum_{k = 0}^n \frac{f^{(k)}(x_0)}{k!} x^k \\
 &= \sum_{k = 0}^n \frac{(-1)^k}{k!}x^k
 \end{align*}
-
-THIS IS SPENCER;
 
 Similarily, the remainder term is
 
@@ -162,6 +177,29 @@ So, the directly computed function is more accurate. We know the closed form of 
   \label{fig:lab1b_3_error_bound}
 \end{figure}
 
+\subsection{Problem 4}
+\begin{enumerate}[label=\alph*.]
+  d. Below is the plot of the domain from problem 2 done using the function myfofxv2.m, which uses a taylor series expansion
+to plot x values between -10^{-7} and 10^{-7}. If the value falls not between those bounds, then the functions opts for the original form of the function.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{Lab1BQ4p1q2}  % Adjust the file name and extension
+\caption{Caption of your figure.}
+\label{Plot of the domain from problem 2 using the function}
+\end{figure}
+  \\
+
+  Below is the plot of the domain from problem 3, using the same function:
+
+  \begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{Lab1BQ4p1q3}  % Adjust the file name and extension
+\caption{Caption of your figure.}
+\label{Plot of domain from problem 3 using the same function}
+\end{figure}
+
+
 \section{Summary and Conclusions}
 
 In this lab, we used the Taylor series the approximate a function whose closed-form we knew. We plotted the approximation alongside the closed form to observe how well the Taylor series was able to approximate, as well as where it fell short. We found both analytically and empirically the expected error due to truncation of the series, and discovered that roundoff errors dominated the error over truncation errors at very small values of $x$.
@@ -173,11 +211,29 @@ The method of using a Taylor series to approximate a function is very applicable
   % Example: \bibitem{author_year} Author, A., \& Year, Y. Title of the paper. \textit{Journal Name}, \textbf{Volume}(Issue), PageRange.
 \end{thebibliography}
 
-\section*{Teamwork Statement}
+\subsection*{Teamwork Statement}
+There were minimal issues encountered as we worked on this lab as a team.
+Both lab members were well-equipped with knowledge on the theory pertaining to Taylor series and their applications.
+Lab members were also experienced with the applications of Taylor series, and had experience with projects on numerical methods and their applications to other fields of work including modelling of stellar atmospheres, modelling of thermodynamic and electromagnetic systems, and the optimization of algorithms.
+Overall, there were little to no problems that arose in terms of teamwork on this project.
 
 \section*{Code Appendix}
 
 \section*{Plot Appendix}
+
+
+\subsection*{References}\\
+
+  \tab Encyclopædia Britannica, inc. (n.d.). Historical background. Encyclopædia Britannica. https://www.britannica.com/science/numerical-analysis/Historical-background\\
+
+  Garcia, A. L. (2015). Numerical Methods for Physics. CreateSpace.\\
+
+  Leblanc, F. (2010). An introduction to Stellar Astrophysics. John Wily & Sons.\\
+
+  King, G. C. (2010). Vibrations and Waves. John Wiley & Sons.
+
+  Sauer, T. (2019). Numerical analysis. Pearson.
+
 
 
 \end{document}
