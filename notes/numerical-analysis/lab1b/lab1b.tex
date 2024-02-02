@@ -1,4 +1,4 @@
-\documentclass[letter,11pt]{article}
+\documentclass[11pt]{article}
 
 \usepackage{titlesec}
 \usepackage{graphicx}
@@ -133,7 +133,6 @@ for some $0 \leq c \leq x$.
  $$\frac{(|x|)^{n+1}}{((n+1)+2)!}$$
 \end{enumerate}
 
-\newpage
 \subsection{Problem 2}
 We compute and plot $F(x)$ from above with the following.
   
@@ -143,7 +142,7 @@ We compute and plot $F(x)$ from above with the following.
 
 giving the graph in Figure~\ref{fig:lab1b_2}:
 
-\begin{figure}[h]
+\begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\linewidth]{lab1b_2.png}
   \caption{$F(x)$ and its Taylor Series from $(-0.01, 0.01)$}
@@ -156,21 +155,21 @@ Plotting the graph from Problem 2 using instead a range of $(-10^{-7}, 10^{-7})$
 
 So, the directly computed function is more accurate. We know the closed form of $F(x)$, so we should use it, rather than approximate the function with the terms of a Taylor series, since, at values of such a small magnitude, it introduces more roundoff error.
 
-\begin{figure}[h]
+\begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\linewidth]{lab1b_3.png}
   \caption{$F(x)$ and its Taylor Series from $(-10^{-7}, 10^{-7})$ up to cubic terms}
   \label{fig:lab1b_3}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\linewidth]{lab1b_3_error.png}
   \caption{Error between $F(x)$ and its Taylor Series}
   \label{fig:lab1b_3_error}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\linewidth]{lab1b_3_error_bound.png}
   \caption{Error between $F(x)$ and its Taylor Series and truncation bound}
@@ -178,25 +177,23 @@ So, the directly computed function is more accurate. We know the closed form of 
 \end{figure}
 
 \subsection{Problem 4}
-\begin{enumerate}[label=\alph*.]
-  d. Below is the plot of the domain from problem 2 done using the function myfofxv2.m, which uses a taylor series expansion
-to plot x values between -10^{-7} and 10^{-7}. If the value falls not between those bounds, then the functions opts for the original form of the function.
+Below in Figure~\ref{fig:q41} is the plot of the domain from problem 2 done using the function myfofxv2.m, which uses a taylor series expansion
+to plot x values between $-10^{-7}$ and $10^{-7}$. If the value falls not between those bounds, then the functions opts for the original form of the function.
 
-\begin{figure}[htbp]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=\linewidth]{Lab1BQ4p1q2}  % Adjust the file name and extension
-\caption{Caption of your figure.}
-\label{Plot of the domain from problem 2 using the function}
+\includegraphics[width=\linewidth]{Lab1BQ4p1q2.png}  % Adjust the file name and extension
+\caption{Plot of domain from Problem 2}
+\label{fig:q41}
 \end{figure}
-  \\
 
-  Below is the plot of the domain from problem 3, using the same function:
+Below in Figure~\ref{fig:q42} is the plot of the domain from problem 3, using the same function:
 
-  \begin{figure}[htbp]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=\linewidth]{Lab1BQ4p1q3}  % Adjust the file name and extension
-\caption{Caption of your figure.}
-\label{Plot of domain from problem 3 using the same function}
+\includegraphics[width=\linewidth]{Lab1BQ4p1q3.png}  % Adjust the file name and extension
+\caption{Plot of domain from Problem 3}
+\label{fig:q42}
 \end{figure}
 
 
@@ -206,33 +203,57 @@ In this lab, we used the Taylor series the approximate a function whose closed-f
 
 The method of using a Taylor series to approximate a function is very applicable and often used to compute values for functions whose closed form we do not know. For example, in many programming languages, the trigonometric functions are defined in terms of their power series, and 3 to 4 terms are usually used as enough to achieve the maximum-allowed precision due to floating-point representation. For future work, it wouuld be good to explore the threshold at which roundoff error begins to dominate truncation error, as well as discover possible workarounds for approximating functions with Taylor series at very small input values.
 
-\begin{thebibliography}{99}
-  % Add your references here using the \bibitem{} command
-  % Example: \bibitem{author_year} Author, A., \& Year, Y. Title of the paper. \textit{Journal Name}, \textbf{Volume}(Issue), PageRange.
-\end{thebibliography}
-
-\subsection*{Teamwork Statement}
+\section*{Teamwork Statement}
 There were minimal issues encountered as we worked on this lab as a team.
 Both lab members were well-equipped with knowledge on the theory pertaining to Taylor series and their applications.
 Lab members were also experienced with the applications of Taylor series, and had experience with projects on numerical methods and their applications to other fields of work including modelling of stellar atmospheres, modelling of thermodynamic and electromagnetic systems, and the optimization of algorithms.
 Overall, there were little to no problems that arose in terms of teamwork on this project.
 
+\clearpage
 \section*{Code Appendix}
+
+\lstinputlisting{myfofxv2.m}
+
+\lstinputlisting{plotFTaylorError.m}
+
+\lstinputlisting{myfxv2.m}
 
 \section*{Plot Appendix}
 
+\includegraphics[width=0.8\linewidth]{lab1b_2.png}
 
-\subsection*{References}\\
+\includegraphics[width=0.8\linewidth]{lab1b_3_error_bound.png}
 
-  \tab Encyclopædia Britannica, inc. (n.d.). Historical background. Encyclopædia Britannica. https://www.britannica.com/science/numerical-analysis/Historical-background\\
+\includegraphics[width=0.8\linewidth]{Lab1BQ4p1q2.png}
 
-  Garcia, A. L. (2015). Numerical Methods for Physics. CreateSpace.\\
+\begin{thebibliography}{99}  % Use a number large enough to accommodate the maximum number of references
 
-  Leblanc, F. (2010). An introduction to Stellar Astrophysics. John Wily & Sons.\\
-
-  King, G. C. (2010). Vibrations and Waves. John Wiley & Sons.
-
-  Sauer, T. (2019). Numerical analysis. Pearson.
+  \bibitem{britannica}
+  Encyclopædia Britannica, inc.
+  \newblock \emph{Historical background}.
+  \newblock \url{https://www.britannica.com/science/numerical-analysis/Historical-background}.
+  
+  \bibitem{garcia2015}
+  Garcia, A. L.
+  \newblock \emph{Numerical Methods for Physics}.
+  \newblock CreateSpace, 2015.
+  
+  \bibitem{leblanc2010}
+  Leblanc, F.
+  \newblock \emph{An Introduction to Stellar Astrophysics}.
+  \newblock John Wiley \& Sons, 2010.
+  
+  \bibitem{king2010}
+  King, G. C.
+  \newblock \emph{Vibrations and Waves}.
+  \newblock John Wiley \& Sons, 2010.
+  
+  \bibitem{sauer2019}
+  Sauer, T.
+  \newblock \emph{Numerical Analysis}.
+  \newblock Pearson, 2019.
+  
+\end{thebibliography}
 
 
 
