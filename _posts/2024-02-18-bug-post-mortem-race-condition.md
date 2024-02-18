@@ -4,7 +4,7 @@ title: "Bug Postmortem: Race Condition"
 toc: true
 ---
 
-I like re-analyzing hard-to-find bugs (bugs that aren't immediately found after a second inspection of the code) because they reveal a logical fault in our mental models of code. Reflecting on how these bugs came to be lets me fix these faults, as well as think of "antidotes"—strategies on how I should change my coding style in the future to prevent them.
+I like re-analyzing hard-to-find bugs (bugs that aren't immediately found after a second inspection of the code) because they reveal a logical fault in our mental models of code. Reflecting on how these bugs came to be lets me fix these faults, as well as think of "antidotes"—changes I can make to my coding style to prevent the bugs in the future.
 
 The following snippet is a concurrent queue in C++ and a simple test testing for a race condition:
 
