@@ -51,21 +51,29 @@ We rewrite the base class as a template that accepts a derived class as a templa
 template <typename Derived>
 class Animal {
 public:
-    auto speak() -> void { static_cast<Derived *>(this)->speak_impl(); }
+    auto speak() -> void {
+        static_cast<Derived *>(this)->speak_impl(); 
+    }
 };
 
 class Dog : public Animal<Dog> {
 public:
-    auto speak_impl() -> void { std::cout << "WOOF"; }
+    auto speak_impl() -> void {
+        std::cout << "WOOF";
+    }
 };
 
 class Cat : public Animal<Dog> {
 public:
-    auto speak_impl() -> void { std::cout << "meow..."; }
+    auto speak_impl() -> void {
+        std::cout << "meow...";
+    }
 };
 
 template <typename T>
-auto speak_twice(const Animal<T> &animal) { animal->speak(); animal->speak(); }
+auto speak_twice(const Animal<T> &animal) {
+    animal->speak(); animal->speak();
+}
 
 int main() {
     auto dog = Dog {};
