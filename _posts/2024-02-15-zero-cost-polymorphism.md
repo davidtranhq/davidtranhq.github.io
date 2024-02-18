@@ -16,13 +16,17 @@ public:
 
 class Dog {
 public:
-    virtual auto speak() -> void const override { std::cout << "WOOF\n"; }
+    virtual auto speak() -> void const override {
+        std::cout << "WOOF\n";
+    }
 };
 
 class Cat {
 public:
-    virtual auto speak() -> void const override { std::cout << "meow...\n"; }
-}
+    virtual auto speak() -> void const override {
+        std::cout << "meow...\n";
+    }
+};
 
 auto speak_twice(Animal *animal) { animal->speak(); animal->speak(); }
 
