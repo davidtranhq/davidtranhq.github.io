@@ -41,6 +41,8 @@ In the above case, we already knew the types of the animals at compile-time but 
 
 ## Compile-Time Polymorphism
 
+In the following pattern, because all code is generated at compile-time, the abstraction is free at runtime.
+
 ### Curiously Recurring Template Pattern
 
 We rewrite the base class as a template that accepts a derived class as a template parameter. To call overridden methods of the base class, the base class first casts its own `this` pointer to a pointer to the derived type, and then uses it to call a method implemented in the derived type. The above snippet becomes:
