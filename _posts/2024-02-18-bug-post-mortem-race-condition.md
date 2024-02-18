@@ -127,7 +127,7 @@ for (auto i = 0; i < num_threads; ++i) {
 
 ## Reflections
 
-The bug is more than just a careless one. I think if the culprit variable was not the loop counter variable, something like
+The bug is more than just a careless one. I think if the culprit variable were not the loop counter variable, something like
 
 ```c++
 int thread_id = 0;
