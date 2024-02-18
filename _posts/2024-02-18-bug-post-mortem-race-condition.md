@@ -141,7 +141,7 @@ for (auto i = 0; i < num_threads; ++i) {
 }
 ```
 
-it's much easier to notice we are capturing by reference something that is being modified outside the thread. Detecting the loop variable race-condition is tricky because in single-threaded code, in our mental model of for-loops, the loop variable is a constant with respect to each iteration. Indeed, modifying the loop variable within an iteration raises (or should raise) immediate red-flags:
+it would be much easier to notice that we are capturing by reference something that is being modified outside the thread. Detecting the loop variable race-condition is tricky because in single-threaded code, in our mental model of for-loops, the loop variable is a constant with respect to each iteration. Indeed, modifying the loop variable within an iteration raises (or should raise) immediate red-flags:
 
 ```c++
 for (int i = 0; i < 100; ++i) {
