@@ -28,7 +28,10 @@ public:
     }
 };
 
-auto speak_twice(Animal *animal) { animal->speak(); animal->speak(); }
+auto speak_twice(Animal *animal) {
+    animal->speak();
+    animal->speak();
+}
 
 int main() {
     auto dog = std::make_unique<Dog>();
