@@ -3,7 +3,6 @@ layout: post
 title: "How do machines \"learn\"?"
 date: 2020-12-30 16:12:00 -0500
 excerpt_separator: <!--more-->
-published: false
 ---
 
 We'll look at the classic problem of recognizing handwritten digits: the "Hello, world!" of machine learning. For humans with a fully developed visual cortex, this task is trivial. For a computer, this task is more complicated. We'll solve this problem by building an artifical brain of sorts, a *neural network*. At its most basic level, a neural network is a function that takes an input and provides an output. The input to our function will be a 28x28 pixel grayscale image of a handwritten digit, and the output will be the digit represented in the image.
