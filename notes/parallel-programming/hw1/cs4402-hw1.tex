@@ -1,0 +1,124 @@
+\documentclass[11pt, letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{enumitem} % \setlist
+% for \imageans: float for [H] so the figure floats
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstdefinestyle{verbatimStyle}{
+    basicstyle=\ttfamily,
+    columns=fullflexible,
+    keepspaces=true,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!40!black},
+    stringstyle=\color{orange},
+    numbers=left,
+    numberstyle=\tiny,
+    % numbersep=5pt,
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=4,
+}
+
+\setlength{\parindent}{0.25in}
+\setlength{\parskip}{0.05in}
+% indent paragraphs in list
+\setlist{  
+  listparindent=\parindent,
+  parsep=0pt,
+}
+
+% Include graphics in answer
+\newcommand{\imageans}[1]
+{%
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\linewidth]{#1}
+    \end{figure}
+}
+
+% comments inside align environnment
+\newcommand{\comment}[1]{%
+  \text{\phantom{(#1)}} \tag{#1}
+}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+% Cases for Proof environment
+\newlist{pcases}{enumerate}{1}
+\setlist[pcases]{
+  label=\underline{Case~\arabic*}:\protect\thiscase.~,
+  ref=\arabic*,
+  align=left,
+  labelsep=0pt,
+  leftmargin=0pt,
+  labelwidth=0pt,
+  parsep=0pt
+}
+\newcommand{\case}[1][]{%
+  \if\relax\detokenize{#1}\relax
+    \def\thiscase{}%
+  \else
+    \def\thiscase{~#1}%
+  \fi
+  \item
+}
+
+% Edit these as appropriate
+\newcommand\course{CS 4402}
+\newcommand\hwtitle{HW 1}                  
+\newcommand\name{David Tran}
+\newcommand\studentid{251169871}
+
+\fancypagestyle{firststyle}
+{
+    \headheight 35pt
+    \lhead{\name}
+    \lhead{\name\\\studentid}
+    \chead{\textbf{\LARGE \hwtitle}}
+    \rhead{\course \\ \today}
+    \lfoot{}
+    \cfoot{}
+    \rfoot{\small\thepage}
+    \headsep 1.5em
+}
+
+\DeclareUnicodeCharacter{2212}{-}
+\begin{document}
+
+\thispagestyle{firststyle}
+
+\setlist[enumerate]{leftmargin=*} % remove enuemrate indentation
+
+\begin{enumerate}
+  \item Let $A$ be a lower-triangular $n \times n$ matrix. The following computes and returns its inverse.
+  \begin{verbatim}
+    fn lower_triangular_inverse(row, col, n, A)
+    {
+        A1_inv = spawn lower_triangular_inverse(row, col, n/2);
+        A3_inv = lower_triangular_inverse(row + n/2, col + n/2, n/2);
+        sync;
+        A2 = A.submatrix(row + n/2, col, n/2); 
+        result = matrix with (A1_inv) starting at (0,0),
+            (-A3_inv * A2 * A1_inv) starting at (n/2, 0),
+            (A3_inv) starting at (n/2, n/2)
+        return result;
+    } 
+  \end{verbatim}
+
+  \item The main algorithm is shown below.
+  \lstinputlisting[language=c++,style=verbatimStyle]{code/lower_triangular_inverse.cpp}
+  Note that \verb|SquareMatrixView::submat| runs in constant time, matrix multiplication runs in $\Theta(n^3)$, and \verb|Matrix::write_submat| runs in $\Theta(n)$. The recurrence is
+
+  $$
+  T(n) = 2T(n/4) + c(n/4)^3
+  $$
+\end{enumerate}
+\end{document}

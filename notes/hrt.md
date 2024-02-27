@@ -192,31 +192,45 @@ void produce() {
 * `stat()` and `fstat()`
   * read metadata from the associated file's inode
 * `mmap()` and `munmap()`
+  * maps (and unmaps) parts of the process' virtual address space. can be
+    * anonymous: 
 * `brk()`
+  * sets the end of the data segment of the calling process to a specified value, changing the size of the process' heap
+  * new physical pages aren't necessarily mapped here immediately: rather, demand-paging or copy-on-write is used
 * `sbrk()`
+  * same as `brk()`, but increments the current end rather than setting it to a specified value
 * `ioctl()`
+  * provides a generic mechanism for performing device-specific or implementation-specific control operations on file descriptors
 * `socket()`
   * return a file descriptor to a buffer for sending and recieving packets. usually there are two buffers: a user-space buffer and a kernel-space buffer, to seperate the application layer from the lower layers of the network stack
-
-socket(), bind(), listen(), accept(), connect():
-Functions for creating and managing network sockets.
-select(), poll(), and epoll():
-Multiplexing system calls for managing multiple I/O sources.
-kill():
-Send a signal to a process.
-signal() and sigaction():
-Register a signal handler.
-mknod():
-Create a special or ordinary file (node).
-chmod(), chown(), and chgrp():
-Change file permissions, owner, and group.
-getpid(), getppid(), getuid(), getgid(), geteuid(), and getegid():
-Get various process and user identifiers.
+* `bind()`
+  * associates a given name (IP address and port number) for a given socket (through its file descriptor) in the kernel's socket table, inside a networking subsystem of the kernel
+* `listen()`
+  * sets the specified socket to the listening state (e.g. in the socket table), and initializes a buffer for an internal queue for incoming connection requests.
+  * if processes were waiting for the socket to transition into the listening state, they are notified
+* `accept()`
+  * blocks the process if there are no pending connections, otherwise dequeues the pending connection from the queue and returns a file descriptor to the newly created socket for exclusive communciation with the incoming client
+* `connect()`
+  * attempt to connect with a server, using the provided socket if a connection is established
+* `select()`
+  * blocks the thread until one of the specified sockets (specfied with file descriptors) is ready, after which `select()` returns a value indicating a socket is ready, or none are ready. the ready sockets can then be idenfitied by a structure passed into `select()` (which told `select()` which sockets we wanted to listen to)
+* `poll()`
+  * less portable version of `select()` but easier to use: can monitor an unlimited number of sockets
+* `epoll()`
+  * more scalable version of `poll()` that uses events, waits for incoming events rather than scanning all watched socket fds
+* `kill()`
+  * kernel checks if the process that sent the signal has permissions, and then goes to the recieving PCB, updates flags, checks if there is an associated signal handler in the PCB (if there is, runs it, otherwise, runs default action)
+* `signal()`
+  * registers a signal handler in the process' PCB
+* `sigaction()`
+  * same as `signal()`, but provides more controls and options
 
 ### Inter-process Communication
 
 #### Pipe
 * pipe at command-line: `A | B`: process is created, a pipe is opened and forked into `A` and `A'`: before `A'` is `exec()`'d into `B`, we close the STDOUT of `A` and the STDIN of `B` and replace them respectively with the write and read ends of the pipe
+
+#### 
 
 ## C++
 
