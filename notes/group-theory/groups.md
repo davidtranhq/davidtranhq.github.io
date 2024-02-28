@@ -33,7 +33,7 @@ toc: true
 
 **Proposition**: The inverse of the inverse of an element in a group is the element itself.
 
-*Proof*: If $aa^{-1} = e = a^{-1}a$ for an element $a$ and identity $e$, then $a$ is also $a^{-1}$'s inverse. $\blacksquare$
+*Proof*:**** If $aa^{-1} = e = a^{-1}a$ for an element $a$ and identity $e$, then $a$ is also $a^{-1}$'s inverse. $\blacksquare$
 
 **Proposition**: Let $a, b \in G$. Then $(ab)^{-1} = b^{-1}a^{-1}$.
 
