@@ -1,0 +1,129 @@
+\documentclass[11pt]{article}
+
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Define colors for syntax highlighting
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+% Set up the MATLAB code listing style
+\lstset{
+  backgroundcolor=\color{white},
+  basicstyle=\footnotesize\ttfamily,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{mygreen},
+  deletekeywords={...},
+  escapeinside={\%*}{*)},
+  extendedchars=true,
+  frame=single,
+  keepspaces=true,
+  keywordstyle=\color{blue},
+  language=Matlab,
+  otherkeywords={*,...},
+  numbers=left,
+  numbersep=5pt,
+  numberstyle=\tiny\color{mygray},
+  rulecolor=\color{black},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stepnumber=1,
+  stringstyle=\color{mymauve},
+  tabsize=2,
+  title=\lstname
+}
+
+
+% Adjust the margins if needed
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{graphicx}
+\usepackage{tabto}
+
+% Set the title and author
+\title{Newton's Method, Error, Newton's Fractal and Explorations}
+\author{David Tran and Spencer Kelly}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Abstract}
+
+
+\section{Introduction}
+
+
+\section{Code}
+
+\begin{verbatim}
+function [x,flag] = MyVectorNewton(f,Df,x0,tol,maxiter)
+% Author : YourFirstName YourLastName
+% Date : Today
+% Purpose : Compute approximate solution to f(x )=0 via Newton's Method
+%
+% Inputs :
+% f -- A function handle for f(x) being solved
+% Df -- A function handle for the f'(x)
+% x0 -- Initial guess for the fixed point
+% tol -- Tolerance of the solution .
+% maxiter -- Maximum number of iterations .
+%
+% Outputs :
+% x -- Estimated solution
+% flag -- Flag specifying if the solution has been obtained :
+% = The number of iterations taken to converge .
+% = -1 If the algorithm has not converged in maxiter iterations .
+%
+flag = -1;                                   %give inital value of flag and xold
+x = x0;
+for i = 1:maxiter              %for loop do the iteration with 'maxiter' given for the maximum steps
+    xold = x;
+    x = x - Df(x)\f(x);        %Newton
+    %fprintf('%f\n',xs);
+    if norm(x-xold) <= tol               %if x_new - x_old <= tol, break the loop, let flag = # of steps
+        flag = i;
+        break
+    end                                      %if not, do next iteration
+end
+end
+\end{verbatim}
+
+\begin{verbatim}
+clear
+clc
+f = @(x)[x(2) - x(1)^3 ; x(1)^2 + x(2)^2 - 1];                     %You need to consider your own example
+Df = @(x)[-3* x(1)^2 , 1 ; 2*x(1) , 2* x(2)];
+[xsoln , fl]= MyVectorNewton(f , Df , [ 1 ; 2 ], 10^(-12) ,10)
+\end{verbatim}
+
+\section{Summary}
+\subsection{Results}
+
+
+\subsection{Team Description}
+
+
+\subsection{Future Explorations}
+
+
+\subsection{References}
+
+\section*{Appendix}
+
+
+\end{document}

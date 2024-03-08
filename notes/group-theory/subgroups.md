@@ -6,7 +6,7 @@ layout: default
 
 # Subgroups
 
-## Subgroups
+## Definition and Examples
 
 **Definition**: Let $G$ be any group. Then a subset $H \subseteq G$ is a **subgroup** of $G$ if
 1. $1_G \in H$
@@ -23,13 +23,14 @@ If $H \leq G$ but $H \neq G$, then $H \lt G$ and is called a **proper subgroup**
 * $n\mathbb Z \leq \mathbb Z, \forall n \in \mathbb Z$
 * $\mathbb Z^+ \nleq (\mathbb Z, +)$
 * $\mathbb Z^+ \nleq (\mathbb R^+, \cdot)$
-* $\mathbb Q^+ \leq \mathbb R^+$  
+* $\mathbb Q^+ \leq \mathbb R^+$
+* The rotations of a square is a subgroup of all the symmetries of a square.
 
 **Example**: We can replace the condition that $1_G \in H$ by $H \neq \emptyset$.
 
-*Proof*: If $H \neq \emptyset$, then there is an $x \in H$. So by $b$, $x^{-1} \in H$. So $1_G = xx^{-1} \in H$. $\blacksquare$
+*Proof*: If $H \neq \emptyset$, then there is an $x \in H$. So by 2., $x^{-1} \in H$. So $1_G = xx^{-1} \in H$. $\blacksquare$
 
-**Proposition**: If $G$ is any group and $H \subseteq G$ is finite such tht $H \neq \emptyset$ and $H$ is closed under products, then $H \leq G$.
+**Proposition**: If $G$ is any group and $H \subseteq G$ is finite such that $H \neq \emptyset$ and $H$ is closed under products, then $H \leq G$.
 
 *Proof*: It suffices to show that $H$ is closed under inverses. Let $x \in H$. Then $x, x^2, x^3, \dots \in H$. Since $H$ is finite, for some $a \lt b \in \mathbb Z^+$, $x^a = x^b$. Then
 
@@ -39,15 +40,21 @@ $$
 
 Let $n = b - a \in \mathbb Z^+$. So $1 = x^n = x^{n - 1}x \implies x^{-1} = x^{n - 1} \in H$, since $n - 1 \geq 0$. $\blacksquare$
 
+**Counterexample**: The positive integers are a subset of the integers but do not form a group even though they are closed under addition, since the group is not finite.
+
 ## Centralizers, Normalizers, Stabilizers, and Kernels
 
 ## Centralizers, Normalizers, and Centers
 
 **Definition**: The **centralizer** of $A \subseteq G$ in $G$, denoted $C_G(A) \leq G$, is the set of elements in $G$ that commute with every element in $A$.
 
+**Example**:
+* Subsets where the centralizer is the entire group: Any abelian group (e.g. $\mathbb Z$)
+* Subsets where the centralizer is a proper subset of the entire group: $\lbrace 1, r, r^2, r^3 \rbrace = \lbrace 1, r, r^2, r^3 \rbrace$ in $D_8$
+
 **Proposition**: $C_G(A) \leq G$.
 
-*Proof*: Direct using the subgroup criterion. $\blacksquare$
+*Proof*: If $x$ and $y$ commute with every element in $A$ then so does $(xy)^{-1}$. $\blacksquare$
 
 **Definition**: The set of elements commuting with all the elements of $G$ is called the **center** of $G$, denoted $Z(G)$.
 

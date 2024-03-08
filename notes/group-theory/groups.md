@@ -4,9 +4,9 @@ order: 1
 toc: true
 ---
 
-# Groups
+# Introduction to Groups
 
-## Groups
+## Definitions and Examples
 
 **Definition**: A **semigroup** is an ordered pair $(S, *)$ where $S \neq 0$ and $*$ is an associative binary operation on $S$. 
 
@@ -18,6 +18,10 @@ toc: true
 **Definition**: A **group** is a semigroup $(G, *)$ with the additional following properties:
 1. There is an identity element $e \in G$, that is, $ae = a = ea$ for all $a \in G$. 
 2. Every element $a \in G$ has an inverse $b \in G$, that is, $ab = e = ba$.
+
+**Examples**:
+* Infinite group: $(\mathbb Z, +)$
+* Finite group: $(\mathbb Z_5, +)$
 
 **Remark**: Note that $ab = e$ doesn't necessarily imply $ba = e$ since commutativity is not a group axiom, so the inverse axiom requires both $ab = ba = e$.
 
@@ -33,7 +37,7 @@ toc: true
 
 **Proposition**: The inverse of the inverse of an element in a group is the element itself.
 
-*Proof*:**** If $aa^{-1} = e = a^{-1}a$ for an element $a$ and identity $e$, then $a$ is also $a^{-1}$'s inverse. $\blacksquare$
+*Proof*: If $aa^{-1} = e = a^{-1}a$ for an element $a$ and identity $e$, then $a$ is also $a^{-1}$'s inverse. $\blacksquare$
 
 **Proposition**: Let $a, b \in G$. Then $(ab)^{-1} = b^{-1}a^{-1}$.
 
@@ -77,6 +81,8 @@ then $\lambda \circ \rho = \operatorname{id}_X$ but not $\rho \circ \lambda$.
 * $\mathbb Z - \lbrace 0 \rbrace$ is a commutative subgroup but not a group, since only $1$ and $-1$ have inverses.
   * Note that $\mathbb Z - \lbrace 0 \rbrace \neq \mathbb Z^\times$.
 * If $V$ is a vector space, then it is an Abelian group under $+$, where $e = \vec 0$.
+* The symmetries of a square $(D_8)$ are not Abelian.
+* The group of invertible square matrices under multiplication is not Abelian.
 
 ### Integers modulo $n$
 
@@ -104,6 +110,8 @@ $$
 **Notation**: $(a, n) := \gcd(a, n)$
 
 **Proposition**: $a \in (\mathbb Z/n\mathbb Z)^\times$ if and only if $(a, n) = 1$.
+
+**Example**: $(\mathbb Z/6\mathbb Z)^\times = \lbrace 1, 5 \rbrace$.
 
 *Proof*: $(\rightarrow)$ If $a \in (\mathbb Z/n\mathbb Z)^\times$ then so is $a^{-1}$, and $aa^{-1} = 1 \equiv aa^{-1} + nx = \overline 1$, so $(a, n) = 1$.    
 
@@ -311,6 +319,33 @@ $$
 \phi(g_1 g_2) = \phi(g_1)\phi(g_2)
 $$
 
+**Examples**:
+* Homomorphism on an infinite group:
+  * $\phi: \mathbb Z \to \lbrace \pm 1 \rbrace$, where $\phi(x) = 1$ if $x$ is even and $-1$ otherwise.
+* Homomorphism on a finite group:
+  * $\phi: \mathbb Z_n \to \lbrace 0 \rbrace$: everything maps to $0$
+
 **Definition**: An **isomorphism** $\phi: G \to H$ is an **isomorphism** if $\phi$ is a bijective homomorphism.
 
 **Definition**: If there is an isomorphism $\phi: G \to H$, then $G$ and $H$ are called **isomorphic** and we write $G \cong H$.
+
+**Examples**:
+* Isomorphism on an infinite group
+  * $\phi: (\mathbb R, +)  \to (\mathbb R^+, \times), \phi(x) = e^x$ is a homomorphism
+
+Note that in some sense, homomorphisms preserve the structure of a group but (if it is not an isomophirms) loses some information in the mapping. On the other hand, isomorphisms preserve the entirety of the information of the structure of the group.
+
+As such, isomorphisms preserve every property of the group: i.e. Abelianness, order, etc.
+
+## Group Actions
+
+**Definition**: A **group action** of a group $G$ on a set $A$ is a map from $G \times A$ to $A$ (written $g \cdot a$ for all $g \in G$, $a \in A$) satisfying the following properties:
+* $g_1 \cdot (g_2 \cdot a) = (g_1g_2) \cdot a$ for all $a \in A, g \in G$
+* $1 \cdot a = a$ for all $a \in A$
+
+We may say that **$G$ is a group acting on $A$**, and may write $ga$ in place of $g \cdot a$.
+
+**Examples**:
+* Consider $D_8$ acting on the vertices of the square (encoded as the set of permutations of the vertices 1,2,3,4 labelled in clockwise order). For example, $r \cdot (1)(2)(3)(4) = (1234)$: a clockwise rotation of 90 degrees.
+* For a vector space $V$ with scalars in a field $F$, the vector space axioms declaring $cv \in V$ for $c \in F, v \in V$, $1v = v$, and $a(bv) = (ab)v, v \in V, a, b \in F$ describe $F$ as a group acting on the set of vectors $V$. 
+
