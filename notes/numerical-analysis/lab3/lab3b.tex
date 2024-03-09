@@ -70,6 +70,12 @@
 
 \subsection{Why is PA = LU needed for solving linear systems approximately?}
 
+When solving linear systems of the form $Ax = b$, we begin by gaussian elimination of the matrix $A$, followed by back substitution, and ultimately arrive at our solution.
+However, when a particular matrix $A$ is being used for multiple iterations, the overhead involved can become quite an obstacle.
+This is because the process of Gaussian elimination is a computationally expensive process, with complexity on the order $O(n^2)$.
+But with $PA = LU$ factorization, we essentially remove the overhead involved with gassian elimination, for all but the first iteration, by rewriting the matrix $A$ in terms of the upper and lower matrices $L$, and $U$, respectively.
+Thus, for every subsequent iteration involving the same matrix, we need not perform gaussian elimination, since $L$ and $U$ are all we need to begin performing back-substitution, which has complexity $O(n)$.
+
 \subsection{How to identify systems Ax = b for which PA = LU is not suited}
 
 \subsection{Larger applications of PA = LU factorization}
