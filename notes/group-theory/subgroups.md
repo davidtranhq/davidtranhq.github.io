@@ -6,6 +6,8 @@ layout: default
 
 # Subgroups
 
+## Definition and Examples
+
 **Definition**: Let $G$ be any group. Then a subset $H \subseteq G$ is a **subgroup** of $G$ if
 1. $1_G \in H$
 2. $H$ is closed under products and inverses
@@ -22,12 +24,13 @@ If $H \leq G$ but $H \neq G$, then $H \lt G$ and is called a **proper subgroup**
 * $\mathbb Z^+ \nleq (\mathbb Z, +)$
 * $\mathbb Z^+ \nleq (\mathbb R^+, \cdot)$
 * $\mathbb Q^+ \leq \mathbb R^+$
+* The rotations of a square is a subgroup of all the symmetries of a square.
 
 **Example**: We can replace the condition that $1_G \in H$ by $H \neq \emptyset$.
 
-*Proof*: If $H \neq \emptyset$, then there is an $x \in H$. So by $b$, $x^{-1} \in H$. So $1_G = xx^{-1} \in H$. $\blacksquare$
+*Proof*: If $H \neq \emptyset$, then there is an $x \in H$. So by 2., $x^{-1} \in H$. So $1_G = xx^{-1} \in H$. $\blacksquare$
 
-**Proposition**: If $G$ is any group and $H \subseteq G$ is finite such tht $H \neq \emptyset$ and $H$ is closed under products, then $H \leq G$.
+**Proposition**: If $G$ is any group and $H \subseteq G$ is finite such that $H \neq \emptyset$ and $H$ is closed under products, then $H \leq G$.
 
 *Proof*: It suffices to show that $H$ is closed under inverses. Let $x \in H$. Then $x, x^2, x^3, \dots \in H$. Since $H$ is finite, for some $a \lt b \in \mathbb Z^+$, $x^a = x^b$. Then
 
@@ -37,6 +40,43 @@ $$
 
 Let $n = b - a \in \mathbb Z^+$. So $1 = x^n = x^{n - 1}x \implies x^{-1} = x^{n - 1} \in H$, since $n - 1 \geq 0$. $\blacksquare$
 
+**Counterexample**: The positive integers are a subset of the integers but do not form a group even though they are closed under addition, since the group is not finite.
+
+## Centralizers, Normalizers, Stabilizers, and Kernels
+
+## Centralizers, Normalizers, and Centers
+
+**Definition**: The **centralizer** of $A \subseteq G$ in $G$, denoted $C_G(A) \leq G$, is the set of elements in $G$ that commute with every element in $A$.
+
+**Example**:
+* Subsets where the centralizer is the entire group: Any abelian group (e.g. $\mathbb Z$)
+* Subsets where the centralizer is a proper subset of the entire group: $\lbrace 1, r, r^2, r^3 \rbrace = \lbrace 1, r, r^2, r^3 \rbrace$ in $D_8$
+
+**Proposition**: $C_G(A) \leq G$.
+
+*Proof*: If $x$ and $y$ commute with every element in $A$ then so does $(xy)^{-1}$. $\blacksquare$
+
+**Definition**: The set of elements commuting with all the elements of $G$ is called the **center** of $G$, denoted $Z(G)$.
+
+**Proposition**: $Z(G) \leq G$.
+
+*Proof*: Since $Z(G) = C_G(G)$, the proposition follows from above. $\blacksquare$
+
+**Definition**: The **normalizer** of $A \subseteq G$ in $G$ is defined as
+
+$$
+    N_G(A) = \lbrace g \in G \mid gAg^{-1} = A \rbrace
+$$
+
+**Remark**: $C_G(A) \subseteq N_G(A)$.
+
+**Proposition**: $N_G(A) \subseteq G$.
+
+*Proof*: Direct from the subgroup criterion. $\blacksquare$
+
+**Example**: If $G$ is abelian than $Z(G) = G$, $C_G(A) = N_G(A) = G$.
+
+### Stabilizers and Kernels of Group Actions
 
 **Definition**: Let $G$ act on a set $S \neq \emptyset$ and let $s \in S$. Then
 
@@ -49,6 +89,10 @@ are the set of elements that **fix** $s$, that is, $g$ **fixes** $s$. Then $G_s$
 **Proposition**: $G_s \leq G$.
 
 *Proof*: Note that $1 \in G_s$. Let $x, y \in G_s$. Then $xs = s$ and $ys = s$. So $(xy)s = x(ys) = xs = s$, so $xy \in G_s$, and the stabilizer is closed under products. We can also show it is closed under inverses. $\blacksquare$
+
+**Proposition**: The kernel of an action is a subgroup.
+
+**Proposition**: The stabilizer of an action is a subgroup.
 
 ## Cyclic Groups
 
@@ -68,3 +112,61 @@ are the set of elements that **fix** $s$, that is, $g$ **fixes** $s$. Then $G_s$
 **Example**: $\mathbb R$ is not cyclic.
 
 *Proof*: $\mathbb R$ is uncountable. $\blacksquare$
+
+**Proposition**: The order of a cyclic group is the order of its generator.
+
+**Proposition**: If $x^m = 1$ and $x^n = 1$, then $x^{(m,n)} = 1$.
+
+*Proof*: By the Euclidean algorithm, $x^{(m, n)} = x^{mr + ns} = (x^m)^r(x^n)^s = 1$, for integers $r, n$. $\blacksquare$
+
+**Theorem**: Any two cyclic groups of the same order are isomorphic. Any infinite cyclic group is isomorphic to the integers.
+
+*Proof*: For the first, map like-powers to like-powers. For the second, map an integer $k$ to the $k$-th power of the generator. $\blacksquare$
+
+**Proposition**: Let $G$ be a group, $x \in G$, and $a \in \mathbb Z - \lbrace 0 \rbrace$.
+
+1. If $\vert x \vert = \infty$, then $\vert x^a \vert = \infty$.
+2. If $\vert x \vert = n$, then $\vert x^a \vert = \frac{n}{(n, a)}$
+
+**Proposition**: Let $H = \langle x \rangle$.
+1. If $\vert x \vert = \infty$, then $H = \langle x^a \rangle$ iff $a = \pm 1$.
+2. If $\vert x \vert = n \lt \infty$, then $H = \langle x^a \rangle$ iff $(a, n) = 1$. In general, the number of generators of $H$ is $\varphi(n)$ (where $\varphi$ is Euler's $\varphi$-function).
+
+*Proof*: (2) Since $\langle x^a \rangle = H$ iff $\vert x^a \vert = \vert x \vert$, and from the above proposition, this is only true when $\frac{n}{(n, a)} = n$, that is, $(n, a) = 1$. $\blacksquare$
+
+**Theorem**: Let $H = \langle x \rangle$ be a cyclic group.
+1. Every subgroup of $H$ is cyclic.
+2. If $\vert H \vert = \infty$, then for any distinct nonnegative integers $a$ and $b$, $\langle x^a \rangle \neq \langle x^b \rangle$.
+3. If $\vert H \vert = n$, there is a unique subgroup of $H$ of order $a$ for each positive integer $a$ dividing $n$, that is, $\langle x^{n/a} \rangle$.
+   1. For every integer $m$, $\langle x^m \rangle = \langle x^{(n, m)} \rangle$, so the subgroups of $H$ correspond bijectively with the positive divisors of $n$.
+
+## Subgroups Generated by Subsets of a Group
+
+**Proposition 8**: THe intersection of any non-empty collection of subgroups of $G$ is itself a subgroup of $G$.
+
+*Proof*: Application of the subgroup criterion. $\blacksquare$
+
+**Definition**: Let $A \subseteq G$. The **subgroup of $G$ generated by $A$** is
+
+$$
+\langle A \rangle = \bigcap_{A \subseteq H, H \leq G} H
+$$
+
+that is, the intersection of all subgroups of $G$ containing $A$.
+
+**Proposition 9**: $\overline A = \langle A \rangle$ where
+
+$$
+\overline A := \lbrace a_1^{\epsilon_1} \dots a_n^{\epsilon_n} \mid n \in \mathbb Z, n \geq 0, a_i \in A, \epsilon_i = \pm 1 \rbrace
+$$
+
+*Proof*: $\overline A$ is a subgroup, $\langle A \rangle \subseteq \overline A$ since $A \subseteq \overline A$, and $\overline A \subseteq \langle A \rangle$ since $\langle A \rangle$ is a subgroup.
+
+## Lattice of Subgroups of a Group
+
+**Definition**: The **lattice of subgroups of a group** is a graph where the nodes are the subgroups, and directed edges denote that one group is a subgroup of another.
+
+**Remark**: Isomorphic groups have identical lattice forms, but not the converse.
+
+**Remark**: $V_4$ and $Z_4$ are not isomorphic because they have different lattice structures.
+
