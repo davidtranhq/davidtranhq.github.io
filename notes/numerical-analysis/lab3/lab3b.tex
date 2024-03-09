@@ -54,7 +54,7 @@
 \usepackage{tabto}
 
 % Set the title and author
-\title{Newton's Method, Error, Newton's Fractal and Explorations}
+\title{Solving Systems of Equations, Errors and Explorations}
 \author{David Tran and Spencer Kelly}
 \date{\today}
 
@@ -64,52 +64,47 @@
 
 \subsection*{Abstract}
 
-
 \section{Introduction}
+
+\section{The PA = LU factorization method for linear systems}
+
+\subsection{Why is PA = LU needed for solving linear systems approximately?}
+
+\subsection{How to identify systems Ax = b for which PA = LU is not suited}
+
+\subsection{Larger applications of PA = LU factorization}
+
+\section{Iterative solution of systems of linear equations}
+
+\subsection{Solving an equation for n = 100,000}
+
+\subsection{Comparison of PA = LU and Jacobi Iteration}
+
+\subsection{Why is solving such large systems important in applications?}
+
+\section{Implement Newton's method for multiple variables}
+
+\subsection{Implement Newton's method for systems using vectorization}
+
+\subsection{Testing}
+
+\subsection{Challenging Example}
+
+\section{Summary}
+
+\section{Appendices}
+
+\subsection{Code}
+
+\subsection{Plots}
+
+
+
 
 
 \section{Code}
 
-\begin{verbatim}
-function [x,flag] = MyVectorNewton(f,Df,x0,tol,maxiter)
-% Author : YourFirstName YourLastName
-% Date : Today
-% Purpose : Compute approximate solution to f(x )=0 via Newton's Method
-%
-% Inputs :
-% f -- A function handle for f(x) being solved
-% Df -- A function handle for the f'(x)
-% x0 -- Initial guess for the fixed point
-% tol -- Tolerance of the solution .
-% maxiter -- Maximum number of iterations .
-%
-% Outputs :
-% x -- Estimated solution
-% flag -- Flag specifying if the solution has been obtained :
-% = The number of iterations taken to converge .
-% = -1 If the algorithm has not converged in maxiter iterations .
-%
-flag = -1;                                   %give inital value of flag and xold
-x = x0;
-for i = 1:maxiter              %for loop do the iteration with 'maxiter' given for the maximum steps
-    xold = x;
-    x = x - Df(x)\f(x);        %Newton
-    %fprintf('%f\n',xs);
-    if norm(x-xold) <= tol               %if x_new - x_old <= tol, break the loop, let flag = # of steps
-        flag = i;
-        break
-    end                                      %if not, do next iteration
-end
-end
-\end{verbatim}
 
-\begin{verbatim}
-clear
-clc
-f = @(x)[x(2) - x(1)^3 ; x(1)^2 + x(2)^2 - 1];                     %You need to consider your own example
-Df = @(x)[-3* x(1)^2 , 1 ; 2*x(1) , 2* x(2)];
-[xsoln , fl]= MyVectorNewton(f , Df , [ 1 ; 2 ], 10^(-12) ,10)
-\end{verbatim}
 
 \section{Summary}
 \subsection{Results}
