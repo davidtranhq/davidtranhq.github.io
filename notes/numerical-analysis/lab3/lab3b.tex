@@ -76,11 +76,56 @@
 
 \section{Iterative solution of systems of linear equations}
 
+Jacobi FPI is a method for solving systems of linear equations of the form $Ax = b$. It is a multi-dimensional analogue of the one-dimensional fixed-point iteration we explored in Lab 2. We require that $A$ is diagonally dominant, which means that the absolute value of the diagonal element of $A$ is greater than the sum of the absolute values of the other elements in the row. This is a sufficient condition for the convergence of the Jacobi FPI. The Jacobi FPI is given by the following formula:
+
+\begin{equation}
+x^{(k+1)} = D^{-1}(L+U)x^{(k)} + D^{-1}b
+\end{equation}
+
+where $D$ is the diagonal of $A$, $L$ is the lower triangular part of $A$, and $U$ is the upper triangular part of $A$. The Jacobi FPI is a simple and easy-to-implement method for solving systems of linear equations, but it is not the most efficient method. We will explore the convergence of the Jacobi FPI and compare it to the PA = LU factorization method.
+
 \subsection{Solving an equation for n = 100,000}
+
+We solve the following system of linear equations
+
+\begin{equation}
+\begin{bmatrix}
+  3 & -1 & 0 & 0 & 0 & \frac{1}{2} \\
+  -1 & 3 & -1 & 0 & \frac{1}{2} & 0 \\
+  0 & -1 & 3 & -1 & 0 & 0 \\
+  0 & 0 & -1 & 3 & 0 & 0 \\
+  0 & \frac{1}{2} & 0 & 0 & 3 & -1 \\
+  \frac{1}{2} & 0 & 0 & 0 & -1 & 3 \\
+\end{bmatrix}x = b
+\end{equation}
+
+where $b = (5/2, 3/2, \dots, 3/2, 1, 1, 3/2, \dots, 5/2)^T$, where there are $n - 4$ 3/2's in the middle of the vector. Using the code in Listing \ref{lst:jacobi}, we solve the system of linear equations for $n = 100,000$, with the following:
+
+\begin{verbatim}
+>> n = 100000;
+>> [A, b] = sparsesetup(n);
+>> x = jacobi(A, b, 50);
+\end{verbatim}
+
+which converges to $(1, \dots, 1)^T$ after just 50 iterations.
+
+
+
+% include code from jacobi.m with a reference
+\lstinputlisting[caption={The code for the Jacobi FPI}, label={lst:jacobi}]{jacobi.m}
 
 \subsection{Comparison of PA = LU and Jacobi Iteration}
 
+Theoretically, Jacobi is guaranteed to converge for all $n$ if $A$ is diagonally dominant, which $A$ is in this case. If we try $PA = LU$ decomposition for this problem, using
+
+% include code from solve_lu.m
+\lstinputlisting[caption={The code for the LU decomposition}, label={lst:lu}]{solve_lu.m}
+
+the function takes much longer due to its $O(n^3)$ time complexity. Even for $n = 10000$, the function takes almost a minute on an Apple M1 Pro chip. Usually for $PA = LU$, if the matrix is rank-deficient (multiple rows/columns that are linearly dependent), the $LU$ decomposition may not be unique and thus may fail to find the correct solution. However in this case, $A$ is not rank-deficient, so the $LU$ decomposition should work. But, the Jacobi method is much faster and more reliable for this problem.
+
 \subsection{Why is solving such large systems important in applications?}
+
+Solving large systems of linear equations is important in applications because it is a fundamental problem in many areas of science and engineering. For example, in statstics, a linear model may depend on millions or even billions of parameters which translates to a system of equations of the same size. As a concrete example, a technique such as principal component analysis requires solving a system with as many equations as there are desired dimensions. Or, for example, modelling fluid dynamics similarily requires very large systems of equations due to the complexity of the problem. Data is naturally highly multi-dimensional, which makes solving large systems important in practice.
 
 \section{Implement Newton's method for multiple variables}
 
@@ -103,8 +148,6 @@
 
 
 \section{Code}
-
-
 
 \section{Summary}
 \subsection{Results}
