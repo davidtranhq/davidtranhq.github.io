@@ -63,8 +63,10 @@
 \maketitle
 
 \subsection*{Abstract}
+This lab is the 3rd in a series of 4 labs exploring various numerical methods, implementing them, and examining their tradeoffs. In this lab, we explore the PA = LU factorization method for solving systems of linear equations, as well as the Jacobi fixed-point iteration method and multivariate Newton's method. We compare the convergence of the Jacobi FPI and the PA = LU factorization method, and we compare the convergence of Newton's method for different systems of equations. We find that the Jacobi FPI is a simple and easy-to-implement method for solving systems of linear equations, but it is not the most efficient method. We also find that the PA = LU factorization method is not suited for solving systems of linear equations when the matrix is large, and that the Jacobi FPI is much faster and more reliable for this problem. We also find that Newton's method is a very fast and reliable method for solving systems of equations, and that plotting the convergence of Newton's method allows one to understand the rate of convergence and the behavior of the system of equations.
 
 \section{Introduction}
+
 
 \section{The PA = LU factorization method for linear systems}
 
@@ -125,43 +127,71 @@ the function takes much longer due to its $O(n^3)$ time complexity. Even for $n 
 
 \subsection{Why is solving such large systems important in applications?}
 
-Solving large systems of linear equations is important in applications because it is a fundamental problem in many areas of science and engineering. For example, in statstics, a linear model may depend on millions or even billions of parameters which translates to a system of equations of the same size. As a concrete example, a technique such as principal component analysis requires solving a system with as many equations as there are desired dimensions. Or, for example, modelling fluid dynamics similarily requires very large systems of equations due to the complexity of the problem. Data is naturally highly multi-dimensional, which makes solving large systems important in practice.
+Solving large systems of linear equations is important in applications because it is a fundamental problem in many areas of science and engineering. For example, in statstics, a linear model may depend on millions or even billions of parameters which translates to a system of equations of the same size. As a concrete example, a dimensonality-reduction technique such as principal component analysis requires solving a system with as many equations as there are data points and/or desired dimensions. Or, for example, modelling fluid dynamics similarily requires very large systems of equations due to the complexity of the problem. Data is naturally highly multi-dimensional, which makes solving large systems important in practice.
 
 \section{Implement Newton's method for multiple variables}
 
-\subsection{Implement Newton's method for systems using vectorization}
+
+\subsection{Implementation of Newton's method for systems using vectorization}
+
+\lstinputlisting[caption={The code for the Newton's method}, label={lst:newton}]{vectornewton.m}
 
 \subsection{Testing}
 
-\subsection{Challenging Example}
+We test Newton's method on the following system of equations in Listing \ref{lst:newtontest}: which yields the approximate solution of $u = 1.0960, v = -1.1592, w = -0.2611$ in 7 iterations with a tolerance of $10^{-12}$.
+\begin{equation}
+\begin{aligned}
+  2u^2 - 4u + v^2 + 3w^2 + 6w + 2 &= 0 \\
+  u^2 + v^2 - 2v + 2w^2 - 5 &= 0 \\
+  3u^2 - 12u + v^2 + 3w^2 + 8 &= 0 \\
+\end{aligned}
+\end{equation}
+In the same code, we solve
+\begin{equation}
+\begin{aligned}
+  y^2 - x^3 &= 0 \\
+  x^2 + y^2 - 1 &= 0 
+\end{aligned}
+\end{equation}
+which yields $x = 0.8260, y = 0.5636$ in 7 iterations with a tolerance of $10^{-12}$.
+
+
+\subsection{Adding Visualization to Newton's Method}
+
+Plotting the convergence of Newton's method allows one to understand the rate of convergence and the behavior of the system of equations, since we often don't know how the system may converge or behave beforehand. For example, We can plot the convergence of Newton's method for the system of equations in Listing \ref{lst:newtontest} by using the code in Listing \ref{lst:vectornewtonvisualized}, which yields the plot in Figure \ref{fig:newtonplot}. It shows that although we don't reach the desired tolerance until iteration 7, the rate of convergence is very fast, and the solution is very close to the true solution after just 4 iterations.
 
 \section{Summary}
+
+\subsection{Results}
+
+We explored 3 different methods of solving systems of equations across 2 different categories: direct substitution methods, and iterative methods. We found that the Jacobi FPI is a simple and easy-to-implement method for solving systems of linear equations, but it is not the most efficient method. We also found that the PA = LU factorization method is not suited for solving systems of linear equations when the matrix is large, and that the Jacobi FPI is much faster and more reliable for this problem. We also implemented Newton's method for systems of equations and found that it is a very fast and reliable method for solving systems of equations, and that plotting the convergence of Newton's method allows one to understand the rate of convergence and the behavior of the system of equations.
+
+\subsection{Team Work Problems and Ideas}
+
+We worked well together and were able to complete the lab in a timely manner. We were able to divide the work evenly and work on the lab together. We were able to communicate effectively and work together to solve the problems in the lab. A problem that was encountered was in the testing of the PA = LU method, where the function took much longer than expected to run. We were able to solve this problem by starting with much smaller input sizes (e.g. $n = 100$) and growing $n$ much slower to see how the function scaled.
+\subsection{Future Explorations}
+
+In the future, we would like to explore other methods for solving systems of equations, such as the Gauss-Seidel method, the SOR method, and the conjugate gradient method. We would also like to explore the convergence of these methods and compare them to the methods we explored in this lab. We would also like to further explore how ill-conditioned matrices may behave with the discussed methods, and how to transform the matrices to be better conditioned.
+
+
+\subsection{References}
 
 \section{Appendices}
 
 \subsection{Code}
 
+\lstinputlisting[caption={The code for the Newton's method test}, label={lst:newtontest}]{vectornewtontest.m}
+
+\lstinputlisting[caption={The code for the Newton's method with visualization}, label={lst:vectornewtonvisualized}]{vectornewtonvisualized.m}
+
 \subsection{Plots}
 
-
-
-
-
-\section{Code}
-
-\section{Summary}
-\subsection{Results}
-
-
-\subsection{Team Description}
-
-
-\subsection{Future Explorations}
-
-
-\subsection{References}
-
-\section*{Appendix}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{newtonplot.png}
+  \caption{The convergence of Newton's method for the second system of equations in Listing \ref{lst:newtontest}}
+  \label{fig:newtonplot}
+\end{figure}
 
 
 \end{document}
