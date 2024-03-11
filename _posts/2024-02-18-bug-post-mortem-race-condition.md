@@ -171,7 +171,7 @@ in a single-threaded program, the comment holds true; `bar` is even marked `cons
 int main() {
     auto vec = std::vector<int> {1, 2, 3, 4, 5};
     auto future = std::async(std::launch::async, count_vec, vec);
-    count_vec.clear();
+    vec.clear();
     std::cout << future.get(); // maybe 0, maybe 5
     return 0;
 }
