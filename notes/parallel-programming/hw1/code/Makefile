@@ -3,16 +3,16 @@ OS := $(shell uname)
 
 # Set default CXX for Linux
 CXX = clang++
+CC = clang
 
-# Override CXX for macOS
+# Override compiler for macOS
 ifeq ($(OS), Darwin)
+    CC = xcrun cilk
     CXX = xcrun cilk++
 endif
 
 CXXFLAGS = -g -O3 --std=c++20 -Wall -Wextra -fopencilk
 
-# c compiler
-CC = xcrun cilk
 # add -DENABLE_CILK to enable cilk
 CCFLAGS = -g -O3 -Wall -Wextra -fopencilk -DENABLE_CILK
 
