@@ -1,6 +1,14 @@
+# Detect the operating system
+OS := $(shell uname)
 
-# Note: need to prefix with `xcrun` if running on MacOS
-CXX = xcrun cilk++
+# Set default CXX for Linux
+CXX = clang++
+
+# Override CXX for macOS
+ifeq ($(OS), Darwin)
+    CXX = xcrun cilk++
+endif
+
 CXXFLAGS = -g -O3 --std=c++20 -Wall -Wextra -fopencilk
 
 # c compiler
@@ -13,7 +21,7 @@ HEADERS_q1 = SquareMatrix.hpp SquareMatrixView.hpp
 OBJS_q1 = $(SRCS_q1:.cpp=.o)
 BIN_q1 = q1
 
-SRCS_q2 = closest_pair.c
+SRCS_q2 = main_q2.c
 HEADERS_q2 =
 OBJS_q2 = $(SRCS_q2:.c=.o)
 BIN_q2 = q2
