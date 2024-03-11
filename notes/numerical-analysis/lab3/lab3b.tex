@@ -67,6 +67,11 @@ This lab is the 3rd in a series of 4 labs exploring various numerical methods, i
 
 \section{Introduction}
 
+(The citations for the following are found in the references section at the end of the document.)
+
+The problem of solving systems of linear equations forms the historical roots of linear algebra. It was deeply explored by Rene Descartes, who introduced the geometrical interpretation of solutions to systems as intersections in hyper-dimensional Cartesian space. Later, both Leibniz and Gauss independently developed methods for solving systems of linear equations, with the latter being the namesake for Gaussian elimination. 
+
+The methods explored in this lab, namely, PA = LU factorization, Jacobi fixed-point iteration, and Newton's method, are all later methods for solving systems of linear equations. The PA = LU factorization method is a direct substitution method, which means that it is a method that directly computes the solution to the system of linear equations. The Jacobi fixed-point iteration and Newton's method are iterative methods, which means that they are methods that use an initial guess to iteratively compute the solution to the system of linear equations. Both have their tradeoffs, and we will explore these tradeoffs in this lab. We will see why Newton's method is one of the more popular methods for solving systems of equations in modern times.
 
 \section{The PA = LU factorization method for linear systems}
 
@@ -173,8 +178,28 @@ We worked well together and were able to complete the lab in a timely manner. We
 
 In the future, we would like to explore other methods for solving systems of equations, such as the Gauss-Seidel method, the SOR method, and the conjugate gradient method. We would also like to explore the convergence of these methods and compare them to the methods we explored in this lab. We would also like to further explore how ill-conditioned matrices may behave with the discussed methods, and how to transform the matrices to be better conditioned.
 
-
-\subsection{References}
+\begin{thebibliography}{}
+  \bibitem{christensen2012}
+  Christensen, R. H. (2012).
+  \textit{The History of Linear Algebra}.
+  Retrieved from: \url{https://www.math.utah.edu/~gustafso/s2012/2270/web-projects/christensen-HistoryLinearAlgebra.pdf}
+  
+  \bibitem{fearnley1979}
+  Fearnley-Sander, D. (1979).
+  \textit{Hermann Grassmann and the Creation of Linear Algebra}.
+  \textit{American Mathematical Monthly}, 86, 809–817.
+  
+  \bibitem{hart2010}
+  Hart, R. (2010).
+  \textit{The Chinese Roots of Linear Algebra}.
+  JHU Press. ISBN 9780801899584.
+  
+  \bibitem{sauer2012}
+  Sauer, T. (2012).
+  \textit{Numerical Analysis}.
+  Pearson. ISBN 978-0-321-58746-2.
+\end{thebibliography}
+  
 
 \section{Appendices}
 
