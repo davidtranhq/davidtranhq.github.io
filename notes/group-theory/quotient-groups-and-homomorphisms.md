@@ -276,6 +276,8 @@ $\blacksquare$
 
 Some properties shown in the exercises:
 * If a subgroup is the sole subgroup of its order, then it is normal. (Exercise 5)
+* Let $K \leq H \leq G$ where $H$ has finite index in $G$. Then $\vert G : K\vert = \vert G : H\vert\vert H : K\vert$. (used in Exercise 11).
+* The number of left cosets equals the number of right cosets by the correspondence $x \mapsto x^{-1}$ (Exercise 12).
 
 ### Exercises
 
@@ -305,4 +307,24 @@ Some properties shown in the exercises:
 
 **Exercise 10**: Suppose $H$ and $K$ are subgroups of finite index $m$, $n$, respectively, in $G$ (possibly infinite). Prove that $\operatorname{lcm}(m,n) \leq \vert G : H \cap K \vert \leq mn$.
 
-*Proof*: TODO.
+*Proof*: First, note that $a(H \cap K) = aH \cap aK$, so the number of cosets of $H \cap K$ is at most the product of the number of cosets of $aH$ and of $aK$, that is, $mn$. For the lower bound, note that since $H \cap K \leq H$ and $H \cap K \leq K$,
+
+$$
+\vert G : H \cap K\vert = \vert G : K\vert\vert K : H \cap K\vert = \vert G : H\vert\vert H : H \cap K\vert
+$$
+
+since $H \cap K$ partitions $H$ which partitions $G$ (likewise for $H \cap K$ paritioning $K$ partitioning $G$) (see Exercise 11 for a complete proof). So $m$ and $n$ divide $\vert G : H \cap K\vert$, so $\operatorname{lcm}(m, n) \leq \vert G : H \cap K\vert$. $\blacksquare$
+
+**Exercise 11**: Let $H \leq K \leq G$. Prove that $\vert G : H \vert = \vert G : K \vert \cdot \vert K : H \vert$.
+
+*Proof*: Let $n = \vert G : K \vert, m = \vert K : H \vert$. We have
+
+$$
+\begin{align*}
+G = \bigsqcup_{g \in G} gK = \bigsqcup_{g \in G}g\bigsqcup_{k \in K}kH = \bigsqcup_{g \in G, k \in K} gkH
+\end{align*}
+$$
+
+and there are $mn$ distinct cosets of $gkH$. $\blacksquare$
+
+**Exercise 12**: Let $H \leq G$. Prove that $x \mapsto x^{-1}$ maps each left coset of $H$ in $G$ onto a right coset of $H$ and gives a bijection between the set of left cosets and the set of right cosets of $H$ in $G$.
