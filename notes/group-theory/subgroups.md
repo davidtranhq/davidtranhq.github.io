@@ -129,10 +129,12 @@ are the set of elements that **fix** $s$, that is, $g$ **fixes** $s$. Then $G_s$
 
 *Proof*: For the first, map like-powers to like-powers. For the second, map an integer $k$ to the $k$-th power of the generator. $\blacksquare$
 
-**Proposition**: Let $G$ be a group, $x \in G$, and $a \in \mathbb Z - \lbrace 0 \rbrace$.
+**Proposition 5**: Let $G$ be a group, $x \in G$, and $a \in \mathbb Z - \lbrace 0 \rbrace$.
 
 1. If $\vert x \vert = \infty$, then $\vert x^a \vert = \infty$.
 2. If $\vert x \vert = n$, then $\vert x^a \vert = \frac{n}{(n, a)}$
+
+*Proof* $(1)$ If $\vert x^a \vert = n \lt \infty$, then $x^{an} = 1$ so $\vert x \vert \leq an \lt \infty$. $\blacksquare$
 
 **Proposition**: Let $H = \langle x \rangle$.
 1. If $\vert x \vert = \infty$, then $H = \langle x^a \rangle$ iff $a = \pm 1$.

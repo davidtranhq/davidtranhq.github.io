@@ -272,11 +272,11 @@ $\blacksquare$
 
 **Corollary 15**: If $H$ and $K$ are subgroups of $G$ and $H$ normalizes $K$, then $HK \leq G$.
 
-*Proof*: Let $hk \in HK$. Since $H$ normalizes $K$ $k = h^{-1}k'h$ for some $k'$, so $hk = hh^{-1}k'h = k'h \in KH$ so $HK \subseteq KH$. Similarily KH \subseteq HK$, so by Proposition 14, $HK \leq G$. $\blacksquare$
+*Proof*: Let $hk \in HK$. Since $H$ normalizes $K$, $k = h^{-1}k'h$ for some $k'$, so $hk = hh^{-1}k'h = k'h \in KH$ so $HK \subseteq KH$. Similarily $KH \subseteq HK$, so by Proposition 14, $HK \leq G$. $\blacksquare$
 
 Some properties shown in the exercises:
 * If a subgroup is the sole subgroup of its order, then it is normal. (Exercise 5)
-* Let $K \leq H \leq G$ where $H$ has finite index in $G$. Then $\vert G : K\vert = \vert G : H\vert\vert H : K\vert$. (used in Exercise 11).
+* Let $K \leq H \leq G$ where $H$ has finite index in $G$. Then $\vert G : K\vert = \vert G : H\vert\vert H : K\vert$. (Exercise 11).
 * The number of left cosets equals the number of right cosets by the correspondence $x \mapsto x^{-1}$ (Exercise 12).
 
 ### Exercises
@@ -328,3 +328,243 @@ $$
 and there are $mn$ distinct cosets of $gkH$. $\blacksquare$
 
 **Exercise 12**: Let $H \leq G$. Prove that $x \mapsto x^{-1}$ maps each left coset of $H$ in $G$ onto a right coset of $H$ and gives a bijection between the set of left cosets and the set of right cosets of $H$ in $G$.
+
+*Proof*: Let $g \in G$ and $x \in Hg$. Then $x = hg$ for some $h \in H$, so $x^{-1} = g^{-1}h^{-1} \in g^{-1}H$, so the mapping is surjective. Now suppose $hg = h'g$. Then, taking the inverse of both sides, shows $g^{-1}h^{-1} = g^{-1}h'^{-1}$, so the mapping is injective. Thus it is bijective. $\blacksquare$
+
+## The Isomorphism Theorems
+
+**Theorem 16 (The First Isomorphism Theorem)**: If $\phi: G \to H$ is a homomorphism of groups, then $\operatorname{ker} \phi \trianglelefteq G$ and $G/\operatorname{ker}\phi \cong \phi(G)$.
+
+*Proof*: The first statement is Proposition 7, and the second is Theorem 3 and Proposition 5. $\blacksquare$
+
+**Corollary 17**: Let $\varphi: G \to H$ be a homomorphism of groups.
+1. $\varphi$ is injective if and only if $\operatorname{ker} \varphi = 1$.
+2. $\vert G : \operatorname{ker} \varphi \vert = \vert \varphi(G) \vert$
+
+*Proof*: $(1)$ Suppose $\varphi$ is injective. Then for $a \in G$, $\phi(a) = 1$ if and only if $a = 1$ since $\varphi(1) = 1$. Conversely, suppose the kernel is trivial. Then $G/1 = G \cong \varphi(G)$ by the First Isomorphism Theorem, so $\varphi$ is bijective (and thus injective).
+
+$(2)$ $\vert G : \operatorname{ker} \varphi \vert = \vert G/\operatorname{ker} \varphi \vert = \vert \varphi(G) \vert$ since $G/\operatorname{ker} \varphi \cong \varphi(G)$ by the First Isomorphism Theorem. $\blacksquare$.
+
+**Theorem 18 (The Second Isomorphism Theorem)**: Let $G$ be a group, $A, B \leq G$, and $A \leq N_G(B)$. Then $AB \leq G$, $B \trianglelefteq AB$, $A \cap B \trianglelefteq A$, and $AB/B \cong A/A \cap B$.
+
+*Proof*: $AB \leq G$ since $A \leq N_G(B)$ by Corollary 15.
+
+We have $B \trianglelefteq A$, so $(ab)B(ab)^{-1} = abBb^{-1}a^{-1} \subseteq aBa^{-1}\subseteq B$ for $ab \in AB$, so $B \trianglelefteq AB$ by Theorem 6.
+
+Define $\varphi: A \to AB/B$ as $\varphi(a) = aB$. It is surjective since if $abB \in AB/B$, then $\varphi(a) = abB = aB$. It is also a homomorphism since $\varphi(aa') = (aa')B = aBa'B = \varphi(a)\varphi(a')$. The identity is $1B$, which is mapped to when $a \in B$, so $\operatorname{ker} \varphi = B$. Thus by the First Isomorphism Theorem, $AB/B \cong A/A \cap B$, and $A \cap B \trianglelefteq A$ by Proposition 7. $\blacksquare$
+
+**Theorem 19 (The Third Isomorphism Theorem)**: Let $G$ be a group and $H, K \trianglelefteq G$ with $H \leq K$. Then $K/H \trianglelefteq G/H$ and
+
+$$
+(G/H)/(K/H) \cong G/K
+$$
+
+*Proof*: Define a map $\varphi: G/H \to G/K$ as $\varphi(gH) = gK$. It is well-defined since if $gH = g'H$ then $gK = g'K$ since if $g \in H$ then $g \in K$ since $H \leq K$ (and likewise for $g'$). It is surjective since $g$ may be chosen arbitrarily. Finally, $\operatorname{ker} \varphi = K/H$ since if $kH \in K/H$ then $\varphi(kH) = kK = K$ since $k \in K$, and conversely, if $\varphi(gH) = K$ for $gH \in G/H$ then $g \in K$, that is, $gH \in G/K$. So by the First Isomorphism Theorem, the statement holds and $K/H \trianglelefteq G/H$ by Proposition 7. $\blacksquare$
+
+**Theorem 20 (Fourth Isomoprhism Theorem) (Correspondence Theorem) (Lattice Isomorphism Theorem)**: Let $G$ be a group and $N \trianglelefteq G$. Then there is a bijection between the set of subgroups $A$ of $G$ containing $N$ and the set of subgroups $A/N$ of $G/N$. In particular, for all $A, B \leq G$ and $N \leq A, N \leq B$,
+1. $A \leq B$ if and only if $\overline A \leq \overline B$
+2. If $A \leq B$, then $\vert B : A \vert = \vert \overline B : \overline A \vert$
+3. $\overline{\langle A, B \rangle} = \langle \overline A, \overline B \rangle$
+4. $\overline{(A \cap B)} = \overline A \cap \overline B$
+5. $A \trianglelefteq G$ if and only if $\overline A \trianglelefteq \overline G$.
+
+where $\overline X := X/N$ for some group $X$.
+
+*Proof*: Let $X^\star$ be the set of subgroups $A$ of $G$ containing $N$ and $Y^\star$ the set of subgroups $A/N$ of $G/N$. Define $\varphi: X^\star \to Y^\star$ as $\varphi(A) = \pi(A)$. It is surjective since the complete preimage of a subgroup in $G/N$ is a subgroup in $G$ (by Exercise 1 in "Definition and Examples"). It is injective since if $\pi(A) = \pi(A')$ then $A = \pi^{-1}(\pi(A)) = \pi^{-1}(\pi(A')) = A'$. So $\varphi$ is bijective.
+
+$(1)$ Suppose $A \leq B$. $\overline A$ is non-empty since $1 \in A$, so $\pi(1) \in \overline A$. Let $aN, a'N \in \overline A$. Then $(aN)(a'N)^{-1} \in \overline A$ since $A$ is a subgroup, so $\overline A \leq \overline B$.
+
+Now suppose $\overline A \leq \overline B$. $A$ is non-empty since $1 \in \overline A$ so $\pi^{-1}(1) \in A$. Let $a, a' \in A$. Then $aa'^{-1} = \pi^{-1}(aN)\pi^{-1}((a'N)^{-1}) = \pi^{-1}((aa'^{-1})N) \in A$ since $\overline A \leq \overline B$. So $A \leq B$.
+
+$(2)$ Suppose $A \leq B$. Define a mapping from the cosets in $B/A$ to the cosets of $\overline B/\overline A$ as $bA \mapsto (bN)\overline A$. It is injective and well-defined since
+
+$$
+\begin{align*}
+    bA = b'A 
+    &\iff b'^{-1}b \in A \\
+    &\iff b'^{-1}bN \in \overline A \\
+    &\iff (bN)\overline A = (b'N)\overline A
+\end{align*}
+$$
+
+and it is surjective since $B$ ranges over all values of $b$ in $(bN)\overline A$.
+
+$(3)$ We have
+
+$$
+\begin{align*}
+    \overline X \in \overline{\langle A, B \rangle}
+    &\iff \overline X = (x_1 \dots x_n)N \\
+    &\iff \overline X = (x_1N)\dots(x_nN) \\
+    &\iff \overline X \in \langle \overline A, \overline B \rangle
+\end{align*}
+$$
+
+where $x_1, x_2, \dots, x_n \in A \cup B$.
+
+$(4)$ We have
+
+$$
+\begin{align*}
+    xN \in \overline{A \cap B}
+    &\iff x \in A \cap B \\
+    &\iff xN \in \overline A \land xN \in \overline B \\
+    &\iff xN \in \overline A \cap \overline B.
+\end{align*}
+$$
+
+$(5)$ Suppose $A \trianglelefteq G$. Let $gN \in \overline G$ and $aN \in \overline A$. Then $(gN)(aN)(gN)^{-1} = (gag^{-1})N = N$. For the converse, suppose $\overline A \trianglelefteq \overline G$ and let $a \in A$ and $g \in G$. Then $gag^{-1} \in \pi^{-1}(gN)\pi^{-1}(aN)\pi^{-1}((gN)^{-1}) = \pi^{-1}(gag^{-1}N) = \pi^{-1}(N) = A$, where $\pi$ is the natural projection.
+
+$\blacksquare$
+
+**Proposition**: Let $N \trianglelefteq G$ and $\varphi$ a homomorphism on $G/N$ whose value for some coset $gN$ depends only on $g$. Define $\phi$ as a homomorphism on $G$ with $\phi(g) = \varphi(\pi(g))$, where $\pi$ is the natural projection. Then $\varphi$ is well-defined if and only if $N \leq \operatorname{ker}{\phi}$.
+
+*Proof*: Suppose $N \leq \operatorname{ker}\phi$. Let $gN = g'N \in G/N$. Then $g'^{-1}g \in N$, so $g'^{-1}g \in \operatorname{ker}\phi$, so $\phi(g'^{-1}g) = \varphi(g'^{-1}gN) = 1$, so $\varphi(g'^{-1}N) = \varphi(g^{-1}N)$.
+
+Suppose now that $\varphi$ is well-defined. First note that $N \subseteq \operatorname{ker}\phi$ since if it weren't, then given $gN = g'N$, one may have $g'^{-1}g \in N - \operatorname{ker} \phi$, so $\phi(g'^{-1}g) =\varphi(g'^{-1}gN) = x \neq 1$, thus $\varphi(g'^{-1}N) = x\varphi(gN)$ with $x \neq 1$, so $\varphi(g'^{-1}N) \neq \varphi(gN)$, violating the well-definedness of $\varphi$. Finally, since $N \trianglelefteq G$, $N$ is a group so $N \leq \operatorname{ker} \phi$.
+
+$\blacksquare$
+
+### Exercises
+
+**Exercise 1**: Let $F$ be a finite field of order $q$ and let $n \in \mathbb Z^+$. Prove that $\vert GL_n(F) : SL_n(F) \vert = q - 1$.
+
+*Proof*: Define $\varphi: GL_n(F) \to F - \lbrace 0 \rbrace$ as $\varphi(M) = \det M$. It is a homomorphism since $\det(M)\det(M') = \det(MM')$ and it is surjective since given some $d \in F$, a matrix $M \in GL_n(F)$ with identical entries to the identity matrix, except for $M_{00} = d$, has determinant $d$ (the product of the entries along the diagonal). The kernel of $\varphi$ is the set of matrices with determinant 1, that is, $SL_n(F)$. So by the First Isomorphism Theorem, $GL_n(F)/SL_n(F) \cong F$, so $\vert GL_n(F) : SL_n(F) \vert = \vert F - \lbrace 0 \rbrace \vert = q - 1$. $\blacksquare$
+
+**Exercise 2**: Prove all parts of the Lattice Isomorphism Theorem (proved above).
+
+**Exercise 3**: Prove that if $H$ is a normal subgroup of $G$ of prime index $p$ then for all $K \leq G$, either ($K \leq H$) or ($G = HK$ and $\vert K : K \cap H \vert = p$).
+
+*Proof*: Suppose $K \nleq H$. By Corollary 15, $HK \leq G$, so $H \leq HK \leq G$. We have $[G : H] = p = [G : HK][HK : H]$ by Exercise 11 in "More on Cosets and Lagrange's Theorem", so either $[G : HK] = 1$, in which case $G = HK$, or $[G : HK] = p$. If $[G : HK] = p$, then $[HK : H] = 1$, but then $HK = H$ and $K \leq HK = H$; a contradiction. So $[G : HK] = 1$ and $G = HK$.
+
+To show that $[K : K \cap H] = p$, note that by the Second Isomorphism Theorem, $HK/H \cong K/(K \cap H)$, and since $[HK : H] = p$, $[K : K \cap H] = p$. $\blacksquare$
+
+**Exercise 4**: Let $C \trianglelefteq A$ and $D \trianglelefteq B$. Prove that $(C \times D) \trianglelefteq (A \times B)$ and $(A \times B)/(C \times D) \cong (A/C) \times (B/ D)$.
+
+*Proof*: Define $\varphi: A \times B \to A/C \times B/D$ as $\varphi((a, b)) = (aC, bD)$. It is a surjective homomorphism with kernel $C \times D$, so by the First Isomorphism Theorem and Proposition 7, both statements hold. $\blacksquare$
+
+**Exercise 7**: Let $M$ and $N$ be normal subgroups of $G$ such that $G = MN$. Prove that $G/(M \cap N) \cong (G/M) \times (G/N)$.
+
+*Proof*: By the Second Isomorphism Theorem, $G/M = MN/M \cong N/(M \cap N)$ and $G/N = MN/N \cong M/(M\cap N)$. So let $\varphi: M/(M \cap N) \times N/(M \cap N) \to G/(M \cap N)$ be defined as $\varphi: (m(M \cap N), n(M \cap N)) \mapsto mn(M \cap N)$. It is a surjective homomorphism since $G = MN$ and the kernel is $(M \cap N)$, so by the First Isomorphism Theorem, the statement holds. $\blacksquare$
+
+## Composition Series and the Holder Program
+
+**Proposition 21 (Cauchy's Theorem)**: If $G$ is a finite abelian group and $p$ is a prime dividing $\vert G \vert$, then $G$ contains an element of order $p$.
+
+*Proof*: By induction. Let $G$ be a finite abelian group of order $n > 1$. Suppose the statement holds for all such groups with order less than $n$. Since $n > 1$, there is an $x \in G$ with $x \neq 1$. If $n = p$ then $\vert x \vert = p$ by Lagrange's and we are done.
+
+So suppose $n > p$. Choose $x \in G$ and define $H = \langle x \rangle$ with $m = \vert H \vert$. If $p$ divides $m$ then $m = kp$ and $\vert x^k \vert = p$. So suppose $p$ does not divide $m$. $m$ divides $n$ by Lagrange's and is normal in $G$ since it is abelian. So $G/H$ is defined and $\vert G/H \vert = n/m$. Since $p$ does not divide $m$ and it divides $n$, it divides $n/m$ so $G/H$ contains an element, call it $yN$, of order $p$ by the inductive hypothesis. Since $\vert yN \vert \neq 1$ we have $y \not\in N$, but $y^p \in N$ since $(yN)^p = 1$. We have $\langle y^p \rangle \leq \langle y \rangle$ so $\vert y^p \vert \leq \vert y \vert$. Also $\langle y^p \rangle \leq N$ but $\langle y \rangle \nleq N$, so $\langle y^p \rangle \neq \langle y \rangle$ so $\vert y^p \vert \neq \vert y \vert$. So $\vert y^p \vert \lt \vert y \vert$. But by Proposition 2.5, $\vert y^p \vert = \vert y \vert/(\vert y \vert, p)$. $\vert y^p \vert \lt \vert y \vert$ so $(\vert y \vert, p) > 1$, so $p \mid \vert y \vert$ since $p$ is prime. So $lp = \vert y \vert$ for some integer $l$, so $y^l$ has order $p$ in $G$. $\blacksquare$
+
+**Definition**: A group $G$ is called **simple** if $\vert G \vert \gt 1$ and the only normal subgroups of $G$ are $1$ and $G$.
+
+**Definition**: In a group $G$, a sequence of subgroups
+
+$$
+1 = N_0 \leq N_1 \leq \dots \leq N_k = G
+$$
+
+is called a **composition series** if $N_i \trianglelefteq N_{i + 1}$ and $N_{i + 1}/N_i$ is a simple group for $0 \leq i \leq k - 1$. Then, the quotient groups $N_{i + 1}/N_i$ are called **composition factors** of $G$.
+
+**Theorem 22 (Jordan-Holder)**: Let $G$ be a finite, non-trivial group. Then
+1. $G$ has a composition series and
+2. The composition factors in a composition series are unique. That is, any two composition series for $G$ is the same length and there is a one-to-one congruence of each composition factor between each series.
+
+*Proof*: $(1)$ We induct on $\vert G \vert = n$. The base case of $n = 2$ holds since if $n = 2$ then $G = Z_2$ and $1 \leq Z_2$ is a composition series for $Z_2$. For the inductive step, suppose $n > 2$. If $G$ has no nontrivial proper normal subgroups, then $1 \leq G$ is a composition series so suppose otherwise. Let $N$ be such a normal subgroup. Then $\vert G/N \vert \leq \vert G \vert$ so by the inductive hypothesis, $G/N = \overline G$ has a composition series $\overline{G_1}, \dots, \overline{G_N}$. By the Lattice Isomorphism Theorem, there is some $G_i \leq G$ for each $\overline {G_i} \leq \overline G$, and $G_i \trianglelefteq G_{i + 1}$ for all $0 \leq i \lt n$ with $G_n = G$. Finally, by the Third Isomorphism Theorem, $\overline{G_{i + 1}}/\overline{G_i} \cong G_{i + 1}/G_i$, so each composition factor is simple. So $G_1, \dots, G_n$ is a composition series for $G$.
+
+$(2)$ TODO.
+
+**Theorem**: There are 18 (infinite) families of simple groups and 26 simple groups not belonging to these families, called the **sporadic** simple group, such that every finite simple group is isomorphic to one of the groups in the list.
+
+**Theorem (Feit-Thompson)**: If $G$ is a simple group of odd order, then $G \cong Z_p$ for some prime $p$.
+
+*Proof*: Out of scope (understatement).
+
+**Definition**: A group $G$ is **solvable** if there is a chain of subgroups
+
+$$
+1 = G_0 \trianglelefteq G_1 \trianglelefteq \dots \trianglelefteq G_s = G
+$$
+
+such that $G_{i + 1}/G_i$ is abelian for $0 \leq i \lt s$.
+
+**Proposition**: If $N$ and $G/N$ are solvable, then $G$ is solvable.
+
+*Proof*: Let $\overline G = G/N$ and $1 = N_0 \trianglelefteq N_1 \dots \trianglelefteq N_n = N$ and $1 = \overline G_0 \trianglelefteq \overline G_1 \trianglelefteq \dots \trianglelefteq \overline G_m = \overline G$ be the composition series with abelian factors for $N$ and $\overline G$, respectively. By the Fourth Isomorphism Theorem, $\overline G_i \cong G_i/N$ for some subgroups $G_i$ of $G$ with $N \trianglelefteq G$ and $G_i \trianglelefteq G_{i + 1}$ for $0 \leq i \lt m$. By the Third Isomorphism Theorem, $\overline G_{i + 1}/\overline G \cong G_{i + 1}/G_i$ so $G_{i + 1}/G_i$ is abelian. Thus
+
+$$
+1 = N_0 \trianglelefteq N_1 \trianglelefteq \dots \trianglelefteq N_n = N = G_0 \trianglelefteq G_1 \trianglelefteq \dots \trianglelefteq G_m = G
+$$
+
+is a composition series with abelian composition factors. Thus $G$ is solvable. $\blacksquare$
+
+Many important properties are shown in the exercises, such as:
+* If $G$ is an abelian simple group, then $G \cong Z_p$ for some prime $p$ (Exercise 1).
+* A finite abelian group has a subgroup of order $n$ for each positive divisor $n$ of its order. (Exercise 4).
+* Subgroups and quotient groups of a solvable group are solvable (Exercise 5).
+* If $G$ is a finite group and $H \trianglelefteq G$, there is a composition series of $G$, one of whose terms is $H$ (Exercise 7)
+* $G$ being a finite group is equivalent to all of the following: (Exercise 8)
+  * $G$ is solvable
+  * $G$ has a chain of subgroups with cyclic factors
+  * All composition factors of $G$ are of prime order
+  * $G$ has a chain of normal subgroups with abelian factors 
+
+### Exercises
+
+**Exercise 1**: Prove that if $G$ is an abelian simple group then $G \cong Z_p$ for some prime $p$ ($G$ is not necessarily finite).
+
+*Proof*: If $G$ is an abelian simple group, then for $\langle x \rangle \leq G$ for $x \in G - \lbrace 1 \rbrace$ we have $\langle x \rangle = G$, since otherwise $\langle x \rangle$ would be a normal proper subgroup of $G$; a contradiction. So $G$ is cyclic and $G \cong Z_n$ for some $n$. If $n$ were not prime, then $\langle d \rangle$ is a proper subgroup of $Z_n$; a contradiction. So $G \cong Z_p$ for some prime $p$. $\blacksquare$
+
+**Exercise 2**: Exhibit all 3 composition series for $Q_8$ and all 7 composition series for $D_8$. List the composition factors in each case.
+
+The composition series for each is every path from 1 to $Q_8$ (or $D_8$) in the lattice structure. For $D_8$:
+
+| Composition Series | Composition Factors |
+| ------------------ | ------------------- |
+| $1, \langle r^2 \rangle, \langle r \rangle, D_8$ | $Z_2, Z_2, Z_2$|
+|$1, \langle s \rangle, D_4, D_8$| as above|
+|$1, \langle r^2s \rangle, D_4, D_8$| as above|
+|$1, \langle r^2 \rangle, D_4, D_8$| as above|
+|$1, \langle r^2 \rangle, D_4', D_8$| as above|
+| $\dots$ | $\dots$
+
+**Exercise 4**: Use Cauchy's Theorem and induction to show that a finite abelian group has a subgroup of order $d$ for each positive divisor $d$ of its order.
+
+*Proof*: By induction. The base case is when $\vert G \vert = 1$ which is trivial. For the inductive step, suppose $\vert G \vert = n$. Let $d$ be a divisor of $n$. $d = kp$ for some prime $p$, so $p \mid n$ and by Cauchy's Theorem there exists a subgroup $H \leq G$ of order $p$. Since $G$ is abelian, $H$ is normal, so take $G/H$ with order $n/p$. By the inductive hypothesis, let $K/H \leq G/H$ with order $d/p$. By the Correspondence Theorem, $\vert K \vert = \vert H \vert d/p = d$. So $K \leq G$ with order $d$. $\blacksquare$
+
+**Exercise 5**: Prove that subgroups and quotient groups of a solvable group are solvable.
+
+*Proof*: Let $G$ be solvable with a series $G_1, \dots G_n$ and $H \leq G$. We show that $H$ is solvable with series $H_i = G_i \cap H$, $0 \leq i \leq n$. Note that $H_{i} = G_i \cap H = (G_{i + 1} \cap H) \cap G_i$. So by the Second Isomorphism Theorem,
+
+$$
+\frac{H_{i + 1}}{H_i} = \frac{G_{i + 1} \cap H}{(G_{i + 1} \cap H) \cap G_i} \cong \frac{(G_{i + 1} \cap H)G_i}{G_i}
+$$
+
+so $H_{i} \trianglelefteq H_{i + 1}$. Also, $(G_{i + 1} \cap H)G_i \leq G_{i + 1}$, so by the Lattice Isomorphism Theorem, $\frac{(G_{i + 1} \cap H)G_i}{G_i} \leq G_{i + 1}/G_i$. so $H_{i + 1}/H_i$ is abelian.
+
+For the quotient group of a solvable group, let $G$ be solvable with series $G_1, \dots, G_n$ and $N \trianglelefteq G$. Define $\overline G = G/N$. $\overline G$ is solvable with series $\overline G_1, \dots, \overline G_n$ since by the Lattice Isomorphism Theorem, $\overline{G_{i}} \trianglelefteq \overline{G_{i + 1}}$ since $G_{i} \trianglelefteq G_{i + 1}$, and $\overline{ G_{i + 1}} / \overline {G_i}$ is abelian since by the Third Isomorphism Theorem, $\overline{ G_{i + 1}}/\overline {G_i} \cong G_{i + 1}/G_i$. $\blacksquare$ 
+
+**Exercise 6**: Proof of $(1)$ of Jordan-Holder.
+
+**Exercise 7**: If $G$ is a finite group and $H \trianglelefteq G$, prove that there is a composition series of $G$, one of whose terms is $H$.
+
+*Proof*: By $(1)$ of Jordan-Holder, $H$ has a composition series $1 = H_1 \trianglelefteq \dots \trianglelefteq H_n = H$. Since $H \trianglelefteq G$, $\overline G = G/H$ is well-defined and also has a composition series $1 = \overline{G_1} \trianglelefteq \dots \trianglelefteq \overline{G_m} = \overline G$. By the Third and Fourth Isomorphism Theorems, there is a $G_i \leq G$ such that $\overline G_i = G_i/N$ and $H = G_1 \trianglelefteq \dots \trianglelefteq G_m = G$ is a composition series from $H$ to $G$ (see the proof of $(1)$ of Jordan-Holder). So
+
+$$
+1 = H_1 \trianglelefteq \dots \trianglelefteq H_n = H = G_1 \trianglelefteq \dots \trianglelefteq G_m = G
+$$
+
+is a composition series for $G$, one of whose terms is $H$. $\blacksquare$
+
+**Exercise 8**: Let $G$ be a finite group. Prove that the following are equivalent.
+1. $G$ is solvable.
+2. $G$ has a chain of subgroups $1 = H_0 \trianglelefteq \dots \trianglelefteq H_s = G$ such that $H_{i + 1}/H_i$ is cyclic for $0 \leq i \leq s - i$.
+3. All composition factors of $G$ are of prime order.
+4. $G$ has a chain of subgroups $1 = N_0 \trianglelefteq \dots \trianglelefteq N_t = G$ such that each $N_i \trianglelefteq G$ and $N_{i + 1}/N_i$ is abelian, $0 \leq i \leq t - i$.
+
+*Proof*: $(1 \to 2)$ Suppose $G$ is solvable with series $1 = H_0 \trianglelefteq \dots \trianglelefteq H_s = G$ where $s$ is maximal. Suppose there is a factor $H_{i + 1}/H_i$ that is non-cyclic. Then, it has a cyclic proper subgroup $X/H_i$. Since the factors are abelian, $X/H_i \trianglelefteq H_{i + 1}/H_i$, so by the Lattice Isormorphism Theorem, $X \trianglelefteq H_{i + 1}$. So $X$ can be placed in between $H_i$ and $H_{i + 1}$ in the series, contradicting that $s$ is maximal. So every factor is cyclic.
+
+$(2 \to 3)$ Let $1 = H_0 \trianglelefteq \dots \trianglelefteq H_s = G$ be the subnormal series existing by the assumption with maximal $s$. Suppose there is a quotient $H/N$ that is not of prime order. Since it is cyclic, there is a subgroup $M/N \trianglelefteq H/N$, so $N \trianglelefteq M \trianglelefteq H$, so $M$ may be added to the subnormal series between $N$ and $H$, contradicting that $s$ is maximal. So every quotient is of prime order. Every quotient is prime and cyclic, so it is simple, so the series is a composition series with factors of prime order. By Jordan-Holder, this composition series is unique, so all composition factors are of prime order.
+
+$(3 \to 4)$ TODO.
+
+$(4 \to 1)$ TODO.
