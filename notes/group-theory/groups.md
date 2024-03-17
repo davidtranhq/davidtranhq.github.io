@@ -348,4 +348,3 @@ We may say that **$G$ is a group acting on $A$**, and may write $ga$ in place of
 **Examples**:
 * Consider $D_8$ acting on the vertices of the square (encoded as the set of permutations of the vertices 1,2,3,4 labelled in clockwise order). For example, $r \cdot (1)(2)(3)(4) = (1234)$: a clockwise rotation of 90 degrees.
 * For a vector space $V$ with scalars in a field $F$, the vector space axioms declaring $cv \in V$ for $c \in F, v \in V$, $1v = v$, and $a(bv) = (ab)v, v \in V, a, b \in F$ describe $F$ as a group acting on the set of vectors $V$. 
-

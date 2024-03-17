@@ -217,6 +217,10 @@ The example holds whenever $g \in N$ but $g \neq 1$. For example, let $G = \math
 
 *Proof*: Let $X \in \overline G$ and $x \in X$. Then $x$ is some finite product of elements in $S$. So $X$ is some finite product of elements in $\overline S$ since $aNbN = abN$. So $X \in \langle \overline S \rangle$ and $\overline G \subseteq \langle \overline S \rangle$. Similar in the opposite direction. $\blacksquare$
 
+**Exercise 36**: Prove that if $G/Z(G)$ is cyclic then $G$ is abelian.
+
+*Proof*: Let $g \in G$. Since $G/Z(G)$ is cyclic, $g \in gZ(G) = x^aZ(G)$ for some $x \in G$ and $a \in \mathbb Z$. So $g = x^az$ for some $z \in Z(G)$. Similarily, $h = x^bz'$. So $gh = x^azx^bz' = x^ax^bzz' = x^bz'x^az = hg$. $\blacksquare$
+
 **Exercise 42**: Let $H, K \trianglelefteq G$ with $H \cap K = 1$. Prove that $xy = yx$ for all $x \in H$ and $y \in K$.
 
 *Proof*: Let $x \in H, y \in K$. Then $x^{-1}y^{-1}xy = x^{-1}h \in H$ where $h = y^{-1}xy \in H$ by normality of $H$. Similarily, $x^{-1}y^{-1}xy = ky \in K$ where $k = x^{-1}y^{-1}x \in K$ by normality of $K$. So $x^{-1}y^{-1}xy \in H \cap K = 1$, so $xy = yx$. $\blacksquare$
@@ -642,6 +646,9 @@ $\blacksquare$
 **Proposition 25**: The permutation of $\sigma$ is odd if and only if the number of cycles of even length in its cycle decomposition is odd.
 
 *Proof*: A cycle of even length has an odd number of transpositions, so the cycle is odd. $(-1)^k = -1$ if and only if $k$ is odd. $\blacksquare$
+
+Some useful tools used in the Exercises:
+* Given two transpositions $(ab)$ and $(bc)$, we may construct $(ac)$ by conjugating $(bc)$ by $(ab)$. (Exercise 3, 4)
 
 ### Exercises
 
