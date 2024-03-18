@@ -6,6 +6,8 @@ layout: default
 
 # Group Actions
 
+## Definition and Examples
+
 **Definition**: A **group action** of a group $G$ on a set $A$ is a map from $G \times A$ to $A$ (written $g \cdot a$ for all $g \in G$, $a \in A$) satisfying the following properties:
 * $g_1 \cdot (g_2 \cdot a) = (g_1g_2) \cdot a$ for all $a \in A, g \in G$
 * $1 \cdot a = a$ for all $a \in A$
@@ -260,4 +262,84 @@ $$
 
 so $fg^{-1}$ is an isomorphism and is in $\operatorname{Aut}(G)$. So it is a group. $\blacksquare$
 
-**Proposition 13**: Let $H$ be a normal subgroup of the group $G$. Then $G$ acts by conjugation on $H$ as automorphisms of $H$.
+**Proposition 13**: Let $H$ be a normal subgroup of the group $G$. Then $G$ acts by conjugation on $H$ as automorphisms of $H$. The permutation representation afforded by this action is a homomorphism of $G$ into $\operatorname{Aut}(H)$ with kernel $C_G(H)$.
+
+*Proof*: Let $g \in G$ and let $\varphi_g$ denote conjugation by $g$. Then
+
+$$
+\varphi_g(h_1h_2) = gh_1h_2g^{-1} = gh_1g^{-1}gh_2g^{-1} = \varphi_g(h_1)\varphi_g(h_2)
+$$
+
+with $h_1, h_2 \in H$, so $\varphi_g$ is a homomorphism from $G \to G$. It is injective since if $ghg^{-1} = gh'g^{-1}$ then $h = h'$ by cancellation, and it is surjective since given $h \in H$ we have $\varphi_g(g^{-1}hg) = h$. So $\varphi_g$ is an isomorphism.
+
+The permutation representation $\phi: G \to S_H$ defined by $\phi(g) = \varphi_g$ is a homomorphism by above whose image is contained in $\operatorname{Aut}(H)$. The kernel is all elements $g \in G$ such that $ghg^{-1} = h$ for all $h \in H$, that is, the centralizer of $H$. So by the First Isomorphism Theorem, $G/C_G(H) \cong \varphi(G) \leq \operatorname{Aut}(H)$. $\blacksquare$
+
+**Corollary 14**: If $K \leq G$ and $g \in G$, then $K \cong gKg^{-1}$. Thus, conjugate elements and conjugate subgroups have the same order.
+
+*Proof*: Let $H = G$ in Proposition 13, then $G$ acting on itself by conjugation is an automorphism. Thus, $G$ acting on a subgroup $K$ by conjugation is an automorphism on $K$, as well. $\blacksquare$
+
+**Corollary 15**: Let $H \leq G$. Then $N_G(H)/C_G(H)$ is isomorphic to a subgroup of $\operatorname{Aut}(H)$.
+
+*Proof*: $H \trianglelefteq N_G(H)$, so the result follows by Proposition 13. $\blacksquare$
+
+**Remark**: In particular, by Corollary 15, $G/Z(G)$ is isomorphic to a subgroup of $\operatorname{Aut}(G)$.
+
+**Definition**: Let $G$ be a group and $g \in G$. Conjugation by $g$ is called an **inner automorphism** of $G$ and the subgroup of $\operatorname{Aut}(G)$ consisting of all inner automorphisms is denoted $\operatorname{Inn}(G)$.
+
+**Note**: By Corollary 15, $\operatorname{Inn}(G) \cong G/Z(G)$.
+
+**Proposition E**: A group is abelian if and only if every inner automorphism is trivial.
+
+*Proof*: Let $G$ be a group. Then for all $x, y \in G$,
+
+$$
+\begin{align*}
+xy = yx
+&\iff xyx^{-1} = y \\
+&\iff \sigma_x(y) = y, \forall \sigma_x \in \operatorname{Inn}(G) \\
+&\iff \sigma_x(y) = \operatorname{id}, \forall \sigma_x \in \operatorname{Inn}(G)
+\end{align*}
+$$
+
+$\blacksquare$
+
+**Proposition F**: If $H \trianglelefteq G$ is abelian and is not contained in $Z(G)$, then there is some $g \in G$ such that if $\sigma_g$ is restricted to $H$,  $\sigma_g \notin \operatorname{Inn}(H)$.
+
+*Proof*: Let $g \in G$ such that $h'g \neq gh'$ for some $h' \in H$. Suppose to the contrary that every inner automorphism of $G$ restricted to $H$ is an inner automorphism of $H$. Then in particular, $\sigma_g \in \operatorname{Inn}(H)$, so for all $x \in H$, $gxg^{-1} = hxh^{-1}$ for some $h \in H$. Since $H$ is abelian, then $gxg^{-1} = x$ for all $x \in H$, so $gx = xg$. But this contradicts that $g$ does not commute with some element of $H$. $\blacksquare$
+
+**Examples**:
+1. Since $Z(Q_8) = \langle -1 \rangle$, $\operatorname{Inn}(Q_8) \cong V_4$.
+2. Since $Z(D_8) = \langle r^2 \rangle$, $\operatorname{Inn}(D_8) \cong V_4$.
+3. Since for al $n \geq 3$, $Z(S_n) = 1$, $\operatorname{Inn}(S_n) \cong S_n$.
+
+**Example**: Show that if $H \cong Z_2$, then $\operatorname{Aut}(H) = 1$. Deduce that $N_G(H) = C_G(H)$.
+
+*Proof*: $H$ has one element of order 1 and one element of order 2. By Corollary 14, automorphisms preserve order, so the only automorphism of $H$ is the identity. Then by Corollary 15, $N_G(H)/C_G(H) = 1$, so $N_G(H) = C_G(H)$. $\blacksquare$
+
+**Definition**: A subgroup $H$ of a group $G$ is called **characteristic in $G$**, denoted $H$ char $G$, if every automorphism of $G$ maps $H$ to itself. That is, $\sigma(H) = H$ for all $\sigma \in \operatorname{Aut}(G)$.
+
+**Proposition G**: Characteristic subgroups are normal.
+
+*Proof*: In particular, an inner automorphism of $G$ maps $H$ to itself, that is, $gHg^{-1} = H$ for all $g \in G$. That is, $H$ is normal. $\blacksquare$
+
+**Proposition H**: If $H$ is the unique subgroup of $G$ of a given order, then $H$ is characteristic in $G$.
+
+*Proof*: Automorphisms are isomorphisms, so in particular they preserve group order. So any automorphism of $G$ must map $H$ to a subgroup of the same order, which must be $H$. $\blacksquare$
+
+**Proposition I**: If $K$ char $H$ and $H \trianglelefteq G$, then $K \trianglelefteq G$.
+
+*Proof*: Since $H \trianglelefteq G$, every inner automorphism of $G$ restricted to $H$ is an automorphism of $H$. Since $K$ char $H$, every inner automorphism of $G$ maps $K$ to itself, that is, $gKg^{-1} = K$ for all $g \in G$, that is, $K$ is normal in $G$. $\blacksquare$
+
+**Proposition 16**: The automorphism group of the cyclic group of order $n$ is isomorphic to $(\mathbb Z/n\mathbb Z)^\times$.
+
+*Proof*: Let $G = Z_n$ and $G^\times = (\mathbb Z/n\mathbb Z)^\times$. Define a map $\varphi: G^\times \to \operatorname{Aut}(G)$ as $\varphi(g) = \phi_g$ where $\phi_g(x) = gx$ for $x \in G$. This is well-defined ($\phi_g$ is an automorphism) since
+
+$$
+\begin{align*}
+\phi_g(x + y) = g(x + y) = gx + gy = \phi_g(x) + \phi_g(y)
+\end{align*}
+$$
+
+and $\phi_g$ has trivial kernel, so it is injective. It is surjective since given $z \in G$, $\phi_g(g^{-1}z) = z$.
+
+To show that $\varphi$ is an isomorphism, first note it is surjective since 
