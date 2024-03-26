@@ -71,6 +71,12 @@
     But to teach the model to act as the differential equation and use it as a black-box solver for our system, we must have an underlying method for solving such a system.
     That's to say, all the model can do is to try its best to act as the underlying differential equation for the system, but in order to solve the system, we need a way to integrate the differential equation.
 
+  There are various numerical integration methods with varying levels of accuracy and computational intensity.
+  In this lab, we will go over some effective numerical methods for integration and their usefulness.
+  We then show how to these numerical methods can be used in a neural ODE to provide solutions to systems that don't have an obvious differential equation that governs them.
+  We evaluate the difference in effectiveness of these numerical methods when used in a neural ODE, and touch the on broader applications of neural ODEs.
+
+
 \section{Differential Equation Solvers}
 
 In this section, we discuss two different methods of numerical differential equation solving, their accuracy, and their importance.
