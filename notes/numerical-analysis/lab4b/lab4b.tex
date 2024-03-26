@@ -71,6 +71,27 @@
 In this section, we discuss two different methods of numerical differential equation solving, their accuracy, and their importance.
 
 \subsection{Euler's Method}
+  There are a variety of methods that can be used for numerical integration, these range all the way from methods such as using random walks in $\mathbb{Z}^d$ to solve for harmonic functions, to the simple and straightforward Euler's method on $\mathbb{R}$.
+    Of these methods there are two that stand-out as some of the most effective, and will be used in this lab.
+    The aforementioned Euler's method is a simple yet effective way to solve a differential equation, and will be one of the two examined in this lab.
+    The other is from the Runge-Kutta family, which are more computationally expensive but often give a more accurate solution.
+
+    Euler's method is rather simple, given some step size $s$, some initial value $h(t_0)$ and the differential equation $\frac{dh(t)}{dt}$, it moves along the tangent vector in the direction of $\frac{dh(t)}{dt}$ for some distance that has a projected length of $s$ along the $t$ axis.
+    The equation to represent this looks as such, for some $t \in (t_0,t_1)$, $h(t + s) = h(t) + s\frac{dh(t)}{dt}$.
+    This equation is evaluated for each step $t_n = n\cdot s \in (t_0,t_1)$, where $n$ is the step number.
+    This is an effective way of integrating a differential equation, though it is subject to errors that can propagate as the step size increases.
+
+    Assuming at time $t$ you lie on the one point to another, you lose accuracy by approximating the curve to be the straight line in the direction of $\frac{dh(t_i)}{dt}$ for time $s$.
+    This introduces an error corresponding to the difference between the point on the line $h(t_i+s)$ and the point at the end of straight line from $(t_i, h(t_i))$ to $(t_i + s, h(t_i) + s\frac{dh(t_i)}{dt})$.
+    Not only this, but you have to keep in mind that the latter point is not necessarily on the solution curve, so that the $\frac{dh(t)}{dt}$ vector field may look very different at the latter point than at the former point, and this introduces yet another source of error.
+    That is, as you encounter per-step errors by approximating the curve to be a straight line, you also encounter a global error resulting from falling off the original solution curve for the IVP and onto what would be other integral curves for the vector field $\frac{dh(t)}{dt}$.\\
+    Euler's method offers simplicity at the price of such errors.
+
+    As for the Runge-Kutta family, they are better designed to avoid errors at the cost of increased computational cost.
+    As implied, these methods are more involved than that of Euler's, giving a system of equations at each step in the integration, as opposed to a single equation.
+    The group of Runge-Kutta methods used in this lab, arguably a favourite for computational initial value problem-solving functions, fall into those of the 4th and 5th order.
+    This means that the methods in this lab serve to calculate each time steps accuracy to that of the 4th and 5th order terms
+
 
 \subsection{Runge-Kutta Methods}
 
