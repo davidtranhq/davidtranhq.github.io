@@ -62,7 +62,9 @@
 
 \maketitle
 
-\section*{Abstract}
+\subsection*{Abstract}
+
+In this final lab of a series of 4 labs exploring numerical methods, we discuss numerical ODE solvers. We describe Euler's method and the family of Runge-Kutta methods and the computational tradeoffs between them. In particular, we explore its usage in neural ordinary differential equations, and how different families of ODE solvers provide different tradeoffs on the approximation accuracy of the model and its computational cost.
 
 \section{Introduction}
 
@@ -115,12 +117,6 @@ As seen in Figure~\ref{fig:first_iteration_euler}, after the first iteration, th
 
 When using the Dormand-Prince method, training and evaluating the model took approximately 4 minutes and 53 seconds on an Apple M1 Pro, consisting of 8 physical cores each with 8 logical processors. Using Euler's method, training and evaluating the model took approximately 2 minutes and 3 seconds, less than half the time of the Dormand-Prince method. This demonstrates the cost-accuracy tradeoff between the two methods, and more generally, between fixed-step and adaptive-step ODE solvers.
 
-\section{Conclusion}
-
-We discussed the difference between fixed-step and adaptive-step numerical ODE solvers, in particular, Euler's method and Runge-Kutta methods. We described neural ODEs, a deep learning approach that chooses to model transformations to the input data as an ordinary differential equation, allowing one to leverage the rich theory of ODE solvers to the problem of time-series modelling. We showed that, when using the Runge-Kutta methods in neural ODEs, we observe better approximations at the cost of longer compute time, and vice-versa for Euler's method.
-
-The team was able to collaborate well and properly divide the tasks. We were able to leverage our existing experience in ODE solvers in applications for simulating fluid dynamics, as well as experience in novel machine learning research. In the future, it would be interesting to apply neural ODEs to other time-series problems with complex system dynamics, such as fluid flow simulation, weather prediction, and financial modelling.
-
 
 \begin{figure}
   \centering
@@ -135,6 +131,131 @@ The team was able to collaborate well and properly divide the tasks. We were abl
   \caption{After 2000 iterations, using Euler's method.}
   \label{fig:last_iteration_euler}
 \end{figure}
+
+\section{Conclusion}
+
+We discussed the difference between fixed-step and adaptive-step numerical ODE solvers, in particular, Euler's method and Runge-Kutta methods. We described neural ODEs, a deep learning approach that chooses to model transformations to the input data as an ordinary differential equation, allowing one to leverage the rich theory of ODE solvers to the problem of time-series modelling. We showed that, when using the Runge-Kutta methods in neural ODEs, we observe better approximations at the cost of longer compute time, and vice-versa for Euler's method.
+
+The team was able to collaborate well and properly divide the tasks. We were able to leverage our existing experience in ODE solvers in applications for simulating fluid dynamics, as well as experience in novel machine learning research. In the future, it would be interesting to apply neural ODEs to other time-series problems with complex system dynamics, such as fluid flow simulation, weather prediction, and financial modelling.
+
+\section{Appendix}
+\begin{lstlisting}[language=Python,caption=Code for the ODE solver.]
+SOLVERS = {
+  'dopri8': Dopri8Solver,
+  'dopri5': Dopri5Solver,
+  'bosh3': Bosh3Solver,
+  'fehlberg2': Fehlberg2,
+  'adaptive_heun': AdaptiveHeunSolver,
+  'euler': Euler,
+  'midpoint': Midpoint,
+  'heun3': Heun3,
+  'rk4': RK4,
+  'explicit_adams': AdamsBashforth,
+  'implicit_adams': AdamsBashforthMoulton,
+  # Backward compatibility: use the same name as before
+  'fixed_adams': AdamsBashforthMoulton,
+  # ~Backwards compatibility
+  'scipy_solver': ScipyWrapperODESolver,
+}
+
+
+def odeint(func, y0, t, *, rtol=1e-7, atol=1e-9, method=None, options=None, event_fn=None):
+
+  shapes, func, y0, t, rtol, atol, method, options, event_fn, t_is_reversed = _check_inputs(func, y0, t, rtol, atol, method, options, event_fn, SOLVERS)
+
+  solver = SOLVERS[method](func=func, y0=y0, rtol=rtol, atol=atol, **options)
+
+  if event_fn is None:
+      solution = solver.integrate(t)
+  else:
+      event_t, solution = solver.integrate_until_event(t[0], event_fn)
+      event_t = event_t.to(t)
+      if t_is_reversed:
+          event_t = -event_t
+
+  if shapes is not None:
+      solution = _flat_to_shape(solution, (len(t),), shapes)
+
+  if event_fn is None:
+      return solution
+  else:
+      return event_t, solution
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python,caption=Code for training the network on the oscillator.]
+  class ODEFunc(nn.Module):
+
+    def __init__(self):
+        super(ODEFunc, self).__init__()
+
+        self.net = nn.Sequential(
+            nn.Linear(2, 50),
+            nn.Tanh(),
+            nn.Linear(50, 2),
+        )
+
+        for m in self.net.modules():
+            if isinstance(m, nn.Linear):
+                nn.init.normal_(m.weight, mean=0, std=0.1)
+                nn.init.constant_(m.bias, val=0)
+
+    def forward(self, t, y):
+        return self.net(y**3)
+
+
+class RunningAverageMeter(object):
+    """Computes and stores the average and current value"""
+
+    def __init__(self, momentum=0.99):
+        self.momentum = momentum
+        self.reset()
+
+    def reset(self):
+        self.val = None
+        self.avg = 0
+
+    def update(self, val):
+        if self.val is None:
+            self.avg = val
+        else:
+            self.avg = self.avg * self.momentum + val * (1 - self.momentum)
+        self.val = val
+
+
+if __name__ == '__main__':
+
+    ii = 0
+
+    func = ODEFunc().to(device)
+    
+    optimizer = optim.RMSprop(func.parameters(), lr=1e-3)
+    end = time.time()
+
+    time_meter = RunningAverageMeter(0.97)
+    
+    loss_meter = RunningAverageMeter(0.97)
+
+    for itr in range(1, args.niters + 1):
+        optimizer.zero_grad()
+        batch_y0, batch_t, batch_y = get_batch()
+        pred_y = odeint(func, batch_y0, batch_t, method='euler').to(device)
+        loss = torch.mean(torch.abs(pred_y - batch_y))
+        loss.backward()
+        optimizer.step()
+
+        time_meter.update(time.time() - end)
+        loss_meter.update(loss.item())
+
+        if itr % args.test_freq == 0:
+            with torch.no_grad():
+                pred_y = odeint(func, true_y0, t)
+                loss = torch.mean(torch.abs(pred_y - true_y))
+                print('Iter {:04d} | Total Loss {:.6f}'.format(itr, loss.item()))
+                visualize(true_y, pred_y, func, ii)
+                ii += 1
+
+        end = time.time()
+\end{lstlisting}
 
 \begin{thebibliography}{9}
 
