@@ -65,6 +65,11 @@
 \section*{Abstract}
 
 \section{Introduction}
+  Neural ODEs are set up such that the hidden state at any time $t$ is such that it returns the function $f$ for the differential equation $\frac{dh(t)}{dt} = f(h(t),t,\theta)$.
+  That is, for some system with state $h(t)$, we can train the neural network to find $\frac{dh(t)}{dt}$ for any time $t$.
+    This means that we are essentially training the ODE to act as a \"black-box\" solver of some dynamical system in which the state of our system can be described as $h(t)$ so that the rate of change of our system can be described as $\frac{dh(t)}{dt} = f(h(t),t,\theta)$.
+    But to teach the model to act as the differential equation and use it as a black-box solver for our system, we must have an underlying method for solving such a system.
+    That's to say, all the model can do is to try its best to act as the underlying differential equation for the system, but in order to solve the system, we need a way to integrate the differential equation.
 
 \section{Differential Equation Solvers}
 
@@ -77,8 +82,8 @@ In this section, we discuss two different methods of numerical differential equa
     The other is from the Runge-Kutta family, which are more computationally expensive but often give a more accurate solution.
 
     Euler's method is rather simple, given some step size $s$, some initial value $h(t_0)$ and the differential equation $\frac{dh(t)}{dt}$, it moves along the tangent vector in the direction of $\frac{dh(t)}{dt}$ for some distance that has a projected length of $s$ along the $t$ axis.
-    The equation to represent this looks as such, for some $t \in (t_0,t_1)$, $h(t + s) = h(t) + s\frac{dh(t)}{dt}$.
-    This equation is evaluated for each step $t_n = n\cdot s \in (t_0,t_1)$, where $n$ is the step number.
+    The equation to represent this looks as such, for some $t \in (t_0,t_1)$, $h_{n+1} = h_n + s\frac{dh(t)}{dt}$.
+    This equation is evaluated for each step $t_n = n\cdot s \in (t_0,t_1)$, where $n \in \mathbb{N}$ is the step number.
     This is an effective way of integrating a differential equation, though it is subject to errors that can propagate as the step size increases.
 
     Assuming at time $t$ you lie on the one point to another, you lose accuracy by approximating the curve to be the straight line in the direction of $\frac{dh(t_i)}{dt}$ for time $s$.
@@ -87,13 +92,37 @@ In this section, we discuss two different methods of numerical differential equa
     That is, as you encounter per-step errors by approximating the curve to be a straight line, you also encounter a global error resulting from falling off the original solution curve for the IVP and onto what would be other integral curves for the vector field $\frac{dh(t)}{dt}$.\\
     Euler's method offers simplicity at the price of such errors.
 
-    As for the Runge-Kutta family, they are better designed to avoid errors at the cost of increased computational cost.
+\subsection{Runge-Kutta Methods}
+    As for the Runge-Kutta family, they are better designed to avoid errors, at the cost of increased computational cost.
     As implied, these methods are more involved than that of Euler's, giving a system of equations at each step in the integration, as opposed to a single equation.
     The group of Runge-Kutta methods used in this lab, arguably a favourite for computational initial value problem-solving functions, fall into those of the 4th and 5th order.
-    This means that the methods in this lab serve to calculate each time steps accuracy to that of the 4th and 5th order terms
+    This means that the Runge-Kutta methods in this lab serve to calculate each time steps accuracy to that of the 4th and 5th order terms.
 
+  The order of a Runge-Kutta method is the number of terms it uses when calculating the slope of the vector to follow on the next step.
+For example, a Runge-Kutta method of the 4th order does the following at step $i$ of the iterative method for some step size $s$, and differential equation $\frac{dh(t)}{dt} = f(t,h)$:
 
-\subsection{Runge-Kutta Methods}
+\[\begin{align}
+    h_{n+1} &= h_n + \frac{s}{6}(k_1 + 2k_2 + 2k_3 + k_4)\\
+    t_{i+1} &= t_i + s
+\end{align}\]
+Where
+\[\begin{align}
+    k_1 &= f(t_i, h_i)\\
+    k_2 &= f(t_i + \frac{s}{2}, h_i + \frac{k_1}{2})\\
+    k_3 &= f(t_i + \frac{s}{2}, h_i + \frac{k_2}{2})\\
+    k_4 &= f(t_i + s, h_i + k_3)\\
+\end{align}\]
+Here we can see that within any given step of this method, the differential equation is evaluated at the start point of the interval $[t_i, t_i + s]$, giving us $k_1$
+Once we have $k_1$, we use that slope to calculate the estimated slope at the middle point of the interval, which gives us $k_2$.
+With $k_2$, we again calculate the slope at the midpoint of the interval but this time using the slope $k_2$, which gives us $k_3$.
+Finally, we calculate the slope at the endpoint of the interval, using $k_3$, and giving us $k_4$.
+Once we have these, we use a weighted sum of them to calculate the next point on the integral curve.
+It is important to note that this example is used to display the idea behind Runge-Kutta methods, and that the multi-stage slope evaluation and subsequent weighted averaging within each step is used across the entire Runge-Kutta family.
+
+As is evident from above, the Runge-Kutta 4th order method is a much more complex method than Euler's method, and the Runge-Kutta method used in this lab called dopri5 (The Dormand-Prince Method), is even more sophisticated than the classic Runge-Kutta 4th order method.
+The Dormand-Prince method uses the same Runge-Kutta method as displayed in the 4th order, but does so also in the 5th order, along with adapting the step size for each individual step based on error calculations obtained by contrasting the 4th and 5th order coefficients (as opposed to using a fixed step size, seen in Euler's method and the Runge-Kutta 4th order method).
+dorpi5 is able to balance error-mitigation with computational efficiency to provide accurate solutions in the 5th order without sacrificing too much computational cost, which is why it is the default of ODE solver functions in MATLAB and other computational software.
+
 
 \section{Neural Ordinary Differential Equations}
 
@@ -163,17 +192,17 @@ The team was able to collaborate well and properly divide the tasks. We were abl
     Chen, R. T. Q., Rubanova, Y., Bettencourt, J., \& Duvenaud, D. (2018).
     \textit{Neural Ordinary Differential Equations}.
     Advances in Neural Information Processing Systems.
-  
+
   \bibitem{torchdiffeq}
     Chen, R. T. Q. (2018).
     \textit{torchdiffeq}.
     Retrieved from \url{https://github.com/rtqichen/torchdiffeq}
-  
+
 \end{thebibliography}
 
 
 
-  
+
 
 
 \end{document}
