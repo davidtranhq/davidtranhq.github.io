@@ -76,7 +76,13 @@ In this section, we discuss two different methods of numerical differential equa
 
 \section{Neural Ordinary Differential Equations}
 
-\subsection{What is a neural ODE?}
+Neural Ordinary Differential Equations (Neural ODEs) is a deep learning approch that uses neural networks to model continuous time-series data. Unlike traditional deep learning models that rely on discrete layers and fixed architectures, Neural ODEs leverage the theory of ordinary differential equations (ODEs) to describe dynamic systems. In essence, they encapsulate the evolution of hidden states continuously over time, offering a flexible framework for modeling complex temporal dynamics.
+
+Existing models for time-series data such as residual networks and recurrent neural networks vompose sequences of transformation to some hidden state $h$ as $h_{t + 1} = h_t + f(h_t, \theta_t)$. Crucially, these models use a fixed number of layers to represent discrete (pre-determined) time steps $t_1, \dots, t_n$. The neural ODE instead considers the sequence of transformations as a continuous and represents the transformation as an ordinary diferential equation: $\frac{dh}{dt} = f(h(t), t, \theta)$. The neural network is then trained to approximate the function $f$ as $\hat f$. The output of the model $h(t)$ at some time $t$ is computed from an initial value $h(0)$ (the input data) using any ODE solver on the ODE
+
+$$
+\frac{dh(t)}{dt} = \hat f(h(t), t, \theta)
+$$
 
 \subsection{Why machine learning for DE solving}
 
@@ -86,21 +92,49 @@ The advantage of machine learning for DE solving over traditional analytical or 
 
 We use the implementation of the neural ODE described in \cite{chen2018neuralode} using the code in \cite{torchdiffeq}. We use it to learn the dynamics of a simple harmonic oscillator with slight dampening. Observe in Figure~\ref{fig:first_iteration} how the predicted trajectories and phase portrait (blue) do not match very well the ground truth (green). Although the shape of the learned vector field looks accurate, it is askew from the proper orientation of the phase portrait In Figure~\ref{fig:last_iteration}, the predicted trajectory and phase portrait nearly perfectly coincide, and we observe that the learned vector field nearly matches what one would expect from the phase portrait.
 
+
 \begin{figure}
   \centering
   \includegraphics*[width=\linewidth]{000.png}
-  \caption{The predicted trajectory, and the corresponding learned vector field after one iteration. The green represents the ground truth, while the blue represents the output of the model.}
+  \caption{The predicted trajectory, and the corresponding learned vector field after one iteration. The green represents the ground truth, while the blue represents the output of the model. The Dormand-Prince method, a type of Runge-Kutta ODE solver, is used to evaluate the final prediction.}
   \label{fig:first_iteration}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics*[width=\linewidth]{099.png}
-  \caption{After 99 iterations.}
+  \caption{After 2000 iterations, using Dormand-Prince.}
   \label{fig:last_iteration}
 \end{figure}
 
 \subsubsection{Euler's Method vs Runge-Kutta}
+
+In the above section, after learning the function $\frac{dh(t)}{dt}$, the model uses the Dormand-Prince method, an adaptive-step ODE solver that falls under the family of Runge-Kutta methods. We now compare its performance to using a fixed-point ODE solver, namely, Euler's method.
+
+As seen in Figure~\ref{fig:first_iteration_euler}, after the first iteration, the trajectory and phase portrait match the ground-truth much worse, and the learned vector field exhibits greater distortion than when using the Dormand-Prince method as the ODE solver. Even after 2000 iterations as in Figure~\ref{fig:last_iteration_euler}, we see the model is not able to capture the trajectory as well as when using the Dormand-Prince method, as in Figure~\ref{fig:last_iteration}.
+
+When using the Dormand-Prince method, training and evaluating the model took approximately 4 minutes and 53 seconds on an Apple M1 Pro, consisting of 8 physical cores each with 8 logical processors. Using Euler's method, training and evaluating the model took approximately 2 minutes and 3 seconds, less than half the time of the Dormand-Prince method. This demonstrates the cost-accuracy tradeoff between the two methods, and more generally, between fixed-step and adaptive-step ODE solvers.
+
+\section{Conclusion}
+
+We discussed the difference between fixed-step and adaptive-step numerical ODE solvers, in particular, Euler's method and Runge-Kutta methods. We described neural ODEs, a deep learning approach that chooses to model transformations to the input data as an ordinary differential equation, allowing one to leverage the rich theory of ODE solvers to the problem of time-series modelling. We showed that, when using the Runge-Kutta methods in neural ODEs, we observe better approximations at the cost of longer compute time, and vice-versa for Euler's method.
+
+The team was able to collaborate well and properly divide the tasks. We were able to leverage our existing experience in ODE solvers in applications for simulating fluid dynamics, as well as experience in novel machine learning research. In the future, it would be interesting to apply neural ODEs to other time-series problems with complex system dynamics, such as fluid flow simulation, weather prediction, and financial modelling.
+
+
+\begin{figure}
+  \centering
+  \includegraphics*[width=\linewidth]{000_euler.png}
+  \caption{After one iteration, using Euler's method.}
+  \label{fig:first_iteration_euler}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics*[width=\linewidth]{099_euler.png}
+  \caption{After 2000 iterations, using Euler's method.}
+  \label{fig:last_iteration_euler}
+\end{figure}
 
 \begin{thebibliography}{9}
 
