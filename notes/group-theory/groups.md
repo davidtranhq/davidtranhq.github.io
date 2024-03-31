@@ -8,7 +8,7 @@ toc: true
 
 ## Definitions and Examples
 
-**Definition**: A **semigroup** is an ordered pair $(S, *)$ where $S \neq 0$ and $*$ is an associative binary operation on $S$. 
+**Definition**: A **semigroup** is an ordered pair $(S, \star)$ where $S \neq 0$ and $\star$ is an associative binary operation on $S$. 
 
 **Example**:
 * $(\mathbb Z, +), (\mathbb Z, \cdot), (\mathbb Q, +)$, etc. are commutative semigroups.

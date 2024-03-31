@@ -151,7 +151,7 @@ First note that $\operatorname{ker} \pi_H$ is normal in $G$ since it is the kern
 
 ### Exercises
 
-**Exercise 8**: Prove that if $H$ has finite index $n$, then there is a $K \trianglelefteq G$ with $K \leq H$ and $[G : H] \leq n!$.
+**Exercise 8**: Prove that if $H$ has finite index $n$, then there is a $K \trianglelefteq G$ with $K \leq H$ and $[G : K] \leq n!$.
 
 *Proof*: Define $\pi$ as the permutation representation afforded by $G$ acting on the left cosets of $H$ in $G$. Let $K = \operatorname{ker} \pi$. Then $K \trianglelefteq G$ and $K \leq H$. Since $\pi: G \to S_G$, by the First Isomorphism Theorem, $G/K \cong \pi(G) \leq S_G$, so $[G : K] \leq n!$. $\blacksquare$
 
@@ -248,6 +248,10 @@ $$
 a^g = g^{-1}ag, \forall g, a \in G
 $$
 
+### Exercises
+
+
+
 ## Automorphisms
 
 **Definition**: Let $G$ be a group. An isomorphism from $G$ onto itself is caleld an **automorphism** of $G$. The set of all automorphisms of $G$ is denoted $\operatorname{Aut}(G)$.
@@ -332,14 +336,58 @@ $\blacksquare$
 
 **Proposition 16**: The automorphism group of the cyclic group of order $n$ is isomorphic to $(\mathbb Z/n\mathbb Z)^\times$.
 
-*Proof*: Let $G = Z_n$ and $G^\times = (\mathbb Z/n\mathbb Z)^\times$. Define a map $\varphi: G^\times \to \operatorname{Aut}(G)$ as $\varphi(g) = \phi_g$ where $\phi_g(x) = gx$ for $x \in G$. This is well-defined ($\phi_g$ is an automorphism) since
+*Proof*: Let $x$ be a generator of $Z_n$. If $\psi \in \operatorname{Aut}(Z_n)$, then $\psi(x) = x^a$, for some $a \in \mathbb Z$, denoted $\psi_a$. Since $\psi_a$ is an automorphism, $\vert x \vert = \vert x^a \vert$ so $(a, n) = 1$. Note that if $(a, n) = 1$, then $x \mapsto x^a$ is an automorphism of $Z_n$. So $\phi: \operatorname{Aut}(Z_n) \to (\mathbb Z/n\mathbb Z)^\times$ is surjective with $\psi_a \mapsto a \pmod n$. It is a homomorphism since $\psi_a \circ \psi_b(x) = \psi_a(x^b) = x^ab = \psi_{ab}(x)$ for $\psi_a, \psi_b \in \operatorname{Aut}(Z_n)$, and it is injective, so it is an isomorphism.
 
-$$
-\begin{align*}
-\phi_g(x + y) = g(x + y) = gx + gy = \phi_g(x) + \phi_g(y)
-\end{align*}
-$$
+**Example**: Let $G$ be a group of order $pq$, with $p, q$ prime and $p \leq q$. If $p \nmid q - 1$, then $G$ is abelian.
 
-and $\phi_g$ has trivial kernel, so it is injective. It is surjective since given $z \in G$, $\phi_g(g^{-1}z) = z$.
+*Proof*: TODO.
 
-To show that $\varphi$ is an isomorphism, first note it is surjective since 
+## Sylow's Theorem
+
+**Definition**: Let $G$ be a group and $p$ a prime.
+1. A group of order $p^\alpha$ for some $\alpha \geq 1$ is called a **$p$-group**. Subgroups of $G$ which are $p$-groups are called **$p$-subgroups**.
+2. If $G$ is a group of order $p^\alpha m$ where $p \nmid m$, then a subgroup of order $p^\alpha$ is called a **Sylow $p$-subgroup of $G$**.
+3. The set of Sylow $p$-subgroups of $G$ are denoted by $Syl_p(G)$, and the number of Sylow $p$-subgroups of $G$ is denoted by $n_p(G)$ (or just $n_p$ when $G$ is clear from the context).
+
+**Theorem 18 (Sylow's Theorem)**: Let $G$ be a group of order $p^\alpha m$, where $p$ is a prime not dividing $m$.
+1. Sylow $p$-subgroups of $G$ exist.
+2. If $P$ is a Sylow $p$-subgroup of $G$ and $Q$ is any $p$-subgroup of $G$, then there exists $g \in G$ such that $Q \leq gPg^{-1}$.
+3. The number of Sylow $p$-subgroups of $G$ is $n_p \equiv 1 \pmod p$. $n_p$ is also the index in $G$ of the normalizer $N_G(P)$ for any Slow $p$-subgroup $P$, hence $n_p$ divides $m$.
+
+*Proof*: $(1)$ By induction on $\vert G \vert$. If $\vert G \vert = 1$, we are done. Assume inductively the existence of Sylow $p$-subgroups for all groups of order less than $\vert G \vert$.
+
+Suppose $p \mid \vert Z(G) \vert$, then by Cauchy's Theorem, there is an $N \trianglelefteq Z(G)$ of order $p$. Let $\overline G = G/N$. Then $\overline G$ has a Sylow $p$-group $\overline P$ of order $p^{\alpha - 1}$. By the Lattice Isomorphism Theorem, we have $P \leq G$ with $\vert P \vert = \vert P/N \vert \cdot \vert N \vert = p^\alpha$, so $P$ is a Sylow $p$-subgroup of $G$.
+
+Now suppose $p \nmid \vert Z(G) \vert$. Since $p \mid G$, $p$ does not divide the order of some conjugacy class with representative $g \in G$, by the class equation. Then $\vert C_G(g) \vert = \vert G \vert / [G : C_G(g)] = p^\alpha k$ where $p \nmid k$. By induction, $C_G(g)$ has a Sylow $p$-subgroup, so $G$ has a Sylow $p$-subgroup.
+
+$(2, 3)$ Let $P$ be a Sylow $p$-subgroup of $G$. Let $\mathcal P$ be the set of conjugates of $P$ in $G$. $P$ acts on $\mathcal P$ by conjugation with $P$ as the unique fixed point. Indeed, if $R \in \mathcal P$ and $P$ fixes $R$, then $P$ normalizes $R$, so $PR$ is a subgroup with $\vert PR \vert = \vert P \vert \vert R \vert / \vert P \cap R \vert$, so $PR$ is a $p$-subgroup of $G$ since $P$ and $R$ are $p$-subgroups of $G$. We have $P \leq PR$, but since $P$ is the maximal $p$-subgroup, $P = PR$ so $P = R$. $p$ divides the size of the other orbits, so $\vert \mathcal P \vert \equiv 1 \pmod p$.
+
+Suppose now that some Sylow $p$-subgroup is not in $\mathcal P$. Then $p$ divides the size of every orbit so $\vert \mathcal P \vert \equiv 0 \pmod p$, a contradiction. So every Sylow $p$-subgroup is conjugate. So $n_p = \vert \mathcal P \vert \equiv 1 \pmod p$.
+
+Note that $n_p \mid m$ since $m = [G : P] = [G : N_G(P)][N_G(P) : P] = n_p[N_G(P) : P]$.
+
+Finally assume $Q$ is a $p$-subgroup not contained in a conjugate of $P$. $Q$ acts on $\mathcal P$ by conjugation, but the size of each of its orbits would be divsible by $p$, a contradiction. So $Q$ is contained in some conjugate of $P$.
+
+$n_p$$\blacksquare$
+
+**Corollary 20**: Let $P$ be a Sylow $p$-subgroup of $G$. Then the following are equivalent:
+1. $P$ is the unique Sylow $p$-subgroup of $G$
+2. $P$ is normal in $G$
+3. $P$ is characteristic in $G$
+4. All subgroups generated by elements of $p$-power order are $p$-groups.
+
+*Proof*: $(1 \to 3)$. By Proposition $H$.
+
+$(3 \to 2)$ By Proposition $G$.
+
+$(2 \to 1)$ If $P \trianglelefteq G$ and $Q \in Syl_p(G)$ then $Q = gPg^{-1} = P$ for some $g \in G$, so $Syl_p(G) = \lbrace P \rbrace$.
+
+$(1 \to 4)$ Let $X \subseteq G$ with every element in $X$ of $p$-power order. Then for $x \in X$, $\langle x \rangle$ is a $p$-subgroup so $\langle x \rangle \subseteq gPg^{-1} = P$ by Sylow's Theorem, so $x \in P$. So $\langle X \rangle \subseteq P$, so $X$ is a $p$-group.
+
+$(4 \to 1)$. Let $X$ be the union of all Sylow $p$-subgroups of $G$. If $P \in Syl_p(G)$, then $P \leq \langle X \rangle$, but $P$ is the maximal $p$-subgroup, so $P = \langle X \rangle$ $\blacksquare$.
+
+### Applications of Sylow's Theorem
+
+**Example**: Let $\vert G \vert = pq$ for primes $p, q$ with $p \lt q$. Let $P \in Syl_p(G)$ and $Q \in Syl_q(G)$. Then $Q \trianglelefteq G$ and if $P \trianglelefteq G$, then $G$ is cyclic.
+
+*Proof*: Since $n_q \equiv 1 \pmod q$ and $n_q \mid p$, $n_q = 1$ so $Syl_q(G) = \lbrace Q \rbrace$. By Corollary 20, then, $Q$ is normal.
