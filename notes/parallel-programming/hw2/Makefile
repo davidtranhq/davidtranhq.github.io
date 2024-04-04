@@ -5,17 +5,18 @@ NVCC := $(CUDA_PATH)/bin/nvcc
 export PATH := $(CUDA_PATH)/bin:$(PATH)
 
 TARGET := poly_mul
-SRC := poly_mul.cu
+SRC := main.cu
 # Object files
 OBJ := $(SRC:.cu=.o)
+HEADERS := poly_mul.hpp
 
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(NVCC) -g -o $@ $^
+	$(NVCC) -o $@ $^
 
-%.o: %.cu
-	$(NVCC) -c -g -o $@ $<
+%.o: %.cu $(HEADERS)
+	$(NVCC) -c -o $@ $<
 
 clean:
 	rm -f $(OBJ) $(TARGET)

@@ -20,6 +20,26 @@ enum class PolynomialMulMethod {
     fast
 };
 
+/**
+ * @brief Naive polynomial multiplication on the CPU.
+ */
+template <typename T>
+void naive_polynomial_mul_cpu(
+    T const *poly1,
+    T const *poly2,
+    T       *result, 
+    int   const  degree
+) {
+    for (int i = 0; i <= 2 * degree; i++) {
+        T sum = 0;
+        for (int j = 0; j <= i; j++) {
+            if (j <= degree && (i - j) <= degree) {
+                sum += poly1[j] * poly2[i - j];
+            }
+        }
+        result[i] = sum;
+    }
+}
 
 /**
  * @brief Naive polynomial multiplication kernel.
@@ -30,7 +50,7 @@ enum class PolynomialMulMethod {
  * @param degree Degree of the polynomial
  */
 template <typename T>
-__global__ void naive_polynomial_mul_cuda(
+__global__ void naive_polynomial_mul_dev(
     T const *poly1,
     T const *poly2,
     T       *result, 
@@ -59,8 +79,8 @@ __global__ void naive_polynomial_mul_cuda(
  * @param degree Degree of the polynomial
  *
  */
-template <typename T, int block_sizea>
-__global__ void fast_polynomial_mul_cuda(
+template <typename T>
+__global__ void fast_polynomial_mul_dev(
     T const *A,
     T const *B,
     T       *C, 
@@ -86,12 +106,13 @@ __global__ void fast_polynomial_mul_cuda(
  * @param degree Degree of the polynomial
  * @param method Method to use for polynomial multiplication
  */
-template <typename T, int block_size>
+template <typename T>
 void polynomial_mul(
     T const *const poly1,
     T const *const poly2,
     T *result,
     int const degree,
+    int const block_size,
     PolynomialMulMethod method = PolynomialMulMethod::fast
 ) {
     const int num_coefficients = 2 * degree + 1;
@@ -122,13 +143,10 @@ void polynomial_mul(
 
     switch (method) {
     case PolynomialMulMethod::naive:
-        naive_polynomial_mul_cuda<<<num_blocks, block_size>>>(d_poly1, d_poly2, d_result, degree);
+        naive_polynomial_mul_dev<<<num_blocks, block_size>>>(d_poly1, d_poly2, d_result, degree);
         break;
     case PolynomialMulMethod::fast:
-        fast_polynomial_mul_cuda
-            <T, block_size>
-            <<<num_blocks, block_size>>>
-            (d_poly1, d_poly2, d_result, degree);
+        fast_polynomial_mul_dev<<<num_blocks, block_size>>>(d_poly1, d_poly2, d_result, degree);
         break;
     default:
         std::cerr << "Invalid polynomial multiplication method" << std::endl;

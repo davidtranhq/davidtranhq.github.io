@@ -7,34 +7,15 @@
 
 #include "poly_mul.hpp"
 
-
-
-template <typename T>
-void naive_polynomial_mul(
-    T const *poly1,
-    T const *poly2,
-    T       *result, 
-    int   const  degree
-) {
-    for (int i = 0; i <= 2 * degree; i++) {
-        T sum = 0;
-        for (int j = 0; j <= i; j++) {
-            if (j <= degree && (i - j) <= degree) {
-                sum += poly1[j] * poly2[i - j];
-            }
-        }
-        result[i] = sum;
-    }
-}
-
-void test_correctness() {
-
+void test_correctness(int block_size = 256) {
     auto generate_polynomial = [](int degree) {
         static auto rd = std::random_device {};
         static auto gen = std::mt19937(rd());
         static auto dis = std::uniform_int_distribution<int>(-1, 1);
         auto poly = std::vector<int>(degree + 1, 1);
-        for (int i = 0; i < degree + 1; ++i) poly[i] = dis(gen);
+        for (int i = 0; i < degree + 1; ++i) {
+            poly[i] = dis(gen);
+        }
         return poly;
     };
 
@@ -51,11 +32,13 @@ void test_correctness() {
         auto result = std::vector<int>(2 * degree + 1);
         auto expected = std::vector<int>(2 * degree + 1);
 
-        naive_polynomial_mul(poly1.data(), poly2.data(), expected.data(), degree);
-        polynomial_mul<int, 4>(poly1.data(), poly2.data(), result.data(), degree);
+        // serial code on CPU for testing
+        naive_polynomial_mul_cpu(poly1.data(), poly2.data(), expected.data(), degree);
+        // polynomial CUDA kernel
+        polynomial_mul(poly1.data(), poly2.data(), result.data(), degree, block_size, PolynomialMulMethod::fast);
 
         if (result != expected) {
-            std::cerr << "[TEST FAILED] Test failed for degree " << degree
+            std::cerr << "[FAIL] Test failed for degree " << degree
                 << "\nPolynomial 1: ";
             for (auto const coeff : poly1) std::cerr << coeff << " ";
             std::cerr << "\nPolynomial 2: ";
@@ -68,12 +51,12 @@ void test_correctness() {
             return;
         }
 
-        std::cout << "[TEST PASSED] Test passed for degree " << degree << "\n";
+        std::cout << "[PASS] Test passed for degree " << degree << "\n";
     }
     std::cout << "\nPASSED ALL TESTS\n";
 }
 
-void test_naive_performance(int degree, int block_size) {
+void test_naive_performance(int degree) {
     const int numCoefficients = 2 * degree + 1;
 
     // Define polynomials
@@ -85,17 +68,22 @@ void test_naive_performance(int degree, int block_size) {
 
     // use std::chrono to measure time it takes to run naive_polynomial_mul
     auto start = std::chrono::high_resolution_clock::now();
-    naive_polynomial_mul(poly1, poly2, result, degree);
+    naive_polynomial_mul_cpu(poly1, poly2, result, degree);
     auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> elapsed = end - start;
+    auto elapsed = end - start;
+    auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(elapsed);
 
     // print degree, block size, and elapsed time
-    std::cout << "(Naive) Degree: " << degree << ", Block Size: " << block_size << ", Elapsed Time: " << elapsed.count() << " s" << std::endl;
+    std::cout << "[cpu] degree: " << degree
+        << ", time: " << elapsed_ms.count() << " ms\n";
 
 }
 
-template <int block_size>
-void test_performance(int degree, PolynomialMulMethod method = PolynomialMulMethod::fast) {
+void test_performance(
+    int degree, 
+    int block_size,
+    PolynomialMulMethod method = PolynomialMulMethod::fast)
+{
     const int numCoefficients = 2 * degree + 1;
 
     // Define polynomials
@@ -112,7 +100,7 @@ void test_performance(int degree, PolynomialMulMethod method = PolynomialMulMeth
 
     // Perform polynomial multiplication using the given method
     cudaEventRecord(start); // Record start time
-    polynomial_mul<int, block_size>(poly1, poly2, result, degree, method);
+    polynomial_mul(poly1, poly2, result, degree, block_size, method);
     cudaEventRecord(stop); // Record stop time
 
     // Synchronize to make sure all CUDA operations are completed
@@ -129,12 +117,14 @@ void test_performance(int degree, PolynomialMulMethod method = PolynomialMulMeth
             method_name = "naive";
             break;
         case PolynomialMulMethod::fast:
-            method_name = "fast";
+            method_name = "fast!";
             break;
     }
 
     // print method name, degree, block size, and elapsed time
-    std::cout << "Method: " << method_name << ", Degree: " << degree << ", Block Size: " << block_size << ", Elapsed Time: " << milliseconds << " ms" << std::endl;
+    std::cout << "[cuda (" << method_name << ")] degree: " << degree
+        << ", block size: " << block_size
+        << ", time: " << milliseconds << " ms\n";
 
     // Cleanup
     cudaEventDestroy(start);
@@ -144,10 +134,17 @@ void test_performance(int degree, PolynomialMulMethod method = PolynomialMulMeth
 
 
 int main() {
-    // test_correctness();
+    test_correctness();
 
-    test_naive_performance(65536, 256);
-    test_performance<256>(65536, PolynomialMulMethod::naive);
-    test_performance<256>(65536, PolynomialMulMethod::fast);
+    for (int i = 1; i <= 16; i++) {
+        test_naive_performance(1 << i);
+    }
+
+    for (int b = 32; b <= 512; b *= 2) {
+        for (int i = 1; i <= 16; i++) {
+            test_performance(1 << i, b, PolynomialMulMethod::naive);
+            test_performance(1 << i, b, PolynomialMulMethod::fast);
+        }
+    }
     return 0;
 }
