@@ -2,6 +2,8 @@
     "files.associations": {
         "*.md": "markdown",
         "make.config": "makefile",
-        "functional": "cpp"
+        "functional": "cpp",
+        "*.tcc": "cpp",
+        "random": "cpp"
     }
 }

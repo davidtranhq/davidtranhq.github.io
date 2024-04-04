@@ -12,10 +12,10 @@ OBJ := $(SRC:.cu=.o)
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(NVCC) -o $@ $^
+	$(NVCC) -g -o $@ $^
 
 %.o: %.cu
-	$(NVCC) -c -o $@ $<
+	$(NVCC) -c -g -o $@ $<
 
 clean:
 	rm -f $(OBJ) $(TARGET)

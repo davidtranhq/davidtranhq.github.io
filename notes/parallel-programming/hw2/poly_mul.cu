@@ -7,6 +7,8 @@
 
 #include "poly_mul.hpp"
 
+
+
 template <typename T>
 void naive_polynomial_mul(
     T const *poly1,
@@ -31,23 +33,26 @@ void test_correctness() {
         static auto rd = std::random_device {};
         static auto gen = std::mt19937(rd());
         static auto dis = std::uniform_int_distribution<int>(-1, 1);
-        auto poly = std::vector<int>(degree + 1);
-        for (int i = 0; i < degree + 1; ++i) {
-            poly[i] = dis(gen);
-        }
+        auto poly = std::vector<int>(degree + 1, 1);
+        for (int i = 0; i < degree + 1; ++i) poly[i] = dis(gen);
         return poly;
     };
 
     std::cout << "Running correctness tests...\n";
-    std::vector<int> test_degrees = {0, 1, 1024, 2048, (1 << 16)};
+    auto const test_degrees = std::vector {
+        1, 2, 4, 8, 
+        16, 32, 64, 128, 
+        256, 512, 1024, 2048, 
+        (1 << 16)
+    };
     for (int const degree : test_degrees) {
         auto poly1 = generate_polynomial(degree);
         auto poly2 = generate_polynomial(degree);
         auto result = std::vector<int>(2 * degree + 1);
         auto expected = std::vector<int>(2 * degree + 1);
 
-        naive_polynomial_mul(poly1.data(), poly2.data(), result.data(), degree);
-        polynomial_mul(poly1.data(), poly2.data(), expected.data(), degree, 256);
+        naive_polynomial_mul(poly1.data(), poly2.data(), expected.data(), degree);
+        polynomial_mul<int, 4>(poly1.data(), poly2.data(), result.data(), degree);
 
         if (result != expected) {
             std::cerr << "[TEST FAILED] Test failed for degree " << degree
@@ -89,7 +94,8 @@ void test_naive_performance(int degree, int block_size) {
 
 }
 
-void test_performance(int degree, int block_size, PolynomialMulMethod method) {
+template <int block_size>
+void test_performance(int degree, PolynomialMulMethod method = PolynomialMulMethod::fast) {
     const int numCoefficients = 2 * degree + 1;
 
     // Define polynomials
@@ -106,7 +112,7 @@ void test_performance(int degree, int block_size, PolynomialMulMethod method) {
 
     // Perform polynomial multiplication using the given method
     cudaEventRecord(start); // Record start time
-    polynomial_mul(poly1, poly2, result, degree, block_size, method);
+    polynomial_mul<int, block_size>(poly1, poly2, result, degree, method);
     cudaEventRecord(stop); // Record stop time
 
     // Synchronize to make sure all CUDA operations are completed
@@ -138,9 +144,10 @@ void test_performance(int degree, int block_size, PolynomialMulMethod method) {
 
 
 int main() {
-    test_correctness();
+    // test_correctness();
 
-    // test_naive_performance(3, 256);
-    // test_performance(3, 256);
+    test_naive_performance(65536, 256);
+    test_performance<256>(65536, PolynomialMulMethod::naive);
+    test_performance<256>(65536, PolynomialMulMethod::fast);
     return 0;
 }
