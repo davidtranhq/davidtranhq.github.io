@@ -82,6 +82,7 @@ From https://stackoverflow.com/a/4742791/6327671 :
 * implemented with value, condition variable and mutex
 * `wait` (decrementing) acquires a mutex and waits on a condition variable if the value is not positive
 * `post` (incrementing) acquires a mutex, increments the value, signals the condition variables, and releases the mutex
+
 ```
 struct semaphore {
     int value;
