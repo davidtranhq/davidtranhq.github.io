@@ -1,0 +1,113 @@
+\documentclass[11pt]{article}
+
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Define colors for syntax highlighting
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+% Set up the MATLAB code listing style
+\lstset{
+  backgroundcolor=\color{white},
+  basicstyle=\footnotesize\ttfamily,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{mygreen},
+  deletekeywords={...},
+  escapeinside={\%*}{*)},
+  extendedchars=true,
+  frame=single,
+  keepspaces=true,
+  keywordstyle=\color{blue},
+  language=Matlab,
+  otherkeywords={*,...},
+  numbers=left,
+  numbersep=5pt,
+  numberstyle=\tiny\color{mygray},
+  rulecolor=\color{black},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stepnumber=1,
+  stringstyle=\color{mymauve},
+  tabsize=2,
+  title=\lstname
+}
+
+
+% Adjust the margins if needed
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{graphicx}
+\usepackage{tabto}
+
+% Set the title and author
+\title{Lab 4A}
+\author{David Tran}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+  \item The below code adds the feature of plotting the solution.
+  
+  \lstinputlisting{euler_method.m}
+
+  \lstinputlisting{test_euler_method.m}
+
+  \includegraphics*[width=\linewidth]{euler_method.png}
+
+  \item We obtain the following values
+  \begin{table}[htbp]
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+    $t$ & $y$ \\
+    \hline
+    0 & 1.0000 \\
+    0.1000 & 1.0000 \\
+    0.2000 & 1.0101 \\
+    0.3000 & 1.0311 \\
+    0.4000 & 1.0647 \\
+    0.5000 & 1.1137 \\
+    0.6000 & 1.1819 \\
+    0.7000 & 1.2744 \\
+    0.8000 & 1.3979 \\
+    0.9000 & 1.5610 \\
+    1.0000 & 1.7744 \\
+    \hline
+    \end{tabular}
+    \caption{Values of $t$ and $y$ obtained from Euler's method}
+    \label{tab:euler_values}
+    \end{table}
+
+    which are similar to the text.
+
+    \item Skipped.
+    
+    \item The Hodgkin-Huxley model created the field of computational neuroscience by using differential equations to mode the action potential: the electrical signal that propagates along neurons. It was developed through experiments on the giant squid axon, proposing that the action potential arises from the sequential opening and closing of voltage-gated ion channel. 
+    
+    \item Numerical differential equations were used to study the Tacoma Bridge's oscillations by modeling the structural dynamics through systems of ordinary differential equations (ODEs) governing the bridge's motion. By numerically solving these ODEs, researchers could simulate the bridge's behavior under different conditions, predict its response to wind gusts, and identify potential instabilities leading to the bridge's catastrophic collapse.
+    
+    \item The Lorenz equations, a set of three nonlinear differential equations, are utilized in climate modeling to describe complex atmospheric dynamics, including convection, turbulence, and chaotic behavior. These equations capture the system's sensitivity to initial conditions, enabling simulations that elucidate climate patterns, predict weather phenomena, and assess long-term climate trends.
+    
+    \item Skipped.
+    
+\end{enumerate}
+
+
+\end{document}

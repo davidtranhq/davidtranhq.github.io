@@ -1,0 +1,179 @@
+\documentclass[11pt, letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{enumitem} % \setlist
+% for \imageans: float for [H] so the figure floats
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{float} 
+
+\setlength{\parindent}{0.25in}
+\setlength{\parskip}{0.05in}
+% indent paragraphs in list
+\setlist{  
+  listparindent=\parindent,
+  parsep=0pt,
+}
+
+% Include graphics in answer
+\newcommand{\imageans}[1]
+{%
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\linewidth]{#1}
+    \end{figure}
+}
+
+% comments inside align environnment
+\newcommand{\comment}[1]{%
+  \text{\phantom{(#1)}} \tag{#1}
+}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+% Cases for Proof environment
+\newlist{pcases}{enumerate}{1}
+\setlist[pcases]{
+  label=\underline{Case~\arabic*}:\protect\thiscase.~,
+  ref=\arabic*,
+  align=left,
+  labelsep=0pt,
+  leftmargin=0pt,
+  labelwidth=0pt,
+  parsep=0pt
+}
+\newcommand{\case}[1][]{%
+  \if\relax\detokenize{#1}\relax
+    \def\thiscase{}%
+  \else
+    \def\thiscase{~#1}%
+  \fi
+  \item
+}
+
+% Edit these as appropriate
+\newcommand\course{Math 3120}
+\newcommand\hwtitle{HW 5}                  
+\newcommand\name{David Tran}
+\newcommand\studentid{251169871}
+
+\fancypagestyle{firststyle}
+{
+    \headheight 35pt
+    \lhead{\name}
+    \lhead{\name\\\studentid}
+    \chead{\textbf{\LARGE \hwtitle}}
+    \rhead{\course \\ \today}
+    \lfoot{}
+    \cfoot{}
+    \rfoot{\small\thepage}
+    \headsep 1.5em
+}
+
+\DeclareUnicodeCharacter{2212}{-}
+\begin{document}
+
+\thispagestyle{firststyle}
+
+\setlist[enumerate]{leftmargin=*} % remove enuemrate indentation
+
+\begin{enumerate}
+  \item \begin{proof}
+    Let $N \trianglelefteq H$ be a proper, non-trivial normal subgroup of $H$. Then $N \cap G_i \trianglelefteq G_i$ for all $i$, so $N \cap G_i = G_i$ or $N \cap G_i = 1$, since $G_i$ is simple. If $N \cap G_i = G_i$ for all $i$, then $G_i \leq N$, so $N = H$; a contradiction. Similarily, if $N \cap G_i = 1$ for all $i$, then $H = 1$; a contradiction. So suppose let $j, k$ such that $N \cap G_j = G_j \neq 1$ and $N \cap G_k = 1$. If $j < k$, then $G_j \leq G_k$, so $N \cap G_j \leq N \cap G_k = 1$, contradicting that $G_j \neq 1$. If instead $k < j$, then $G_k \leq G_j$, but $N \cap G_k = 1$ so we can't have $N \cap G_j = G_j$, since that would imply $G_j \leq N$. Thus $N$ can't exist, so $H$ is simple.
+  \end{proof}
+
+  \item \begin{enumerate}
+    \item Consider $\langle (i, 1) \rangle = \lbrace (i, 1), (-1, 2), (-i, 3), (-1, 0) \rbrace \leq Q_8 \times Z_4$. Then $(j, 0)(i, 1)(j, 0)^{-1} = (-i, 0) \notin \langle (i, 1) \rangle$, so it is not normal.
+    \item \begin{proof}
+      Let $N \leq G$, $(x, y) \in N, (a, b) \in G$. Then $(a, b)(x, y)(a, b)^{-1} = (axa^{-1}, byb^{-1})$. Since $b \in E_{2^n}$, $byb^{-1} = b$. So, it remains to show that $(axa^{-1}, b) \in N$. Since $a, x \in Q_8$, $axa^{-1} = \pm x$. If $axa^{-1} = x$ we are done. If $axa^{-1} = -x$, note that $(-x, y)^{-1} = (x, y) \in N$ (since $y \in E_{2^n})$, so $(-x, y) \in N$.
+    \end{proof}
+  \end{enumerate}
+
+  \item \begin{enumerate}
+    \item We have $\coprod G_i \subseteq \prod G_i$ and $(1, \dots) \in \coprod G_i$ so $\coprod G_i$ is non-empty. Let $x = (x_1, \dots) \in \coprod G_i$ where $x_k = x_{k + 1} = \dots = 1$ for some $k$ and $y = (y_1, \dots) \in \prod G_i$. Then
+    \begin{align*}
+      yxy^{-1} &= (y_1 x_1 y_1^{-1}, \dots, y_k x_k y_k^{-1} \dots) \\
+      &= (y_1x_1y^{-1}, \dots, y_k 1 y_k^{-1}, \dots) \\
+      &= (y_1 x_1 y^{-1}, \dots, 1, \dots)
+    \end{align*}
+
+    so $yxy^{-1} \in \coprod G_i$, and by the subgroup criterion, $\coprod G_i \leq \prod G_i$.
+
+    \item \begin{proof}
+      Let $x \in T(\prod G)$. Then $\vert x \vert = n < \infty$. If $x = (x_1, x_2, \dots)$ had infinitely many non-identity components, then its order would be infinite, since one could always choose a prime $p > n$ such that $x_i \in Z_p$ such that $x_i^n \neq 1$. So all but finitely many components of $x$ are the identity, so $x \in \coprod G$. Conversely, if $x \in \coprod G$, then there are finitely many non-identity components each in some cyclic group $Z_{p_1}, \dots, Z_{p_n}$. Then $\vert x \vert \leq p_1 \dots p_n < \infty$, so $x \in T(\prod G)$.
+    \end{proof} 
+  \end{enumerate}
+
+  \item \begin{enumerate}
+    \item \begin{proof}
+      Let $\vert G \vert = n = p_1^{\alpha_1} \dots p_n^{\alpha_n}$. Then by Sylow's Theorem, $G$ has Sylow $p_i$-subgroups $P_i$ of order $p_i^{\alpha_i}$. Since $n_{p_i}$ must divide $p_1^{\alpha_1} \dots p_n^{\alpha_n}/p_i^{\alpha_i}$, $n_{p_i} = 1$, so each $P_i$ is the unique Sylow $p_i$-subgroup and thus normal.
+      
+      We proceed by induction on $n$. Suppose the statement holds for finite abelian groups of order less than $n$.We have that the subgroup $H \leq G$ generated by $P_2, \dots, P_n$ is the product of its Sylow subgroups $P_2, \dots, P_n$ and is normal since $G$ is abelian. By Lagrange's $H \cap P_1 = 1$ is a direct product, so by the Recognition Theorem $G \cong P_1 \times H \cong P_1 \times \dots P_n$.
+    \end{proof}
+
+    \item \begin{proof}
+      Note that since $H, K$ char $G$, if $\phi \in \operatorname{Aut}(G)$ then $\phi \mid_H \in \operatorname{Aut}(H)$ and $\phi \mid_K \in \operatorname{Aut}(K)$. So define $\varphi: \operatorname{Aut}(G) \to \operatorname{Aut}(H) \times \operatorname{Aut}(K)$ by $\varphi(\sigma) = (\sigma|_H, \sigma|_K)$. Then $\varphi$ is a homomorphism since $\varphi(\sigma \tau) = (\sigma \tau|_H, \sigma \tau|_K) = (\sigma|_H \tau|_H, \sigma|_K \tau|_K) = (\sigma|_H, \sigma|_K)(\tau|_H, \tau|_K) = \varphi(\sigma) \varphi(\tau)$. 
+
+      The kernel of $\varphi$ is the set of automorphisms that fix $H$ and $K$, that is $\sigma$ such that $\sigma|_H = 1$ and $\sigma|_K = 1$. Since $G = H \times K$, it must be that $\sigma = 1$. Thus $\varphi$ is injective.
+
+      To show that $\varphi$ is surjective, note that given $h \in \operatorname{Aut}(H)$ and $k \in \operatorname{Aut}(K)$, we can define $\sigma \in \operatorname{Aut}(G)$ by $\sigma = h \cup k$ since $H \cap K = 1$. Thus $\varphi$ is surjective, and thus bijective, so $\operatorname{Aut}(G) \cong \operatorname{Aut}(H) \times \operatorname{Aut}(K)$.
+    \end{proof}
+
+    \item \begin{proof}
+      By induction on the number of Sylow subgroups of $G$. The base case of $n = 1$ is trivial. Suppose $G$ is finite abelian so that it has $n > 1$ distinct Sylow subgroups $P_1, \dots, P_n$ and that the statement holds for finite abelian groups of order less than $n$. Consider $G/P_1$. By the induction hypothesis, $\operatorname{Aut}(G/P_1) \cong \operatorname{Aut}(P_2) \times \dots \times \operatorname{Aut}(P_n)$. As in (b), $G/P_i \cap P_i = 1$ and are characteristic, so by (b) $\operatorname{Aut}(G) \cong \operatorname{Aut}(P_1) \times \dots \times \operatorname{Aut}(P_n)$.
+    \end{proof}
+  \end{enumerate}
+
+  \item \begin{proof}
+    Let $G$ be non-abelian. Recall that if $G/Z(G)$ is cyclic, then $G$ is abelian, so $Z(G)$ must have order $p$. Thus $\vert G/Z(G) \vert = p^2$, so $G/Z(G)$ is abelian by Corollary 4.9. Since $G'$ is the smallest normal subgroup of $G$ with abelian quotient, $G' \leq Z(G)$. Since $G$ is non-abelian, $1 < G' \leq Z(G) < G$, but $\vert G' \vert = \vert Z(G) \vert = p$, so $G' = Z(G)$.
+  \end{proof}
+
+  \item (We use the notation that $x^g = gxg^{-1}$). 
+  \begin{enumerate}
+    \item \begin{proof}
+      Let $g \in G$ and $x, y \in K$. Then $x = a^g$ and $y = b^g$ for some $a, b \in K$, so $(x^{-1}y^{-1}xy)^g = (a^{-g}b^{-g}(a^{-1})^{-g}(b^{-1})^{-g})^g = aba^{-1}b^{-1} \in K'$.
+    \end{proof}
+    \item \begin{proof}
+      Let $\varphi: G \to \operatorname{Aut}(K)$ be the permutation representation of $G$ associated with the action by conjugation. Then it is a homomorphism, and since $\operatorname{Aut}(K)$ is Abelian, by Proposition 5.7(5), $G' \leq \operatorname{ker} \varphi = C_G(K)$.
+    \end{proof}
+  \end{enumerate}
+
+  \item \begin{enumerate}
+    \item \begin{proof}
+      By Theorem 5.10(5), 
+      
+      \begin{align*}
+        k \in C_K(H) &\iff h^k =k, \forall h \in H \\
+        &\iff \varphi(k)(h) = h, \forall h \in H  \\
+        &\iff \varphi(k) = 1 \\
+        &\iff k \in \operatorname{ker} \varphi
+      \end{align*}
+    \end{proof}
+
+    \item \begin{proof}
+      Let $h \in H$ and $k \in K$. Then
+      $$
+      (1,k)^{(h, 1)} = (h, k)(h, 1)^{-1} = (h, k)(h^{-1}, 1) = (h k \cdot h^{-1}, k)
+      $$
+      If also $h \in N_H(K)$, then $(1, k)^{(h ,1)} = (1, k') = (hk \cdot h^{-1}, k)$. So $k' = k$, so $(1, k)^{(h, 1)} = (1, k)$, so $h \in C_H(K)$. Clearly $C_H(K) \leq N_H(K)$, so $C_H(K) = N_H(K)$.
+    \end{proof}
+  \end{enumerate}
+
+  \item \begin{enumerate}
+    \item \begin{proof}
+      We need to show that $\operatorname{Aut}(H) \cong S_3$. Note that $Z_2 \times Z_2 \cong V_4$ so $\operatorname{Aut}(Z_2 \times Z_2) \cong \operatorname{Aut}(V_4)$, and the automorphisms of $V_4$ are the permutations of the 3 non-identity elements. Thus $\operatorname{Aut}(V_4) \cong S_3$. So $\vert G \vert = \vert H \vert \vert K \vert = 4 \cdot 6 = 24$, so $G \cong S_4$.
+    \end{proof}
+
+    \item \begin{proof}
+      Let $G$ act on the left cosets of $K$ by left multiplication. The permutation representation $\pi$ afforded by this action is a homomorphism $\pi: G \to S_{G/K} \cong S_H \cong S_4$. To show that $\operatorname{ker} \pi = 1$, note that from Exercise 7a, $C_K(H) = \operatorname{ker}(\varphi) = 1$ where $\varphi = 1$ is the homomorphism associated with $G = H \rtimes K$. So, it remains to show that $\operatorname{ker} \pi \leq C_K(H)$.
+
+      Let $g \in \operatorname{ker} \pi$. Then $gxK = xK$ for all $x \in G$. Then $xgx^{-1} \in K$ so $xgx^{-1}g^{-1} \in K$, since $g \in K$ because $g(1)K = (1)K$. If $x \in H$ then since $H \trianglelefteq G$ (by Theorem 5.10), $xgx^{-1}g^{-1} \in H$. But $H \cap K = 1$, again by Theorem 5.10, so $xgx^{-1}g^{-1} = 1$ so $gx = xg$. Thus $g \in C_K(H)$, so $\operatorname{ker} \pi \leq C_K(H)$
+
+      Thus, the kernel of the permutation representation is trivial, so $G \cong S_4$.
+    \end{proof}
+  \end{enumerate} 
+\end{enumerate}
+\end{document}

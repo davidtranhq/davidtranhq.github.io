@@ -390,4 +390,6 @@ $(4 \to 1)$. Let $X$ be the union of all Sylow $p$-subgroups of $G$. If $P \in S
 
 **Example**: Let $\vert G \vert = pq$ for primes $p, q$ with $p \lt q$. Let $P \in Syl_p(G)$ and $Q \in Syl_q(G)$. Then $Q \trianglelefteq G$ and if $P \trianglelefteq G$, then $G$ is cyclic.
 
-*Proof*: Since $n_q \equiv 1 \pmod q$ and $n_q \mid p$, $n_q = 1$ so $Syl_q(G) = \lbrace Q \rbrace$. By Corollary 20, then, $Q$ is normal.
+*Proof*: $n_q \equiv 1$ since $n_q \mid p$ and $n_q \equiv 1 \pmod q$ with $p \lt q$. So $Q \trianglelefteq G$.
+
+Now suppose $P$ is normal. We have $PQ \leq G$ and since $P \cap Q = 1$, $\vert PQ \vert = \vert G \vert = pq$. Let $x$ generate $P$ and $y$ generate $Q$. We have $G/C_G(P) \cong A \leq \operatorname{Aut}(Z_p)$
