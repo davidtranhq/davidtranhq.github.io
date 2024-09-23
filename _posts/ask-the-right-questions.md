@@ -1,0 +1,3 @@
+# Ask the Right Questions
+
+A reoccuring theme in mathematics is that patterns that repeat themselves in disparate domains tend to hint towards a more fundamental, underlying pattern. Similarily, in many domains asking the right questions is the hallmark of a good researcher, engineer, therapist, friend, and more. It is a common misconception that hard work drives success, and an even more common one that hard work is hard. Most people are willing to work hard for something they believe in, so it is unlikely that a success differentiator be "outworking" the competition. Rather, it is usually that the competition wasn't even working on the right thing. And the only way to know what the right thing to work on is, is to ask the right questions.

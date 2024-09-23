@@ -51,7 +51,7 @@ $$
     F^{-1}(U) &= P(F^{-1}(U) \leq x) \\
     &= P(U \leq F(x)) \\
     &= F(x).
-\end{aligned}   
+\end{aligned}
 $$
 
 since the cumulative distribution function $F_A$ of any standard uniformly-distributed random variable $A$ is $F_A(a) = P(A \leq a) = a$.
@@ -64,7 +64,7 @@ Let there be a circle centered at the origin with radius $R$. The task is to gen
 
 An initial approach could be to generate random points in polar coordinates using a radius $r \sim U(0, R)$ and an angle $\theta \sim U(0, 2\pi)$. The probability of landing in a ring with an inner radius of $r_1$ and an outer radius of $r_2$ inside a circle of radius $R$ would be
 
-that is, the area of the ring divided by the total area of the circle. 
+that is, the area of the ring divided by the total area of the circle.
 
 Unfortunately, this results in an overrepresentation of points nearer to the origin. The non-uniformity is because the relationship between a circle's radius and its area is not linear but quadratic (since $A = \pi r^2$). Uniform sampling of the length of the radius thus does not result in uniform sampling of the regions in the circle. We can show this by comparing the area of the regions in the first half of the radius versus the second half:
 

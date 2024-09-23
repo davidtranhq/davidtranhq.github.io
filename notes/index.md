@@ -13,12 +13,11 @@ permalink: /notes/
 
 ## Computer Science
 
+* [C++](cpp/)
 * [Computer Architecture](computer-architecture/)
 * [Machine Learning](machine-learning/)
 
-## C++
-
-Some surprising and/or useful things about and/or with C++:
+And some good links:
 
 * [Efficiently passing a callable to a function](https://wolchok.org/posts/cxx-trap-2-std-function)
 * [Pointer to data members are callable](https://stackoverflow.com/questions/78610204/why-are-pointers-to-data-members-callable-in-c)
