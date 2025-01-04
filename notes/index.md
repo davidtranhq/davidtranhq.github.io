@@ -10,6 +10,7 @@ permalink: /notes/
 * [Complex Analysis](complex-analysis/)
 * [Abstract Algebra](abstract-algebra/)
 * [Group Theory](group-theory/)
+* [Category Theory](category-theory/)
 
 ## Computer Science
 
