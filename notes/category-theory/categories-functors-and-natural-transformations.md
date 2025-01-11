@@ -6,6 +6,8 @@ order: 1
 
 # Categories, Functors, and Natural Transformations
 
+> Category theory asks of every type of object: "What are the morphisms?"; it suggests that these morphisms should be described at the same time as the objects.
+
 ## Categories
 
 A category is essentially a reflexive and transitive directed graph with the additional constraint that if $(a, b)$ and $(b, c)$ are edges, then $(a, c)$ is also an edge.
@@ -101,3 +103,31 @@ Tg \circ \tau f = Tg \circ Tf \circ \eta_c = T(g \circ f) \circ \eta_c = \tau(g 
 $$
 
 ---
+
+### Monics, Epis, and Zeros
+
+An arrow is **monic** if it is left-cancellable: it is **epi** if it is right-cancellable. An object $t$ is **terminal** if for every object $a$ in $C$ there is exactly one arrow $a \to t$: similarily it is **initial** if there is exactly one arrow $t \to a$. **Null** objects are both initial and terminal.
+
+---
+
+**Exercises**
+
+(1) Every non-identity arrow in the preorder of ordinal numbers is both epi and monic, but not invertible.
+
+(2) If $f, g$ are monic, then $(gf)h = (gf)h' \implies h = h'$ by associativity, so the composition of monics is monic. Similar for epis.
+
+(3) If $gf$ is monic then so is $f$, but not necessarily $g$: as a counter example consider $f: a \mapsto b, g: b \mapsto c, d \mapsto c$, then $gf$ is monic (injective) but $g$ is not.
+
+(4) The inclusion morphism $\mathbb Z \to \mathbb Q$ in $\bf Rng$ is epi since ... (TODO)
+
+---
+
+## Foundations
+
+We assume the standard ZF aximos for the set theory, plus the existence of a set $U$, the **universe**. A set $u \in U$ is a **small set** and a subset $C \subseteq U$ is a **class**. Note that since $x \in u \in U$ implies $u \in U$, all small sets are classes, but the converse is not true: $U$ is not a small set, for otherwise $U \in U$, contradicting the axiom of regularity. Small categories are categories in which the set of objects and the set of arrows are small: large categories permit the set of objects and arrows to be classes. For example, $\bf Set$ and $\bf Grp$ are large categories, but not small categories.
+
+Note some categories may not even be classified as large categories: take $\bf Cls$: the category of all classes. Its objects are all classes, so the set of its objects is $\mathscr P(U) \nsubseteq U$.
+
+## Hom-Sets
+
+The hom-set $\hom(a,b)$ of objects $a$ and $b$ consists of all arrows from $a$ to $b$. Categories may equivalently be defined in terms of their hom-sets. An **Ab-category** is a category in which every hom-set is an additive abelian group and for which composition is bilinear.
