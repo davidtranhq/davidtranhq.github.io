@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Iterative Segment Trees
+published: false
 ---
 
 Let $A$ be an array of $n$ values and $f$ an associative operation on the values of $A$. A **segment tree** is a flat data structure that allows computing $f$ over any contiguous subarray of $A$ and updating the values of any contiguous subarray of $A$ in logarithmic time and linear space with respect to $n$. Some common instances of this problem:
