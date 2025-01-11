@@ -1,9 +1,8 @@
 ---
 layout: post
 toc: true
+title: Motivations of constexpr, constinit, and consteval
 ---
-
-# Motivations of `constexpr` vs `constinit` vs `consteval`
 
 The confusion between these three qualifiers usually comes from misunderstanding the guarantees of `constexpr`. `constexpr` does NOT guarantee evaluation at compile-time, nor does it guarantee that a variable has no runtime storage.
 
@@ -138,4 +137,23 @@ constinit int y = 20;
 
 * Use `constexpr` on a functions when it makes sense for it to be evaluated both at compile-time and at run-time. For example, the constructors for `std::vector` are `constexpr`, allowing for algorithms that require auxilary space to be computed all at compile-time:
 
-<iframe width="800px" height="550px" src="https://godbolt.org/e#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:23,positionColumn:1,positionLineNumber:23,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Cvector%3E%0A%23include+%3Calgorithm%3E%0A%23include+%3Cformat%3E%0A%0Aconsteval+int+numCoinCombinations(std::vector%3Cint%3E+coins,+int+target)%0A%7B%0A++++std::vector%3Cint%3E+dp(target+%2B+1)%3B%0A++++dp%5B0%5D+%3D+1%3B%0A++++for+(int+i+%3D+0%3B+i+%3C%3D+target%3B+%2B%2Bi)+%7B%0A++++++++for+(int+c+:+coins)+%7B%0A++++++++++++if+(i+-+c+%3E%3D+0)%0A++++++++++++++++dp%5Bi%5D+%3D+dp%5Bi%5D+%2B+dp%5Bi+-+c%5D%3B%0A++++++++%7D%0A++++%7D%0A++++return+dp%5Btarget%5D%3B%0A%7D%0A%0Aint+main()%0A%7B%0A++++//+All+at+compile-time+:)%0A++++std::printf(%22%7B%7D%22,+numCoinCombinations(%7B1,+1500,+1000%7D,+2000))%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:compiler,i:(compiler:g142,filters:(b:'0',binary:'1',binaryObject:'1',commentOnly:'0',debugCalls:'1',demangle:'0',directives:'0',execute:'1',intel:'0',libraryCode:'0',trim:'1',verboseDemangling:'0'),flagsViewOpen:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-std%3Dc%2B%2B20',overrides:!(),selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:1),l:'5',n:'0',o:'+x86-64+gcc+14.2+(Editor+%231)',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4"></iframe>
+```c++
+consteval int numCoinCombinations(std::vector<int> coins, int target)
+{
+    std::vector<int> dp(target + 1);
+    dp[0] = 1;
+    for (int i = 0; i <= target; ++i) {
+        for (int c : coins) {
+            if (i - c >= 0)
+                dp[i] = dp[i] + dp[i - c];
+        }
+    }
+    return dp[target];
+}
+
+int main()
+{
+    // All at compile-time :)
+    std::printf("{}", numCoinCombinations({1, 1500, 1000}, 2000));
+}
+```
