@@ -80,18 +80,18 @@ int plusThree(int x) { return x + 3; }
 int main()
 {
     // Valid: plusOne(1) is a constant expression
-    constinit int x = plusOne(1);
+    static constinit int x = plusOne(1);
     
     // Valid: plusTwo(2) is a constant expression evaluated
     // at compile-time because it is required in a constant
     // expression context, namely, the initialization of y
-    constinit int y = plusTwo(2); 
+    static constinit int y = plusTwo(2); 
 
     // INVALID: note that constinit variables are not constant expressions! 
-    constinit int y2 = plusTwo(x);
+    static constinit int y2 = plusTwo(x);
 
     // INVALID: plusThree(3) is not a constant expression
-    constinit int y2 = plusThree(3);
+    static constinit int y2 = plusThree(3);
 }
 ```
 
