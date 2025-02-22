@@ -124,7 +124,7 @@ An arrow is **monic** if it is left-cancellable: it is **epi** if it is right-ca
 
 ## Foundations
 
-We assume the standard ZF aximos for the set theory, plus the existence of a set $U$, the **universe**. A set $u \in U$ is a **small set** and a subset $C \subseteq U$ is a **class**. Note that since $x \in u \in U$ implies $u \in U$, all small sets are classes, but the converse is not true: $U$ is not a small set, for otherwise $U \in U$, contradicting the axiom of regularity. Small categories are categories in which the set of objects and the set of arrows are small: large categories permit the set of objects and arrows to be classes. For example, $\bf Set$ and $\bf Grp$ are large categories, but not small categories.
+We assume the standard ZF aximos for the set theory, plus the existence of a **universe** $U$, a set defined (summarised) as being closed under all standard operations of set theory. A set $u \in U$ is a **small set** and a subset $C \subseteq U$ is a **class**. By definition, $x \in u \in U$ implies $u \in U$, so all small sets are classes, but the converse is not true: $U$ is not a small set, for otherwise $U \in U$, contradicting the axiom of regularity. Small categories are categories in which the set of objects and the set of arrows are small: large categories permit the set of objects and arrows to be classes. For example, $\bf Set$ and $\bf Grp$ are large categories, but not small categories.
 
 Note some categories may not even be classified as large categories: take $\bf Cls$: the category of all classes. Its objects are all classes, so the set of its objects is $\mathscr P(U) \nsubseteq U$.
 
