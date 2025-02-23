@@ -14,3 +14,5 @@ The duality principle also applies to statements involving several categories an
 
 ## Contravariance and Opposites
 
+Each category $C$ has an **opposite category** $C^{op}$: the transpose of the  category’s graph. A **contravariant functor** $\overline S$ on $C$ to $B$ maps from $C^{op}$ to $B$. Note that as a result the order of the requirement of composition is inverted for a contravariant functor: $\overline S(f g) = (\overline S g)(\overline S f)$. An example of a contravariant functor on the category of rings is the association of a ring with its opposite. A functor $T: C \to B$ as previously defined is a **covariant functor** on $C$ to $B$.
+
