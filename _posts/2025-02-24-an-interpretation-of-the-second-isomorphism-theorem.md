@@ -16,5 +16,5 @@ The purpose of this theorem is justified by the following natural manipulation o
 The first is achieved by “extending” $H$ to $HN$—this is the smallest subgroup containing $H$ and $N$— and taking the quotient: $HN/N$. The second restricts $N$ by taking the intersection of $H$ and $N$ and taking the quotient by it: $H / (H \cap N)$. The Second Isomorphism Theorem proves that these two techniques are equivalent.
 
 $$
-HN/N \cong H/(H \cap N)$
+HN/N \cong H/(H \cap N)
 $$
