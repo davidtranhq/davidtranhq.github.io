@@ -2,6 +2,7 @@
 layout: post
 toc: true
 title: Motivations of constexpr, constinit, and consteval
+tags: [cpp]
 ---
 
 The confusion between these three qualifiers usually comes from misunderstanding the guarantees of `constexpr`. `constexpr` does NOT guarantee evaluation at compile-time, nor does it guarantee that a variable has no runtime storage.
@@ -52,8 +53,8 @@ int main()
 
 ## Guaranteed compile-time evaluation
 
-`consteval` and `constinit` are used to fill this missing guarantee from 
-`constexpr`. 
+`consteval` and `constinit` are used to fill this missing guarantee from
+`constexpr`.
 
 `consteval` can only be applied to functions, and forces the function to be evaluated at compile-time whenever it is called. If this is not possible, it is a compile-time error. If the function were marked `constexpr` and called in a context where compile-time evaluation were not possible, it would "silently" be evaluated at runtime.
 
@@ -81,13 +82,13 @@ int main()
 {
     // Valid: plusOne(1) is a constant expression
     static constinit int x = plusOne(1);
-    
+
     // Valid: plusTwo(2) is a constant expression evaluated
     // at compile-time because it is required in a constant
     // expression context, namely, the initialization of y
-    static constinit int y = plusTwo(2); 
+    static constinit int y = plusTwo(2);
 
-    // INVALID: note that constinit variables are not constant expressions! 
+    // INVALID: note that constinit variables are not constant expressions!
     static constinit int y2 = plusTwo(x);
 
     // INVALID: plusThree(3) is not a constant expression

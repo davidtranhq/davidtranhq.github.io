@@ -2,7 +2,33 @@
 layout: post
 toc: true
 title: What is Perfect Forwarding?
+tags: [cpp]
 ---
+
+An important refresher on lvalues and rvalues:
+
+## Lvalues and Rvalues
+
+In C++, an lvalue is an expression that refers to an object with a persistent location in memory that can be referred to (i.e, you can take its address with `&`).
+An rvalue is an expression that refers to a value not associated with a persistent object.
+
+For example:
+
+```c++
+int bar()
+{
+  return 5; // 5 is an rvalue
+}
+
+void foo() // lvalue, stored at &foo
+{
+  int x = 2; // lvalue, stored at &x
+  int y = bar(); // y is an lvalue, but bar() is an rvalue, we can't refer to it directly
+}
+```
+It is important to note that lvalueness and rvalueness are properties of expressions, not objects. For example, in the above, the expression `bar()` and the expression `y` refer to the same temporary, but `y` is an lvalue while `bar()` is an rvalue.
+
+## Perfect Forwarding
 
 Perfect forwarding is a technique in C++ that allows you to pass arguments to a wrapped function while preserving their value category (lvalue or rvalue). Consider the following:
 

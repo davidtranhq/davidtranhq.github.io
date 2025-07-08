@@ -8,4 +8,12 @@ title: C++
 
 From [posts/](/posts/):
 
-* [Motivations of `constexpr`, `consteval`, and `constinit`](/2025/01/11/motivations-of-constexpr-consteval-and-constinit.html)
+<ul>
+  {% for post in site.posts %}
+    {% if post.tags contains "cpp" %}
+      <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
